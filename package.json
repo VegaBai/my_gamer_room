@@ -1,0 +1,52 @@
+{
+  "name": "gamer-room-interactive",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern public",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --config vitest.config.ts",
+    "room:update": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1",
+    "room:update:force": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -Force",
+    "room:update:ktx2": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -RequireKtx2",
+    "room:update:reuse": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -ReuseVariants",
+    "room:validate": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -ValidateOnly"
+  },
+  "dependencies": {
+    "meshoptimizer": "^1.2.0",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "4.20260515.1",
+    "@gltf-transform/cli": "^4.4.2",
+    "@openai/sites-vite-plugin": "^0.1.0 || ^0.2.0",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "react-server-dom-webpack": "19.2.6",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3",
+    "vinext": "1.0.0-beta.3",
+    "vite": "8.0.13",
+    "vitest": "^4.1.11",
+    "wrangler": "4.92.0"
+  },
+  "type": "module"
+}

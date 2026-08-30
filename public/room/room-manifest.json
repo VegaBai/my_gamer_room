@@ -1,0 +1,1643 @@
+{
+  "schemaVersion": 1,
+  "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
+  "pipelineVersion": "1.2.0",
+  "units": "meters",
+  "coordinateSystem": "glTF +Y up, +Z forward",
+  "variants": {
+    "desktop": {
+      "sha256": "9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af",
+      "bytes": 7729840,
+      "triangles": 582104,
+      "drawCalls": 83,
+      "nodes": 137,
+      "meshes": 83,
+      "materials": 32,
+      "textures": 29,
+      "images": 27,
+      "embeddedImageBytes": 2397748,
+      "binaryBytes": 22902504,
+      "animations": 0,
+      "extensionsUsed": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_lights_punctual",
+        "KHR_materials_emissive_strength",
+        "KHR_mesh_quantization"
+      ],
+      "extensionsRequired": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_lights_punctual",
+        "KHR_mesh_quantization"
+      ],
+      "generator": "Khronos glTF Blender I/O v5.2.39",
+      "webIdCount": 137,
+      "url": "/room/9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af.glb",
+      "artifactFile": "9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af.glb",
+      "textureMaxDimension": 2048,
+      "compression": {
+        "geometry": "meshopt",
+        "textures": "webp"
+      }
+    },
+    "low": {
+      "sha256": "89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d",
+      "bytes": 3117376,
+      "triangles": 232168,
+      "drawCalls": 83,
+      "nodes": 137,
+      "meshes": 83,
+      "materials": 32,
+      "textures": 29,
+      "images": 27,
+      "embeddedImageBytes": 693244,
+      "binaryBytes": 9749516,
+      "animations": 0,
+      "extensionsUsed": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_lights_punctual",
+        "KHR_materials_emissive_strength",
+        "KHR_mesh_quantization"
+      ],
+      "extensionsRequired": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_lights_punctual",
+        "KHR_mesh_quantization"
+      ],
+      "generator": "Khronos glTF Blender I/O v5.2.39",
+      "webIdCount": 137,
+      "url": "/room/89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d.glb",
+      "artifactFile": "89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d.glb",
+      "textureMaxDimension": 1024,
+      "compression": {
+        "geometry": "meshopt",
+        "textures": "webp"
+      }
+    }
+  },
+  "camera": {
+    "nodeId": "camera.main",
+    "position": [
+      3,
+      2.299999952,
+      5.300000191
+    ],
+    "target": [
+      0.079999998,
+      0.819999993,
+      0.079999998
+    ],
+    "fovDegrees": 24.616033,
+    "near": 0.1,
+    "far": 1000,
+    "minDistance": 3.5,
+    "maxDistance": 7.2,
+    "minPolar": 0.85,
+    "maxPolar": 1.44,
+    "minAzimuth": 0.08,
+    "maxAzimuth": 0.94
+  },
+  "controls": [
+    {
+      "id": "cabinet.drawer.1",
+      "label": "顶层抽屉",
+      "group": "cabinet",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "cabinet.drawer.1.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.319999993
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabinet.drawer.2",
+      "label": "第二层抽屉",
+      "group": "cabinet",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "cabinet.drawer.2.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.319999993
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabinet.drawer.3",
+      "label": "第三层抽屉",
+      "group": "cabinet",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "cabinet.drawer.3.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.319999993
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabinet.drawer.4",
+      "label": "底层抽屉",
+      "group": "cabinet",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "cabinet.drawer.4.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.319999993
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabinet.door",
+      "label": "柜门",
+      "group": "cabinet",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 750,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "cabinet.door.pivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.793353379,
+                0,
+                0.60876143
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "desk.lift",
+      "label": "升降桌",
+      "group": "desk",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 1200,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "desk.middle",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.200000003,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "nodeId": "desk.top",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.400000006,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chair.swivel",
+      "label": "椅子旋转",
+      "group": "chair",
+      "primary": true,
+      "min": -45,
+      "max": 45,
+      "default": 0,
+      "clickValue": 45,
+      "durationMs": 750,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "chair.swivel.pivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.382683456,
+                0,
+                0.923879564
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chair.headrest",
+      "label": "取下头枕",
+      "group": "chair",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "chair.headrest.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                -0.183560967,
+                0.780558944,
+                0.025259852
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                -0.003107071,
+                0.886158943,
+                -0.000101328
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chair.lumbar",
+      "label": "取下腰枕",
+      "group": "chair",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 550,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "chair.lumbar.pivot",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                -0.117807269,
+                0.278514117,
+                0.016552925
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0.088425756,
+                0.331314117,
+                -0.012431264
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microphone.fold",
+      "label": "折叠话筒臂",
+      "group": "microphone",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 900,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "microphone.shoulder",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.173648164,
+                0.984807789
+              ]
+            }
+          ]
+        },
+        {
+          "nodeId": "microphone.elbow",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                -0.42261824,
+                0.906307817
+              ]
+            }
+          ]
+        },
+        {
+          "nodeId": "microphone.headLevel",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                0.258819073,
+                0.965925932
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitors.face",
+      "label": "双屏面对面",
+      "group": "monitors",
+      "primary": true,
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "clickValue": 1,
+      "durationMs": 900,
+      "unit": "ratio",
+      "tracks": [
+        {
+          "nodeId": "monitors.leftPivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.707106829,
+                0,
+                0.707106829
+              ]
+            }
+          ]
+        },
+        {
+          "nodeId": "monitors.rightPivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                -0.707106829,
+                0,
+                0.707106829
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microphone.yaw",
+      "label": "话筒横摆",
+      "group": "microphone",
+      "primary": false,
+      "min": -30,
+      "max": 10,
+      "default": 0,
+      "clickValue": 10,
+      "durationMs": 500,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "microphone.baseYaw",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                -0.258819073,
+                0,
+                0.965925932
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.087155752,
+                0,
+                0.99619472
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitors.leftTrim",
+      "label": "左屏微调",
+      "group": "monitors",
+      "primary": false,
+      "min": -15,
+      "max": 15,
+      "default": 0,
+      "clickValue": 15,
+      "durationMs": 400,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "monitors.leftPivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                -0.1305262,
+                0,
+                0.991444886
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.1305262,
+                0,
+                0.991444886
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitors.rightTrim",
+      "label": "右屏微调",
+      "group": "monitors",
+      "primary": false,
+      "min": -15,
+      "max": 15,
+      "default": 0,
+      "clickValue": 15,
+      "durationMs": 400,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "monitors.rightPivot",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                -0.1305262,
+                0,
+                0.991444886
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0.1305262,
+                0,
+                0.991444886
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "hitTargets": [
+    {
+      "controlId": "cabinet.drawer.1",
+      "nodeId": "cabinet.drawer.1.pivot",
+      "space": "node-local",
+      "center": [
+        1.077859402,
+        0.703505874,
+        0.234728485
+      ],
+      "size": [
+        0.326024652,
+        0.176049054,
+        0.029184684
+      ],
+      "activeCenter": [
+        1.077859402,
+        0.703505874,
+        0.234728485
+      ],
+      "activeSize": [
+        0.326024652,
+        0.176049054,
+        0.029184684
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.2",
+      "nodeId": "cabinet.drawer.2.pivot",
+      "space": "node-local",
+      "center": [
+        1.077826023,
+        0.528396845,
+        0.234677061
+      ],
+      "size": [
+        0.326116085,
+        0.17606467,
+        0.029081821
+      ],
+      "activeCenter": [
+        1.077826023,
+        0.528396845,
+        0.234677061
+      ],
+      "activeSize": [
+        0.326116085,
+        0.17606467,
+        0.029081821
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.3",
+      "nodeId": "cabinet.drawer.3.pivot",
+      "space": "node-local",
+      "center": [
+        1.077849746,
+        0.35870409,
+        0.23484014
+      ],
+      "size": [
+        0.326104581,
+        0.165663779,
+        0.029261619
+      ],
+      "activeCenter": [
+        1.077849746,
+        0.35870409,
+        0.23484014
+      ],
+      "activeSize": [
+        0.326104581,
+        0.165663779,
+        0.029261619
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.4",
+      "nodeId": "cabinet.drawer.4.pivot",
+      "space": "node-local",
+      "center": [
+        1.077842236,
+        0.181331277,
+        0.2348582
+      ],
+      "size": [
+        0.326086581,
+        0.190958381,
+        0.029297739
+      ],
+      "activeCenter": [
+        1.077842236,
+        0.181331277,
+        0.2348582
+      ],
+      "activeSize": [
+        0.326086581,
+        0.190958381,
+        0.029297739
+      ]
+    },
+    {
+      "controlId": "cabinet.door",
+      "nodeId": "cabinet.door.pivot",
+      "space": "node-local",
+      "center": [
+        -0.163677931,
+        -1.5e-8,
+        0.012049407
+      ],
+      "size": [
+        0.327355862,
+        0.705689549,
+        0.03006953
+      ],
+      "activeCenter": [
+        -0.163677931,
+        -1.5e-8,
+        0.012049447
+      ],
+      "activeSize": [
+        0.327355862,
+        0.705689549,
+        0.030069539
+      ]
+    },
+    {
+      "controlId": "desk.lift",
+      "nodeId": "desk.top",
+      "space": "node-local",
+      "center": [
+        -0.150000006,
+        0.622853577,
+        0.049999997
+      ],
+      "size": [
+        1.75,
+        0.314292818,
+        0.780000091
+      ],
+      "activeCenter": [
+        -0.150000006,
+        0.622853577,
+        0.049999997
+      ],
+      "activeSize": [
+        1.75,
+        0.314292818,
+        0.780000091
+      ]
+    },
+    {
+      "controlId": "chair.swivel",
+      "nodeId": "chair.swivel.pivot",
+      "space": "node-local",
+      "center": [
+        -0.013507068,
+        0.514805317,
+        -0.011710227
+      ],
+      "size": [
+        0.681606889,
+        1.029589415,
+        0.691419482
+      ],
+      "activeCenter": [
+        -0.013507068,
+        0.514805317,
+        -0.011710227
+      ],
+      "activeSize": [
+        0.681606889,
+        1.029589415,
+        0.691419482
+      ]
+    },
+    {
+      "controlId": "chair.headrest",
+      "nodeId": "chair.headrest.pivot",
+      "space": "node-local",
+      "center": [
+        -0.006477833,
+        0,
+        0.001997411
+      ],
+      "size": [
+        0.091496706,
+        0.201467752,
+        0.263725877
+      ],
+      "activeCenter": [
+        -0.006477833,
+        0,
+        0.001997411
+      ],
+      "activeSize": [
+        0.091496706,
+        0.201467752,
+        0.263725877
+      ]
+    },
+    {
+      "controlId": "chair.lumbar",
+      "nodeId": "chair.lumbar.pivot",
+      "space": "node-local",
+      "center": [
+        -0.000912279,
+        -3e-8,
+        -0.00055781
+      ],
+      "size": [
+        0.153665602,
+        0.134628117,
+        0.307116091
+      ],
+      "activeCenter": [
+        -0.000912279,
+        -3e-8,
+        -0.00055781
+      ],
+      "activeSize": [
+        0.153665602,
+        0.134628117,
+        0.307116091
+      ]
+    },
+    {
+      "controlId": "microphone.fold",
+      "nodeId": "microphone.root",
+      "space": "node-local",
+      "center": [
+        -0.81692934,
+        1.144188404,
+        0.279999971
+      ],
+      "size": [
+        0.508858681,
+        0.531623006,
+        0.104999989
+      ],
+      "activeCenter": [
+        -0.921417236,
+        1.06555295,
+        0.279999971
+      ],
+      "activeSize": [
+        0.511794806,
+        0.443989158,
+        0.104999989
+      ]
+    },
+    {
+      "controlId": "monitors.face",
+      "nodeId": "monitors.root",
+      "space": "node-local",
+      "center": [
+        -0.150000006,
+        1.120000005,
+        -0.159999996
+      ],
+      "size": [
+        1.201217175,
+        0.360000074,
+        0.065214276
+      ],
+      "activeCenter": [
+        -0.150000006,
+        1.120000005,
+        -0.159999996
+      ],
+      "activeSize": [
+        0.685214281,
+        0.360000074,
+        0.58121711
+      ]
+    }
+  ],
+  "visualTargets": [
+    {
+      "controlId": "cabinet.drawer.1",
+      "nodeIds": [
+        "cabinet.drawer.1.front"
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.2",
+      "nodeIds": [
+        "cabinet.drawer.2.front"
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.3",
+      "nodeIds": [
+        "cabinet.drawer.3.front"
+      ]
+    },
+    {
+      "controlId": "cabinet.drawer.4",
+      "nodeIds": [
+        "cabinet.drawer.4.front"
+      ]
+    },
+    {
+      "controlId": "cabinet.door",
+      "nodeIds": [
+        "cabinet.door.front"
+      ]
+    },
+    {
+      "controlId": "desk.lift",
+      "nodeIds": [
+        "desk.top.mesh"
+      ]
+    },
+    {
+      "controlId": "chair.swivel",
+      "nodeIds": [
+        "chair.swivel.mesh"
+      ]
+    },
+    {
+      "controlId": "chair.headrest",
+      "nodeIds": [
+        "chair.headrest.mesh"
+      ]
+    },
+    {
+      "controlId": "chair.lumbar",
+      "nodeIds": [
+        "chair.lumbar.mesh"
+      ]
+    },
+    {
+      "controlId": "microphone.fold",
+      "nodeIds": [
+        "microphone.lowerArm.mesh",
+        "microphone.upperArm.mesh",
+        "microphone.head.mesh",
+        "microphone.capsule.mesh"
+      ]
+    },
+    {
+      "controlId": "monitors.face",
+      "nodeIds": [
+        "monitors.left.mesh",
+        "monitors.right.mesh"
+      ]
+    },
+    {
+      "controlId": "microphone.yaw",
+      "nodeIds": [
+        "microphone.lowerArm.mesh",
+        "microphone.upperArm.mesh",
+        "microphone.head.mesh",
+        "microphone.capsule.mesh"
+      ]
+    },
+    {
+      "controlId": "monitors.leftTrim",
+      "nodeIds": [
+        "monitors.left.mesh"
+      ]
+    },
+    {
+      "controlId": "monitors.rightTrim",
+      "nodeIds": [
+        "monitors.right.mesh"
+      ]
+    }
+  ],
+  "nodeMap": {
+    "scene.04.pc.tower.empty.00.44305147": {
+      "nodeName": "04-pc-tower_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.04.pc.tower.mesh.01.54d3d0b6": {
+      "nodeName": "04-pc-tower_mesh_01",
+      "type": "MESH"
+    },
+    "scene.05.dual.monitor.arm.empty.00.0c71c259": {
+      "nodeName": "05-dual-monitor-arm_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.05.dual.monitor.arm.mesh.01.b2a572cd": {
+      "nodeName": "05-dual-monitor-arm_mesh_01",
+      "type": "MESH"
+    },
+    "scene.06.monitor.right.instance.empty.00.3c4e4741": {
+      "nodeName": "06-monitor-right-instance_empty_00",
+      "type": "EMPTY"
+    },
+    "monitors.right.mesh": {
+      "nodeName": "06-monitor-right-instance_mesh_01",
+      "type": "MESH"
+    },
+    "scene.06.monitor.empty.00.b98d2996": {
+      "nodeName": "06-monitor_empty_00",
+      "type": "EMPTY"
+    },
+    "monitors.left.mesh": {
+      "nodeName": "06-monitor_mesh_01",
+      "type": "MESH"
+    },
+    "scene.07.keyboard.mesh.00.27d17cf0": {
+      "nodeName": "07-keyboard_mesh_00",
+      "type": "MESH"
+    },
+    "scene.08.mouse.empty.00.e3f49922": {
+      "nodeName": "08-mouse_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.08.mouse.mesh.01.a45e972d": {
+      "nodeName": "08-mouse_mesh_01",
+      "type": "MESH"
+    },
+    "scene.09.mousepad.empty.00.aa5b9f06": {
+      "nodeName": "09-mousepad_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.09.mousepad.mesh.01.8fe8cade": {
+      "nodeName": "09-mousepad_mesh_01",
+      "type": "MESH"
+    },
+    "scene.10.speaker.right.instance.empty.00.903f5ef4": {
+      "nodeName": "10-speaker-right-instance_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.10.speaker.right.instance.mesh.01.58051953": {
+      "nodeName": "10-speaker-right-instance_mesh_01",
+      "type": "MESH"
+    },
+    "scene.10.speaker.empty.00.1a41b670": {
+      "nodeName": "10-speaker_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.10.speaker.mesh.01.95753e88": {
+      "nodeName": "10-speaker_mesh_01",
+      "type": "MESH"
+    },
+    "scene.12.microphone.empty.00.0fbb36e4": {
+      "nodeName": "12-microphone_empty_00",
+      "type": "EMPTY"
+    },
+    "microphone.capsule.mesh": {
+      "nodeName": "12-microphone_mesh_01",
+      "type": "MESH"
+    },
+    "scene.13.ambient.loop.lamp.empty.00.580d2f72": {
+      "nodeName": "13-ambient-loop-lamp_empty_00",
+      "type": "EMPTY"
+    },
+    "scene.13.ambient.loop.lamp.mesh.01.64c34f76": {
+      "nodeName": "13-ambient-loop-lamp_mesh_01",
+      "type": "MESH"
+    },
+    "scene.anchor.mic.elbow.f338e936": {
+      "nodeName": "ANCHOR_Mic_Elbow",
+      "type": "EMPTY"
+    },
+    "scene.anchor.mic.head.67a02c9e": {
+      "nodeName": "ANCHOR_Mic_Head",
+      "type": "EMPTY"
+    },
+    "scene.architecture.back.wall.160e154d": {
+      "nodeName": "Architecture_Back_Wall",
+      "type": "MESH"
+    },
+    "scene.architecture.floor.56fe22c7": {
+      "nodeName": "Architecture_Floor",
+      "type": "MESH"
+    },
+    "scene.architecture.left.wall.00feb0f3": {
+      "nodeName": "Architecture_Left_Wall",
+      "type": "MESH"
+    },
+    "chair.headrest.pivot": {
+      "nodeName": "CTRL_Chair_Headrest",
+      "type": "EMPTY"
+    },
+    "chair.lumbar.pivot": {
+      "nodeName": "CTRL_Chair_Lumbar",
+      "type": "EMPTY"
+    },
+    "chair.swivel.pivot": {
+      "nodeName": "CTRL_Chair_Swivel",
+      "type": "EMPTY"
+    },
+    "desk.middle": {
+      "nodeName": "CTRL_Desk_Middle_Stage",
+      "type": "EMPTY"
+    },
+    "desk.top": {
+      "nodeName": "CTRL_Desk_Moving_Top",
+      "type": "EMPTY"
+    },
+    "cabinet.door.pivot": {
+      "nodeName": "CTRL_Door_Right_Hinge",
+      "type": "EMPTY"
+    },
+    "cabinet.drawer.1.pivot": {
+      "nodeName": "CTRL_Drawer_01_Top",
+      "type": "EMPTY"
+    },
+    "cabinet.drawer.2.pivot": {
+      "nodeName": "CTRL_Drawer_02",
+      "type": "EMPTY"
+    },
+    "cabinet.drawer.3.pivot": {
+      "nodeName": "CTRL_Drawer_03",
+      "type": "EMPTY"
+    },
+    "cabinet.drawer.4.pivot": {
+      "nodeName": "CTRL_Drawer_04_Bottom",
+      "type": "EMPTY"
+    },
+    "scene.cabinet.pink.bounce.bf95412c": {
+      "nodeName": "Cabinet_Pink_Bounce",
+      "type": "LIGHT"
+    },
+    "scene.camera.focus.bc9fd0f4": {
+      "nodeName": "Camera_Focus",
+      "type": "EMPTY"
+    },
+    "scene.cyan.wall.wash.39a3f4a1": {
+      "nodeName": "Cyan_Wall_Wash",
+      "type": "LIGHT"
+    },
+    "scene.decor.plant.leaf.00.1.ca1b8ff0": {
+      "nodeName": "Decor_Plant_Leaf_00_+1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.00.1.53642b37": {
+      "nodeName": "Decor_Plant_Leaf_00_-1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.01.1.3ed5922d": {
+      "nodeName": "Decor_Plant_Leaf_01_+1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.01.1.b023bbc3": {
+      "nodeName": "Decor_Plant_Leaf_01_-1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.02.1.604c88de": {
+      "nodeName": "Decor_Plant_Leaf_02_+1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.02.1.80ebb6a5": {
+      "nodeName": "Decor_Plant_Leaf_02_-1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.03.1.b637f30a": {
+      "nodeName": "Decor_Plant_Leaf_03_+1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.03.1.5a13963a": {
+      "nodeName": "Decor_Plant_Leaf_03_-1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.04.1.f8f442f8": {
+      "nodeName": "Decor_Plant_Leaf_04_+1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.leaf.04.1.30262c48": {
+      "nodeName": "Decor_Plant_Leaf_04_-1",
+      "type": "MESH"
+    },
+    "scene.decor.plant.pot.c3ac0b41": {
+      "nodeName": "Decor_Plant_Pot",
+      "type": "MESH"
+    },
+    "scene.decor.plant.stem.00.03a28022": {
+      "nodeName": "Decor_Plant_Stem_00",
+      "type": "MESH"
+    },
+    "scene.decor.plant.stem.01.f00cc9fb": {
+      "nodeName": "Decor_Plant_Stem_01",
+      "type": "MESH"
+    },
+    "scene.decor.plant.stem.02.509ce711": {
+      "nodeName": "Decor_Plant_Stem_02",
+      "type": "MESH"
+    },
+    "scene.decor.plant.stem.03.90f99b4c": {
+      "nodeName": "Decor_Plant_Stem_03",
+      "type": "MESH"
+    },
+    "scene.decor.plant.stem.04.c8ee676d": {
+      "nodeName": "Decor_Plant_Stem_04",
+      "type": "MESH"
+    },
+    "scene.decor.rug.1089de84": {
+      "nodeName": "Decor_Rug",
+      "type": "MESH"
+    },
+    "scene.desk.pink.bounce.6a40ccca": {
+      "nodeName": "Desk_Pink_Bounce",
+      "type": "LIGHT"
+    },
+    "scene.front.fill.587a9155": {
+      "nodeName": "Front_Fill",
+      "type": "LIGHT"
+    },
+    "scene.geo.cabinet.body.d90def4f": {
+      "nodeName": "GEO_Cabinet_Body",
+      "type": "MESH"
+    },
+    "scene.geo.cabinet.static.interior.cavities.cdab36de": {
+      "nodeName": "GEO_Cabinet_Static_Interior_Cavities",
+      "type": "MESH"
+    },
+    "chair.headrest.mesh": {
+      "nodeName": "GEO_Chair_Headrest_Detachable",
+      "type": "MESH"
+    },
+    "scene.geo.chair.headrest.rearshell.002b7613": {
+      "nodeName": "GEO_Chair_Headrest_RearShell",
+      "type": "MESH"
+    },
+    "scene.geo.chair.headrest.staticinfill.1c768db0": {
+      "nodeName": "GEO_Chair_Headrest_StaticInfill",
+      "type": "MESH"
+    },
+    "chair.lumbar.mesh": {
+      "nodeName": "GEO_Chair_Lumbar_Detachable",
+      "type": "MESH"
+    },
+    "scene.geo.chair.lumbar.rearshell.5dce0057": {
+      "nodeName": "GEO_Chair_Lumbar_RearShell",
+      "type": "MESH"
+    },
+    "scene.geo.chair.lumbar.staticinfill.d612f3fc": {
+      "nodeName": "GEO_Chair_Lumbar_StaticInfill",
+      "type": "MESH"
+    },
+    "scene.geo.chair.spindle.lower.staticcollar.7db1d277": {
+      "nodeName": "GEO_Chair_Spindle_Lower_StaticCollar",
+      "type": "MESH"
+    },
+    "scene.geo.chair.spindle.upper.rotatingcap.0f05f1a8": {
+      "nodeName": "GEO_Chair_Spindle_Upper_RotatingCap",
+      "type": "MESH"
+    },
+    "scene.geo.chair.static.base.aa9108a0": {
+      "nodeName": "GEO_Chair_Static_Base",
+      "type": "MESH"
+    },
+    "chair.swivel.mesh": {
+      "nodeName": "GEO_Chair_Swivel_Upper",
+      "type": "MESH"
+    },
+    "scene.geo.desk.fixed.base.68e83405": {
+      "nodeName": "GEO_Desk_Fixed_Base",
+      "type": "MESH"
+    },
+    "scene.geo.desk.innersleeve.lower.lr.0afc730e": {
+      "nodeName": "GEO_Desk_InnerSleeve_Lower_LR",
+      "type": "MESH"
+    },
+    "scene.geo.desk.innersleeve.upper.lr.8f18d575": {
+      "nodeName": "GEO_Desk_InnerSleeve_Upper_LR",
+      "type": "MESH"
+    },
+    "scene.geo.desk.middle.stage.e9061063": {
+      "nodeName": "GEO_Desk_Middle_Stage",
+      "type": "MESH"
+    },
+    "desk.top.mesh": {
+      "nodeName": "GEO_Desk_Moving_Top",
+      "type": "MESH"
+    },
+    "scene.geo.door.right.backplate.1f4a4f00": {
+      "nodeName": "GEO_Door_Right_Backplate",
+      "type": "MESH"
+    },
+    "cabinet.door.front": {
+      "nodeName": "GEO_Door_Right_Front",
+      "type": "MESH"
+    },
+    "cabinet.drawer.1.front": {
+      "nodeName": "GEO_Drawer_01_Top_Front",
+      "type": "MESH"
+    },
+    "scene.geo.drawer.01.top.tray.4d2dfa6c": {
+      "nodeName": "GEO_Drawer_01_Top_Tray",
+      "type": "MESH"
+    },
+    "cabinet.drawer.2.front": {
+      "nodeName": "GEO_Drawer_02_Front",
+      "type": "MESH"
+    },
+    "scene.geo.drawer.02.tray.9d1f248f": {
+      "nodeName": "GEO_Drawer_02_Tray",
+      "type": "MESH"
+    },
+    "cabinet.drawer.3.front": {
+      "nodeName": "GEO_Drawer_03_Front",
+      "type": "MESH"
+    },
+    "scene.geo.drawer.03.tray.5372d5ff": {
+      "nodeName": "GEO_Drawer_03_Tray",
+      "type": "MESH"
+    },
+    "cabinet.drawer.4.front": {
+      "nodeName": "GEO_Drawer_04_Bottom_Front",
+      "type": "MESH"
+    },
+    "scene.geo.drawer.04.bottom.tray.3d93d34e": {
+      "nodeName": "GEO_Drawer_04_Bottom_Tray",
+      "type": "MESH"
+    },
+    "scene.geo.mic.basehub.fixed.6835c11d": {
+      "nodeName": "GEO_Mic_BaseHub_Fixed",
+      "type": "MESH"
+    },
+    "scene.geo.mic.base.jointcover.91fef7a3": {
+      "nodeName": "GEO_Mic_Base_JointCover",
+      "type": "MESH"
+    },
+    "scene.geo.mic.clamp.fixed.08f4f483": {
+      "nodeName": "GEO_Mic_Clamp_Fixed",
+      "type": "MESH"
+    },
+    "scene.geo.mic.elbowhub.bc8f2f14": {
+      "nodeName": "GEO_Mic_ElbowHub",
+      "type": "MESH"
+    },
+    "scene.geo.mic.elbow.jointcover.bd43cb2b": {
+      "nodeName": "GEO_Mic_Elbow_JointCover",
+      "type": "MESH"
+    },
+    "microphone.head.mesh": {
+      "nodeName": "GEO_Mic_HeadAndSocket",
+      "type": "MESH"
+    },
+    "scene.geo.mic.head.jointcover.f1d52b9f": {
+      "nodeName": "GEO_Mic_Head_JointCover",
+      "type": "MESH"
+    },
+    "microphone.lowerArm.mesh": {
+      "nodeName": "GEO_Mic_LowerArm",
+      "type": "MESH"
+    },
+    "microphone.upperArm.mesh": {
+      "nodeName": "GEO_Mic_UpperArm",
+      "type": "MESH"
+    },
+    "scene.key.window.973f2b04": {
+      "nodeName": "Key_Window",
+      "type": "LIGHT"
+    },
+    "scene.pc.internal.glow.f1a092a2": {
+      "nodeName": "PC_Internal_Glow",
+      "type": "LIGHT"
+    },
+    "microphone.baseYaw": {
+      "nodeName": "PIVOT_Mic_BaseYaw_Z",
+      "type": "EMPTY"
+    },
+    "microphone.elbow": {
+      "nodeName": "PIVOT_Mic_Elbow_Y",
+      "type": "EMPTY"
+    },
+    "microphone.headLevel": {
+      "nodeName": "PIVOT_Mic_HeadLevel_Y",
+      "type": "EMPTY"
+    },
+    "microphone.shoulder": {
+      "nodeName": "PIVOT_Mic_Shoulder_Y",
+      "type": "EMPTY"
+    },
+    "monitors.leftPivot": {
+      "nodeName": "PIVOT_Monitor_Left_VESA_Yaw",
+      "type": "EMPTY"
+    },
+    "monitors.rightPivot": {
+      "nodeName": "PIVOT_Monitor_Right_VESA_Yaw",
+      "type": "EMPTY"
+    },
+    "scene.pink.wall.wash.cd56344d": {
+      "nodeName": "Pink_Wall_Wash",
+      "type": "LIGHT"
+    },
+    "scene.rgb.cabinet.underglow.0412b7e4": {
+      "nodeName": "RGB_Cabinet_UnderGlow",
+      "type": "MESH"
+    },
+    "scene.rgb.desk.underglow.502aeed9": {
+      "nodeName": "RGB_Desk_UnderGlow",
+      "type": "MESH"
+    },
+    "scene.rgb.pc.cyan.6c910325": {
+      "nodeName": "RGB_PC_Cyan",
+      "type": "MESH"
+    },
+    "cabinet.root": {
+      "nodeName": "RIG_Cabinet_Interactive",
+      "type": "EMPTY"
+    },
+    "desk.root": {
+      "nodeName": "RIG_Desk_Lift_Interactive",
+      "type": "EMPTY"
+    },
+    "monitors.root": {
+      "nodeName": "RIG_DualMonitor_Interactive",
+      "type": "EMPTY"
+    },
+    "chair.root": {
+      "nodeName": "RIG_GamingChair_Interactive",
+      "type": "EMPTY"
+    },
+    "microphone.root": {
+      "nodeName": "RIG_Microphone_Boom_Interactive",
+      "type": "EMPTY"
+    },
+    "scene.root.04.pc.tower.075d2d73": {
+      "nodeName": "ROOT_04-pc-tower",
+      "type": "EMPTY"
+    },
+    "scene.root.05.dual.monitor.arm.33aa48d6": {
+      "nodeName": "ROOT_05-dual-monitor-arm",
+      "type": "EMPTY"
+    },
+    "scene.root.06.monitor.b70eccf6": {
+      "nodeName": "ROOT_06-monitor",
+      "type": "EMPTY"
+    },
+    "scene.root.06.monitor.right.instance.b8ecfecf": {
+      "nodeName": "ROOT_06-monitor-right-instance",
+      "type": "EMPTY"
+    },
+    "scene.root.07.keyboard.c1858abd": {
+      "nodeName": "ROOT_07-keyboard",
+      "type": "EMPTY"
+    },
+    "scene.root.08.mouse.5b8b0214": {
+      "nodeName": "ROOT_08-mouse",
+      "type": "EMPTY"
+    },
+    "scene.root.09.mousepad.e0807117": {
+      "nodeName": "ROOT_09-mousepad",
+      "type": "EMPTY"
+    },
+    "scene.root.10.speaker.8cd9ccac": {
+      "nodeName": "ROOT_10-speaker",
+      "type": "EMPTY"
+    },
+    "scene.root.10.speaker.right.instance.0b369100": {
+      "nodeName": "ROOT_10-speaker-right-instance",
+      "type": "EMPTY"
+    },
+    "scene.root.12.microphone.f206485d": {
+      "nodeName": "ROOT_12-microphone",
+      "type": "EMPTY"
+    },
+    "scene.root.13.ambient.loop.lamp.89e8666e": {
+      "nodeName": "ROOT_13-ambient-loop-lamp",
+      "type": "EMPTY"
+    },
+    "scene.screen.left.b7d389a0": {
+      "nodeName": "Screen_Left",
+      "type": "MESH"
+    },
+    "scene.screen.right.41439fdc": {
+      "nodeName": "Screen_Right",
+      "type": "MESH"
+    },
+    "scene.top.softbox.c7c08a5a": {
+      "nodeName": "Top_Softbox",
+      "type": "LIGHT"
+    },
+    "scene.wall.art.art.9f64a075": {
+      "nodeName": "Wall_Art_Art",
+      "type": "MESH"
+    },
+    "scene.wall.art.bottom.d5808333": {
+      "nodeName": "Wall_Art_Bottom",
+      "type": "MESH"
+    },
+    "scene.wall.art.left.267a2faa": {
+      "nodeName": "Wall_Art_Left",
+      "type": "MESH"
+    },
+    "scene.wall.art.right.c170190a": {
+      "nodeName": "Wall_Art_Right",
+      "type": "MESH"
+    },
+    "scene.wall.art.top.65f7a17c": {
+      "nodeName": "Wall_Art_Top",
+      "type": "MESH"
+    },
+    "scene.window.frame.h.05eb03b5": {
+      "nodeName": "Window_Frame_H",
+      "type": "MESH"
+    },
+    "scene.window.frame.h.001.a7d014a8": {
+      "nodeName": "Window_Frame_H.001",
+      "type": "MESH"
+    },
+    "scene.window.frame.v.5dd312da": {
+      "nodeName": "Window_Frame_V",
+      "type": "MESH"
+    },
+    "scene.window.frame.v.001.e91cd35d": {
+      "nodeName": "Window_Frame_V.001",
+      "type": "MESH"
+    },
+    "scene.window.glass.051c2bae": {
+      "nodeName": "Window_Glass",
+      "type": "MESH"
+    },
+    "scene.window.mullion.b2ddce94": {
+      "nodeName": "Window_Mullion",
+      "type": "MESH"
+    },
+    "camera.main": {
+      "nodeName": "Workstation_Camera",
+      "type": "CAMERA"
+    }
+  },
+  "optimization": {
+    "geometry": "meshopt",
+    "textures": "webp",
+    "semanticNodesPreserved": true,
+    "ktx2Available": false
+  }
+}
