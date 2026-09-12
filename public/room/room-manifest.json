@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "1.2.0",
+  "pipelineVersion": "2.0.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af",
-      "bytes": 7729840,
-      "triangles": 582104,
+      "sha256": "0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3",
+      "bytes": 16443716,
+      "triangles": 585239,
       "drawCalls": 83,
       "nodes": 137,
-      "meshes": 83,
+      "meshes": 81,
       "materials": 32,
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 2397748,
-      "binaryBytes": 22902504,
+      "binaryBytes": 34563952,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -33,26 +33,37 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 137,
-      "url": "/room/9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af.glb",
-      "artifactFile": "9f4f09730b7ea3d500d26d339de3de8e872def4e77597311b95271dae7b1b6af.glb",
+      "url": "/room/0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3.glb",
+      "artifactFile": "0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
-        "textures": "webp"
+        "textures": "webp",
+        "positionEncoding": "lossless-float32",
+        "normalBits": 14
+      },
+      "normalValidation": {
+        "validatorVersion": "2.0.0",
+        "space": "world",
+        "passed": true,
+        "reversedCorners": 0,
+        "significantReversedCorners": 0,
+        "nonUnitNormals": 0,
+        "zeroAreaTriangles": 0
       }
     },
     "low": {
-      "sha256": "89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d",
-      "bytes": 3117376,
-      "triangles": 232168,
+      "sha256": "378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f",
+      "bytes": 7361944,
+      "triangles": 236096,
       "drawCalls": 83,
       "nodes": 137,
-      "meshes": 83,
+      "meshes": 81,
       "materials": 32,
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 693244,
-      "binaryBytes": 9749516,
+      "binaryBytes": 15315996,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -69,12 +80,23 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 137,
-      "url": "/room/89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d.glb",
-      "artifactFile": "89a055f06c6c3c85e378228a1e1048d6e5e914129f301e26dc6e087650c7a53d.glb",
+      "url": "/room/378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f.glb",
+      "artifactFile": "378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
-        "textures": "webp"
+        "textures": "webp",
+        "positionEncoding": "lossless-float32",
+        "normalBits": 14
+      },
+      "normalValidation": {
+        "validatorVersion": "2.0.0",
+        "space": "world",
+        "passed": true,
+        "reversedCorners": 0,
+        "significantReversedCorners": 0,
+        "nonUnitNormals": 0,
+        "zeroAreaTriangles": 0
       }
     }
   },
@@ -1638,6 +1660,8 @@
     "geometry": "meshopt",
     "textures": "webp",
     "semanticNodesPreserved": true,
+    "shading": "world-space-angle-normals-with-hemisphere-validation",
+    "geometryQualityVersion": "2.0.0",
     "ktx2Available": false
   }
 }
