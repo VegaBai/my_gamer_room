@@ -154,7 +154,7 @@ export default function GamingRoom() {
           </div>
           <div className="panel-controls">
             {selected.group === '双屏' && (
-              <p className="monitor-motion-hint">向内转动由机械臂带动屏幕；向外微调只转屏幕。左屏正值、右屏负值为向内。俯仰负值向下，正值向上。</p>
+              <p className="monitor-motion-hint">并列时支架收拢；向内转动先展开机械臂，向外微调只转屏幕。左屏正值、右屏负值为向内。俯仰负值向下，正值向上。</p>
             )}
             {groupControls.map((control) => (
               <label key={control.id} className="range-control">

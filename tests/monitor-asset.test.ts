@@ -11,7 +11,7 @@ const tiltDefinition = DEFAULT_CONTROLS.find(control => control.id === 'monitors
 function loadNodes(variant: 'desktop' | 'low') {
   const glb = readFileSync(path.resolve('public', manifest.variants[variant].url.slice(1)));
   const data = JSON.parse(glb.subarray(20, 20 + glb.readUInt32LE(12)).toString('utf8'));
-  const nodes: THREE.Object3D[] = data.nodes.map((node: { name?: string; matrix?: number[]; translation?: number[]; rotation?: number[]; scale?: number[]; extras?: object }) => {
+  const nodes: THREE.Object3D[] = data.nodes.map((node: { name?: string; mesh?: number; matrix?: number[]; translation?: number[]; rotation?: number[]; scale?: number[]; extras?: object }) => {
     const object = new THREE.Object3D();
     object.name = node.name ?? '';
     if (node.matrix) new THREE.Matrix4().fromArray(node.matrix).decompose(object.position, object.quaternion, object.scale);
@@ -21,6 +21,14 @@ function loadNodes(variant: 'desktop' | 'low') {
       if (node.scale) object.scale.fromArray(node.scale);
     }
     object.userData = node.extras ?? {};
+    if (node.mesh !== undefined) {
+      const bounds = new THREE.Box3();
+      for (const primitive of data.meshes[node.mesh].primitives) {
+        const accessor = data.accessors[primitive.attributes.POSITION];
+        bounds.union(new THREE.Box3(new THREE.Vector3(...accessor.min), new THREE.Vector3(...accessor.max)));
+      }
+      object.userData.localBounds = bounds;
+    }
     return object;
   });
   data.nodes.forEach((node: { children?: number[] }, i: number) => node.children?.forEach((child) => nodes[i].add(nodes[child])));
@@ -32,7 +40,7 @@ function loadNodes(variant: 'desktop' | 'low') {
     const targets = new Map([...bases].map(([id, base]) => [id, { position: base.position.clone(), quaternion: base.quaternion.clone(), scale: base.scale.clone() }]));
     for (const control of manifest.controls) {
       for (const track of control.tracks ?? []) composeTrackDelta(targets.get(track.nodeId)!, track,
-        ...controlInputRange(control, values));
+        ...controlInputRange(control, values, track));
     }
     for (const [id, target] of targets) {
       const node = semantic.get(id)!;
@@ -40,7 +48,11 @@ function loadNodes(variant: 'desktop' | 'low') {
     }
     scene.updateMatrixWorld(true);
   }
-  return { scene, nodes, semantic, apply };
+  function worldBounds(id: string) {
+    const node = semantic.get(id)!;
+    return (node.userData.localBounds as THREE.Box3).clone().applyMatrix4(node.matrixWorld);
+  }
+  return { scene, nodes, semantic, apply, worldBounds };
 }
 
 describe('published monitor mechanical contract', () => {
@@ -58,6 +70,18 @@ describe('published monitor mechanical contract', () => {
   });
 
   for (const variant of ['desktop', 'low'] as const) {
+    it(`${variant}: parks the two screens close together and clear of the speakers`, () => {
+      const rig = loadNodes(variant);
+      rig.apply({});
+      const left = rig.worldBounds('monitors.left.mesh');
+      const right = rig.worldBounds('monitors.right.mesh');
+      const gap = right.min.x - left.max.x;
+      expect(gap).toBeGreaterThanOrEqual(.008);
+      expect(gap).toBeLessThanOrEqual(.03);
+      const speakers = ['scene.10.speaker.mesh.01.95753e88', 'scene.10.speaker.right.instance.mesh.01.58051953'].map(rig.worldBounds);
+      for (const screen of [left, right]) for (const speaker of speakers) expect(screen.intersectsBox(speaker)).toBe(false);
+    });
+
     it(`${variant}: tilts at the terminal mount without pitching the carrier arm`, () => {
       const rig = loadNodes(variant);
       rig.apply({ 'monitors.face': .6, 'monitors.leftTrim': 15, 'monitors.rightTrim': -15 });
@@ -94,6 +118,13 @@ describe('published monitor mechanical contract', () => {
         return { body, panel };
       });
       rig.apply({});
+      for (const side of ['left', 'right']) {
+        const body = rig.worldBounds(`monitors.${side}.mesh`);
+        const panel = rig.worldBounds(side === 'left' ? 'scene.screen.left.b7d389a0' : 'scene.screen.right.41439fdc');
+        // Catch a keep-world attachment made after changing the parked pose:
+        // it can preserve relative motion while leaving the glow at the old gap.
+        expect(body.getCenter(new THREE.Vector3()).distanceTo(panel.getCenter(new THREE.Vector3()))).toBeLessThan(.05);
+      }
       const relative = pairs.map(({ body, panel }) => body.matrixWorld.clone().invert().multiply(panel.matrixWorld));
       for (const face of [0, .37, .8, 1]) for (const leftTrim of [-15, 0, 15]) for (const rightTrim of [-15, 0, 15]) {
         const values = { 'monitors.face': face, 'monitors.leftTrim': leftTrim, 'monitors.rightTrim': rightTrim,

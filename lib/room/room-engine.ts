@@ -328,8 +328,8 @@ export class RoomEngine {
     if (!this.manifest) return;
     const composed = new Map<string, NodeBaseTransform>();
     for (const definition of this.manifest.controls) {
-      const [defaultNormalized, normalized] = controlInputRange(definition, values);
       for (const track of definition.tracks ?? []) {
+        const [defaultNormalized, normalized] = controlInputRange(definition, values, track);
         const node = this.manifestNodes.get(track.nodeId);
         const base = this.manifestNodeBases.get(track.nodeId);
         if (!node || !base) continue;
@@ -577,7 +577,17 @@ export class RoomEngine {
   }
 }
 
-export function controlInputRange(control: ControlDefinition, values: Readonly<Record<string, number>>): [number, number] {
+export function controlInputRange(control: ControlDefinition, values: Readonly<Record<string, number>>, track?: TransformTrack): [number, number] {
+  if (track?.input) {
+    const input = track.input;
+    const value = input.terms.reduce((sum, term) => {
+      const v = values[term.controlId] ?? 0;
+      const directed = term.mode === 'positive' ? Math.max(v, 0) : term.mode === 'negative' ? Math.min(v, 0) : v;
+      return sum + term.scale * directed;
+    }, 0);
+    const range = input.max - input.min;
+    return [(input.default - input.min) / range, THREE.MathUtils.clamp((value - input.min) / range, 0, 1)];
+  }
   const range = Math.max(1e-8, control.max - control.min);
   return [(control.default - control.min) / range, ((values[control.id] ?? control.default) - control.min) / range];
 }

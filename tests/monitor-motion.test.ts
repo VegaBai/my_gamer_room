@@ -15,6 +15,27 @@ const transform = () => ({ position: new THREE.Vector3(), quaternion: new THREE.
 const angle = (q: THREE.Quaternion) => new THREE.Euler().setFromQuaternion(q, 'YXZ').y * 180 / Math.PI;
 
 describe('directional monitor joint sampling', () => {
+  it('combines face and inward trim before sampling a folded arm, with outward trim kept separate', () => {
+    const control = DEFAULT_CONTROLS.find(item => item.id === 'monitors.face')!;
+    for (const side of ['left', 'right'] as const) {
+      const sign = side === 'left' ? 1 : -1;
+      const coupled: TransformTrack = { ...track([32, 15, 87.5]), input: {
+        min: 0, max: 7 / 6, default: 0, terms: [
+          { controlId: 'monitors.face', mode: 'value', scale: 1 },
+          { controlId: `monitors.${side}Trim`, mode: side === 'left' ? 'positive' : 'negative', scale: sign / 90 },
+        ],
+      } };
+      const input = (face: number, trim: number) => controlInputRange(control, { 'monitors.face': face, [`monitors.${side}Trim`]: trim }, coupled);
+      expect(input(0, 0)).toEqual([0, 0]);
+      expect(input(.5, -sign * 15)[1]).toBeCloseTo(.5 / (7 / 6));
+      expect(input(.5, sign * 15)[1]).toBeCloseTo((.5 + 15 / 90) / (7 / 6));
+      expect(input(1, sign * 15)).toEqual([0, 1]);
+      const before = input(.2 - 1e-7, sign * 9)[1];
+      const after = input(.2 + 1e-7, sign * 9)[1];
+      expect(after - before).toBeLessThan(2e-7);
+    }
+  });
+
   it('samples pitch around the horizontal default with positive values looking up', () => {
     const definition = DEFAULT_CONTROLS.find(control => control.id === 'monitors.leftTilt')!;
     const values = [definition.min, 0, definition.max];

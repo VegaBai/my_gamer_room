@@ -37,6 +37,20 @@ export function validateManifest(manifest: RoomManifestV1) {
   }
 
   const hitControlIds = new Set<string>();
+  for (const control of controls.values()) for (const track of control.tracks ?? []) {
+    if (!track.input) continue;
+    const input = track.input;
+    if (![input.min, input.max, input.default].every(Number.isFinite) || input.min >= input.max || input.default < input.min || input.default > input.max || !Array.isArray(input.terms) || !input.terms.length) {
+      throw new Error(`Invalid coupled track range: ${control.id}`);
+    }
+    const seen = new Set<string>();
+    for (const term of input.terms) {
+      if (!controls.has(term.controlId) || seen.has(term.controlId) || !Number.isFinite(term.scale) || !['value', 'positive', 'negative'].includes(term.mode)) {
+        throw new Error(`Invalid coupled track input: ${control.id}`);
+      }
+      seen.add(term.controlId);
+    }
+  }
   for (const target of manifest.hitTargets ?? []) {
     if (!controls.has(target.controlId)) throw new Error(`Unknown hit target control: ${target.controlId}`);
     if (target.size.some((value) => !Number.isFinite(value) || value <= 0)) {

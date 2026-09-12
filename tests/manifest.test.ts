@@ -41,6 +41,21 @@ describe('room manifest validation', () => {
     expect(() => validateManifest(makeManifest())).not.toThrow();
   });
 
+  it('validates coupled joint inputs and rejects unknown controls or degenerate ranges', () => {
+    const manifest = makeManifest();
+    const track = manifest.controls.find(control => control.id === 'monitors.face')!.tracks![0];
+    track.input = { min: 0, max: 7 / 6, default: 0, terms: [
+      { controlId: 'monitors.face', scale: 1, mode: 'value' },
+      { controlId: 'monitors.leftTrim', scale: 1 / 90, mode: 'positive' },
+    ] };
+    expect(() => validateManifest(manifest)).not.toThrow();
+    track.input.terms[1].controlId = 'missing';
+    expect(() => validateManifest(manifest)).toThrow('Invalid coupled track input');
+    track.input.terms[1].controlId = 'monitors.leftTrim';
+    track.input.max = 0;
+    expect(() => validateManifest(manifest)).toThrow('Invalid coupled track range');
+  });
+
   it('rejects duplicate and unknown semantic ids', () => {
     const duplicate = makeManifest();
     duplicate.controls.push({ ...duplicate.controls[0] });

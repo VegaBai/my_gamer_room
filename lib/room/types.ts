@@ -12,6 +12,13 @@ export interface TransformTrack {
   nodeId: string;
   path: TrackPath;
   samples: TrackSample[];
+  // A coupled mechanical joint is sampled once from its combined inputs.
+  input?: {
+    min: number;
+    max: number;
+    default: number;
+    terms: { controlId: string; scale: number; mode: 'value' | 'positive' | 'negative' }[];
+  };
 }
 
 export interface ControlDefinition {

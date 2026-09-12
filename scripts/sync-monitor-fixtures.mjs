@@ -6,8 +6,11 @@ import { fileURLToPath } from 'node:url';
 const webRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const auditPath = process.argv[2] ?? path.resolve(webRoot, '../.tmp/web-export/monitor-kinematics-high.json');
 const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
-if (audit.schema !== 'monitor-kinematics-audit/2' || !audit.passed || !audit.allDriversLiveAndValidated) {
+if (audit.schema !== 'monitor-kinematics-audit/3' || !audit.passed || !audit.allDriversLiveAndValidated || audit.speakerPairsChecked !== 18) {
   throw new Error('A passing, live-driver-validated Blender audit is required.');
+}
+for (const id of ['scene.10.speaker.mesh.01.95753e88', 'scene.10.speaker.right.instance.mesh.01.58051953']) {
+  if (!audit.fixtures.every(pose => pose.nodes[id])) throw new Error(`Speaker fixture is missing: ${id}`);
 }
 const poses = audit.fixtures.map(pose => ({
   face: pose.face, leftTrim: pose.leftTrim, rightTrim: pose.rightTrim,
