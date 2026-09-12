@@ -29,7 +29,7 @@ interface OriginalMaterialState {
   emissiveIntensity: number;
 }
 
-interface NodeBaseTransform {
+export interface NodeBaseTransform {
   position: THREE.Vector3;
   quaternion: THREE.Quaternion;
   scale: THREE.Vector3;
@@ -328,10 +328,7 @@ export class RoomEngine {
     if (!this.manifest) return;
     const composed = new Map<string, NodeBaseTransform>();
     for (const definition of this.manifest.controls) {
-      const value = values[definition.id] ?? definition.default;
-      const normalized = (value - definition.min) / Math.max(1e-8, definition.max - definition.min);
-      const defaultNormalized = (definition.default - definition.min)
-        / Math.max(1e-8, definition.max - definition.min);
+      const [defaultNormalized, normalized] = controlInputRange(definition, values);
       for (const track of definition.tracks ?? []) {
         const node = this.manifestNodes.get(track.nodeId);
         const base = this.manifestNodeBases.get(track.nodeId);
@@ -523,7 +520,7 @@ export class RoomEngine {
     this.lastFrameAt = now;
     this.state.tick(now);
     if (this.hoveredControl) this.updateHoverOutline();
-    if (!this.reduceMotion && now - this.lastInputAt > 8000 && !this.state.isAnimating()) {
+    if (!this.disposeSurfaceQA && !this.reduceMotion && now - this.lastInputAt > 8000 && !this.state.isAnimating()) {
       this.orbit.autoRotate = true;
     }
     this.orbit.update(delta);
@@ -580,7 +577,12 @@ export class RoomEngine {
   }
 }
 
-function composeTrackDelta(
+export function controlInputRange(control: ControlDefinition, values: Readonly<Record<string, number>>): [number, number] {
+  const range = Math.max(1e-8, control.max - control.min);
+  return [(control.default - control.min) / range, ((values[control.id] ?? control.default) - control.min) / range];
+}
+
+export function composeTrackDelta(
   target: NodeBaseTransform,
   track: TransformTrack,
   fromT: number,
@@ -608,7 +610,7 @@ function composeTrackDelta(
   ));
 }
 
-function sampleTrack(track: TransformTrack, t: number) {
+export function sampleTrack(track: TransformTrack, t: number) {
   const [a, b, mix] = surroundingSamples(track.samples, THREE.MathUtils.clamp(t, 0, 1));
   if (track.path === 'quaternion') {
     const qa = new THREE.Quaternion(...(a.value as [number, number, number, number]));

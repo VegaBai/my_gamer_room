@@ -35,6 +35,8 @@ button { -webkit-tap-highlight-color: transparent; }
   background: linear-gradient(135deg, #f8e7ec, #e7edf8);
 }
 
+.monitor-motion-hint { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
 .canvas-host,
 .room-canvas {
   position: absolute;

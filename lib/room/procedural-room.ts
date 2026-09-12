@@ -102,14 +102,26 @@ export function buildProceduralRoom(): ProceduralRoom {
   monitorSupport.position.set(0, .1, -.18);
   deskTop.add(monitorSupport);
   cylinder(monitorSupport, 'monitor-post', .09, .09, .78, [0, .39, 0], materials.metal);
-  box(monitorSupport, 'monitor-arm-left', [.78, .08, .08], [-.42, .67, 0], materials.metal);
-  box(monitorSupport, 'monitor-arm-right', [.78, .08, .08], [.42, .67, 0], materials.metal);
+  box(monitorSupport, 'monitor-arm-left-fixed', [.4, .08, .08], [-.2, .67, 0], materials.metal);
+  box(monitorSupport, 'monitor-arm-right-fixed', [.4, .08, .08], [.2, .67, 0], materials.metal);
+  const leftArm = new THREE.Group();
+  const rightArm = new THREE.Group();
+  leftArm.position.set(-.4, .67, 0);
+  rightArm.position.set(.4, .67, 0);
+  monitorSupport.add(leftArm, rightArm);
+  cylinder(leftArm, 'monitor-left-yaw-joint', .055, .055, .1, [0, 0, 0], materials.metal);
+  cylinder(rightArm, 'monitor-right-yaw-joint', .055, .055, .1, [0, 0, 0], materials.metal);
+  box(leftArm, 'monitor-arm-left-moving', [.33, .07, .07], [-.165, 0, 0], materials.metal);
+  box(rightArm, 'monitor-arm-right-moving', [.33, .07, .07], [.165, 0, 0], materials.metal);
+  box(leftArm, 'monitor-left-mount', [.06, .06, .2], [-.33, .05, .1], materials.metal);
+  box(rightArm, 'monitor-right-mount', [.06, .06, .2], [.33, .05, .1], materials.metal);
 
   const leftScreen = new THREE.Group();
   const rightScreen = new THREE.Group();
-  leftScreen.position.set(-.73, .72, 0);
-  rightScreen.position.set(.73, .72, 0);
-  monitorSupport.add(leftScreen, rightScreen);
+  leftScreen.position.set(-.33, .05, .2);
+  rightScreen.position.set(.33, .05, .2);
+  leftArm.add(leftScreen);
+  rightArm.add(rightScreen);
   const leftScreenMesh = buildScreen(leftScreen, 'left-screen', screenGlow, materials.dark);
   const rightScreenMesh = buildScreen(rightScreen, 'right-screen', screenGlow, materials.dark);
 
@@ -268,8 +280,12 @@ export function buildProceduralRoom(): ProceduralRoom {
     micHead.rotation.z = -(shoulder.rotation.z + elbow.rotation.z);
 
     const screens = values['monitors.face'] ?? 0;
-    leftScreen.rotation.y = deg(90 * screens + (values['monitors.leftTrim'] ?? 0));
-    rightScreen.rotation.y = deg(-90 * screens + (values['monitors.rightTrim'] ?? 0));
+    const leftTrim = values['monitors.leftTrim'] ?? 0;
+    const rightTrim = values['monitors.rightTrim'] ?? 0;
+    leftArm.rotation.y = deg(75 * screens + Math.max(0, leftTrim));
+    rightArm.rotation.y = deg(-75 * screens + Math.min(0, rightTrim));
+    leftScreen.rotation.y = deg(15 * screens + Math.min(0, leftTrim));
+    rightScreen.rotation.y = deg(-15 * screens + Math.max(0, rightTrim));
   };
 
   const dispose = () => {

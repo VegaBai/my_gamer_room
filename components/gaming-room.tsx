@@ -153,14 +153,18 @@ export default function GamingRoom() {
             <button type="button" aria-label="关闭控制面板" onClick={() => setSelectedId(null)}>×</button>
           </div>
           <div className="panel-controls">
+            {selected.group === '双屏' && (
+              <p className="monitor-motion-hint">向内转动由机械臂带动屏幕；向外微调只转屏幕。左屏正值、右屏负值为向内。</p>
+            )}
             {groupControls.map((control) => (
               <label key={control.id} className="range-control">
                 <span><b>{control.label}</b><output>{formatValue(control, values[control.id] ?? control.default)}</output></span>
                 <input
                   type="range"
+                  aria-label={control.label}
                   min={control.min}
                   max={control.max}
-                  step={control.unit === '°' ? .5 : .01}
+                  step={control.id === 'monitors.face' ? 1 / 90 : control.unit === '°' ? .5 : .01}
                   value={values[control.id] ?? control.default}
                   onInput={(event) => engineRef.current?.setControl(control.id, Number(event.currentTarget.value))}
                 />

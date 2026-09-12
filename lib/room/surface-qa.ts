@@ -23,14 +23,17 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   let cavities = true;
   const initialFog = scene.fog;
   scene.fog = null;
-  orbit.minDistance = .1;
-  orbit.maxDistance = 10;
-  orbit.autoRotate = false;
-  orbit.minAzimuthAngle = -Infinity;
-  orbit.maxAzimuthAngle = Infinity;
-  orbit.minPolarAngle = .1;
-  orbit.maxPolarAngle = Math.PI - .1;
-  orbit.enablePan = true;
+  function unlockCamera() {
+    orbit.minDistance = .1;
+    orbit.maxDistance = 10;
+    orbit.autoRotate = false;
+    orbit.minAzimuthAngle = -Infinity;
+    orbit.maxAzimuthAngle = Infinity;
+    orbit.minPolarAngle = .1;
+    orbit.maxPolarAngle = Math.PI - .1;
+    orbit.enablePan = true;
+  }
+  unlockCamera();
   const button = (label: string, action: () => void) => {
     const element = document.createElement('button');
     element.textContent = label;
@@ -40,6 +43,7 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
     return element;
   };
   function focus(part: 'cabinet' | 'chair') {
+    unlockCamera();
     const selected = meshes.filter((mesh) => part === 'cabinet'
       ? /cabinet|drawer|door/.test(mesh.userData.web_id)
       : /chair/.test(mesh.userData.web_id));
@@ -56,6 +60,22 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   }
   button('柜体近景', () => focus('cabinet'));
   button('椅脚近景', () => focus('chair'));
+  function focusMonitors(back: boolean) {
+    unlockCamera();
+    for (const mesh of meshes) {
+      if (/wall/i.test(mesh.userData.web_id)) mesh.visible = !back && initial.get(mesh)!.visible;
+    }
+    const box = new THREE.Box3();
+    for (const mesh of meshes.filter((item) => /monitor/i.test(item.userData.web_id))) box.expandByObject(mesh);
+    const center = box.getCenter(new THREE.Vector3());
+    camera.position.copy(center).add(new THREE.Vector3(back ? -.9 : 1.2, .85, back ? -1.8 : 1.8));
+    orbit.target.copy(center);
+    camera.fov = 48;
+    camera.updateProjectionMatrix();
+    orbit.update();
+  }
+  button('双屏正面', () => focusMonitors(false));
+  button('双屏背面', () => focusMonitors(true));
   const normalButton = button('法线贴图：开', () => {
     normals = !normals;
     normalButton.textContent = `法线贴图：${normals ? '开' : '关'}`;
