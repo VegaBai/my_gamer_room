@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.0.0",
+  "pipelineVersion": "2.1.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3",
-      "bytes": 16443716,
-      "triangles": 585239,
+      "sha256": "d6382b5a85792fe6e93e3567f4deb350a0dc553c0e2f03c9c31031766ec5bf61",
+      "bytes": 12076828,
+      "triangles": 585241,
       "drawCalls": 83,
       "nodes": 137,
       "meshes": 81,
@@ -16,7 +16,7 @@
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 2397748,
-      "binaryBytes": 34563952,
+      "binaryBytes": 24751128,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -33,8 +33,8 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 137,
-      "url": "/room/0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3.glb",
-      "artifactFile": "0cc6873f58229905f5356cacaaa8294299ededf76c0365f02e58fc3eb9f845c3.glb",
+      "url": "/room/d6382b5a85792fe6e93e3567f4deb350a0dc553c0e2f03c9c31031766ec5bf61.glb",
+      "artifactFile": "d6382b5a85792fe6e93e3567f4deb350a0dc553c0e2f03c9c31031766ec5bf61.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -43,19 +43,24 @@
         "normalBits": 14
       },
       "normalValidation": {
-        "validatorVersion": "2.0.0",
+        "validatorVersion": "2.1.0",
         "space": "world",
         "passed": true,
         "reversedCorners": 0,
         "significantReversedCorners": 0,
         "nonUnitNormals": 0,
         "zeroAreaTriangles": 0
+      },
+      "surfaceValidation": {
+        "method": "exact-position-boundary-budget",
+        "checkedParts": 30,
+        "passed": true
       }
     },
     "low": {
-      "sha256": "378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f",
-      "bytes": 7361944,
-      "triangles": 236096,
+      "sha256": "d111c221b0718ce896c62b782852d07316994e070886092a0b6773af03964ef4",
+      "bytes": 5140760,
+      "triangles": 232230,
       "drawCalls": 83,
       "nodes": 137,
       "meshes": 81,
@@ -63,7 +68,7 @@
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 693244,
-      "binaryBytes": 15315996,
+      "binaryBytes": 10430576,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -80,8 +85,8 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 137,
-      "url": "/room/378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f.glb",
-      "artifactFile": "378a0db774044dbe40cbb31e253ca6a7eff63b2657c1e4658a9187776571cf7f.glb",
+      "url": "/room/d111c221b0718ce896c62b782852d07316994e070886092a0b6773af03964ef4.glb",
+      "artifactFile": "d111c221b0718ce896c62b782852d07316994e070886092a0b6773af03964ef4.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -90,13 +95,18 @@
         "normalBits": 14
       },
       "normalValidation": {
-        "validatorVersion": "2.0.0",
+        "validatorVersion": "2.1.0",
         "space": "world",
         "passed": true,
         "reversedCorners": 0,
         "significantReversedCorners": 0,
         "nonUnitNormals": 0,
         "zeroAreaTriangles": 0
+      },
+      "surfaceValidation": {
+        "method": "exact-position-boundary-budget",
+        "checkedParts": 30,
+        "passed": true
       }
     }
   },
@@ -1660,8 +1670,8 @@
     "geometry": "meshopt",
     "textures": "webp",
     "semanticNodesPreserved": true,
-    "shading": "world-space-angle-normals-with-hemisphere-validation",
-    "geometryQualityVersion": "2.0.0",
+    "shading": "seam-connected-world-space-normals-and-hard-surface-weighting",
+    "geometryQualityVersion": "2.1.0",
     "ktx2Available": false
   }
 }

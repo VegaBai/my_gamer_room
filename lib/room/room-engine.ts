@@ -71,6 +71,7 @@ export class RoomEngine {
   private frameCount = 0;
   private pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
   private lastFrameAt = performance.now();
+  private disposeSurfaceQA: (() => void) | null = null;
 
   constructor(container: HTMLElement, callbacks: RoomEngineCallbacks) {
     this.container = container;
@@ -197,6 +198,7 @@ export class RoomEngine {
     this.cancelDemo();
     this.unbindEvents();
     this.orbit.dispose();
+    this.disposeSurfaceQA?.();
     this.procedural?.dispose();
     this.procedural = null;
     if (this.manifestRoot) disposeObject(this.manifestRoot);
@@ -313,6 +315,13 @@ export class RoomEngine {
     }
     this.useHitTargets(actualHitTargets, actualVisualTargets);
     this.applyManifestTracks(this.state.snapshot());
+    if (process.env.NODE_ENV === 'development' && new URLSearchParams(location.search).has('surfaceQA')) {
+      void import('./surface-qa').then(({ mountSurfaceQA }) => {
+        if (this.disposed) return;
+        this.disposeSurfaceQA = mountSurfaceQA(root, this.scene, this.camera, this.orbit);
+        this.lastInputAt = Number.POSITIVE_INFINITY;
+      });
+    }
   }
 
   private applyManifestTracks(values: Readonly<Record<string, number>>) {
@@ -551,6 +560,10 @@ export class RoomEngine {
   };
 
   private chooseVariant(): 'desktop' | 'low' {
+    if (process.env.NODE_ENV === 'development') {
+      const inspectionVariant = new URLSearchParams(location.search).get('qaVariant');
+      if (inspectionVariant === 'desktop' || inspectionVariant === 'low') return inspectionVariant;
+    }
     const device = navigator as Navigator & {
       connection?: { saveData?: boolean };
       deviceMemory?: number;
