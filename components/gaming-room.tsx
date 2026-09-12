@@ -154,7 +154,7 @@ export default function GamingRoom() {
           </div>
           <div className="panel-controls">
             {selected.group === '双屏' && (
-              <p className="monitor-motion-hint">向内转动由机械臂带动屏幕；向外微调只转屏幕。左屏正值、右屏负值为向内。</p>
+              <p className="monitor-motion-hint">向内转动由机械臂带动屏幕；向外微调只转屏幕。左屏正值、右屏负值为向内。俯仰负值向下，正值向上。</p>
             )}
             {groupControls.map((control) => (
               <label key={control.id} className="range-control">
@@ -207,6 +207,7 @@ export default function GamingRoom() {
 function formatValue(control: ControlDefinition, value: number) {
   if (control.id === 'desk.lift') return `${Math.round(78 + value * 40)} cm`;
   if (control.id === 'monitors.face') return `${Math.round(value * 90)}°`;
+  if (control.id.endsWith('Tilt')) return value === 0 ? '0°' : `${value > 0 ? '仰' : '俯'} ${Math.round(Math.abs(value) * 10) / 10}°`;
   if (control.unit === '%') return `${Math.round(value * 100)}%`;
   if (control.unit === '°') return `${Math.round(value * 10) / 10}°`;
   return String(Math.round(value * 100) / 100);

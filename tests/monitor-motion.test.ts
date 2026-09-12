@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
-import { composeTrackDelta, sampleTrack } from '../lib/room/room-engine';
+import { composeTrackDelta, controlInputRange, sampleTrack } from '../lib/room/room-engine';
 import type { TransformTrack } from '../lib/room/types';
 import { RoomStateMachine } from '../lib/room/state-machine';
 import { DEFAULT_CONTROLS } from '../lib/room/default-controls';
@@ -15,6 +15,42 @@ const transform = () => ({ position: new THREE.Vector3(), quaternion: new THREE.
 const angle = (q: THREE.Quaternion) => new THREE.Euler().setFromQuaternion(q, 'YXZ').y * 180 / Math.PI;
 
 describe('directional monitor joint sampling', () => {
+  it('samples pitch around the horizontal default with positive values looking up', () => {
+    const definition = DEFAULT_CONTROLS.find(control => control.id === 'monitors.leftTilt')!;
+    const values = [definition.min, 0, definition.max];
+    const tiltTrack: TransformTrack = { nodeId: 'monitors.leftTilt', path: 'quaternion', samples: values.map(value => ({
+      t: (value - definition.min) / (definition.max - definition.min),
+      value: new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -value * Math.PI / 180).toArray(),
+    })) };
+    for (const value of [definition.min, definition.min / 4, 0, definition.max / 2, definition.max]) {
+      const joint = transform();
+      composeTrackDelta(joint, tiltTrack, ...controlInputRange(definition, { [definition.id]: value }));
+      const facing = new THREE.Vector3(0, 0, 1).applyQuaternion(joint.quaternion);
+      expect(Math.asin(facing.y) * 180 / Math.PI).toBeCloseTo(value, 5);
+    }
+  });
+
+  it('clamps independent screen tilts and smoothly resets them with arm motion', () => {
+    const machine = new RoomStateMachine(DEFAULT_CONTROLS);
+    machine.toggle('monitors.face', 0);
+    machine.toggle('monitors.leftTilt', 0);
+    machine.tick(180);
+    const current = machine.getValue('monitors.leftTilt');
+    machine.toggle('monitors.leftTilt', 180);
+    expect(machine.getValue('monitors.leftTilt')).toBe(current);
+    machine.setDirect('monitors.leftTilt', 40);
+    machine.setDirect('monitors.rightTilt', -40);
+    expect(machine.getValue('monitors.leftTilt')).toBe(machine.getDefinition('monitors.leftTilt').max);
+    expect(machine.getValue('monitors.rightTilt')).toBe(machine.getDefinition('monitors.rightTilt').min);
+    expect(machine.isAnimating('monitors.leftTilt')).toBe(false);
+    expect(machine.isAnimating('monitors.face')).toBe(true);
+    machine.reset(200);
+    machine.tick(1600);
+    expect(machine.getValue('monitors.leftTilt')).toBe(0);
+    expect(machine.getValue('monitors.rightTilt')).toBe(0);
+    expect(machine.getValue('monitors.face')).toBe(0);
+  });
+
   it('preserves the exact neutral knot instead of blending inward and outward pivots', () => {
     const inward = track([0, 0, 15]);
     const outward = track([-15, 0, 0]);

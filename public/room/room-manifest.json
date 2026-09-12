@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.2.0",
+  "pipelineVersion": "2.3.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "846e4370fead902f81434200c52404335b1ecc41a592921da35b69a8893ee7ab",
-      "bytes": 12092004,
+      "sha256": "c567f40e0308bef7b91a5aebba3b852662fd5dab0a2de1aabc650bc02dc5df56",
+      "bytes": 12092500,
       "triangles": 585237,
       "drawCalls": 89,
-      "nodes": 151,
+      "nodes": 153,
       "meshes": 87,
       "materials": 32,
       "textures": 29,
@@ -32,9 +32,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 151,
-      "url": "/room/846e4370fead902f81434200c52404335b1ecc41a592921da35b69a8893ee7ab.glb",
-      "artifactFile": "846e4370fead902f81434200c52404335b1ecc41a592921da35b69a8893ee7ab.glb",
+      "webIdCount": 153,
+      "url": "/room/c567f40e0308bef7b91a5aebba3b852662fd5dab0a2de1aabc650bc02dc5df56.glb",
+      "artifactFile": "c567f40e0308bef7b91a5aebba3b852662fd5dab0a2de1aabc650bc02dc5df56.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -58,11 +58,11 @@
       }
     },
     "low": {
-      "sha256": "dffd496e528d452326413aae78e21dbdc7108c6c0b063cdf197175b4c01db7f2",
-      "bytes": 5167172,
+      "sha256": "536752826f701e272727d92985aa55fa1b4800c360fe6c788f6828a91f923a57",
+      "bytes": 5167672,
       "triangles": 232230,
       "drawCalls": 89,
-      "nodes": 151,
+      "nodes": 153,
       "meshes": 87,
       "materials": 32,
       "textures": 29,
@@ -84,9 +84,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 151,
-      "url": "/room/dffd496e528d452326413aae78e21dbdc7108c6c0b063cdf197175b4c01db7f2.glb",
-      "artifactFile": "dffd496e528d452326413aae78e21dbdc7108c6c0b063cdf197175b4c01db7f2.glb",
+      "webIdCount": 153,
+      "url": "/room/536752826f701e272727d92985aa55fa1b4800c360fe6c788f6828a91f923a57.glb",
+      "artifactFile": "536752826f701e272727d92985aa55fa1b4800c360fe6c788f6828a91f923a57.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -2879,10 +2879,12 @@
         "monitors.leftArmYaw",
         "monitors.leftArmPitch",
         "monitors.leftPlateLevel",
+        "monitors.leftTilt",
         "monitors.rightShoulder",
         "monitors.rightArmYaw",
         "monitors.rightArmPitch",
         "monitors.rightPlateLevel",
+        "monitors.rightTilt",
         "monitors.leftPivot",
         "monitors.rightPivot"
       ]
@@ -4063,6 +4065,7 @@
         "monitors.leftArmYaw",
         "monitors.leftArmPitch",
         "monitors.leftPlateLevel",
+        "monitors.leftTilt",
         "monitors.leftPivot"
       ]
     },
@@ -5198,7 +5201,114 @@
         "monitors.rightArmYaw",
         "monitors.rightArmPitch",
         "monitors.rightPlateLevel",
+        "monitors.rightTilt",
         "monitors.rightPivot"
+      ]
+    },
+    {
+      "id": "monitors.leftTilt",
+      "label": "左屏俯仰",
+      "group": "monitors",
+      "primary": false,
+      "min": -5,
+      "max": 5,
+      "default": 0,
+      "clickValue": 5,
+      "durationMs": 550,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "monitors.leftTilt",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0.043619387,
+                0,
+                0,
+                0.999048233
+              ]
+            },
+            {
+              "t": 0.5,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                -0.043619387,
+                0,
+                0,
+                0.999048233
+              ]
+            }
+          ]
+        }
+      ],
+      "drivenNodeIds": [
+        "monitors.leftTilt"
+      ],
+      "sampledNodeIds": [
+        "monitors.leftTilt"
+      ]
+    },
+    {
+      "id": "monitors.rightTilt",
+      "label": "右屏俯仰",
+      "group": "monitors",
+      "primary": false,
+      "min": -5,
+      "max": 5,
+      "default": 0,
+      "clickValue": 5,
+      "durationMs": 550,
+      "unit": "degrees",
+      "tracks": [
+        {
+          "nodeId": "monitors.rightTilt",
+          "path": "quaternion",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0.043619387,
+                0,
+                0,
+                0.999048233
+              ]
+            },
+            {
+              "t": 0.5,
+              "value": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                -0.043619387,
+                0,
+                0,
+                0.999048233
+              ]
+            }
+          ]
+        }
+      ],
+      "drivenNodeIds": [
+        "monitors.rightTilt"
+      ],
+      "sampledNodeIds": [
+        "monitors.rightTilt"
       ]
     }
   ],
@@ -5578,6 +5688,18 @@
     },
     {
       "controlId": "monitors.rightTrim",
+      "nodeIds": [
+        "monitors.right.mesh"
+      ]
+    },
+    {
+      "controlId": "monitors.leftTilt",
+      "nodeIds": [
+        "monitors.left.mesh"
+      ]
+    },
+    {
+      "controlId": "monitors.rightTilt",
       "nodeIds": [
         "monitors.right.mesh"
       ]
@@ -6020,6 +6142,10 @@
       "nodeName": "PIVOT_MonitorArm_Left_Shoulder",
       "type": "EMPTY"
     },
+    "monitors.leftTilt": {
+      "nodeName": "PIVOT_MonitorArm_Left_Tilt",
+      "type": "EMPTY"
+    },
     "monitors.leftArmYaw": {
       "nodeName": "PIVOT_MonitorArm_Left_Yaw",
       "type": "EMPTY"
@@ -6034,6 +6160,10 @@
     },
     "monitors.rightShoulder": {
       "nodeName": "PIVOT_MonitorArm_Right_Shoulder",
+      "type": "EMPTY"
+    },
+    "monitors.rightTilt": {
+      "nodeName": "PIVOT_MonitorArm_Right_Tilt",
       "type": "EMPTY"
     },
     "monitors.rightArmYaw": {
@@ -6190,7 +6320,7 @@
     }
   },
   "monitorKinematics": {
-    "version": "1.0.1",
+    "version": "1.1.0",
     "faceDegrees": 90,
     "armDegrees": 75,
     "trimArmFraction": 1,
@@ -6215,13 +6345,15 @@
       "PIVOT_MonitorArm_Left_Yaw": "monitors.leftArmYaw",
       "PIVOT_MonitorArm_Left_Pitch": "monitors.leftArmPitch",
       "PIVOT_MonitorArm_Left_Level": "monitors.leftPlateLevel",
+      "PIVOT_MonitorArm_Left_Tilt": "monitors.leftTilt",
       "GEO_MonitorArm_Right_Lower": "monitors.arm.right.lower.mesh",
       "GEO_MonitorArm_Right_Upper": "monitors.arm.right.upper.mesh",
       "GEO_MonitorArm_Right_Plate": "monitors.arm.right.plate.mesh",
       "PIVOT_MonitorArm_Right_Shoulder": "monitors.rightShoulder",
       "PIVOT_MonitorArm_Right_Yaw": "monitors.rightArmYaw",
       "PIVOT_MonitorArm_Right_Pitch": "monitors.rightArmPitch",
-      "PIVOT_MonitorArm_Right_Level": "monitors.rightPlateLevel"
+      "PIVOT_MonitorArm_Right_Level": "monitors.rightPlateLevel",
+      "PIVOT_MonitorArm_Right_Tilt": "monitors.rightTilt"
     },
     "desktopTriangles": {
       "05-dual-monitor-arm_mesh_01": 6000,
@@ -6238,14 +6370,84 @@
         "yaw": "PIVOT_MonitorArm_Left_Yaw",
         "pitch": "PIVOT_MonitorArm_Left_Pitch",
         "level": "PIVOT_MonitorArm_Left_Level",
-        "vesa": "PIVOT_Monitor_Left_VESA_Yaw"
+        "vesa": "PIVOT_Monitor_Left_VESA_Yaw",
+        "tilt": "PIVOT_MonitorArm_Left_Tilt"
       },
       "right": {
         "shoulder": "PIVOT_MonitorArm_Right_Shoulder",
         "yaw": "PIVOT_MonitorArm_Right_Yaw",
         "pitch": "PIVOT_MonitorArm_Right_Pitch",
         "level": "PIVOT_MonitorArm_Right_Level",
-        "vesa": "PIVOT_Monitor_Right_VESA_Yaw"
+        "vesa": "PIVOT_Monitor_Right_VESA_Yaw",
+        "tilt": "PIVOT_MonitorArm_Right_Tilt"
+      }
+    },
+    "tiltJoints": {
+      "left": {
+        "name": "PIVOT_MonitorArm_Left_Tilt",
+        "webId": "monitors.leftTilt",
+        "property": "left_screen_tilt_degrees",
+        "parent": "PIVOT_MonitorArm_Left_Level",
+        "reparentedChildren": [
+          "GEO_MonitorArm_Left_Plate",
+          "PIVOT_Monitor_Left_VESA_Yaw"
+        ],
+        "neutralLocalTranslation": [
+          0,
+          0,
+          0
+        ],
+        "neutralLocalQuaternionXyzw": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "neutralLocalScale": [
+          1,
+          1,
+          1
+        ],
+        "localAxis": "X",
+        "angleMultiplier": -1,
+        "rangeDegrees": [
+          -5,
+          5
+        ],
+        "defaultDegrees": 0
+      },
+      "right": {
+        "name": "PIVOT_MonitorArm_Right_Tilt",
+        "webId": "monitors.rightTilt",
+        "property": "right_screen_tilt_degrees",
+        "parent": "PIVOT_MonitorArm_Right_Level",
+        "reparentedChildren": [
+          "GEO_MonitorArm_Right_Plate",
+          "PIVOT_Monitor_Right_VESA_Yaw"
+        ],
+        "neutralLocalTranslation": [
+          0,
+          0,
+          0
+        ],
+        "neutralLocalQuaternionXyzw": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "neutralLocalScale": [
+          1,
+          1,
+          1
+        ],
+        "localAxis": "X",
+        "angleMultiplier": -1,
+        "rangeDegrees": [
+          -5,
+          5
+        ],
+        "defaultDegrees": 0
       }
     },
     "sourceSeamRepair": {

@@ -122,8 +122,12 @@ export function buildProceduralRoom(): ProceduralRoom {
   rightScreen.position.set(.33, .05, .2);
   leftArm.add(leftScreen);
   rightArm.add(rightScreen);
-  const leftScreenMesh = buildScreen(leftScreen, 'left-screen', screenGlow, materials.dark);
-  const rightScreenMesh = buildScreen(rightScreen, 'right-screen', screenGlow, materials.dark);
+  const leftTilt = new THREE.Group();
+  const rightTilt = new THREE.Group();
+  leftScreen.add(leftTilt);
+  rightScreen.add(rightTilt);
+  const leftScreenMesh = buildScreen(leftTilt, 'left-screen', screenGlow, materials.dark);
+  const rightScreenMesh = buildScreen(rightTilt, 'right-screen', screenGlow, materials.dark);
 
   // Microphone boom hierarchy.
   const microphoneRig = new THREE.Group();
@@ -254,8 +258,8 @@ export function buildProceduralRoom(): ProceduralRoom {
   registerTarget('chair.headrest', headrest, [.72, .4, .35], [0, 0, .1], [headrestMesh]);
   registerTarget('chair.lumbar', lumbar, [.68, .38, .35], [0, 0, .1], [lumbarMesh]);
   registerTarget('microphone.fold', micYaw, [.85, 1.45, .62], [.2, .62, 0], [lowerArm, upperArm, micHead]);
-  registerTarget('monitors.face', leftScreen, [1.05, .68, .26], [0, 0, .03], [leftScreenMesh]);
-  registerTarget('monitors.face', rightScreen, [1.05, .68, .26], [0, 0, .03], [rightScreenMesh]);
+  registerTarget('monitors.face', leftTilt, [1.05, .68, .26], [0, 0, .03], [leftScreenMesh]);
+  registerTarget('monitors.face', rightTilt, [1.05, .68, .26], [0, 0, .03], [rightScreenMesh]);
 
   const apply = (values: Readonly<Record<string, number>>) => {
     const deskLift = values['desk.lift'] ?? 0;
@@ -286,6 +290,8 @@ export function buildProceduralRoom(): ProceduralRoom {
     rightArm.rotation.y = deg(-75 * screens + Math.min(0, rightTrim));
     leftScreen.rotation.y = deg(15 * screens + Math.min(0, leftTrim));
     rightScreen.rotation.y = deg(-15 * screens + Math.max(0, rightTrim));
+    leftTilt.rotation.x = -deg(values['monitors.leftTilt'] ?? 0);
+    rightTilt.rotation.x = -deg(values['monitors.rightTilt'] ?? 0);
   };
 
   const dispose = () => {

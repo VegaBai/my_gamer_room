@@ -64,6 +64,14 @@ export const DEFAULT_CONTROLS: ControlDefinition[] = [
     id: 'monitors.rightTrim', label: '右屏微调', group: '双屏', primary: false,
     min: -15, max: 15, default: 0, clickValue: -15, durationMs: 450, unit: '°',
   },
+  {
+    id: 'monitors.leftTilt', label: '左屏俯仰', group: '双屏', primary: false,
+    min: -5, max: 5, default: 0, clickValue: 5, durationMs: 550, unit: '°',
+  },
+  {
+    id: 'monitors.rightTilt', label: '右屏俯仰', group: '双屏', primary: false,
+    min: -5, max: 5, default: 0, clickValue: 5, durationMs: 550, unit: '°',
+  },
 ];
 
 export const PRIMARY_CONTROL_IDS = DEFAULT_CONTROLS
