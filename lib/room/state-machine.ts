@@ -93,6 +93,15 @@ export class RoomStateMachine {
     }
   }
 
+  resetGroup(controlId: string, now: number) {
+    const group = this.requireDefinition(controlId).group;
+    for (const definition of this.definitions.values()) {
+      if (definition.group === group) {
+        this.animateTo(definition.id, definition.default, now, Math.min(850, definition.durationMs));
+      }
+    }
+  }
+
   cancelAll() {
     this.tweens.clear();
   }

@@ -83,9 +83,10 @@ export interface RoomManifestV1 {
   visualTargets: VisualTargetDefinition[];
 }
 
+export type RoomLoadingStage = 'waking' | 'manifest' | 'desktop' | 'low' | 'assets' | 'ready' | 'fallbackReady' | 'webglError' | 'moduleError';
+
 export interface EngineStatus {
   ready: boolean;
   usingBlenderAsset: boolean;
   variant: 'desktop' | 'low';
-  message: string;
 }

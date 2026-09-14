@@ -2,19 +2,20 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '我的电竞房间｜Interactive 3D Room',
-  description: '一个可环绕、可点击的粉白科幻电竞房间。',
+  title: 'My Gaming Room | Interactive 3D Room',
+  description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
   openGraph: {
-    title: '我的电竞房间｜Interactive 3D Room',
-    description: '一个可环绕、可点击的粉白科幻电竞房间。',
+    title: 'My Gaming Room | Interactive 3D Room',
+    description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
     type: 'website',
-    locale: 'zh_CN',
-    images: [{ url: '/og.png', width: 1600, height: 900, alt: '粉白电竞房间 3D 场景' }],
+    locale: 'en_US',
+    alternateLocale: ['zh_CN'],
+    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Pink-and-white gaming room in 3D' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '我的电竞房间｜Interactive 3D Room',
-    description: '一个可环绕、可点击的粉白科幻电竞房间。',
+    title: 'My Gaming Room | Interactive 3D Room',
+    description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
     images: ['/og.png'],
   },
 };
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

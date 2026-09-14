@@ -106,6 +106,61 @@ describe('RoomStateMachine', () => {
     expect(() => machine.toggle('unknown.control', 0)).toThrow('Unknown room control');
   });
 
+  it.each(['cabinet.drawer.1', 'desk.lift', 'chair.swivel', 'microphone.fold', 'monitors.face'])(
+    'resets every control in the %s menu without touching other devices', (selectedId) => {
+      const machine = new RoomStateMachine(DEFAULT_CONTROLS);
+      for (const control of DEFAULT_CONTROLS) machine.setDirect(control.id, control.clickValue);
+      const group = machine.getDefinition(selectedId).group;
+      const before = machine.snapshot();
+      machine.resetGroup(selectedId, 100);
+      machine.resetGroup(selectedId, 100);
+      expect(machine.snapshot()).toEqual(before);
+      machine.tick(1200);
+      for (const control of DEFAULT_CONTROLS) expect(machine.getValue(control.id)).toBe(
+        control.group === group ? control.default : before[control.id],
+      );
+    },
+  );
+
+  it('reverses an active group while unrelated animation continues unchanged', () => {
+    const machine = new RoomStateMachine(DEFAULT_CONTROLS);
+    machine.toggle('desk.lift', 0);
+    machine.toggle('monitors.face', 0);
+    machine.tick(300);
+    const before = machine.snapshot();
+    machine.resetGroup('monitors.leftTilt', 300);
+    machine.tick(300);
+    expect(machine.snapshot()).toEqual(before);
+    expect(machine.isAnimating('desk.lift')).toBe(true);
+    machine.tick(1200);
+    expect(machine.getValue('monitors.face')).toBe(0);
+    expect(machine.getValue('desk.lift')).toBe(1);
+  });
+
+  it('local reset cancels future demo steps without resetting the camera or other tweens', async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('window', { setTimeout, clearTimeout });
+    const { RoomEngine } = await import('../lib/room/room-engine');
+    const applyCamera = vi.fn();
+    const engine = Object.create(RoomEngine.prototype) as InstanceType<typeof RoomEngine>;
+    Object.assign(engine, { state: new RoomStateMachine(DEFAULT_CONTROLS), reduceMotion: false,
+      demoTimers: new Set(), orbit: { autoRotate: true }, callbacks: { onUserInput: vi.fn() },
+      lastInputAt: 0, applyCamera });
+    engine.runDemo();
+    await vi.advanceTimersByTimeAsync(0);
+    engine.state.setDirect('monitors.leftTilt', 5);
+    engine.resetGroup('monitors.face');
+    expect(engine.state.isAnimating('desk.lift')).toBe(true);
+    expect(engine.state.isAnimating('monitors.leftTilt')).toBe(true);
+    expect(applyCamera).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(7000);
+    expect(engine.state.isAnimating('cabinet.drawer.1')).toBe(false);
+    expect(engine.state.getValue('cabinet.drawer.1')).toBe(0);
+    engine.state.tick(performance.now() + 8000);
+    expect(engine.state.getValue('desk.lift')).toBe(1);
+    expect(engine.state.getValue('monitors.leftTilt')).toBe(0);
+  });
+
   it('cancels every pending demo step when direct user input takes over', async () => {
     vi.useFakeTimers();
     vi.stubGlobal('window', {

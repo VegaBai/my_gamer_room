@@ -10,13 +10,14 @@ import { RoomStateMachine } from './state-machine';
 import type {
   ControlDefinition,
   EngineStatus,
+  RoomLoadingStage,
   RoomManifestV1,
   TrackSample,
   TransformTrack,
 } from './types';
 
 interface RoomEngineCallbacks {
-  onProgress: (progress: number, message: string) => void;
+  onProgress: (progress: number, stage: RoomLoadingStage) => void;
   onReady: (status: EngineStatus) => void;
   onSelect: (controlId: string | null) => void;
   onHover: (controlId: string | null, x: number, y: number) => void;
@@ -84,7 +85,7 @@ export class RoomEngine {
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.setPixelRatio(this.pixelRatio);
     this.renderer.domElement.className = 'room-canvas';
-    this.renderer.domElement.setAttribute('aria-label', '可环绕、可点击的电竞房 3D 场景');
+    this.renderer.domElement.setAttribute('aria-label', 'Interactive gaming room: drag to orbit and click a device to adjust it');
     this.container.appendChild(this.renderer.domElement);
 
     this.camera.layers.disable(HIT_LAYER);
@@ -129,14 +130,11 @@ export class RoomEngine {
     const usingBlenderAsset = await this.tryLoadBlenderAsset();
     if (this.disposed) return;
     const variant = this.chooseVariant();
-    this.callbacks.onProgress(100, usingBlenderAsset ? 'Blender 场景已就绪' : '互动预览已就绪');
+    this.callbacks.onProgress(100, usingBlenderAsset ? 'ready' : 'fallbackReady');
     this.callbacks.onReady({
       ready: true,
       usingBlenderAsset,
       variant,
-      message: usingBlenderAsset
-        ? (variant === 'desktop' ? 'Blender 高质量' : 'Blender 轻量')
-        : '互动预览',
     });
   }
 
@@ -156,6 +154,15 @@ export class RoomEngine {
     this.userInput();
     this.state.reset(performance.now());
     this.applyCamera(this.manifest?.camera ?? DEFAULT_CAMERA);
+  }
+
+  resetGroup(controlId: string) {
+    this.userInput();
+    this.state.resetGroup(controlId, performance.now());
+  }
+
+  setSceneLabel(label: string) {
+    this.renderer.domElement.setAttribute('aria-label', label);
   }
 
   runDemo() {
@@ -210,14 +217,14 @@ export class RoomEngine {
 
   private async tryLoadBlenderAsset(): Promise<boolean> {
     try {
-      this.callbacks.onProgress(18, '读取 Blender 场景清单');
+      this.callbacks.onProgress(18, 'manifest');
       const response = await fetch('/room/room-manifest.json', { cache: 'no-store' });
       if (!response.ok) throw new Error(`Manifest HTTP ${response.status}`);
       const manifest = await response.json() as RoomManifestV1;
       validateManifest(manifest);
       const variantName = this.chooseVariant();
       const variant = manifest.variants[variantName];
-      this.callbacks.onProgress(26, variantName === 'desktop' ? '加载桌面高质量模型' : '加载轻量模型');
+      this.callbacks.onProgress(26, variantName);
 
       const ktx2 = new KTX2Loader().setTranscoderPath('/basis/').detectSupport(this.renderer);
       const loader = new GLTFLoader();
@@ -229,7 +236,7 @@ export class RoomEngine {
           resolve,
           (event) => {
             const ratio = event.total > 0 ? event.loaded / event.total : .5;
-            this.callbacks.onProgress(26 + Math.round(ratio * 66), '载入房间模型与压缩纹理');
+            this.callbacks.onProgress(26 + Math.round(ratio * 66), 'assets');
           },
           reject,
         );
