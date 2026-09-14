@@ -76,6 +76,23 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   }
   button('双屏正面', () => focusMonitors(false));
   button('双屏背面', () => focusMonitors(true));
+  function focusMicrophone(back: boolean) {
+    unlockCamera();
+    for (const mesh of meshes) {
+      if (/wall/i.test(mesh.userData.web_id)) mesh.visible = !back && initial.get(mesh)!.visible;
+    }
+    const head = meshes.find((mesh) => mesh.userData.web_id === 'microphone.head.mesh');
+    if (!head) return;
+    const center = new THREE.Box3().setFromObject(head).getCenter(new THREE.Vector3());
+    center.y -= .06;
+    camera.position.copy(center).add(new THREE.Vector3(back ? -.42 : .38, .18, back ? -.65 : .72));
+    orbit.target.copy(center);
+    camera.fov = 32;
+    camera.updateProjectionMatrix();
+    orbit.update();
+  }
+  button('话筒正面', () => focusMicrophone(false));
+  button('话筒背面', () => focusMicrophone(true));
   const normalButton = button('法线贴图：开', () => {
     normals = !normals;
     normalButton.textContent = `法线贴图：${normals ? '开' : '关'}`;

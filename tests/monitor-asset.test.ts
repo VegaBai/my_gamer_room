@@ -211,6 +211,40 @@ describe('published monitor mechanical contract', () => {
   }
 });
 
+describe('published microphone U-yoke contract', () => {
+  for (const variant of ['desktop', 'low'] as const) it(`${variant}: stays connected and centred through folding, yaw and desk lift`, () => {
+    const rig = loadNodes(variant);
+    const head = rig.semantic.get('microphone.head.mesh')!;
+    const capsule = rig.semantic.get('microphone.capsule.mesh')!;
+    const knobs = rig.semantic.get('microphone.mount.knobs.mesh')!;
+    expect(knobs).toBeDefined();
+    const hardware = rig.nodes.filter(node => node.userData.web_analytic_microphone_mount);
+    expect(hardware).toHaveLength(3);
+    const clevis = hardware.find(node => node !== head && node !== knobs)!;
+    rig.apply({});
+    const relative = head.matrixWorld.clone().invert().multiply(capsule.matrixWorld);
+    const basePosition = capsule.getWorldPosition(new THREE.Vector3());
+    expect(Math.abs(relative.elements[12])).toBeLessThan(.001);
+    expect(Math.abs(relative.elements[14])).toBeLessThan(.001);
+    for (const part of hardware) {
+      expect(part.userData.web_surface_boundary_limit).toBe(0);
+      for (const material of part.userData.materials) expect(material.normalTexture).toBeUndefined();
+    }
+    for (let step = 0; step <= 20; step++) for (const yaw of [-30, 0, 10]) for (const lift of [0, 1]) {
+      rig.apply({ 'microphone.fold': step / 20, 'microphone.yaw': yaw, 'desk.lift': lift });
+      const current = head.matrixWorld.clone().invert().multiply(capsule.matrixWorld);
+      current.elements.forEach((value, i) => expect(value).toBeCloseTo(relative.elements[i], 5));
+      expect(new THREE.Vector3(0, 1, 0).transformDirection(capsule.matrixWorld).distanceTo(new THREE.Vector3(0, 1, 0))).toBeLessThan(.001);
+      expect(head.getWorldPosition(new THREE.Vector3()).distanceTo(clevis.getWorldPosition(new THREE.Vector3()))).toBeLessThan(.001);
+      for (const part of hardware) expect(part.getWorldScale(new THREE.Vector3()).distanceTo(new THREE.Vector3(1, 1, 1))).toBeLessThan(.00001);
+    }
+    rig.apply({ 'desk.lift': 1 });
+    expect(capsule.getWorldPosition(new THREE.Vector3()).sub(basePosition).distanceTo(new THREE.Vector3(0, .4, 0))).toBeLessThan(.001);
+    rig.apply({});
+    expect(capsule.getWorldPosition(new THREE.Vector3()).distanceTo(basePosition)).toBeLessThan(.00001);
+  });
+});
+
 // The Blender-authored fixture is checked into the source together with the
 // exact asset, so the comparison also runs independently of Blender in CI.
 const fixturePath = path.resolve('tests/fixtures/monitor-poses.json');

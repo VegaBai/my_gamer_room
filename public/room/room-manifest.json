@@ -6,17 +6,17 @@
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724",
-      "bytes": 12156896,
-      "triangles": 559789,
-      "drawCalls": 89,
-      "nodes": 153,
-      "meshes": 94,
-      "materials": 33,
-      "textures": 29,
-      "images": 27,
-      "embeddedImageBytes": 2397748,
-      "binaryBytes": 26674952,
+      "sha256": "00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f",
+      "bytes": 10914324,
+      "triangles": 552753,
+      "drawCalls": 90,
+      "nodes": 154,
+      "meshes": 88,
+      "materials": 34,
+      "textures": 27,
+      "images": 25,
+      "embeddedImageBytes": 2096836,
+      "binaryBytes": 22570724,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -32,9 +32,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 153,
-      "url": "/room/a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724.glb",
-      "artifactFile": "a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724.glb",
+      "webIdCount": 154,
+      "url": "/room/00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f.glb",
+      "artifactFile": "00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -53,22 +53,22 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 36,
+        "checkedParts": 38,
         "passed": true
       }
     },
     "low": {
-      "sha256": "fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5",
-      "bytes": 5232052,
-      "triangles": 227258,
-      "drawCalls": 89,
-      "nodes": 153,
-      "meshes": 94,
-      "materials": 33,
-      "textures": 29,
-      "images": 27,
-      "embeddedImageBytes": 693244,
-      "binaryBytes": 11381908,
+      "sha256": "cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484",
+      "bytes": 4719848,
+      "triangles": 225982,
+      "drawCalls": 90,
+      "nodes": 154,
+      "meshes": 88,
+      "materials": 34,
+      "textures": 27,
+      "images": 25,
+      "embeddedImageBytes": 609958,
+      "binaryBytes": 9653880,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -84,9 +84,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 153,
-      "url": "/room/fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5.glb",
-      "artifactFile": "fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5.glb",
+      "webIdCount": 154,
+      "url": "/room/cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484.glb",
+      "artifactFile": "cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -105,7 +105,7 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 36,
+        "checkedParts": 38,
         "passed": true
       }
     }
@@ -6677,24 +6677,24 @@
       "nodeId": "microphone.root",
       "space": "node-local",
       "center": [
-        -0.81692934,
-        1.144188404,
-        0.279999971
+        -0.811693072,
+        1.128278494,
+        0.280043691
       ],
       "size": [
-        0.508858681,
-        0.531623006,
-        0.104999989
+        0.519331276,
+        0.499802947,
+        0.104999974
       ],
       "activeCenter": [
-        -0.921417236,
-        1.06555295,
-        0.279999971
+        -0.916180968,
+        1.041137695,
+        0.280043691
       ],
       "activeSize": [
-        0.511794806,
-        0.443989158,
-        0.104999989
+        0.522267401,
+        0.492819786,
+        0.104999974
       ]
     },
     {
@@ -6795,6 +6795,7 @@
         "microphone.lowerArm.mesh",
         "microphone.upperArm.mesh",
         "microphone.head.mesh",
+        "microphone.mount.knobs.mesh",
         "microphone.capsule.mesh"
       ]
     },
@@ -6811,6 +6812,7 @@
         "microphone.lowerArm.mesh",
         "microphone.upperArm.mesh",
         "microphone.head.mesh",
+        "microphone.mount.knobs.mesh",
         "microphone.capsule.mesh"
       ]
     },
@@ -7214,6 +7216,10 @@
     },
     "microphone.upperArm.mesh": {
       "nodeName": "GEO_Mic_UpperArm",
+      "type": "MESH"
+    },
+    "microphone.mount.knobs.mesh": {
+      "nodeName": "GEO_Mic_Yoke_Knobs",
       "type": "MESH"
     },
     "monitors.arm.left.lower.mesh": {
@@ -8048,6 +8054,355 @@
         "cutSliversRemoved": []
       }
     ]
+  },
+  "microphoneMount": {
+    "version": "1.0.0",
+    "method": "centred suspended U-yoke with coaxial side trunnions",
+    "capsuleOffsetMeters": [
+      -0.02002739906311035,
+      -0.000043720006942749023,
+      -0.04999995231628418
+    ],
+    "capsulePreserved": true,
+    "sideClearanceMeters": 0.007499990463256834,
+    "yokeTopClearanceMeters": 0.020179949999999988,
+    "triangleCount": 2728,
+    "parts": [
+      {
+        "name": "GEO_Mic_HeadAndSocket",
+        "triangles": 856,
+        "boundaryEdges": 0,
+        "customNormals": true,
+        "features": [
+          {
+            "label": "continuous rounded hanging U-yoke",
+            "triangles": 476
+          },
+          {
+            "label": "rotating head axle barrel",
+            "triangles": 380
+          }
+        ],
+        "nodeId": "microphone.head.mesh"
+      },
+      {
+        "name": "GEO_Mic_Head_JointCover",
+        "triangles": 928,
+        "boundaryEdges": 0,
+        "customNormals": true,
+        "features": [
+          {
+            "label": "crossbrace joining both spring-arm rails",
+            "triangles": 60
+          },
+          {
+            "label": "upper rail end shoe",
+            "triangles": 60
+          },
+          {
+            "label": "lower rail end shoe",
+            "triangles": 60
+          },
+          {
+            "label": "clevis rear bridge",
+            "triangles": 60
+          },
+          {
+            "label": "clevis side fork",
+            "triangles": 60
+          },
+          {
+            "label": "boom-side bearing cheek",
+            "triangles": 284
+          },
+          {
+            "label": "clevis side fork",
+            "triangles": 60
+          },
+          {
+            "label": "boom-side bearing cheek",
+            "triangles": 284
+          }
+        ],
+        "nodeId": null
+      },
+      {
+        "name": "GEO_Mic_Yoke_Knobs",
+        "triangles": 944,
+        "boundaryEdges": 0,
+        "customNormals": true,
+        "features": [
+          {
+            "label": "capsule side trunnion",
+            "triangles": 188
+          },
+          {
+            "label": "side tension knob",
+            "triangles": 284
+          },
+          {
+            "label": "capsule side trunnion",
+            "triangles": 188
+          },
+          {
+            "label": "side tension knob",
+            "triangles": 284
+          }
+        ],
+        "nodeId": "microphone.mount.knobs.mesh"
+      }
+    ],
+    "validation": {
+      "schema": "microphone-mount-audit/1",
+      "validatorVersion": "1.0.0",
+      "passed": true,
+      "errors": [],
+      "poseCount": 126,
+      "surfaces": {
+        "GEO_Mic_HeadAndSocket": {
+          "triangles": 856,
+          "exactWeldBoundaryEdges": 0,
+          "exactWeldNonManifoldEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "zeroAreaTriangles": 0,
+          "nonFiniteCoordinates": 0,
+          "nonFiniteNormals": 0,
+          "nonUnitNormals": 0,
+          "reversedCornerNormals": 0,
+          "minimumCornerFaceNormalDot": 0.9200667050060988,
+          "flatTrianglesChecked": 168,
+          "flatCornerNormalMismatches": 0,
+          "flatFaceMaximumNormalErrorDegrees": 0.00002822622675569471,
+          "connectedComponents": 2,
+          "nonPositiveVolumeComponents": 0,
+          "minimumComponentVolumeM3": 0.000057231868489853054,
+          "passed": true,
+          "physicalAssemblies": 1
+        },
+        "GEO_Mic_Head_JointCover": {
+          "triangles": 928,
+          "exactWeldBoundaryEdges": 0,
+          "exactWeldNonManifoldEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "zeroAreaTriangles": 0,
+          "nonFiniteCoordinates": 0,
+          "nonFiniteNormals": 0,
+          "nonUnitNormals": 0,
+          "reversedCornerNormals": 0,
+          "minimumCornerFaceNormalDot": 0.9171259793808358,
+          "flatTrianglesChecked": 448,
+          "flatCornerNormalMismatches": 0,
+          "flatFaceMaximumNormalErrorDegrees": 0.024241874151547813,
+          "connectedComponents": 8,
+          "nonPositiveVolumeComponents": 0,
+          "minimumComponentVolumeM3": 0.000007092000043377285,
+          "passed": true,
+          "physicalAssemblies": 1
+        },
+        "GEO_Mic_Yoke_Knobs": {
+          "triangles": 944,
+          "exactWeldBoundaryEdges": 0,
+          "exactWeldNonManifoldEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "zeroAreaTriangles": 0,
+          "nonFiniteCoordinates": 0,
+          "nonFiniteNormals": 0,
+          "nonUnitNormals": 0,
+          "reversedCornerNormals": 0,
+          "minimumCornerFaceNormalDot": 0.9086589747664107,
+          "flatTrianglesChecked": 144,
+          "flatCornerNormalMismatches": 0,
+          "flatFaceMaximumNormalErrorDegrees": 0.019782341029446364,
+          "connectedComponents": 4,
+          "nonPositiveVolumeComponents": 0,
+          "minimumComponentVolumeM3": 0.00000463478628948368,
+          "passed": true,
+          "physicalAssemblies": 2
+        }
+      },
+      "collisionMethod": "126 evaluated poses; conservative OBB separation or complete triangle BVH",
+      "intentionalContacts": [
+        "yoke/clevis bearing",
+        "side trunnions/capsule",
+        "side trunnions/yoke"
+      ],
+      "obstacleNames": [
+        "GEO_Desk_Moving_Top",
+        "10-speaker_mesh_01",
+        "10-speaker-right-instance_mesh_01",
+        "06-monitor_mesh_01",
+        "06-monitor-right-instance_mesh_01"
+      ],
+      "contactGapLimitM": 0.002,
+      "allDriversLiveAndValidated": true,
+      "defaultsRestored": true,
+      "capsuleCenterInHeadM": [
+        1.862645149230957e-9,
+        3.725290298461914e-9,
+        -0.16117990016937256
+      ],
+      "yokeCapsuleIntersectionPairs": 0,
+      "yokeCapsuleSurfaceGapM": 0.008089548908174038,
+      "trunnions": [
+        {
+          "side": "left",
+          "capsuleGapM": 0,
+          "capsuleContactPairs": 272,
+          "yokeContact": true,
+          "maximumBoundingInsertionM": 0.010999996215105057
+        },
+        {
+          "side": "right",
+          "capsuleGapM": 0,
+          "capsuleContactPairs": 359,
+          "yokeContact": true,
+          "maximumBoundingInsertionM": 0.010999999940395355
+        }
+      ],
+      "bearingEndProbesHeadLocalM": [
+        [
+          0,
+          -0.01900000311434269,
+          0
+        ],
+        [
+          0,
+          0.01900000311434269,
+          0
+        ]
+      ],
+      "upperArmClevisRims": [
+        {
+          "index": 0,
+          "sourceVertices": 98,
+          "samples": 98,
+          "centerHeadLocalM": [
+            -0.0536641962826252,
+            0.016535218805074692,
+            0.0058391946367919445
+          ],
+          "minimumHeadLocalM": [
+            -0.05715370178222656,
+            0.008183807134628296,
+            -0.002177000045776367
+          ],
+          "maximumHeadLocalM": [
+            -0.04999643564224243,
+            0.02406167984008789,
+            0.013692140579223633
+          ],
+          "worstContactPointHeadLocalM": [
+            -0.05715370178222656,
+            0.014167994260787964,
+            0.013223409652709961
+          ],
+          "maximumSurfaceGapM": 0
+        },
+        {
+          "index": 1,
+          "sourceVertices": 98,
+          "samples": 98,
+          "centerHeadLocalM": [
+            -0.05357790365815163,
+            -0.015519157983362675,
+            0.00561235286295414
+          ],
+          "minimumHeadLocalM": [
+            -0.0566861629486084,
+            -0.023998022079467773,
+            -0.0020599365234375
+          ],
+          "maximumHeadLocalM": [
+            -0.05016529560089111,
+            -0.0080108642578125,
+            0.013401985168457031
+          ],
+          "worstContactPointHeadLocalM": [
+            -0.0566861629486084,
+            -0.016489475965499878,
+            0.013247489929199219
+          ],
+          "maximumSurfaceGapM": 0
+        },
+        {
+          "index": 2,
+          "sourceVertices": 93,
+          "samples": 93,
+          "centerHeadLocalM": [
+            -0.044452816247940063,
+            0.016876693814992905,
+            -0.023907816037535667
+          ],
+          "minimumHeadLocalM": [
+            -0.048481762409210205,
+            0.008283674716949463,
+            -0.03151750564575195
+          ],
+          "maximumHeadLocalM": [
+            -0.03987938165664673,
+            0.02401295304298401,
+            -0.01658046245574951
+          ],
+          "worstContactPointHeadLocalM": [
+            -0.048481762409210205,
+            0.018176555633544922,
+            -0.01694941520690918
+          ],
+          "maximumSurfaceGapM": 0
+        },
+        {
+          "index": 3,
+          "sourceVertices": 93,
+          "samples": 93,
+          "centerHeadLocalM": [
+            -0.04430196061730385,
+            -0.015184575691819191,
+            -0.02415652945637703
+          ],
+          "minimumHeadLocalM": [
+            -0.048481762409210205,
+            -0.023927241563796997,
+            -0.03143012523651123
+          ],
+          "maximumHeadLocalM": [
+            -0.03987234830856323,
+            -0.00804939866065979,
+            -0.016646742820739746
+          ],
+          "worstContactPointHeadLocalM": [
+            -0.048481762409210205,
+            -0.01811760663986206,
+            -0.01705467700958252
+          ],
+          "maximumSurfaceGapM": 0
+        }
+      ],
+      "maxima": {
+        "rigidUnitError": 1.7881393432617188e-7,
+        "axleCenterErrorM": 0,
+        "axleAxisErrorRadians": 0.0003452669847162036,
+        "bearingSurfaceGapM": 0.0005000624805688858,
+        "capsuleRelativeMatrixError": 1.1920928955078125e-7,
+        "capsuleVerticalErrorRadians": 0,
+        "driverAngleErrorRadians": 4.801540154364403e-8
+      },
+      "obbSeparatedPairs": 2520,
+      "fullTriangleBvhPairs": 0,
+      "collisions": [],
+      "meshTriangles": {
+        "GEO_Mic_HeadAndSocket": 856,
+        "GEO_Mic_Head_JointCover": 928,
+        "GEO_Mic_Yoke_Knobs": 944,
+        "GEO_Desk_Moving_Top": 798544,
+        "10-speaker_mesh_01": 999602,
+        "10-speaker-right-instance_mesh_01": 999602,
+        "06-monitor_mesh_01": 999726,
+        "06-monitor-right-instance_mesh_01": 999726,
+        "12-microphone_mesh_01": 999784,
+        "GEO_Mic_UpperArm": 292470
+      },
+      "elapsedSeconds": 2.595
+    }
   },
   "optimization": {
     "geometry": "meshopt",
