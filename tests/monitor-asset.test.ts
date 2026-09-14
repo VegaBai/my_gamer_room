@@ -22,6 +22,7 @@ function loadNodes(variant: 'desktop' | 'low') {
     }
     object.userData = node.extras ?? {};
     if (node.mesh !== undefined) {
+      object.userData.materials = data.meshes[node.mesh].primitives.map((primitive: { material: number }) => data.materials[primitive.material]);
       const bounds = new THREE.Box3();
       for (const primitive of data.meshes[node.mesh].primitives) {
         const accessor = data.accessors[primitive.attributes.POSITION];
@@ -70,6 +71,45 @@ describe('published monitor mechanical contract', () => {
   });
 
   for (const variant of ['desktop', 'low'] as const) {
+    it(`${variant}: uses the rebuilt support and clean texture-free mechanical finish`, () => {
+      const rig = loadNodes(variant);
+      const parts = [...rig.semantic].filter(([id]) => /^monitors\.arm\..*\.mesh$/.test(id)).map(([, node]) => node);
+      expect(parts).toHaveLength(7);
+      for (const part of parts) {
+        expect(part.userData.web_analytic_support, part.name).toBeTruthy();
+        expect(part.userData.web_surface_boundary_limit).toBe(0);
+        for (const material of part.userData.materials) {
+          expect(material.normalTexture).toBeUndefined();
+          expect(material.pbrMetallicRoughness?.baseColorTexture).toBeUndefined();
+          expect(material.pbrMetallicRoughness?.metallicRoughnessTexture).toBeUndefined();
+        }
+      }
+    });
+
+    it(`${variant}: support stays rigid without scale, shear, or accumulated deformation`, () => {
+      const rig = loadNodes(variant);
+      const parts = [...rig.semantic].filter(([id]) => /^monitors\.arm\..*\.mesh$/.test(id)).map(([, node]) => node);
+      expect(parts).toHaveLength(7);
+      const ancestors = new Set<THREE.Object3D>();
+      for (const part of parts) for (let node: THREE.Object3D | null = part; node; node = node.parent) ancestors.add(node);
+      for (const node of ancestors) expect(node.scale.distanceTo(new THREE.Vector3(1, 1, 1))).toBeLessThan(1e-6);
+      for (const control of manifest.controls) for (const track of control.tracks ?? []) {
+        if (ancestors.has(rig.semantic.get(track.nodeId)!)) expect(track.path).not.toBe('scale');
+      }
+      for (const face of [0, .1, .2, .25, .4, .7, 1]) for (const trim of [-15, 0, 15]) for (const tilt of [-5, 0, 5]) {
+        rig.apply({ 'monitors.face': face, 'monitors.leftTrim': trim, 'monitors.rightTrim': -trim,
+          'monitors.leftTilt': tilt, 'monitors.rightTilt': -tilt, 'desk.lift': face });
+        for (const part of parts) {
+          const axes = [0, 1, 2].map(column => new THREE.Vector3().setFromMatrixColumn(part.matrixWorld, column));
+          for (const axis of axes) expect(axis.length()).toBeCloseTo(1, 5);
+          expect(axes[0].dot(axes[1])).toBeCloseTo(0, 5);
+          expect(axes[0].dot(axes[2])).toBeCloseTo(0, 5);
+          expect(axes[1].dot(axes[2])).toBeCloseTo(0, 5);
+          expect(part.matrixWorld.determinant()).toBeCloseTo(1, 5);
+        }
+      }
+    });
+
     it(`${variant}: parks the two screens close together and clear of the speakers`, () => {
       const rig = loadNodes(variant);
       rig.apply({});

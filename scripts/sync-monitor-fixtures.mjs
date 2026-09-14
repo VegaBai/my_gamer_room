@@ -9,6 +9,13 @@ const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
 if (audit.schema !== 'monitor-kinematics-audit/3' || !audit.passed || !audit.allDriversLiveAndValidated || audit.speakerPairsChecked !== 18) {
   throw new Error('A passing, live-driver-validated Blender audit is required.');
 }
+const support = audit.supportIntegrity;
+if (support?.schema !== 'monitor-support-integrity/1' || !support.passed
+    || support.attachmentPairsChecked < 6 || !Array.isArray(support.errors) || support.errors.length
+    || Object.keys(support.surfaces ?? {}).length !== 7
+    || Object.values(support.surfaces).some(surface => !surface.passed)) {
+  throw new Error('Rebuilt support rigidity, surface, and mechanical attachment gates must pass.');
+}
 for (const id of ['scene.10.speaker.mesh.01.95753e88', 'scene.10.speaker.right.instance.mesh.01.58051953']) {
   if (!audit.fixtures.every(pose => pose.nodes[id])) throw new Error(`Speaker fixture is missing: ${id}`);
 }

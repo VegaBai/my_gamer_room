@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.4.0",
+  "pipelineVersion": "2.5.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "df18df33b186f5351224e95db6ff5c26af26aeeaebf1f2017412261ea4f635c8",
-      "bytes": 12092728,
-      "triangles": 585237,
+      "sha256": "a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724",
+      "bytes": 12156896,
+      "triangles": 559789,
       "drawCalls": 89,
       "nodes": 153,
-      "meshes": 87,
-      "materials": 32,
+      "meshes": 94,
+      "materials": 33,
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 2397748,
-      "binaryBytes": 26529584,
+      "binaryBytes": 26674952,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -33,8 +33,8 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 153,
-      "url": "/room/df18df33b186f5351224e95db6ff5c26af26aeeaebf1f2017412261ea4f635c8.glb",
-      "artifactFile": "df18df33b186f5351224e95db6ff5c26af26aeeaebf1f2017412261ea4f635c8.glb",
+      "url": "/room/a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724.glb",
+      "artifactFile": "a61a894237e976557656c2e54e557fb99279bc213445f964195ed773e918a724.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -58,17 +58,17 @@
       }
     },
     "low": {
-      "sha256": "136ce3a57e4f5f2e3594474447ee103dfb4a84d36ad096f278e96a8abc8bb661",
-      "bytes": 5167896,
-      "triangles": 232230,
+      "sha256": "fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5",
+      "bytes": 5232052,
+      "triangles": 227258,
       "drawCalls": 89,
       "nodes": 153,
-      "meshes": 87,
-      "materials": 32,
+      "meshes": 94,
+      "materials": 33,
       "textures": 29,
       "images": 27,
       "embeddedImageBytes": 693244,
-      "binaryBytes": 11236540,
+      "binaryBytes": 11381908,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -85,8 +85,8 @@
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
       "webIdCount": 153,
-      "url": "/room/136ce3a57e4f5f2e3594474447ee103dfb4a84d36ad096f278e96a8abc8bb661.glb",
-      "artifactFile": "136ce3a57e4f5f2e3594474447ee103dfb4a84d36ad096f278e96a8abc8bb661.glb",
+      "url": "/room/fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5.glb",
+      "artifactFile": "fdac85dad00463e2d7250acd0bf09556e99792b11e2e66a42e7ce5865322ecd5.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -7454,7 +7454,7 @@
     }
   },
   "monitorKinematics": {
-    "version": "1.2.0",
+    "version": "1.3.0",
     "faceDegrees": 90,
     "armDegrees": 75,
     "trimArmFraction": 1,
@@ -7628,84 +7628,422 @@
         }
       ]
     },
-    "sourceSeamRepair": {
+    "supportGeometry": {
       "version": "1.0.0",
-      "method": "exact-position-weld-per-corner-uv",
-      "name": "05-dual-monitor-arm_mesh_01",
-      "sourceVertices": 593332,
-      "weldedVertices": 499803,
-      "duplicateVerticesRemoved": 93529,
-      "boundaryEdgesBefore": 171850,
-      "boundaryEdgesAfter": 0,
-      "vertexDisplacementM": 0,
-      "faceCountPreserved": true,
-      "polygonMaterialsPreserved": true,
-      "cornerUvValuesPreserved": true,
-      "uvLayers": [
-        "UVMap"
+      "method": "closed analytic bevelled hardware",
+      "material": "WEB_MonitorSupport_PowderCoat_Analytic",
+      "materialCount": 1,
+      "textureCount": 0,
+      "triangleCount": 6548,
+      "parts": [
+        {
+          "name": "05-dual-monitor-arm_mesh_01",
+          "triangles": 1884,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "smooth vertical pole",
+              "triangles": 380
+            },
+            {
+              "label": "shared shoulder collar",
+              "triangles": 380
+            },
+            {
+              "label": "pole top cap",
+              "triangles": 284
+            },
+            {
+              "label": "desk clamp top pad",
+              "triangles": 60
+            },
+            {
+              "label": "clamp rear spine",
+              "triangles": 60
+            },
+            {
+              "label": "clamp lower jaw",
+              "triangles": 60
+            },
+            {
+              "label": "clamp screw",
+              "triangles": 188
+            },
+            {
+              "label": "under-desk pressure pad",
+              "triangles": 284
+            },
+            {
+              "label": "clamp adjustment knob",
+              "triangles": 188
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Left_Lower",
+          "triangles": 628,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "shoulder bearing",
+              "triangles": 284
+            },
+            {
+              "label": "rigid lower link",
+              "triangles": 60
+            },
+            {
+              "label": "stationary elbow bearing",
+              "triangles": 284
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Left_Upper",
+          "triangles": 1028,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "elbow axle pin",
+              "triangles": 188
+            },
+            {
+              "label": "rotating elbow barrel",
+              "triangles": 284
+            },
+            {
+              "label": "elbow axle cap",
+              "triangles": 188
+            },
+            {
+              "label": "rigid upper forearm",
+              "triangles": 60
+            },
+            {
+              "label": "terminal rear yoke",
+              "triangles": 60
+            },
+            {
+              "label": "terminal vertical yaw axle",
+              "triangles": 188
+            },
+            {
+              "label": "yaw axle rear bridge",
+              "triangles": 60
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Left_Plate",
+          "triangles": 676,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "square 104 mm VESA backplate",
+              "triangles": 60
+            },
+            {
+              "label": "rear-shell mounting adapter",
+              "triangles": 60
+            },
+            {
+              "label": "horizontal screen-tilt barrel",
+              "triangles": 188
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Right_Lower",
+          "triangles": 628,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "shoulder bearing",
+              "triangles": 284
+            },
+            {
+              "label": "rigid lower link",
+              "triangles": 60
+            },
+            {
+              "label": "stationary elbow bearing",
+              "triangles": 284
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Right_Upper",
+          "triangles": 1028,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "elbow axle pin",
+              "triangles": 188
+            },
+            {
+              "label": "rotating elbow barrel",
+              "triangles": 284
+            },
+            {
+              "label": "elbow axle cap",
+              "triangles": 188
+            },
+            {
+              "label": "rigid upper forearm",
+              "triangles": 60
+            },
+            {
+              "label": "terminal rear yoke",
+              "triangles": 60
+            },
+            {
+              "label": "terminal vertical yaw axle",
+              "triangles": 188
+            },
+            {
+              "label": "yaw axle rear bridge",
+              "triangles": 60
+            }
+          ]
+        },
+        {
+          "name": "GEO_MonitorArm_Right_Plate",
+          "triangles": 676,
+          "boundaryEdges": 0,
+          "customNormals": true,
+          "features": [
+            {
+              "label": "square 104 mm VESA backplate",
+              "triangles": 60
+            },
+            {
+              "label": "rear-shell mounting adapter",
+              "triangles": 60
+            },
+            {
+              "label": "horizontal screen-tilt barrel",
+              "triangles": 188
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            },
+            {
+              "label": "VESA mounting screw",
+              "triangles": 92
+            }
+          ]
+        }
+      ],
+      "attachments": [
+        {
+          "id": "left.shoulder",
+          "first": {
+            "nodeName": "05-dual-monitor-arm_mesh_01",
+            "pointLocal": [
+              -0.182,
+              0.312,
+              0.925
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Left_Lower",
+            "pointLocal": [
+              -0.182,
+              0.312,
+              0.925
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Left_Shoulder",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.025
+        },
+        {
+          "id": "left.elbow",
+          "first": {
+            "nodeName": "GEO_MonitorArm_Left_Lower",
+            "pointLocal": [
+              -0.428,
+              0.312,
+              1.031
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Left_Upper",
+            "pointLocal": [
+              -0.428,
+              0.312,
+              1.031
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Left_Yaw",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.023
+        },
+        {
+          "id": "left.terminal",
+          "first": {
+            "nodeName": "GEO_MonitorArm_Left_Upper",
+            "pointLocal": [
+              -0.53,
+              0.191,
+              1.17
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Left_Plate",
+            "pointLocal": [
+              -0.53,
+              0.191,
+              1.17
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Left_Level",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.008
+        },
+        {
+          "id": "right.shoulder",
+          "first": {
+            "nodeName": "05-dual-monitor-arm_mesh_01",
+            "pointLocal": [
+              -0.118,
+              0.312,
+              0.925
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Right_Lower",
+            "pointLocal": [
+              -0.118,
+              0.312,
+              0.925
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Right_Shoulder",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.025
+        },
+        {
+          "id": "right.elbow",
+          "first": {
+            "nodeName": "GEO_MonitorArm_Right_Lower",
+            "pointLocal": [
+              0.128,
+              0.312,
+              1.031
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Right_Upper",
+            "pointLocal": [
+              0.128,
+              0.312,
+              1.031
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Right_Yaw",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.023
+        },
+        {
+          "id": "right.terminal",
+          "first": {
+            "nodeName": "GEO_MonitorArm_Right_Upper",
+            "pointLocal": [
+              0.23,
+              0.191,
+              1.17
+            ]
+          },
+          "second": {
+            "nodeName": "GEO_MonitorArm_Right_Plate",
+            "pointLocal": [
+              0.23,
+              0.191,
+              1.17
+            ]
+          },
+          "jointNodeName": "PIVOT_MonitorArm_Right_Level",
+          "maxCenterErrorM": 0.001,
+          "maxSurfaceDistanceM": 0.008
+        }
       ]
+    },
+    "sourceSeamRepair": {
+      "method": "analytic-replacement",
+      "sourceGeometryReadOnly": true
     },
     "parts": [
       {
         "name": "05-dual-monitor-arm_mesh_01",
-        "triangles": 156770,
+        "triangles": 1884,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Left_Lower",
-        "triangles": 103898,
+        "triangles": 628,
         "boundaryEdges": 0,
-        "cutSliversRemoved": [
-          {
-            "polygons": 33,
-            "triangles": 66,
-            "extentM": [
-              0.00006529688835144043,
-              0.0014672279357910156,
-              0.0015681982040405273
-            ],
-            "maxDistanceToCutM": 0.00006529319286346924,
-            "boundsMin": [
-              -0.18206529319286346,
-              0.30933138728141785,
-              0.8948776125907898
-            ],
-            "boundsMax": [
-              -0.18199999630451202,
-              0.31079861521720886,
-              0.8964458107948303
-            ]
-          }
-        ]
+        "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Left_Upper",
-        "triangles": 234802,
+        "triangles": 1028,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Left_Plate",
-        "triangles": 93318,
+        "triangles": 676,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Right_Lower",
-        "triangles": 104374,
+        "triangles": 628,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Right_Upper",
-        "triangles": 234492,
+        "triangles": 1028,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       },
       {
         "name": "GEO_MonitorArm_Right_Plate",
-        "triangles": 93358,
+        "triangles": 676,
         "boundaryEdges": 0,
         "cutSliversRemoved": []
       }
@@ -7715,7 +8053,7 @@
     "geometry": "meshopt",
     "textures": "webp",
     "semanticNodesPreserved": true,
-    "shading": "seam-connected-world-space-normals-and-hard-surface-weighting",
+    "shading": "analytic-rigid-monitor-support-and-seam-connected-weighted-normals",
     "geometryQualityVersion": "2.1.0",
     "ktx2Available": false
   }
