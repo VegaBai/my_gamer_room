@@ -1,22 +1,23 @@
 {
   "schemaVersion": 1,
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.5.0",
+  "pipelineVersion": "2.7.0",
+  "geometryQualityVersion": "2.3.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f",
-      "bytes": 10914324,
-      "triangles": 552753,
-      "drawCalls": 90,
-      "nodes": 154,
-      "meshes": 88,
-      "materials": 34,
-      "textures": 27,
-      "images": 25,
-      "embeddedImageBytes": 2096836,
-      "binaryBytes": 22570724,
+      "sha256": "a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1",
+      "bytes": 11187952,
+      "triangles": 558249,
+      "drawCalls": 75,
+      "nodes": 139,
+      "meshes": 73,
+      "materials": 32,
+      "textures": 30,
+      "images": 28,
+      "embeddedImageBytes": 2255990,
+      "binaryBytes": 22896572,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -32,9 +33,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 154,
-      "url": "/room/00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f.glb",
-      "artifactFile": "00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f.glb",
+      "webIdCount": 139,
+      "url": "/room/a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1.glb",
+      "artifactFile": "a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -53,22 +54,22 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 38,
+        "checkedParts": 39,
         "passed": true
       }
     },
     "low": {
-      "sha256": "cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484",
-      "bytes": 4719848,
-      "triangles": 225982,
-      "drawCalls": 90,
-      "nodes": 154,
-      "meshes": 88,
-      "materials": 34,
-      "textures": 27,
-      "images": 25,
-      "embeddedImageBytes": 609958,
-      "binaryBytes": 9653880,
+      "sha256": "0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160",
+      "bytes": 4946104,
+      "triangles": 231478,
+      "drawCalls": 75,
+      "nodes": 139,
+      "meshes": 73,
+      "materials": 32,
+      "textures": 30,
+      "images": 28,
+      "embeddedImageBytes": 719778,
+      "binaryBytes": 9930392,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
@@ -84,9 +85,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 154,
-      "url": "/room/cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484.glb",
-      "artifactFile": "cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484.glb",
+      "webIdCount": 139,
+      "url": "/room/0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160.glb",
+      "artifactFile": "0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -105,7 +106,7 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 38,
+        "checkedParts": 39,
         "passed": true
       }
     }
@@ -6998,72 +6999,12 @@
       "nodeName": "Cyan_Wall_Wash",
       "type": "LIGHT"
     },
-    "scene.decor.plant.leaf.00.1.ca1b8ff0": {
-      "nodeName": "Decor_Plant_Leaf_00_+1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.00.1.53642b37": {
-      "nodeName": "Decor_Plant_Leaf_00_-1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.01.1.3ed5922d": {
-      "nodeName": "Decor_Plant_Leaf_01_+1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.01.1.b023bbc3": {
-      "nodeName": "Decor_Plant_Leaf_01_-1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.02.1.604c88de": {
-      "nodeName": "Decor_Plant_Leaf_02_+1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.02.1.80ebb6a5": {
-      "nodeName": "Decor_Plant_Leaf_02_-1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.03.1.b637f30a": {
-      "nodeName": "Decor_Plant_Leaf_03_+1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.03.1.5a13963a": {
-      "nodeName": "Decor_Plant_Leaf_03_-1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.04.1.f8f442f8": {
-      "nodeName": "Decor_Plant_Leaf_04_+1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.leaf.04.1.30262c48": {
-      "nodeName": "Decor_Plant_Leaf_04_-1",
-      "type": "MESH"
-    },
-    "scene.decor.plant.pot.c3ac0b41": {
-      "nodeName": "Decor_Plant_Pot",
-      "type": "MESH"
-    },
-    "scene.decor.plant.stem.00.03a28022": {
-      "nodeName": "Decor_Plant_Stem_00",
-      "type": "MESH"
-    },
-    "scene.decor.plant.stem.01.f00cc9fb": {
-      "nodeName": "Decor_Plant_Stem_01",
-      "type": "MESH"
-    },
-    "scene.decor.plant.stem.02.509ce711": {
-      "nodeName": "Decor_Plant_Stem_02",
-      "type": "MESH"
-    },
-    "scene.decor.plant.stem.03.90f99b4c": {
-      "nodeName": "Decor_Plant_Stem_03",
-      "type": "MESH"
-    },
-    "scene.decor.plant.stem.04.c8ee676d": {
-      "nodeName": "Decor_Plant_Stem_04",
-      "type": "MESH"
-    },
     "scene.decor.rug.1089de84": {
       "nodeName": "Decor_Rug",
+      "type": "MESH"
+    },
+    "decor.scifi.books": {
+      "nodeName": "Decor_SciFi_BookStack",
       "type": "MESH"
     },
     "scene.desk.pink.bounce.6a40ccca": {
@@ -8401,15 +8342,64 @@
         "12-microphone_mesh_01": 999784,
         "GEO_Mic_UpperArm": 292470
       },
-      "elapsedSeconds": 2.595
+      "elapsedSeconds": 2.74
     }
+  },
+  "bookStack": {
+    "schema": "gamer-room-book-prop/1",
+    "nodeId": "decor.scifi.books",
+    "workflow": "imagegen -> Seed3D low -> Blender optimization and PBR bake",
+    "optimizedSha256": "74196fd2cdcc06cfe86efe00bb62407e24c150e6f45de2b1ee98173352bb31a5",
+    "seed3dTaskId": "cgt-20260914151236-tp8lm",
+    "seed3dSourceSha256": "06dc86acbe5bdf9ab285776280a9b3353e9a0c09e17d42b8410d31adea9e4367",
+    "titles": [
+      "Dune — Frank Herbert",
+      "Foundation — Isaac Asimov",
+      "Neuromancer — William Gibson",
+      "The Three-Body Problem — Cixin Liu"
+    ],
+    "removedSourceNames": [
+      "Decor_Plant_Pot",
+      "Decor_Plant_Stem_00",
+      "Decor_Plant_Stem_01",
+      "Decor_Plant_Stem_02",
+      "Decor_Plant_Stem_03",
+      "Decor_Plant_Stem_04",
+      "Decor_Plant_Leaf_00_-1",
+      "Decor_Plant_Leaf_00_+1",
+      "Decor_Plant_Leaf_01_-1",
+      "Decor_Plant_Leaf_01_+1",
+      "Decor_Plant_Leaf_02_-1",
+      "Decor_Plant_Leaf_02_+1",
+      "Decor_Plant_Leaf_03_-1",
+      "Decor_Plant_Leaf_03_+1",
+      "Decor_Plant_Leaf_04_-1",
+      "Decor_Plant_Leaf_04_+1"
+    ],
+    "boundsBlender": {
+      "min": [
+        0.940000057220459,
+        -0.08328170329332352,
+        0.8201500177383423
+      ],
+      "max": [
+        1.2599999904632568,
+        0.12328169494867325,
+        1.0496912002563477
+      ]
+    },
+    "lampClearanceMeters": 0.12999999523162842,
+    "cabinetTopClearanceMeters": 0.0001500248908996582,
+    "uniformScale": 0.9564217519446574,
+    "validated": true,
+    "sourceBlendSaved": false
   },
   "optimization": {
     "geometry": "meshopt",
     "textures": "webp",
     "semanticNodesPreserved": true,
-    "shading": "analytic-rigid-monitor-support-and-seam-connected-weighted-normals",
-    "geometryQualityVersion": "2.1.0",
+    "shading": "analytic-rigid-support-and-preserved-book-bake",
+    "geometryQualityVersion": "2.3.0",
     "ktx2Available": false
   }
 }

@@ -1,10 +1,10 @@
 {
   "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.5.0",
-  "pipelineFingerprint": "bca43203704ab0295d9b150a94937b75d041fdf1cf41ac903f314b34cc10cab7",
-  "publishedAt": "2026-09-14T06:59:36.012Z",
+  "pipelineVersion": "2.7.0",
+  "pipelineFingerprint": "e61ccffa0300679735256e999b3ecc41baa24b627ad9ccbf2dcd7b08ffe05e2b",
+  "publishedAt": "2026-09-14T08:14:33.691Z",
   "variants": {
-    "desktop": "00799f2cbfcce85e78bfb340a6c1931807a6b85c100c64756676c7b6c250b44f",
-    "low": "cbe72f70f08820c19c23bbd83479252fb5b8880841aa38b1f4a4c3fa82964484"
+    "desktop": "a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1",
+    "low": "0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160"
   }
 }

@@ -56,6 +56,33 @@ function loadNodes(variant: 'desktop' | 'low') {
   return { scene, nodes, semantic, apply, worldBounds };
 }
 
+describe('cabinet-top book replacement', () => {
+  for (const variant of ['desktop', 'low'] as const) {
+    it(`${variant}: replaces the plant with grounded books that stay on the cabinet`, () => {
+      const room = loadNodes(variant);
+      const books = room.semantic.get('decor.scifi.books')!;
+      expect(books).toBeDefined();
+      expect(room.nodes.some(node => node.name.startsWith('Decor_Plant_'))).toBe(false);
+      expect(books.parent?.userData.web_id).toBe('cabinet.root');
+      expect(books.userData.web_preoptimized_book_stack).toBe(true);
+      expect(books.userData.web_surface_boundary_limit).toBe(0);
+      const defaults = Object.fromEntries(manifest.controls.map(control => [control.id, control.default]));
+      room.apply(defaults);
+      const matrix = books.matrixWorld.clone();
+      const box = room.worldBounds('decor.scifi.books');
+      expect(box.min.y).toBeGreaterThanOrEqual(.8199);
+      expect(box.min.y).toBeLessThan(.823);
+      expect(box.min.x).toBeGreaterThanOrEqual(.929);
+      expect(box.max.x).toBeLessThanOrEqual(1.271);
+      room.apply({ ...defaults, 'desk.lift': 1, 'cabinet.drawer.1': 1,
+        'cabinet.drawer.2': 1, 'cabinet.drawer.3': 1, 'cabinet.drawer.4': 1, 'cabinet.door': 1 });
+      books.matrixWorld.elements.forEach((value, i) => expect(value).toBeCloseTo(matrix.elements[i], 8));
+      room.apply(defaults);
+      books.matrixWorld.elements.forEach((value, i) => expect(value).toBeCloseTo(matrix.elements[i], 8));
+    });
+  }
+});
+
 describe('published monitor mechanical contract', () => {
   it('keeps screen pitch slider bounds synchronized with the validated manifest', () => {
     for (const side of ['left', 'right']) {
