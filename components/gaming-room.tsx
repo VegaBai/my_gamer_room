@@ -14,7 +14,7 @@ interface HoverState {
 
 const CONTROL_BY_ID = new Map(DEFAULT_CONTROLS.map((control) => [control.id, control]));
 
-export default function GamingRoom() {
+export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<RoomEngine | null>(null);
   const languageRef = useRef<RoomLanguage>(DEFAULT_LANGUAGE);
@@ -123,7 +123,7 @@ export default function GamingRoom() {
       <div ref={hostRef} className="canvas-host" />
 
       <div className="poster-layer" aria-hidden={entered}>
-        <div className="room-poster" />
+        <div className="room-poster" style={{ backgroundImage: `url("${posterUrl}")` }} />
         <div className="poster-wash" />
         <div className="poster-vignette" />
       </div>

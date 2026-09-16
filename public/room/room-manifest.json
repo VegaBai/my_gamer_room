@@ -8401,5 +8401,13 @@
     "shading": "analytic-rigid-support-and-preserved-book-bake",
     "geometryQualityVersion": "2.3.0",
     "ktx2Available": false
+  },
+  "poster": {
+    "url": "/room/poster-47af058d3c347d1b8254092b1a15700acc38f25c02eaf6ad9434f78ad5e0437a.png",
+    "sha256": "47af058d3c347d1b8254092b1a15700acc38f25c02eaf6ad9434f78ad5e0437a",
+    "width": 1600,
+    "height": 900,
+    "bytes": 1632161,
+    "rawDesktopSha256": "720da31bc62d321bf68a730b3dfe708ec6b8edff78e75815bd5d8151e0f93c61"
   }
 }
