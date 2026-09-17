@@ -6,7 +6,7 @@ export const LANGUAGE_STORAGE_KEY = 'gamer-room.display-language';
 export const resolveLanguage = (value: unknown): RoomLanguage => value === 'zh' ? 'zh' : DEFAULT_LANGUAGE;
 
 const english = {
-  title: 'My Gaming Room', pageTitle: 'My Gaming Room | Interactive 3D Room', language: 'Display language',
+  title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: 'Display language',
   eyebrow: 'INTERACTIVE 3D ROOM', kicker: 'Pink & white · Explore · Interact',
   intro: 'Step inside. Make the room your own.',
   introCopy: 'Drag to explore. Click the desk, monitors, microphone, chair or cabinet to adjust them.',
@@ -41,7 +41,7 @@ const english = {
 export const ROOM_COPY = {
   en: english,
   zh: {
-    title: '我的电竞房间', pageTitle: '我的电竞房间｜Interactive 3D Room', language: '展示语言',
+    title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: '展示语言',
     eyebrow: '互动 3D 房间', kicker: '粉白科幻 · 可环绕 · 可交互',
     intro: '走进房间，亲手摆弄每一件设备。', introCopy: '拖动视角探索空间，点击设备控制升降桌、屏幕、话筒、椅子和收纳柜。',
     enter: '开始探索', preparing: '正在准备', retry: '点击重试',

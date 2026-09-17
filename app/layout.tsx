@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'My Gaming Room | Interactive 3D Room',
+  title: "Vega's Gaming Room | Interactive 3D Room",
   description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
   openGraph: {
-    title: 'My Gaming Room | Interactive 3D Room',
+    title: "Vega's Gaming Room | Interactive 3D Room",
     description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
     type: 'website',
     locale: 'en_US',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'My Gaming Room | Interactive 3D Room',
+    title: "Vega's Gaming Room | Interactive 3D Room",
     description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
     images: ['/og.png'],
   },
