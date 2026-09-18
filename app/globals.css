@@ -341,6 +341,17 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .panel-reset:hover { background: rgba(255,206,229,.68); }
 
+.artwork-file-label, .artwork-fit-label { display: grid; gap: 10px; font-size: 14px; }
+.artwork-file-label input { width: 100%; min-width: 0; font-size: 14px; }
+.artwork-file-label input::file-selector-button { border: 1px solid #d1acc1; border-radius: 8px; padding: 9px 12px; background: #ffe4f0; color: #68324f; cursor: pointer; margin-right: 8px; }
+.artwork-fit-label { margin-bottom: 18px; }
+.artwork-fit-label select { width: 100%; padding: 10px; border: 1px solid #cfb8c5; border-radius: 8px; background: #fffafd; color: var(--ink); }
+.artwork-current { font-size: 14px; overflow-wrap: anywhere; margin: 16px 0; }
+.artwork-error { font-size: 14px; color: #a2204f; line-height: 1.5; }
+.artwork-privacy { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.room-toolbar button:disabled { cursor: not-allowed; opacity: .45; }
+.artwork-panel :is(input, select, button):focus-visible { outline: 2px solid #96345f; outline-offset: 3px; }
+
 .range-control { display: grid; gap: 9px; }
 
 .range-control > span {
@@ -498,6 +509,12 @@ button { -webkit-tap-highlight-color: transparent; }
   .intro-card { bottom: 30px; }
   .parts-card { bottom: 33px; }
   .control-panel { top: 86px; max-height: calc(100vh - 160px); overflow-y: auto; }
+}
+
+@media (max-width: 480px) {
+  .room-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-toolbar button { min-width: 0; white-space: normal; }
+  .device-dock, .control-panel { bottom: 112px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

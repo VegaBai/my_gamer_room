@@ -9,7 +9,7 @@ const english = {
   title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: 'Display language',
   eyebrow: 'INTERACTIVE 3D ROOM', kicker: 'Pink & white · Explore · Interact',
   intro: 'Step inside. Make the room your own.',
-  introCopy: 'Drag to explore. Click the desk, monitors, microphone, chair or cabinet to adjust them.',
+  introCopy: 'Drag to explore. Click furniture to adjust it, or click the wall art to change its picture.',
   enter: 'Explore the room', preparing: 'Getting ready', retry: 'Retry',
   webglError: 'Live 3D is unavailable on this device. You can still view the room preview.',
   moduleError: 'Live 3D could not load. You can still view the room preview.',
@@ -22,10 +22,20 @@ const english = {
   demo: 'Demo', resetRoom: 'Reset room', fullscreen: 'Fullscreen', deviceDock: 'Interactive devices',
   sceneLabel: 'Interactive gaming room: drag to orbit and click a device to adjust it', up: 'Up', down: 'Down',
   highQuality: 'High quality', lightweight: 'Lightweight', preview: 'Interactive preview',
+  artwork: {
+    open: 'Change wall art', title: 'Wall art', close: 'Close wall art', choose: 'Choose an image',
+    privacy: 'PNG, JPG or WebP · up to 10 MB. Used only in this browser tab; never uploaded. Reloading restores the original.',
+    original: 'Original artwork', reset: 'Restore original artwork', loading: 'Applying image…',
+    fit: 'Image fit', contain: 'Show whole image', cover: 'Fill frame (crop edges)',
+    errors: { type: 'Choose a PNG, JPG or WebP image.', size: 'Choose a non-empty image up to 10 MB.',
+      decode: 'This image could not be read. Try another file.', dimensions: 'Use an image up to 8,192 px per side and 32 megapixels.',
+      unavailable: 'The replaceable wall art is not available in this scene.' },
+  },
   groups: { cabinet: 'Storage cabinet', desk: 'Sit-stand desk', chair: 'Gaming chair', microphone: 'Microphone arm', monitors: 'Dual monitors' },
   controls: {
     'cabinet.drawer.1': 'Drawer 1', 'cabinet.drawer.2': 'Drawer 2', 'cabinet.drawer.3': 'Drawer 3', 'cabinet.drawer.4': 'Drawer 4',
     'cabinet.door': 'Cabinet door', 'desk.lift': 'Desk height', 'chair.swivel': 'Chair swivel',
+    'chair.moveX': 'Move left / right', 'chair.moveY': 'Move forward / back',
     'chair.headrest': 'Headrest removal', 'chair.lumbar': 'Lumbar cushion removal',
     'microphone.fold': 'Arm folding', 'microphone.yaw': 'Base rotation',
     'monitors.face': 'Inward rotation', 'monitors.leftTrim': 'Left swivel trim', 'monitors.rightTrim': 'Right swivel trim',
@@ -43,7 +53,7 @@ export const ROOM_COPY = {
   zh: {
     title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: '展示语言',
     eyebrow: '互动 3D 房间', kicker: '粉白科幻 · 可环绕 · 可交互',
-    intro: '走进房间，亲手摆弄每一件设备。', introCopy: '拖动视角探索空间，点击设备控制升降桌、屏幕、话筒、椅子和收纳柜。',
+    intro: '走进房间，亲手摆弄每一件设备。', introCopy: '拖动视角探索空间，点击家具调整它，或直接点击墙上的画框更换图片。',
     enter: '开始探索', preparing: '正在准备', retry: '点击重试',
     webglError: '此设备暂时无法启动实时 3D，仍可查看房间预览。', moduleError: '实时 3D 模块加载失败，仍可查看房间预览。',
     summary: '互动摘要', interactionCount: '组互动机构', interactionHint: '点击后可精细调节',
@@ -55,10 +65,20 @@ export const ROOM_COPY = {
     demo: '演示', resetRoom: '全部复位', fullscreen: '全屏', deviceDock: '互动设备快捷入口',
     sceneLabel: '可环绕、可点击的电竞房 3D 场景', up: '仰', down: '俯',
     highQuality: 'Blender 高质量', lightweight: 'Blender 轻量', preview: '互动预览',
+    artwork: {
+      open: '更换挂画', title: '墙面挂画', close: '关闭挂画设置', choose: '选择图片',
+      privacy: '支持 PNG、JPG、WebP，最大 10 MB。仅在当前浏览器标签页使用，不上传；刷新后恢复原图。',
+      original: '原始画面', reset: '恢复原图', loading: '正在应用图片…',
+      fit: '图片显示方式', contain: '完整显示', cover: '铺满画框（裁切边缘）',
+      errors: { type: '请选择 PNG、JPG 或 WebP 图片。', size: '请选择非空且不超过 10 MB 的图片。',
+        decode: '无法读取这张图片，请换一个文件。', dimensions: '图片单边不能超过 8192 像素，总像素不能超过 3200 万。',
+        unavailable: '当前场景暂不支持替换挂画。' },
+    },
     groups: { cabinet: '收纳柜', desk: '升降桌', chair: '电竞椅', microphone: '话筒臂', monitors: '双屏' },
     controls: {
       'cabinet.drawer.1': '抽屉 1', 'cabinet.drawer.2': '抽屉 2', 'cabinet.drawer.3': '抽屉 3', 'cabinet.drawer.4': '抽屉 4',
       'cabinet.door': '柜门', 'desk.lift': '桌面高度', 'chair.swivel': '椅身旋转', 'chair.headrest': '头枕拆装', 'chair.lumbar': '腰枕拆装',
+      'chair.moveX': '左右移动', 'chair.moveY': '前后移动',
       'microphone.fold': '折叠程度', 'microphone.yaw': '底座转向', 'monitors.face': '双屏夹角',
       'monitors.leftTrim': '左屏微调', 'monitors.rightTrim': '右屏微调', 'monitors.leftTilt': '左屏俯仰', 'monitors.rightTilt': '右屏俯仰',
     },
@@ -85,6 +105,7 @@ export function statusLabel(status: EngineStatus | null, language: RoomLanguage)
 }
 
 export function formatControlValue(control: ControlDefinition, value: number, language: RoomLanguage) {
+  if (control.id === 'chair.moveX' || control.id === 'chair.moveY') return `${Math.round(value * 100)} cm`;
   if (control.id === 'desk.lift') return `${Math.round(78 + value * 40)} cm`;
   if (control.id === 'monitors.face') return `${Math.round(value * 90)}°`;
   if (control.id.endsWith('Tilt')) return value === 0 ? '0°'

@@ -7,6 +7,11 @@ import { DEFAULT_CAMERA, DEFAULT_CONTROLS, PRIMARY_CONTROL_IDS } from './default
 import { validateManifest } from './manifest';
 import { buildProceduralRoom, type ProceduralRoom } from './procedural-room';
 import { RoomStateMachine } from './state-machine';
+import { WallArtwork } from './wall-artwork';
+import { ARTWORK_INTERACTION_ID, type ArtworkFit } from './artwork-input';
+import { PointerTap } from './pointer-tap';
+import { artworkViewport } from './artwork-focus';
+import { ArtworkCamera } from './artwork-camera';
 import type {
   ControlDefinition,
   EngineStatus,
@@ -20,6 +25,8 @@ interface RoomEngineCallbacks {
   onProgress: (progress: number, stage: RoomLoadingStage) => void;
   onReady: (status: EngineStatus) => void;
   onSelect: (controlId: string | null) => void;
+  onArtworkSelect: () => void;
+  onArtworkClose: () => void;
   onHover: (controlId: string | null, x: number, y: number) => void;
   onValues: (values: Readonly<Record<string, number>>) => void;
   onUserInput: () => void;
@@ -47,12 +54,13 @@ export class RoomEngine {
   private readonly camera = new THREE.PerspectiveCamera(40, 1, .05, 80);
   private readonly renderer: THREE.WebGLRenderer;
   private readonly orbit: OrbitControls;
+  private readonly artworkCamera: ArtworkCamera;
   private readonly raycaster = new THREE.Raycaster();
   private readonly pointer = new THREE.Vector2();
   private readonly callbacks: RoomEngineCallbacks;
   private readonly container: HTMLElement;
   private readonly reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  private readonly pointerDown = new THREE.Vector2();
+  private readonly pointerTap = new PointerTap();
   private readonly originalMaterials = new Map<THREE.MeshStandardMaterial, OriginalMaterialState>();
   private readonly demoTimers = new Set<number>();
   private readonly rgbBaseIntensity = new Map<THREE.MeshStandardMaterial, number>();
@@ -73,6 +81,7 @@ export class RoomEngine {
   private pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
   private lastFrameAt = performance.now();
   private disposeSurfaceQA: (() => void) | null = null;
+  private wallArtwork: WallArtwork | null = null;
 
   constructor(container: HTMLElement, callbacks: RoomEngineCallbacks) {
     this.container = container;
@@ -91,6 +100,7 @@ export class RoomEngine {
     this.camera.layers.disable(HIT_LAYER);
     this.raycaster.layers.set(HIT_LAYER);
     this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
+    this.artworkCamera = new ArtworkCamera(this.camera, this.orbit);
     this.applyCamera(DEFAULT_CAMERA);
     this.orbit.enableDamping = true;
     this.orbit.dampingFactor = .055;
@@ -130,6 +140,8 @@ export class RoomEngine {
     const usingBlenderAsset = await this.tryLoadBlenderAsset();
     if (this.disposed) return;
     const variant = this.chooseVariant();
+    this.wallArtwork = new WallArtwork(this.manifestRoot ?? this.procedural!.root);
+    this.registerArtworkInteraction();
     this.callbacks.onProgress(100, usingBlenderAsset ? 'ready' : 'fallbackReady');
     this.callbacks.onReady({
       ready: true,
@@ -139,6 +151,7 @@ export class RoomEngine {
   }
 
   selectAndToggle(controlId: string) {
+    if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
     this.userInput();
     this.select(controlId);
     this.state.toggle(controlId, performance.now());
@@ -152,6 +165,8 @@ export class RoomEngine {
 
   reset() {
     this.userInput();
+    this.artworkCamera.clear();
+    this.callbacks.onArtworkClose();
     this.state.reset(performance.now());
     this.applyCamera(this.manifest?.camera ?? DEFAULT_CAMERA);
   }
@@ -161,12 +176,83 @@ export class RoomEngine {
     this.state.resetGroup(controlId, performance.now());
   }
 
+  get artworkAvailable() { return this.wallArtwork?.available ?? false; }
+
+  openArtwork() {
+    if (!this.artworkAvailable) return;
+    this.onPointerLeave();
+    this.select(null);
+    this.artworkCamera.enter();
+    this.focusArtwork();
+    this.callbacks.onArtworkSelect();
+  }
+
+  closeArtwork() {
+    if (!this.artworkCamera.active) return;
+    this.userInput();
+    this.onPointerLeave();
+    this.artworkCamera.close(performance.now(), this.reduceMotion ? 0 : 600);
+    this.callbacks.onArtworkClose();
+  }
+
+  private registerArtworkInteraction() {
+    if (!this.artworkAvailable) return;
+    const root = this.manifestNodes.get('decor.wall-art.root')
+      ?? this.procedural?.root.getObjectByName('art-image-surface')?.parent;
+    if (!root) return;
+    root.traverse(object => {
+      if (!(object instanceof THREE.Mesh)) return;
+      // Keep the visible layer; these are real meshes, not hidden furniture proxies.
+      object.layers.enable(HIT_LAYER);
+      object.userData.controlId = ARTWORK_INTERACTION_ID;
+      this.hitTargets.push(object);
+    });
+    this.visualTargets.set(ARTWORK_INTERACTION_ID, [root]);
+  }
+
+  replaceArtwork(file: File) {
+    this.userInput();
+    return this.wallArtwork?.replace(file) ?? Promise.resolve(false);
+  }
+
+  setArtworkFit(fit: ArtworkFit) { this.wallArtwork?.setFit(fit); }
+  resetArtwork() { this.wallArtwork?.reset(); }
+
+  focusArtwork() {
+    const target = this.manifestNodes.get('decor.wall-art.root')
+      ?? this.procedural?.root.getObjectByName('art-image-surface');
+    if (!target) return;
+    this.userInput();
+    const bounds = new THREE.Box3().setFromObject(target);
+    const center = bounds.getCenter(new THREE.Vector3());
+    const size = bounds.getSize(new THREE.Vector3());
+    const width = this.container.clientWidth;
+    const height = this.container.clientHeight;
+    const viewport = artworkViewport(width, height);
+    // Fit inside the unobscured area, alongside desktop controls or above mobile controls.
+    const visibleHeight = Math.max(size.y * height / (viewport.height * .82), size.x * height / (viewport.width * .82));
+    const distance = Math.max(1.5, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))));
+    const actualHeight = 2 * distance * Math.tan(THREE.MathUtils.degToRad(43 / 2));
+    const backward = new THREE.Vector3(.12, .16, 1).normalize();
+    const right = new THREE.Vector3().crossVectors(this.camera.up, backward).normalize();
+    const up = new THREE.Vector3().crossVectors(backward, right).normalize();
+    const focus = center.clone()
+      .addScaledVector(right, (.5 - viewport.centerX / width) * actualHeight * this.camera.aspect)
+      .addScaledVector(up, (viewport.centerY / height - .5) * actualHeight);
+    this.artworkCamera.focus({
+      position: focus.clone().addScaledVector(backward, distance),
+      target: focus,
+      fov: 43,
+    }, performance.now(), this.reduceMotion ? 0 : 600);
+  }
+
   setSceneLabel(label: string) {
     this.renderer.domElement.setAttribute('aria-label', label);
   }
 
   runDemo() {
     if (this.reduceMotion) return;
+    this.closeArtwork();
     this.cancelDemo();
     this.lastInputAt = performance.now();
     this.orbit.autoRotate = false;
@@ -179,7 +265,7 @@ export class RoomEngine {
       ]],
       [2450, [['microphone.fold', 1]]],
       [3550, [['monitors.face', 1]]],
-      [4650, [['chair.swivel', 45], ['chair.headrest', 1], ['chair.lumbar', 1]]],
+      [4650, [['chair.moveX', .25], ['chair.moveY', -.35], ['chair.swivel', 45], ['chair.headrest', 1], ['chair.lumbar', 1]]],
       [6500, DEFAULT_CONTROLS.map((control) => [control.id, control.default] as [string, number])],
     ];
     for (const [delay, assignments] of steps) {
@@ -206,6 +292,7 @@ export class RoomEngine {
     this.unbindEvents();
     this.orbit.dispose();
     this.disposeSurfaceQA?.();
+    this.wallArtwork?.dispose();
     this.procedural?.dispose();
     this.procedural = null;
     if (this.manifestRoot) disposeObject(this.manifestRoot);
@@ -427,6 +514,7 @@ export class RoomEngine {
     canvas.addEventListener('pointerdown', this.onPointerDown);
     canvas.addEventListener('pointerup', this.onPointerUp);
     canvas.addEventListener('pointerleave', this.onPointerLeave);
+    canvas.addEventListener('pointercancel', this.onPointerLeave);
     canvas.addEventListener('wheel', this.onInteraction, { passive: true });
     this.orbit.addEventListener('start', this.onInteraction);
     window.addEventListener('resize', this.resize);
@@ -438,40 +526,54 @@ export class RoomEngine {
     canvas.removeEventListener('pointerdown', this.onPointerDown);
     canvas.removeEventListener('pointerup', this.onPointerUp);
     canvas.removeEventListener('pointerleave', this.onPointerLeave);
+    canvas.removeEventListener('pointercancel', this.onPointerLeave);
     canvas.removeEventListener('wheel', this.onInteraction);
     this.orbit.removeEventListener('start', this.onInteraction);
     window.removeEventListener('resize', this.resize);
   }
 
-  private onPointerMove = (event: PointerEvent) => {
+  private pickControl(event: PointerEvent): string | null {
     const rect = this.renderer.domElement.getBoundingClientRect();
     this.pointer.set(
       ((event.clientX - rect.left) / rect.width) * 2 - 1,
       -((event.clientY - rect.top) / rect.height) * 2 + 1,
     );
+    this.scene.updateMatrixWorld();
+    this.camera.updateMatrixWorld();
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hit = this.raycaster.intersectObjects(this.hitTargets, true)[0];
-    const controlId = findControlId(hit?.object);
+    return findControlId(hit?.object);
+  }
+
+  private onPointerMove = (event: PointerEvent) => {
+    this.pointerTap.move(event);
+    const controlId = this.pickControl(event);
     this.setHovered(controlId);
     this.callbacks.onHover(controlId, event.clientX, event.clientY);
     this.renderer.domElement.style.cursor = controlId ? 'pointer' : 'grab';
   };
 
   private onPointerDown = (event: PointerEvent) => {
-    this.pointerDown.set(event.clientX, event.clientY);
+    this.artworkCamera.finish();
+    this.pointerTap.down(event, this.pickControl(event));
     this.userInput();
   };
 
   private onPointerUp = (event: PointerEvent) => {
-    const movement = this.pointerDown.distanceTo(new THREE.Vector2(event.clientX, event.clientY));
-    if (movement < 7 && this.hoveredControl) this.selectAndToggle(this.hoveredControl);
+    const controlId = this.pointerTap.up(event, this.pickControl(event));
+    if (controlId) this.selectAndToggle(controlId);
   };
 
   private onPointerLeave = () => {
+    this.pointerTap.cancel();
     this.setHovered(null);
     this.callbacks.onHover(null, 0, 0);
+    this.renderer.domElement.style.cursor = 'grab';
   };
-  private onInteraction = () => this.userInput();
+  private onInteraction = () => {
+    this.artworkCamera.finish();
+    this.userInput();
+  };
 
   private userInput() {
     this.cancelDemo();
@@ -481,6 +583,7 @@ export class RoomEngine {
   }
 
   private select(controlId: string | null) {
+    if (controlId && this.artworkCamera.active) this.closeArtwork();
     this.callbacks.onSelect(controlId);
   }
 
@@ -494,6 +597,8 @@ export class RoomEngine {
     this.hoveredControl = controlId;
     this.hoverOutline.visible = Boolean(controlId);
     if (!controlId) return;
+    // Outline the artwork without tinting the print or its shared fallback materials.
+    if (controlId === ARTWORK_INTERACTION_ID) { this.updateHoverOutline(); return; }
     for (const root of this.visualTargets.get(controlId) ?? []) {
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
@@ -527,10 +632,11 @@ export class RoomEngine {
     this.lastFrameAt = now;
     this.state.tick(now);
     if (this.hoveredControl) this.updateHoverOutline();
-    if (!this.disposeSurfaceQA && !this.reduceMotion && now - this.lastInputAt > 8000 && !this.state.isAnimating()) {
+    if (!this.disposeSurfaceQA && !this.reduceMotion && !this.artworkCamera.active && !this.artworkCamera.returning
+        && now - this.lastInputAt > 8000 && !this.state.isAnimating()) {
       this.orbit.autoRotate = true;
     }
-    this.orbit.update(delta);
+    if (!this.artworkCamera.tick(now)) this.orbit.update(delta);
     if (this.procedural) {
       const pulse = this.reduceMotion ? 1 : 1 + Math.sin(now * .0018) * .22;
       for (const material of this.procedural.rgbMaterials) {

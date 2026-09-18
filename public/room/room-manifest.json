@@ -1,29 +1,30 @@
 {
   "schemaVersion": 1,
-  "sourceBlendSha256": "5118a200a2649465829686aa3e6e7f844e41ce8325d3488c498e6f9322d2ec4d",
-  "pipelineVersion": "2.7.0",
-  "geometryQualityVersion": "2.3.0",
+  "sourceBlendSha256": "307ed6be0ec8621e1290c998561f3e33d36f6d891327329b5d2a9b023acc5bcf",
+  "pipelineVersion": "2.9.0",
+  "geometryQualityVersion": "2.4.0",
   "units": "meters",
   "coordinateSystem": "glTF +Y up, +Z forward",
   "variants": {
     "desktop": {
-      "sha256": "a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1",
-      "bytes": 11187952,
-      "triangles": 558249,
-      "drawCalls": 75,
-      "nodes": 139,
-      "meshes": 73,
-      "materials": 32,
-      "textures": 30,
-      "images": 28,
-      "embeddedImageBytes": 2255990,
-      "binaryBytes": 22896572,
+      "sha256": "3084e962e701b12f9f00183ae9c2417373fa8211d28b6b1482e94124be91df5e",
+      "bytes": 12094620,
+      "triangles": 566259,
+      "drawCalls": 69,
+      "nodes": 131,
+      "meshes": 64,
+      "materials": 35,
+      "textures": 38,
+      "images": 36,
+      "embeddedImageBytes": 2997332,
+      "binaryBytes": 24003720,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
         "EXT_texture_webp",
         "KHR_lights_punctual",
         "KHR_materials_emissive_strength",
+        "KHR_materials_specular",
         "KHR_mesh_quantization"
       ],
       "extensionsRequired": [
@@ -33,9 +34,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 139,
-      "url": "/room/a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1.glb",
-      "artifactFile": "a58e6d38c88904ff24943bade9c945c2b3190fdc4e0771d5c5b9ae9c995a6df1.glb",
+      "webIdCount": 131,
+      "url": "/room/3084e962e701b12f9f00183ae9c2417373fa8211d28b6b1482e94124be91df5e.glb",
+      "artifactFile": "3084e962e701b12f9f00183ae9c2417373fa8211d28b6b1482e94124be91df5e.glb",
       "textureMaxDimension": 2048,
       "compression": {
         "geometry": "meshopt",
@@ -44,7 +45,7 @@
         "normalBits": 14
       },
       "normalValidation": {
-        "validatorVersion": "2.1.0",
+        "validatorVersion": "2.2.0",
         "space": "world",
         "passed": true,
         "reversedCorners": 0,
@@ -54,28 +55,31 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 39,
+        "checkedParts": 44,
+        "checkedMeshes": 41,
+        "topologyScope": "all-material-primitives-of-mesh-node",
         "passed": true
       }
     },
     "low": {
-      "sha256": "0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160",
-      "bytes": 4946104,
-      "triangles": 231478,
-      "drawCalls": 75,
-      "nodes": 139,
-      "meshes": 73,
-      "materials": 32,
-      "textures": 30,
-      "images": 28,
-      "embeddedImageBytes": 719778,
-      "binaryBytes": 9930392,
+      "sha256": "438dd74309b34e5c6af4afbebf573d0de84f666d963945844ed3f44b5847f39f",
+      "bytes": 5217200,
+      "triangles": 233492,
+      "drawCalls": 69,
+      "nodes": 131,
+      "meshes": 64,
+      "materials": 35,
+      "textures": 38,
+      "images": 36,
+      "embeddedImageBytes": 918192,
+      "binaryBytes": 10262172,
       "animations": 0,
       "extensionsUsed": [
         "EXT_meshopt_compression",
         "EXT_texture_webp",
         "KHR_lights_punctual",
         "KHR_materials_emissive_strength",
+        "KHR_materials_specular",
         "KHR_mesh_quantization"
       ],
       "extensionsRequired": [
@@ -85,9 +89,9 @@
         "KHR_mesh_quantization"
       ],
       "generator": "Khronos glTF Blender I/O v5.2.39",
-      "webIdCount": 139,
-      "url": "/room/0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160.glb",
-      "artifactFile": "0ee689453a668b31682d7ada05c15711b73de4aca428f1e8c4723ed3ef63f160.glb",
+      "webIdCount": 131,
+      "url": "/room/438dd74309b34e5c6af4afbebf573d0de84f666d963945844ed3f44b5847f39f.glb",
+      "artifactFile": "438dd74309b34e5c6af4afbebf573d0de84f666d963945844ed3f44b5847f39f.glb",
       "textureMaxDimension": 1024,
       "compression": {
         "geometry": "meshopt",
@@ -96,7 +100,7 @@
         "normalBits": 14
       },
       "normalValidation": {
-        "validatorVersion": "2.1.0",
+        "validatorVersion": "2.2.0",
         "space": "world",
         "passed": true,
         "reversedCorners": 0,
@@ -106,7 +110,9 @@
       },
       "surfaceValidation": {
         "method": "exact-position-boundary-budget",
-        "checkedParts": 39,
+        "checkedParts": 44,
+        "checkedMeshes": 41,
+        "topologyScope": "all-material-primitives-of-mesh-node",
         "passed": true
       }
     }
@@ -432,6 +438,15 @@
               "t": 0,
               "value": [
                 0,
+                -0.382683456,
+                0,
+                0.923879564
+              ]
+            },
+            {
+              "t": 0.5,
+              "value": [
+                0,
                 0,
                 0,
                 1
@@ -457,6 +472,106 @@
       ]
     },
     {
+      "id": "chair.moveX",
+      "label": "左右移动",
+      "group": "chair",
+      "primary": true,
+      "min": -0.35,
+      "max": 0.35,
+      "default": 0,
+      "clickValue": 0.25,
+      "durationMs": 750,
+      "unit": "meters",
+      "tracks": [
+        {
+          "nodeId": "chair.root",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                -0.349999994,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 0.5,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0.349999994,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "drivenNodeIds": [
+        "chair.root"
+      ],
+      "sampledNodeIds": [
+        "chair.root"
+      ]
+    },
+    {
+      "id": "chair.moveY",
+      "label": "前后移动",
+      "group": "chair",
+      "primary": true,
+      "min": -0.45,
+      "max": 0.15,
+      "default": 0,
+      "clickValue": -0.35,
+      "durationMs": 750,
+      "unit": "meters",
+      "tracks": [
+        {
+          "nodeId": "chair.root",
+          "path": "position",
+          "samples": [
+            {
+              "t": 0,
+              "value": [
+                0,
+                0,
+                0.449999988
+              ]
+            },
+            {
+              "t": 0.75,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "t": 1,
+              "value": [
+                0,
+                0,
+                -0.150000006
+              ]
+            }
+          ]
+        }
+      ],
+      "drivenNodeIds": [
+        "chair.root"
+      ],
+      "sampledNodeIds": [
+        "chair.root"
+      ]
+    },
+    {
       "id": "chair.headrest",
       "label": "取下头枕",
       "group": "chair",
@@ -475,17 +590,17 @@
             {
               "t": 0,
               "value": [
-                -0.183560967,
-                0.780558944,
-                0.025259852
+                -0.098921776,
+                0.879999995,
+                0.014167547
               ]
             },
             {
               "t": 1,
               "value": [
-                -0.003107071,
-                0.886158943,
-                -0.000101328
+                0.099131823,
+                0.99000001,
+                -0.013667107
               ]
             }
           ]
@@ -517,17 +632,17 @@
             {
               "t": 0,
               "value": [
-                -0.117807269,
-                0.278514117,
-                0.016552925
+                0.038566947,
+                0.359999985,
+                -0.005227804
               ]
             },
             {
               "t": 1,
               "value": [
-                0.088425756,
-                0.331314117,
-                -0.012431264
+                0.256425917,
+                0.439999968,
+                -0.035845876
               ]
             }
           ]
@@ -6603,24 +6718,86 @@
       "nodeId": "chair.swivel.pivot",
       "space": "node-local",
       "center": [
-        -0.013507068,
-        0.514805317,
-        -0.011710227
+        0.066083342,
+        0.550000012,
+        -0.020331264
       ],
       "size": [
-        0.681606889,
-        1.029589415,
-        0.691419482
+        0.636583269,
+        1.100000024,
+        0.794790983
       ],
       "activeCenter": [
-        -0.013507068,
-        0.514805317,
-        -0.011710227
+        0.066083282,
+        0.550000012,
+        -0.020331204
       ],
       "activeSize": [
-        0.681606889,
-        1.029589415,
-        0.691419482
+        0.636583269,
+        1.100000024,
+        0.794790983
+      ]
+    },
+    {
+      "controlId": "chair.moveX",
+      "nodeId": "chair.root",
+      "space": "node-local",
+      "partition": {
+        "axis": "x",
+        "side": "negative",
+        "gapMeters": 0.02,
+        "referenceNodeId": "chair.base.mesh"
+      },
+      "center": [
+        -1.121757214,
+        0.109999999,
+        1.056601286
+      ],
+      "size": [
+        0.409280648,
+        0.219999999,
+        0.829218864
+      ],
+      "activeCenter": [
+        -1.121757214,
+        0.109999999,
+        1.056601286
+      ],
+      "activeSize": [
+        0.409280648,
+        0.219999999,
+        0.829218864
+      ]
+    },
+    {
+      "controlId": "chair.moveY",
+      "nodeId": "chair.root",
+      "space": "node-local",
+      "partition": {
+        "axis": "x",
+        "side": "positive",
+        "gapMeters": 0.02,
+        "referenceNodeId": "chair.base.mesh"
+      },
+      "center": [
+        -0.692476566,
+        0.109999999,
+        1.056601286
+      ],
+      "size": [
+        0.409280648,
+        0.219999999,
+        0.829218864
+      ],
+      "activeCenter": [
+        -0.692476566,
+        0.109999999,
+        1.056601286
+      ],
+      "activeSize": [
+        0.409280648,
+        0.219999999,
+        0.829218864
       ]
     },
     {
@@ -6628,24 +6805,24 @@
       "nodeId": "chair.headrest.pivot",
       "space": "node-local",
       "center": [
-        -0.006477833,
+        -3e-8,
         0,
-        0.001997411
+        -6e-8
       ],
       "size": [
-        0.091496706,
-        0.201467752,
-        0.263725877
+        0.127596319,
+        0.172380209,
+        0.304025769
       ],
       "activeCenter": [
-        -0.006477833,
+        -3e-8,
         0,
-        0.001997411
+        -6e-8
       ],
       "activeSize": [
-        0.091496706,
-        0.201467752,
-        0.263725877
+        0.127596319,
+        0.172380209,
+        0.304025769
       ]
     },
     {
@@ -6653,24 +6830,24 @@
       "nodeId": "chair.lumbar.pivot",
       "space": "node-local",
       "center": [
-        -0.000912279,
-        -3e-8,
-        -0.00055781
+        0,
+        0,
+        -3e-8
       ],
       "size": [
-        0.153665602,
-        0.134628117,
-        0.307116091
+        0.204671383,
+        0.169141173,
+        0.346844971
       ],
       "activeCenter": [
-        -0.000912279,
-        -3e-8,
-        -0.00055781
+        0,
+        0,
+        -3e-8
       ],
       "activeSize": [
-        0.153665602,
-        0.134628117,
-        0.307116091
+        0.204671383,
+        0.169141173,
+        0.346844971
       ]
     },
     {
@@ -6776,6 +6953,18 @@
       "controlId": "chair.swivel",
       "nodeIds": [
         "chair.swivel.mesh"
+      ]
+    },
+    {
+      "controlId": "chair.moveX",
+      "nodeIds": [
+        "chair.base.mesh"
+      ]
+    },
+    {
+      "controlId": "chair.moveY",
+      "nodeIds": [
+        "chair.base.mesh"
       ]
     },
     {
@@ -7027,35 +7216,11 @@
       "nodeName": "GEO_Chair_Headrest_Detachable",
       "type": "MESH"
     },
-    "scene.geo.chair.headrest.rearshell.002b7613": {
-      "nodeName": "GEO_Chair_Headrest_RearShell",
-      "type": "MESH"
-    },
-    "scene.geo.chair.headrest.staticinfill.1c768db0": {
-      "nodeName": "GEO_Chair_Headrest_StaticInfill",
-      "type": "MESH"
-    },
     "chair.lumbar.mesh": {
       "nodeName": "GEO_Chair_Lumbar_Detachable",
       "type": "MESH"
     },
-    "scene.geo.chair.lumbar.rearshell.5dce0057": {
-      "nodeName": "GEO_Chair_Lumbar_RearShell",
-      "type": "MESH"
-    },
-    "scene.geo.chair.lumbar.staticinfill.d612f3fc": {
-      "nodeName": "GEO_Chair_Lumbar_StaticInfill",
-      "type": "MESH"
-    },
-    "scene.geo.chair.spindle.lower.staticcollar.7db1d277": {
-      "nodeName": "GEO_Chair_Spindle_Lower_StaticCollar",
-      "type": "MESH"
-    },
-    "scene.geo.chair.spindle.upper.rotatingcap.0f05f1a8": {
-      "nodeName": "GEO_Chair_Spindle_Upper_RotatingCap",
-      "type": "MESH"
-    },
-    "scene.geo.chair.static.base.aa9108a0": {
+    "chair.base.mesh": {
       "nodeName": "GEO_Chair_Static_Base",
       "type": "MESH"
     },
@@ -7187,6 +7352,14 @@
       "nodeName": "GEO_MonitorArm_Right_Upper",
       "type": "MESH"
     },
+    "decor.wall-art.frame": {
+      "nodeName": "GEO_WallArt_Frame",
+      "type": "MESH"
+    },
+    "decor.wall-art.image": {
+      "nodeName": "GEO_WallArt_ImageBoard",
+      "type": "MESH"
+    },
     "scene.key.window.973f2b04": {
       "nodeName": "Key_Window",
       "type": "LIGHT"
@@ -7295,6 +7468,10 @@
       "nodeName": "RIG_Microphone_Boom_Interactive",
       "type": "EMPTY"
     },
+    "decor.wall-art.root": {
+      "nodeName": "RIG_WallArt_V4",
+      "type": "EMPTY"
+    },
     "scene.root.04.pc.tower.075d2d73": {
       "nodeName": "ROOT_04-pc-tower",
       "type": "EMPTY"
@@ -7350,26 +7527,6 @@
     "scene.top.softbox.c7c08a5a": {
       "nodeName": "Top_Softbox",
       "type": "LIGHT"
-    },
-    "scene.wall.art.art.9f64a075": {
-      "nodeName": "Wall_Art_Art",
-      "type": "MESH"
-    },
-    "scene.wall.art.bottom.d5808333": {
-      "nodeName": "Wall_Art_Bottom",
-      "type": "MESH"
-    },
-    "scene.wall.art.left.267a2faa": {
-      "nodeName": "Wall_Art_Left",
-      "type": "MESH"
-    },
-    "scene.wall.art.right.c170190a": {
-      "nodeName": "Wall_Art_Right",
-      "type": "MESH"
-    },
-    "scene.wall.art.top.65f7a17c": {
-      "nodeName": "Wall_Art_Top",
-      "type": "MESH"
     },
     "scene.window.frame.h.05eb03b5": {
       "nodeName": "Window_Frame_H",
@@ -8342,7 +8499,7 @@
         "12-microphone_mesh_01": 999784,
         "GEO_Mic_UpperArm": 292470
       },
-      "elapsedSeconds": 2.74
+      "elapsedSeconds": 2.563
     }
   },
   "bookStack": {
@@ -8394,20 +8551,90 @@
     "validated": true,
     "sourceBlendSaved": false
   },
+  "chairAsset": {
+    "version": "independent-v3",
+    "independentSources": 3,
+    "legacySupportPatchesAllowed": false,
+    "rootNodeId": "chair.root",
+    "movementSpace": "Blender world X/Y; glTF X/-Z; meters",
+    "parts": [
+      {
+        "name": "GEO_Chair_Static_Base",
+        "nodeId": "chair.base.mesh",
+        "seed3dSourceSha256": "ee443b77a79cd2dc936ea5333b8a9b02c9f9ec41bf0327aa3cfd2eaea63b267d",
+        "closedSpindleCap": true
+      },
+      {
+        "name": "GEO_Chair_Swivel_Upper",
+        "nodeId": "chair.swivel.mesh",
+        "seed3dSourceSha256": "ee443b77a79cd2dc936ea5333b8a9b02c9f9ec41bf0327aa3cfd2eaea63b267d",
+        "closedSpindleCap": true
+      },
+      {
+        "name": "GEO_Chair_Headrest_Detachable",
+        "nodeId": "chair.headrest.mesh",
+        "seed3dSourceSha256": "bc1492fc84515ea31388676df9183dd26c777974617ad3078a66486f9e4c3251",
+        "closedSpindleCap": false
+      },
+      {
+        "name": "GEO_Chair_Lumbar_Detachable",
+        "nodeId": "chair.lumbar.mesh",
+        "seed3dSourceSha256": "d9115f0818849759ad52149bc508f5ab5e25308a74466a795e8d1c0a3d77a229",
+        "closedSpindleCap": false
+      }
+    ]
+  },
+  "wallArt": {
+    "version": "seed3d-v4",
+    "sourceSha256": "c66ce1dde723df52eb3a98dc0207453fe4355e5578c77f66746f89ed2f06704f",
+    "frameNodeId": "decor.wall-art.frame",
+    "imageNodeId": "decor.wall-art.image",
+    "rootNodeId": "decor.wall-art.root",
+    "artworkAspect": 0.75,
+    "geometrySpace": "blender-import-world",
+    "variants": {
+      "desktop": {
+        "path": "optimized/desktop/wall-frame-desktop.glb",
+        "sha256": "a6339d5cf7906a8939582a96d5d450f5bf64a45c5db9d1fbd0f42f9d8352b0b0",
+        "triangles": 12000
+      },
+      "low": {
+        "path": "optimized/low/wall-frame-low.glb",
+        "sha256": "25b3f86a5321e195c9a544dc5e284b39018461c7bb57d0ab3394685171a80536",
+        "triangles": 6000
+      }
+    },
+    "imageBoard": {
+      "widthMeters": 0.41999995708465576,
+      "heightMeters": 0.559999942779541,
+      "frontY": 0.7080000042915344,
+      "material": "MAT_WallArt_Image",
+      "normalMap": false,
+      "triangles": 12
+    },
+    "removedSourceNames": [
+      "Wall_Art_Art",
+      "Wall_Art_Bottom",
+      "Wall_Art_Left",
+      "Wall_Art_Right",
+      "Wall_Art_Top"
+    ],
+    "validated": true
+  },
   "optimization": {
     "geometry": "meshopt",
     "textures": "webp",
     "semanticNodesPreserved": true,
     "shading": "analytic-rigid-support-and-preserved-book-bake",
-    "geometryQualityVersion": "2.3.0",
+    "geometryQualityVersion": "2.4.0",
     "ktx2Available": false
   },
   "poster": {
-    "url": "/room/poster-47af058d3c347d1b8254092b1a15700acc38f25c02eaf6ad9434f78ad5e0437a.png",
-    "sha256": "47af058d3c347d1b8254092b1a15700acc38f25c02eaf6ad9434f78ad5e0437a",
+    "url": "/room/poster-aa3cfe095f2cc1e613ca094aae8f59b1adbf1c5de0c76c3791327aff620cfef6.png",
+    "sha256": "aa3cfe095f2cc1e613ca094aae8f59b1adbf1c5de0c76c3791327aff620cfef6",
     "width": 1600,
     "height": 900,
-    "bytes": 1632161,
-    "rawDesktopSha256": "720da31bc62d321bf68a730b3dfe708ec6b8edff78e75815bd5d8151e0f93c61"
+    "bytes": 1654681,
+    "rawDesktopSha256": "79bcbf69af9467cae1a908b8cb7274416415b52b4c826f3e45175a21b97e5f16"
   }
 }

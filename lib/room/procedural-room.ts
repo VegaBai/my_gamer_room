@@ -60,6 +60,14 @@ export function buildProceduralRoom(): ProceduralRoom {
   root.add(art);
   box(art, 'art-frame', [1.0, 1.28, .1], [0, 0, 0], materials.white);
   box(art, 'art-image', [.82, 1.08, .06], [0, 0, .07], screenGlow);
+  const artSurface = new THREE.Mesh(new THREE.PlaneGeometry(.82, 1.08), new THREE.MeshBasicMaterial({ color: '#e9b4cb' }));
+  artSurface.name = 'art-image-surface';
+  artSurface.position.z = .101;
+  artSurface.userData.artworkAspect = .82 / 1.08;
+  // Match glTF image UVs, where a replacement texture uses flipY=false.
+  const artUv = artSurface.geometry.attributes.uv;
+  for (let i = 0; i < artUv.count; i++) artUv.setY(i, 1 - artUv.getY(i));
+  art.add(artSurface);
 
   const plant = new THREE.Group();
   plant.position.set(2.65, 0, -2.46);
@@ -255,6 +263,8 @@ export function buildProceduralRoom(): ProceduralRoom {
   registerTarget('cabinet.door', doorPivot, [.76, 1.2, .35], [-.35, 0, .12], [doorMesh]);
   registerTarget('desk.lift', deskTop, [3.5, .35, 1.2], [0, .05, 0], [desktopMesh]);
   registerTarget('chair.swivel', chairSwivel, [1.15, 1.7, .95], [0, .65, -.08], [chairSeat, chairBack]);
+  registerTarget('chair.moveX', chair, [.55, .3, 1.3], [-.35, .15, 0], [chairSeat, chairBack]);
+  registerTarget('chair.moveY', chair, [.55, .3, 1.3], [.35, .15, 0], [chairSeat, chairBack]);
   registerTarget('chair.headrest', headrest, [.72, .4, .35], [0, 0, .1], [headrestMesh]);
   registerTarget('chair.lumbar', lumbar, [.68, .38, .35], [0, 0, .1], [lumbarMesh]);
   registerTarget('microphone.fold', micYaw, [.85, 1.45, .62], [.2, .62, 0], [lowerArm, upperArm, micHead]);
@@ -271,6 +281,7 @@ export function buildProceduralRoom(): ProceduralRoom {
     });
     doorPivot.rotation.y = -deg(105) * (values['cabinet.door'] ?? 0);
 
+    chair.position.set(-2.05 + (values['chair.moveX'] ?? 0), 0, .34 - (values['chair.moveY'] ?? 0));
     chairSwivel.rotation.y = deg(values['chair.swivel'] ?? 0);
     const headrestDetach = values['chair.headrest'] ?? 0;
     headrest.position.set(0, 1.35 + .18 * headrestDetach, -.17 + .18 * headrestDetach);

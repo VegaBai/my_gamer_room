@@ -37,6 +37,14 @@ export const DEFAULT_CONTROLS: ControlDefinition[] = [
     min: -45, max: 45, default: 0, clickValue: 45, durationMs: 750, unit: '°',
   },
   {
+    id: 'chair.moveX', label: '左右移动', group: '电竞椅', primary: true,
+    min: -.35, max: .35, default: 0, clickValue: .25, durationMs: 750, unit: 'cm',
+  },
+  {
+    id: 'chair.moveY', label: '前后移动', group: '电竞椅', primary: true,
+    min: -.45, max: .15, default: 0, clickValue: -.35, durationMs: 750, unit: 'cm',
+  },
+  {
     id: 'chair.headrest', label: '头枕拆装', group: '电竞椅', primary: true,
     min: 0, max: 1, default: 0, clickValue: 1, durationMs: 550, unit: '%',
   },

@@ -18,6 +18,9 @@ describe('room display language', () => {
     expect(JSON.stringify(ROOM_COPY.en)).not.toMatch(/\p{Script=Han}/u);
   });
   it('uses the chosen language for loading, quality, errors and tilt direction', () => {
+    const move = DEFAULT_CONTROLS.find(control => control.id === 'chair.moveY')!;
+    expect(formatControlValue(move, -.35, 'zh')).toBe('-35 cm');
+    expect(formatControlValue(move, .15, 'en')).toBe('15 cm');
     const tilt = DEFAULT_CONTROLS.find(control => control.id === 'monitors.leftTilt')!;
     expect(formatControlValue(tilt, 5, 'en')).toBe('Up 5°');
     expect(formatControlValue(tilt, -5, 'zh')).toBe('俯 5°');

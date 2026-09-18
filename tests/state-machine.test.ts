@@ -10,8 +10,8 @@ afterEach(() => {
 });
 
 describe('room controls contract', () => {
-  it('exposes exactly eleven primary click interactions with unique ids', () => {
-    expect(PRIMARY_CONTROL_IDS).toHaveLength(11);
+  it('exposes exactly thirteen primary click interactions with unique ids', () => {
+    expect(PRIMARY_CONTROL_IDS).toHaveLength(13);
     expect(new Set(DEFAULT_CONTROLS.map((control) => control.id)).size).toBe(DEFAULT_CONTROLS.length);
     for (const control of DEFAULT_CONTROLS) {
       expect(control.default).toBeGreaterThanOrEqual(control.min);
@@ -145,7 +145,7 @@ describe('RoomStateMachine', () => {
     const engine = Object.create(RoomEngine.prototype) as InstanceType<typeof RoomEngine>;
     Object.assign(engine, { state: new RoomStateMachine(DEFAULT_CONTROLS), reduceMotion: false,
       demoTimers: new Set(), orbit: { autoRotate: true }, callbacks: { onUserInput: vi.fn() },
-      lastInputAt: 0, applyCamera });
+      lastInputAt: 0, applyCamera, artworkCamera: { active: false } });
     engine.runDemo();
     await vi.advanceTimersByTimeAsync(0);
     engine.state.setDirect('monitors.leftTilt', 5);
@@ -183,6 +183,7 @@ describe('RoomStateMachine', () => {
       reduceMotion: false,
       demoTimers: new Set<ReturnType<typeof setTimeout>>(),
       orbit: { autoRotate: true },
+      artworkCamera: { active: false },
       callbacks,
       lastInputAt: 0,
     });

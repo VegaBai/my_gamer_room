@@ -56,6 +56,91 @@ function loadNodes(variant: 'desktop' | 'low') {
   return { scene, nodes, semantic, apply, worldBounds };
 }
 
+describe('independently generated chair assets', () => {
+  it('exports both complete movement ranges and symmetric swivel sampling', () => {
+    for (const id of ['chair.moveX', 'chair.moveY', 'chair.swivel']) {
+      const expected = DEFAULT_CONTROLS.find(control => control.id === id)!;
+      const actual = manifest.controls.find(control => control.id === id)!;
+      expect(actual, id).toBeDefined();
+      for (const key of ['min', 'max', 'default', 'clickValue', 'durationMs'] as const) expect(actual[key]).toBe(expected[key]);
+      expect(actual.tracks?.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('keeps the two base movement click zones separate and attached to the chair root', () => {
+    const zones = ['chair.moveX', 'chair.moveY'].map(id => manifest.hitTargets.find(target => target.controlId === id)!);
+    for (const zone of zones) {
+      expect(zone).toBeDefined();
+      expect(zone.nodeId).toBe('chair.root');
+    }
+    const [left, right] = zones.sort((a, b) => a.center[0] - b.center[0]);
+    const gap = right.center[0] - right.size[0] / 2 - (left.center[0] + left.size[0] / 2);
+    expect(gap).toBeGreaterThanOrEqual(.019);
+    expect(gap).toBeLessThanOrEqual(.021);
+  });
+
+  for (const variant of ['desktop', 'low'] as const) {
+    it(`${variant}: contains complete new chair and separate pillows without old infill patches`, () => {
+      const room = loadNodes(variant);
+      expect(room.semantic.get('chair.root')?.userData.chairAssetVersion).toBe('independent-v3');
+      for (const suffix of ['Headrest_RearShell', 'Headrest_StaticInfill', 'Lumbar_RearShell', 'Lumbar_StaticInfill',
+        'Spindle_Lower_StaticCollar', 'Spindle_Upper_RotatingCap']) {
+        expect(room.nodes.some(node => node.name === `GEO_Chair_${suffix}`)).toBe(false);
+      }
+      const parts = ['chair.base.mesh', 'chair.swivel.mesh', 'chair.headrest.mesh', 'chair.lumbar.mesh']
+        .map(id => room.semantic.get(id)!);
+      for (const part of parts) {
+        expect(part).toBeDefined();
+        expect(part.userData.chairAssetVersion).toBe('independent-v3');
+        expect(part.userData.seed3dSourceSha256).toMatch(/^[a-f0-9]{64}$/i);
+      }
+      expect(new Set(parts.map(part => part.userData.seed3dSourceSha256)).size).toBe(3);
+      expect(parts[0].parent).toBe(room.semantic.get('chair.root'));
+      expect(parts[1].parent).toBe(room.semantic.get('chair.swivel.pivot'));
+      expect(parts[2].parent).toBe(room.semantic.get('chair.headrest.pivot'));
+      expect(parts[3].parent).toBe(room.semantic.get('chair.lumbar.pivot'));
+      room.apply({});
+      const base = room.worldBounds('chair.base.mesh');
+      expect(base.min.y).toBeGreaterThanOrEqual(-.001);
+      expect(base.min.y).toBeLessThan(.015);
+    });
+
+    it(`${variant}: moving the chair carries every part without moving furniture or losing swivel/detach`, () => {
+      const room = loadNodes(variant);
+      const ids = ['chair.base.mesh', 'chair.swivel.mesh', 'chair.headrest.mesh', 'chair.lumbar.mesh'];
+      const base = room.semantic.get('chair.base.mesh')!;
+      const upper = room.semantic.get('chair.swivel.mesh')!;
+      room.apply({});
+      const baseRotation = base.getWorldQuaternion(new THREE.Quaternion());
+      const upperRotation = upper.getWorldQuaternion(new THREE.Quaternion());
+      const staticFurniture = room.nodes.filter(node => node.userData.localBounds && !node.name.startsWith('GEO_Chair_'));
+      const furnitureMatrices = staticFurniture.map(node => node.matrixWorld.clone());
+      for (const swivel of [-45, 0, 45]) for (const detach of [0, .5, 1]) {
+        const values = { 'chair.swivel': swivel, 'chair.headrest': detach, 'chair.lumbar': 1 - detach };
+        room.apply(values);
+        const positions = ids.map(id => room.semantic.get(id)!.getWorldPosition(new THREE.Vector3()));
+        const rotations = ids.map(id => room.semantic.get(id)!.getWorldQuaternion(new THREE.Quaternion()));
+        expect(base.getWorldQuaternion(new THREE.Quaternion()).angleTo(baseRotation)).toBeLessThan(.00001);
+        expect(upper.getWorldQuaternion(new THREE.Quaternion()).angleTo(upperRotation)).toBeCloseTo(Math.abs(swivel) * Math.PI / 180, 4);
+        for (const x of [-.35, .35]) for (const y of [-.45, .15]) {
+          room.apply({ ...values, 'chair.moveX': x, 'chair.moveY': y });
+          ids.forEach((id, index) => {
+            const part = room.semantic.get(id)!;
+            const delta = part.getWorldPosition(new THREE.Vector3()).sub(positions[index]);
+            expect(delta.distanceTo(new THREE.Vector3(x, 0, -y))).toBeLessThan(.0001);
+            expect(part.getWorldQuaternion(new THREE.Quaternion()).angleTo(rotations[index])).toBeLessThan(.00001);
+          });
+          staticFurniture.forEach((node, index) => node.matrixWorld.elements.forEach((value, element) =>
+            expect(value).toBeCloseTo(furnitureMatrices[index].elements[element], 6)));
+        }
+      }
+      room.apply({});
+      expect(base.getWorldQuaternion(new THREE.Quaternion()).angleTo(baseRotation)).toBeLessThan(.00001);
+      expect(upper.getWorldQuaternion(new THREE.Quaternion()).angleTo(upperRotation)).toBeLessThan(.00001);
+    });
+  }
+});
+
 describe('cabinet-top book replacement', () => {
   for (const variant of ['desktop', 'low'] as const) {
     it(`${variant}: replaces the plant with grounded books that stay on the cabinet`, () => {

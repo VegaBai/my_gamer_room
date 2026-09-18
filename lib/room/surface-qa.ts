@@ -60,6 +60,44 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   }
   button('柜体近景', () => focus('cabinet'));
   button('椅脚近景', () => focus('chair'));
+  function focusChair(back: boolean) {
+    unlockCamera();
+    for (const mesh of meshes) {
+      if (/wall/i.test(mesh.userData.web_id)) mesh.visible = !back && initial.get(mesh)!.visible;
+    }
+    // Multiple material primitives load as a Group with Mesh children; the
+    // authored web_id belongs to the Group, not those primitive children.
+    let upper: THREE.Object3D | undefined;
+    root.traverse(node => {
+      if (node.userData.web_id === 'chair.swivel.mesh') upper = node;
+    });
+    if (!upper) return;
+    const box = new THREE.Box3().setFromObject(upper);
+    const center = box.getCenter(new THREE.Vector3());
+    // Blender chair fronts along +X at an eight-degree world yaw.
+    camera.position.copy(center).add(new THREE.Vector3(back ? -1.55 : 1.65, .35, back ? .5 : .7));
+    orbit.target.copy(center);
+    camera.fov = 43;
+    camera.updateProjectionMatrix();
+    orbit.update();
+  }
+  button('椅子正面', () => focusChair(false));
+  button('椅子背面', () => focusChair(true));
+  function focusArtwork(oblique: boolean) {
+    unlockCamera();
+    for (const mesh of meshes) mesh.visible = initial.get(mesh)!.visible;
+    let frame: THREE.Object3D | undefined;
+    root.traverse(node => { if (node.userData.web_id === 'decor.wall-art.root') frame = node; });
+    if (!frame) return;
+    const center = new THREE.Box3().setFromObject(frame).getCenter(new THREE.Vector3());
+    camera.position.copy(center).add(new THREE.Vector3(oblique ? .55 : 0, oblique ? .16 : 0, 1.15));
+    orbit.target.copy(center);
+    camera.fov = 43;
+    camera.updateProjectionMatrix();
+    orbit.update();
+  }
+  button('画框正面', () => focusArtwork(false));
+  button('画框斜视', () => focusArtwork(true));
   function focusMonitors(back: boolean) {
     unlockCamera();
     for (const mesh of meshes) {

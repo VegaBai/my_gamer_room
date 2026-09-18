@@ -5,6 +5,7 @@ import { DEFAULT_CONTROLS } from '../lib/room/default-controls';
 import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY, ROOM_COPY, controlLabel, formatControlValue, groupLabel, resolveLanguage, statusLabel, type RoomLanguage } from '../lib/room/i18n';
 import type { RoomEngine } from '../lib/room/room-engine';
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/room/types';
+import { ARTWORK_INTERACTION_ID, ArtworkError, type ArtworkErrorCode, type ArtworkFit } from '../lib/room/artwork-input';
 
 interface HoverState {
   id: string;
@@ -31,6 +32,13 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     Object.fromEntries(DEFAULT_CONTROLS.map((control) => [control.id, control.default])),
   );
   const [engineError, setEngineError] = useState<'webglError' | 'moduleError' | null>(null);
+  const [artworkAvailable, setArtworkAvailable] = useState(false);
+  const [artworkOpen, setArtworkOpen] = useState(false);
+  const [artworkName, setArtworkName] = useState('');
+  const [artworkFit, setArtworkFit] = useState<ArtworkFit>('contain');
+  const [artworkBusy, setArtworkBusy] = useState(false);
+  const [artworkError, setArtworkError] = useState<ArtworkErrorCode | null>(null);
+  const artworkRequestRef = useRef(0);
 
   const selected = selectedId ? CONTROL_BY_ID.get(selectedId) ?? null : null;
   const groupControls = useMemo(
@@ -69,8 +77,11 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           onReady: (nextStatus) => {
             setReady(true);
             setStatus(nextStatus);
+            setArtworkAvailable(engine?.artworkAvailable ?? false);
           },
-          onSelect: setSelectedId,
+          onSelect: (id) => { setSelectedId(id); if (id) setArtworkOpen(false); },
+          onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); },
+          onArtworkClose: () => { setArtworkOpen(false); setHover(null); },
           onHover: (id, x, y) => setHover(id ? { id, x, y } : null),
           onValues: (next) => setValues({ ...next }),
           onUserInput: () => undefined,
@@ -89,6 +100,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     });
     return () => {
       cancelled = true;
+      ++artworkRequestRef.current;
       engine?.dispose();
       engineRef.current = null;
     };
@@ -96,7 +108,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setSelectedId(null);
+      if (event.key === 'Escape') { setSelectedId(null); engineRef.current?.closeArtwork(); }
       if (event.key.toLowerCase() === 'r' && !event.ctrlKey && !event.metaKey && !event.altKey
           && !(event.target instanceof HTMLElement && event.target.closest('input, select, textarea, [contenteditable="true"]'))) {
         engineRef.current?.reset();
@@ -116,6 +128,28 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     languageRef.current = next;
     setLanguage(next);
     try { window.localStorage.setItem(LANGUAGE_STORAGE_KEY, next); } catch { /* Optional device-local preference. */ }
+  };
+
+  const replaceArtwork = async (file: File) => {
+    const request = ++artworkRequestRef.current;
+    setArtworkBusy(true);
+    setArtworkError(null);
+    try {
+      const applied = await engineRef.current?.replaceArtwork(file);
+      if (request === artworkRequestRef.current && applied) setArtworkName(file.name);
+    } catch (error) {
+      if (request === artworkRequestRef.current) setArtworkError(error instanceof ArtworkError ? error.code : 'decode');
+    } finally {
+      if (request === artworkRequestRef.current) setArtworkBusy(false);
+    }
+  };
+
+  const resetArtwork = () => {
+    ++artworkRequestRef.current;
+    engineRef.current?.resetArtwork();
+    setArtworkName('');
+    setArtworkBusy(false);
+    setArtworkError(null);
   };
 
   return (
@@ -169,7 +203,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
       {!entered && (
         <aside className="parts-card" aria-label={copy.summary}>
-          <span className="parts-count">11</span>
+          <span className="parts-count">{DEFAULT_CONTROLS.filter(control => control.primary).length}</span>
           <div><strong>{copy.interactionCount}</strong><small>{copy.interactionHint}</small></div>
         </aside>
       )}
@@ -210,9 +244,42 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
         </aside>
       )}
 
+      {entered && artworkOpen && (
+        <aside className="control-panel artwork-panel" aria-label={copy.artwork.title}>
+          <div className="panel-heading">
+            <h2>{copy.artwork.title}</h2>
+            <button type="button" aria-label={copy.artwork.close} onClick={() => engineRef.current?.closeArtwork()}>×</button>
+          </div>
+          <label className="artwork-file-label">
+            <span>{copy.artwork.choose}</span>
+            <input type="file" accept="image/png,image/jpeg,image/webp" aria-label={copy.artwork.choose}
+              disabled={artworkBusy} onChange={event => {
+                const file = event.currentTarget.files?.[0];
+                event.currentTarget.value = '';
+                if (file) void replaceArtwork(file);
+              }} />
+          </label>
+          <p className="artwork-current" role="status">{artworkBusy ? copy.artwork.loading : artworkName || copy.artwork.original}</p>
+          {artworkError && <p className="artwork-error" role="alert">{copy.artwork.errors[artworkError]}</p>}
+          <label className="artwork-fit-label">
+            <span>{copy.artwork.fit}</span>
+            <select value={artworkFit} disabled={!artworkName || artworkBusy} onChange={event => {
+              const fit = event.currentTarget.value as ArtworkFit;
+              engineRef.current?.setArtworkFit(fit);
+              setArtworkFit(fit);
+            }}>
+              <option value="contain">{copy.artwork.contain}</option>
+              <option value="cover">{copy.artwork.cover}</option>
+            </select>
+          </label>
+          <button type="button" className="panel-reset" onClick={resetArtwork}>{copy.artwork.reset}</button>
+          <p className="artwork-privacy">{copy.artwork.privacy}</p>
+        </aside>
+      )}
+
       {entered && hover && (
         <div className="cursor-tooltip" style={{ left: hover.x + 16, top: hover.y + 14 }}>
-          {controlLabel(hover.id, language)}
+          {hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
         </div>
       )}
 
@@ -222,17 +289,25 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           <em />
           <button type="button" onClick={() => engineRef.current?.runDemo()}><span aria-hidden="true">▶</span> {copy.demo}</button>
           <button type="button" onClick={() => engineRef.current?.reset()}><span aria-hidden="true">↺</span> {copy.resetRoom}</button>
+          <button type="button" disabled={!artworkAvailable} aria-expanded={artworkOpen}
+            onClick={() => {
+              if (artworkOpen) engineRef.current?.closeArtwork();
+              else engineRef.current?.openArtwork();
+            }}>{copy.artwork.open}</button>
           <button type="button" onClick={() => void engineRef.current?.enterFullscreen()}><span aria-hidden="true">⛶</span> {copy.fullscreen}</button>
         </nav>
       )}
 
-      {entered && !selected && (
+      {entered && !selected && !artworkOpen && (
         <section className="device-dock" aria-label={copy.deviceDock}>
           {DEFAULT_CONTROLS.filter((control) => control.primary).map((control) => (
             <button key={control.id} type="button" onClick={() => selectFromList(control)}>
               <i />{controlLabel(control.id, language)}
             </button>
           ))}
+          {artworkAvailable && <button type="button" onClick={() => engineRef.current?.openArtwork()}>
+            <i />{copy.artwork.open}
+          </button>}
         </section>
       )}
     </main>
