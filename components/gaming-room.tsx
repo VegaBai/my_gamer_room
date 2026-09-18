@@ -6,6 +6,7 @@ import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY, ROOM_COPY, controlLabel, format
 import type { RoomEngine } from '../lib/room/room-engine';
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/room/types';
 import { ARTWORK_INTERACTION_ID, ArtworkError, type ArtworkErrorCode, type ArtworkFit } from '../lib/room/artwork-input';
+import { BOOKS, BOOK_COPY, isBookId, type BookId } from '../lib/room/books';
 
 interface HoverState {
   id: string;
@@ -21,6 +22,12 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const languageRef = useRef<RoomLanguage>(DEFAULT_LANGUAGE);
   const [language, setLanguage] = useState<RoomLanguage>(DEFAULT_LANGUAGE);
   const copy = ROOM_COPY[language];
+  const bookCopy = BOOK_COPY[language];
+  const booksButtonRef = useRef<HTMLButtonElement>(null);
+  const bookPanelRef = useRef<HTMLElement>(null);
+  const [availableBooks, setAvailableBooks] = useState<BookId[]>([]);
+  const [selectedBookId, setSelectedBookId] = useState<BookId | null>(null);
+  const selectedBook = selectedBookId ? BOOKS[selectedBookId] : null;
   const [ready, setReady] = useState(false);
   const [entered, setEntered] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -77,11 +84,20 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           onReady: (nextStatus) => {
             setReady(true);
             setStatus(nextStatus);
+            setSelectedId(null);
+            setSelectedBookId(null);
+            setArtworkOpen(false);
             setArtworkAvailable(engine?.artworkAvailable ?? false);
+            setAvailableBooks(engine?.bookIds ?? []);
           },
           onSelect: (id) => { setSelectedId(id); if (id) setArtworkOpen(false); },
           onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); },
           onArtworkClose: () => { setArtworkOpen(false); setHover(null); },
+          onBookSelect: (id) => {
+            setSelectedBookId(id);
+            setHover(null);
+            if (id) { setSelectedId(null); setArtworkOpen(false); }
+          },
           onHover: (id, x, y) => setHover(id ? { id, x, y } : null),
           onValues: (next) => setValues({ ...next }),
           onUserInput: () => undefined,
@@ -108,7 +124,12 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { setSelectedId(null); engineRef.current?.closeArtwork(); }
+      if (event.key === 'Escape') {
+        if (bookPanelRef.current) booksButtonRef.current?.focus();
+        setSelectedId(null);
+        engineRef.current?.closeArtwork();
+        engineRef.current?.closeBook();
+      }
       if (event.key.toLowerCase() === 'r' && !event.ctrlKey && !event.metaKey && !event.altKey
           && !(event.target instanceof HTMLElement && event.target.closest('input, select, textarea, [contenteditable="true"]'))) {
         engineRef.current?.reset();
@@ -117,6 +138,21 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
+
+  useEffect(() => {
+    // Canvas selection has no focusable DOM target. Move focus into the new panel,
+    // but preserve the focused book-switch button when browsing within it.
+    const panel = bookPanelRef.current;
+    if (selectedBookId && panel) panel.scrollTop = 0;
+    if (selectedBookId && panel && !panel.contains(document.activeElement)) {
+      panel.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+    }
+  }, [selectedBookId]);
+
+  const closeBook = () => {
+    engineRef.current?.closeBook();
+    booksButtonRef.current?.focus();
+  };
 
   const selectFromList = (control: ControlDefinition) => {
     setSelectedId(control.id);
@@ -277,9 +313,52 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
         </aside>
       )}
 
+      {entered && selectedBook && selectedBookId && (
+        <aside ref={bookPanelRef} className="control-panel book-panel" aria-labelledby="book-title">
+          <div className="panel-heading">
+            <div>
+              <p>{bookCopy.collection}</p>
+              <h2 id="book-title" tabIndex={-1}>{selectedBook.title[language]}</h2>
+            </div>
+            <button type="button" aria-label={bookCopy.close} onClick={closeBook}>×</button>
+          </div>
+          <div className="book-switcher" role="group" aria-label={bookCopy.select}>
+            {availableBooks.map(id => (
+              <button key={id} type="button" aria-pressed={selectedBookId === id}
+                onClick={() => engineRef.current?.openBook(id)}>{BOOKS[id].title[language]}</button>
+            ))}
+          </div>
+          <p className="book-alternate-title" lang={language === 'zh' ? 'en' : 'zh-CN'}>
+            {selectedBook.title[language === 'zh' ? 'en' : 'zh']}
+          </p>
+          <dl className="book-facts">
+            <div><dt>{bookCopy.author}</dt><dd>{selectedBook.author[language]}</dd></div>
+            <div><dt>{bookCopy.year}</dt><dd>{selectedBook.year}</dd></div>
+          </dl>
+          <p className="book-genre">{selectedBook.genre[language]}</p>
+          <h3>{bookCopy.synopsis}</h3>
+          <p className="book-synopsis">{selectedBook.synopsis[language]}</p>
+          {selectedBook.publicationNote && <p className="book-note">{selectedBook.publicationNote[language]}</p>}
+          <details className="book-sources" key={selectedBookId}>
+            <summary>{bookCopy.sources}</summary>
+            <ul>{selectedBook.sources.map(source => <li key={source.url}>
+              <a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>
+            </li>)}</ul>
+          </details>
+          <p className="book-note">{bookCopy.note}</p>
+        </aside>
+      )}
+
+      {entered && status?.bookError && (
+        <aside className="book-load-error" role="alert">
+          <p>{bookCopy.unavailable}</p>
+          <button type="button" onClick={() => window.location.reload()}>{bookCopy.retry}</button>
+        </aside>
+      )}
+
       {entered && hover && (
         <div className="cursor-tooltip" style={{ left: hover.x + 16, top: hover.y + 14 }}>
-          {hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
+          {isBookId(hover.id) ? BOOKS[hover.id].title[language] : hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
         </div>
       )}
 
@@ -294,11 +373,16 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
               if (artworkOpen) engineRef.current?.closeArtwork();
               else engineRef.current?.openArtwork();
             }}>{copy.artwork.open}</button>
+          <button ref={booksButtonRef} className="book-entry" type="button" disabled={!availableBooks.length} aria-expanded={!!selectedBookId}
+            onClick={() => {
+              if (selectedBookId) closeBook();
+              else if (availableBooks[0]) engineRef.current?.openBook(availableBooks[0]);
+            }}>{bookCopy.open}</button>
           <button type="button" onClick={() => void engineRef.current?.enterFullscreen()}><span aria-hidden="true">⛶</span> {copy.fullscreen}</button>
         </nav>
       )}
 
-      {entered && !selected && !artworkOpen && (
+      {entered && !selected && !artworkOpen && !selectedBookId && (
         <section className="device-dock" aria-label={copy.deviceDock}>
           {DEFAULT_CONTROLS.filter((control) => control.primary).map((control) => (
             <button key={control.id} type="button" onClick={() => selectFromList(control)}>

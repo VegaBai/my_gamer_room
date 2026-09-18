@@ -12,6 +12,10 @@ import { ARTWORK_INTERACTION_ID, type ArtworkFit } from './artwork-input';
 import { PointerTap } from './pointer-tap';
 import { artworkViewport } from './artwork-focus';
 import { ArtworkCamera } from './artwork-camera';
+import { BOOK_IDS, isBookId, type BookId } from './books';
+import { collectBookTargets } from './book-targets';
+import { installBookProp } from './book-prop';
+import bookPropAsset from './book-prop-asset.json';
 import type {
   ControlDefinition,
   EngineStatus,
@@ -27,6 +31,7 @@ interface RoomEngineCallbacks {
   onSelect: (controlId: string | null) => void;
   onArtworkSelect: () => void;
   onArtworkClose: () => void;
+  onBookSelect: (bookId: BookId | null) => void;
   onHover: (controlId: string | null, x: number, y: number) => void;
   onValues: (values: Readonly<Record<string, number>>) => void;
   onUserInput: () => void;
@@ -51,6 +56,7 @@ export class RoomEngine {
 
   private readonly scene = new THREE.Scene();
   private readonly hoverOutline = new THREE.Box3Helper(new THREE.Box3(), '#ff4fa8');
+  private readonly bookOutline = new THREE.Box3Helper(new THREE.Box3(), '#b83777');
   private readonly camera = new THREE.PerspectiveCamera(40, 1, .05, 80);
   private readonly renderer: THREE.WebGLRenderer;
   private readonly orbit: OrbitControls;
@@ -82,6 +88,10 @@ export class RoomEngine {
   private lastFrameAt = performance.now();
   private disposeSurfaceQA: (() => void) | null = null;
   private wallArtwork: WallArtwork | null = null;
+  private bookTargets = new Map<BookId, THREE.Object3D>();
+  private selectedBookId: BookId | null = null;
+  private bookAssetFailed = false;
+  private retiredBookRoot: THREE.Object3D | null = null;
 
   constructor(container: HTMLElement, callbacks: RoomEngineCallbacks) {
     this.container = container;
@@ -117,6 +127,13 @@ export class RoomEngine {
     outlineMaterial.transparent = true;
     outlineMaterial.opacity = .9;
     this.scene.add(this.hoverOutline);
+    this.bookOutline.visible = false;
+    this.bookOutline.renderOrder = 19;
+    const bookOutlineMaterial = this.bookOutline.material as THREE.LineBasicMaterial;
+    bookOutlineMaterial.depthTest = false;
+    bookOutlineMaterial.transparent = true;
+    bookOutlineMaterial.opacity = .8;
+    this.scene.add(this.bookOutline);
     this.procedural = buildProceduralRoom();
     for (const material of this.procedural.rgbMaterials) {
       this.rgbBaseIntensity.set(material, material.emissiveIntensity);
@@ -142,16 +159,19 @@ export class RoomEngine {
     const variant = this.chooseVariant();
     this.wallArtwork = new WallArtwork(this.manifestRoot ?? this.procedural!.root);
     this.registerArtworkInteraction();
+    this.registerBookInteractions();
     this.callbacks.onProgress(100, usingBlenderAsset ? 'ready' : 'fallbackReady');
     this.callbacks.onReady({
       ready: true,
       usingBlenderAsset,
       variant,
+      bookError: this.bookAssetFailed || this.bookTargets.size !== BOOK_IDS.length,
     });
   }
 
   selectAndToggle(controlId: string) {
     if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
+    if (isBookId(controlId)) { this.openBook(controlId); return; }
     this.userInput();
     this.select(controlId);
     this.state.toggle(controlId, performance.now());
@@ -167,6 +187,7 @@ export class RoomEngine {
     this.userInput();
     this.artworkCamera.clear();
     this.callbacks.onArtworkClose();
+    this.clearBookSelection();
     this.state.reset(performance.now());
     this.applyCamera(this.manifest?.camera ?? DEFAULT_CAMERA);
   }
@@ -180,6 +201,8 @@ export class RoomEngine {
 
   openArtwork() {
     if (!this.artworkAvailable) return;
+    // Share the original return point while switching between inspection panels.
+    this.clearBookSelection();
     this.onPointerLeave();
     this.select(null);
     this.artworkCamera.enter();
@@ -188,11 +211,58 @@ export class RoomEngine {
   }
 
   closeArtwork() {
-    if (!this.artworkCamera.active) return;
+    if (!this.artworkCamera.active || this.selectedBookId) return;
     this.userInput();
     this.onPointerLeave();
     this.artworkCamera.close(performance.now(), this.reduceMotion ? 0 : 600);
     this.callbacks.onArtworkClose();
+  }
+
+  get bookIds() { return BOOK_IDS.filter(id => this.bookTargets.has(id)); }
+
+  private registerBookInteractions() {
+    if (!this.manifestRoot) return;
+    this.bookTargets = collectBookTargets(this.manifestRoot);
+    for (const [id, root] of this.bookTargets) {
+      root.traverse(object => {
+        if (!(object instanceof THREE.Mesh)) return;
+        object.layers.enable(HIT_LAYER);
+        object.userData.controlId = id;
+        this.hitTargets.push(object);
+      });
+      this.visualTargets.set(id, [root]);
+    }
+  }
+
+  openBook(id: BookId) {
+    const book = this.bookTargets.get(id);
+    if (!book) return;
+    this.userInput();
+    this.onPointerLeave();
+    this.select(null);
+    this.callbacks.onArtworkClose();
+    this.selectedBookId = id;
+    this.bookOutline.box.setFromObject(book).expandByScalar(.003);
+    this.bookOutline.visible = true;
+    this.artworkCamera.enter();
+    const bounds = new THREE.Box3();
+    for (const node of this.bookTargets.values()) bounds.expandByObject(node);
+    this.focusBounds(bounds, .85, new THREE.Vector3(.25, .5, 1));
+    this.callbacks.onBookSelect(id);
+  }
+
+  closeBook() {
+    if (!this.selectedBookId) return;
+    this.userInput();
+    this.onPointerLeave();
+    this.clearBookSelection();
+    this.artworkCamera.close(performance.now(), this.reduceMotion ? 0 : 600);
+  }
+
+  private clearBookSelection() {
+    this.selectedBookId = null;
+    this.bookOutline.visible = false;
+    this.callbacks.onBookSelect(null);
   }
 
   private registerArtworkInteraction() {
@@ -224,6 +294,10 @@ export class RoomEngine {
     if (!target) return;
     this.userInput();
     const bounds = new THREE.Box3().setFromObject(target);
+    this.focusBounds(bounds, 1.5, new THREE.Vector3(.12, .16, 1));
+  }
+
+  private focusBounds(bounds: THREE.Box3, minimumDistance: number, backward: THREE.Vector3) {
     const center = bounds.getCenter(new THREE.Vector3());
     const size = bounds.getSize(new THREE.Vector3());
     const width = this.container.clientWidth;
@@ -231,9 +305,9 @@ export class RoomEngine {
     const viewport = artworkViewport(width, height);
     // Fit inside the unobscured area, alongside desktop controls or above mobile controls.
     const visibleHeight = Math.max(size.y * height / (viewport.height * .82), size.x * height / (viewport.width * .82));
-    const distance = Math.max(1.5, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))));
+    const distance = Math.max(minimumDistance, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))));
     const actualHeight = 2 * distance * Math.tan(THREE.MathUtils.degToRad(43 / 2));
-    const backward = new THREE.Vector3(.12, .16, 1).normalize();
+    backward.normalize();
     const right = new THREE.Vector3().crossVectors(this.camera.up, backward).normalize();
     const up = new THREE.Vector3().crossVectors(backward, right).normalize();
     const focus = center.clone()
@@ -252,6 +326,7 @@ export class RoomEngine {
 
   runDemo() {
     if (this.reduceMotion) return;
+    this.closeBook();
     this.closeArtwork();
     this.cancelDemo();
     this.lastInputAt = performance.now();
@@ -296,9 +371,12 @@ export class RoomEngine {
     this.procedural?.dispose();
     this.procedural = null;
     if (this.manifestRoot) disposeObject(this.manifestRoot);
+    if (this.retiredBookRoot) disposeObject(this.retiredBookRoot);
     this.renderer.dispose();
     this.hoverOutline.geometry.dispose();
     (this.hoverOutline.material as THREE.Material).dispose();
+    this.bookOutline.geometry.dispose();
+    (this.bookOutline.material as THREE.Material).dispose();
     this.renderer.domElement.remove();
   }
 
@@ -329,6 +407,26 @@ export class RoomEngine {
         );
       });
       ktx2.dispose();
+      if (this.disposed) {
+        disposeObject(gltf.scene);
+        return false;
+      }
+      // A small independently versioned prop replaces only the old fused book stack.
+      // Keep the working room intact if this optional asset cannot be loaded.
+      let bookProp: THREE.Object3D | null = null;
+      try {
+        bookProp = (await loader.loadAsync(bookPropAsset.url)).scene;
+        if (this.disposed) {
+          disposeObject(bookProp);
+          disposeObject(gltf.scene);
+          return false;
+        }
+        this.retiredBookRoot = installBookProp(gltf.scene, bookProp).replaced;
+      } catch (error) {
+        if (bookProp) disposeObject(bookProp);
+        this.bookAssetFailed = true;
+        console.error('[room] Independent books could not be loaded.', error);
+      }
       if (this.disposed) {
         disposeObject(gltf.scene);
         return false;
@@ -542,7 +640,16 @@ export class RoomEngine {
     this.camera.updateMatrixWorld();
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hit = this.raycaster.intersectObjects(this.hitTargets, true)[0];
-    return findControlId(hit?.object);
+    const id = findControlId(hit?.object);
+    if (hit && isBookId(id) && this.manifestRoot) {
+      // Actual books must not be selected through a wall or another solid object.
+      this.raycaster.layers.set(0);
+      const visibleHit = this.raycaster.intersectObject(this.manifestRoot, true)
+        .find(candidate => candidate.object.visible && candidate.object instanceof THREE.Mesh);
+      this.raycaster.layers.set(HIT_LAYER);
+      if (visibleHit && visibleHit.distance < hit.distance - .001) return null;
+    }
+    return id;
   }
 
   private onPointerMove = (event: PointerEvent) => {
@@ -583,6 +690,7 @@ export class RoomEngine {
   }
 
   private select(controlId: string | null) {
+    if (controlId) this.closeBook();
     if (controlId && this.artworkCamera.active) this.closeArtwork();
     this.callbacks.onSelect(controlId);
   }
@@ -598,7 +706,7 @@ export class RoomEngine {
     this.hoverOutline.visible = Boolean(controlId);
     if (!controlId) return;
     // Outline the artwork without tinting the print or its shared fallback materials.
-    if (controlId === ARTWORK_INTERACTION_ID) { this.updateHoverOutline(); return; }
+    if (controlId === ARTWORK_INTERACTION_ID || isBookId(controlId)) { this.updateHoverOutline(); return; }
     for (const root of this.visualTargets.get(controlId) ?? []) {
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
@@ -621,7 +729,7 @@ export class RoomEngine {
     if (!this.hoveredControl) return;
     const box = new THREE.Box3();
     for (const root of this.visualTargets.get(this.hoveredControl) ?? []) box.expandByObject(root);
-    if (!box.isEmpty()) this.hoverOutline.box.copy(box).expandByScalar(.012);
+    if (!box.isEmpty()) this.hoverOutline.box.copy(box).expandByScalar(isBookId(this.hoveredControl) ? .003 : .012);
   }
 
   private animate = () => {

@@ -352,6 +352,30 @@ button { -webkit-tap-highlight-color: transparent; }
 .room-toolbar button:disabled { cursor: not-allowed; opacity: .45; }
 .artwork-panel :is(input, select, button):focus-visible { outline: 2px solid #96345f; outline-offset: 3px; }
 
+.book-panel { background: rgba(255, 250, 252, .96); }
+.book-panel .panel-heading { gap: 12px; }
+.book-panel .panel-heading p { font-size: 14px; letter-spacing: .02em; color: #80546e; }
+.book-panel .panel-heading button { flex: 0 0 44px; width: 44px; height: 44px; }
+.book-panel :is(button, a, summary, h2):focus-visible { outline: 2px solid #96345f; outline-offset: 3px; }
+.book-switcher { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.book-switcher button { min-height: 44px; padding: 8px; border: 1px solid #d7bbc9; border-radius: 9px; background: #fffafd; color: #66364e; font-size: 14px; cursor: pointer; }
+.book-switcher button[aria-pressed="true"] { border-color: #873c63; background: #873c63; color: white; }
+.book-alternate-title { margin: 20px 0 14px; color: var(--muted); font-size: 16px; }
+.book-facts { display: grid; gap: 12px; margin: 0; }
+.book-facts dt { color: var(--muted); font-size: 14px; }
+.book-facts dd { margin: 3px 0 0; font-size: 16px; font-weight: 650; }
+.book-genre { margin: 16px 0; color: #783356; font-size: 14px; line-height: 1.5; }
+.book-panel h3 { margin: 20px 0 8px; font-size: 16px; }
+.book-synopsis { margin: 0; font-size: 16px; line-height: 1.75; }
+.book-note { margin: 16px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.book-sources { margin-top: 18px; font-size: 14px; }
+.book-sources summary { min-height: 44px; padding: 12px 0; cursor: pointer; color: #783356; }
+.book-sources ul { margin: 0; padding-left: 20px; }
+.book-sources a { display: inline-block; padding: 8px 0; color: #783356; text-underline-offset: 3px; }
+.book-load-error { position: absolute; right: 18px; top: 110px; z-index: 15; width: min(300px, calc(100vw - 36px)); padding: 16px; background: #fff8fb; border: 1px solid #cc9ab2; border-radius: 14px; font-size: 14px; line-height: 1.6; }
+.book-load-error p { margin: 0 0 8px; }
+.book-load-error button { min-height: 44px; border: 1px solid #ac6c8c; border-radius: 8px; padding: 8px 14px; background: #fff; color: #783356; cursor: pointer; }
+
 .range-control { display: grid; gap: 9px; }
 
 .range-control > span {
@@ -425,6 +449,7 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 .room-toolbar button { cursor: pointer; }
+.room-toolbar .book-entry { min-height: 44px; font-size: 14px; }
 .room-toolbar button:hover { background: rgba(122, 80, 108, .1); }
 .room-toolbar button span, .orbit-tip i { margin-right: 4px; color: #b25288; }
 .room-toolbar em { width: 1px; height: 21px; background: rgba(83, 57, 76, .13); }
@@ -512,7 +537,7 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 480px) {
-  .room-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-toolbar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .room-toolbar button { min-width: 0; white-space: normal; }
   .device-dock, .control-panel { bottom: 112px; }
 }

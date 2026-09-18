@@ -93,6 +93,16 @@ describe('wall art camera round trip', () => {
     expect(controller.returning).toBe(false);
   });
 
+  it('keeps the original room view when switching between books and wall art', () => {
+    const { camera, original, controller } = setup();
+    const bookView = { position: new Vector3(1.1, 1.2, .8), target: new Vector3(1, .9, 0), fov: 43 };
+    controller.enter(); controller.focus(bookView, 0); controller.tick(600);
+    controller.enter(); controller.focus(artView, 700); controller.tick(1300);
+    controller.enter(); controller.focus(bookView, 1400); controller.tick(2000);
+    controller.close(2100); controller.tick(2700);
+    expect(camera.position.distanceTo(original)).toBeLessThan(1e-10);
+  });
+
   it('supports reduced motion and preserves the new viewport aspect', () => {
     const { camera, original, controller, focus } = setup();
     controller.enter(); focus(); camera.aspect = .5;

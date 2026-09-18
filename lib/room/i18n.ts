@@ -9,7 +9,7 @@ const english = {
   title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: 'Display language',
   eyebrow: 'INTERACTIVE 3D ROOM', kicker: 'Pink & white · Explore · Interact',
   intro: 'Step inside. Make the room your own.',
-  introCopy: 'Drag to explore. Click furniture to adjust it, or click the wall art to change its picture.',
+  introCopy: 'Drag to explore. Adjust the furniture, change the wall art, or click a book to discover its story.',
   enter: 'Explore the room', preparing: 'Getting ready', retry: 'Retry',
   webglError: 'Live 3D is unavailable on this device. You can still view the room preview.',
   moduleError: 'Live 3D could not load. You can still view the room preview.',
@@ -53,7 +53,7 @@ export const ROOM_COPY = {
   zh: {
     title: "Vega's Gaming Room", pageTitle: "Vega's Gaming Room | Interactive 3D Room", language: '展示语言',
     eyebrow: '互动 3D 房间', kicker: '粉白科幻 · 可环绕 · 可交互',
-    intro: '走进房间，亲手摆弄每一件设备。', introCopy: '拖动视角探索空间，点击家具调整它，或直接点击墙上的画框更换图片。',
+    intro: '走进房间，亲手摆弄每一件设备。', introCopy: '拖动视角探索空间，点击家具调整它、点击画框换图，也可以点选一本书了解它的故事。',
     enter: '开始探索', preparing: '正在准备', retry: '点击重试',
     webglError: '此设备暂时无法启动实时 3D，仍可查看房间预览。', moduleError: '实时 3D 模块加载失败，仍可查看房间预览。',
     summary: '互动摘要', interactionCount: '组互动机构', interactionHint: '点击后可精细调节',

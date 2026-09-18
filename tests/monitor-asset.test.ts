@@ -51,7 +51,11 @@ function loadNodes(variant: 'desktop' | 'low') {
   }
   function worldBounds(id: string) {
     const node = semantic.get(id)!;
-    return (node.userData.localBounds as THREE.Box3).clone().applyMatrix4(node.matrixWorld);
+    const bounds = new THREE.Box3();
+    node.traverse(child => {
+      if (child.userData.localBounds) bounds.union((child.userData.localBounds as THREE.Box3).clone().applyMatrix4(child.matrixWorld));
+    });
+    return bounds;
   }
   return { scene, nodes, semantic, apply, worldBounds };
 }
@@ -141,7 +145,7 @@ describe('independently generated chair assets', () => {
   }
 });
 
-describe('cabinet-top book replacement', () => {
+describe('base-room cabinet book anchor (replaced by the standalone template at runtime)', () => {
   for (const variant of ['desktop', 'low'] as const) {
     it(`${variant}: replaces the plant with grounded books that stay on the cabinet`, () => {
       const room = loadNodes(variant);
