@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { DEFAULT_CONTROLS, PRIMARY_CONTROL_IDS } from '../lib/room/default-controls';
+import { DEFAULT_CONTROLS, PRIMARY_CONTROL_IDS, BASE_PRIMARY_CONTROL_IDS } from '../lib/room/default-controls';
 import { RoomStateMachine } from '../lib/room/state-machine';
 
 afterEach(() => {
@@ -10,8 +10,9 @@ afterEach(() => {
 });
 
 describe('room controls contract', () => {
-  it('exposes exactly thirteen primary click interactions with unique ids', () => {
-    expect(PRIMARY_CONTROL_IDS).toHaveLength(13);
+  it('preserves thirteen base interactions and adds six independent expansion controls', () => {
+    expect(BASE_PRIMARY_CONTROL_IDS).toHaveLength(13);
+    expect(PRIMARY_CONTROL_IDS).toHaveLength(19);
     expect(new Set(DEFAULT_CONTROLS.map((control) => control.id)).size).toBe(DEFAULT_CONTROLS.length);
     for (const control of DEFAULT_CONTROLS) {
       expect(control.default).toBeGreaterThanOrEqual(control.min);

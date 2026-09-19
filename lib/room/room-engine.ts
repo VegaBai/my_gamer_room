@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { MeshoptDecoder } from 'meshoptimizer';
-import { DEFAULT_CAMERA, DEFAULT_CONTROLS, PRIMARY_CONTROL_IDS } from './default-controls';
+import { DEFAULT_CAMERA, DEFAULT_CONTROLS, BASE_PRIMARY_CONTROL_IDS } from './default-controls';
 import { validateManifest } from './manifest';
 import { buildProceduralRoom, type ProceduralRoom } from './procedural-room';
 import { RoomStateMachine } from './state-machine';
@@ -16,6 +16,10 @@ import { BOOK_IDS, isBookId, type BookId } from './books';
 import { collectBookTargets } from './book-targets';
 import { installBookProp } from './book-prop';
 import bookPropAsset from './book-prop-asset.json';
+import { RoomExpansion, validateExpansionContract, type ExpansionContract } from './room-expansion';
+import { isExpansionControl } from './expansion-controls';
+import { pickRoomControl } from './room-picking';
+import { overviewFraming } from './overview-framing';
 import type {
   ControlDefinition,
   EngineStatus,
@@ -92,6 +96,9 @@ export class RoomEngine {
   private selectedBookId: BookId | null = null;
   private bookAssetFailed = false;
   private retiredBookRoot: THREE.Object3D | null = null;
+  private expansion: RoomExpansion | null = null;
+  private overviewFov = 40;
+  private framingKey = '';
 
   constructor(container: HTMLElement, callbacks: RoomEngineCallbacks) {
     this.container = container;
@@ -144,6 +151,7 @@ export class RoomEngine {
     this.state.subscribe((values) => {
       this.procedural?.apply(values);
       this.applyManifestTracks(values);
+      this.expansion?.apply(values);
       this.callbacks.onValues(values);
     });
 
@@ -156,6 +164,8 @@ export class RoomEngine {
   private async start() {
     const usingBlenderAsset = await this.tryLoadBlenderAsset();
     if (this.disposed) return;
+    if (usingBlenderAsset) await this.tryLoadExpansion();
+    if (this.disposed) return;
     const variant = this.chooseVariant();
     this.wallArtwork = new WallArtwork(this.manifestRoot ?? this.procedural!.root);
     this.registerArtworkInteraction();
@@ -166,10 +176,13 @@ export class RoomEngine {
       usingBlenderAsset,
       variant,
       bookError: this.bookAssetFailed || this.bookTargets.size !== BOOK_IDS.length,
+      expansionReady: Boolean(this.expansion),
+      expansionError: !this.expansion,
     });
   }
 
   selectAndToggle(controlId: string) {
+    if (isExpansionControl(controlId) && !this.expansion) return;
     if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
     if (isBookId(controlId)) { this.openBook(controlId); return; }
     this.userInput();
@@ -178,6 +191,7 @@ export class RoomEngine {
   }
 
   setControl(controlId: string, value: number) {
+    if (isExpansionControl(controlId) && !this.expansion) return;
     this.userInput();
     this.select(controlId);
     this.state.setDirect(controlId, value);
@@ -189,7 +203,7 @@ export class RoomEngine {
     this.callbacks.onArtworkClose();
     this.clearBookSelection();
     this.state.reset(performance.now());
-    this.applyCamera(this.manifest?.camera ?? DEFAULT_CAMERA);
+    this.applyCamera(this.expansion?.camera ?? this.manifest?.camera ?? DEFAULT_CAMERA);
   }
 
   resetGroup(controlId: string) {
@@ -298,6 +312,7 @@ export class RoomEngine {
   }
 
   private focusBounds(bounds: THREE.Box3, minimumDistance: number, backward: THREE.Vector3) {
+    this.camera.clearViewOffset();
     const center = bounds.getCenter(new THREE.Vector3());
     const size = bounds.getSize(new THREE.Vector3());
     const width = this.container.clientWidth;
@@ -307,7 +322,10 @@ export class RoomEngine {
     const visibleHeight = Math.max(size.y * height / (viewport.height * .82), size.x * height / (viewport.width * .82));
     const distance = Math.max(minimumDistance, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))));
     const actualHeight = 2 * distance * Math.tan(THREE.MathUtils.degToRad(43 / 2));
-    backward.normalize();
+    const direction = new THREE.Spherical().setFromVector3(backward);
+    direction.theta = THREE.MathUtils.clamp(direction.theta, this.orbit.minAzimuthAngle, this.orbit.maxAzimuthAngle);
+    direction.phi = THREE.MathUtils.clamp(direction.phi, this.orbit.minPolarAngle, this.orbit.maxPolarAngle);
+    backward.setFromSpherical(direction).normalize();
     const right = new THREE.Vector3().crossVectors(this.camera.up, backward).normalize();
     const up = new THREE.Vector3().crossVectors(backward, right).normalize();
     const focus = center.clone()
@@ -341,8 +359,13 @@ export class RoomEngine {
       [2450, [['microphone.fold', 1]]],
       [3550, [['monitors.face', 1]]],
       [4650, [['chair.moveX', .25], ['chair.moveY', -.35], ['chair.swivel', 45], ['chair.headrest', 1], ['chair.lumbar', 1]]],
-      [6500, DEFAULT_CONTROLS.map((control) => [control.id, control.default] as [string, number])],
     ];
+    if (this.expansion) steps.push(
+      [5900, [['blinds.tilt', -70]]],
+      [6900, [['blinds.raise', 1]]],
+      [8500, [['bookshelf.leftDoor', 1], ['bookshelf.rightDoor', 1], ['floorLamp.power', 0], ['bookshelf.lights', 0]]],
+    );
+    steps.push([this.expansion ? 10500 : 6500, DEFAULT_CONTROLS.map(control => [control.id, control.default] as [string, number])]);
     for (const [delay, assignments] of steps) {
       const timer = window.setTimeout(() => {
         this.demoTimers.delete(timer);
@@ -440,6 +463,33 @@ export class RoomEngine {
     }
   }
 
+  private async tryLoadExpansion() {
+    let root: THREE.Object3D | null = null;
+    const ktx2 = new KTX2Loader().setTranscoderPath('/basis/').detectSupport(this.renderer);
+    try {
+      const response = await fetch('/room/expansion/manifest.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Expansion HTTP ${response.status}`);
+      const contract = await response.json() as ExpansionContract;
+      validateExpansionContract(contract);
+      if (this.disposed) return;
+      const loader = new GLTFLoader().setKTX2Loader(ktx2).setMeshoptDecoder(MeshoptDecoder);
+      root = (await loader.loadAsync(contract.asset.url)).scene;
+      if (this.disposed) { disposeObject(root); return; }
+      this.expansion = new RoomExpansion(root, contract, this.manifestRoot!);
+      this.hitTargets.push(...this.expansion.hitTargets);
+      for (const [id, targets] of this.expansion.visualTargets) this.visualTargets.set(id, targets);
+      this.expansion.apply(this.state.snapshot());
+      this.applyCamera(this.expansion.camera);
+    } catch (error) {
+      this.expansion?.detach();
+      this.expansion = null;
+      if (root) disposeObject(root);
+      console.error('[room] Window, floor lamp and bookcase could not be loaded; the original room is preserved.', error);
+    } finally {
+      ktx2.dispose();
+    }
+  }
+
   private installBlenderAsset(root: THREE.Object3D, manifest: RoomManifestV1) {
     const nodes = new Map<string, THREE.Object3D>();
     root.traverse((object) => {
@@ -454,7 +504,7 @@ export class RoomEngine {
       }
     });
 
-    const requiredControls = new Set(PRIMARY_CONTROL_IDS);
+    const requiredControls = new Set(BASE_PRIMARY_CONTROL_IDS);
     for (const definition of manifest.controls) {
       if (definition.primary && definition.tracks?.length) requiredControls.delete(definition.id);
       for (const track of definition.tracks ?? []) {
@@ -484,7 +534,7 @@ export class RoomEngine {
         return object;
       }));
     }
-    for (const id of PRIMARY_CONTROL_IDS) {
+    for (const id of BASE_PRIMARY_CONTROL_IDS) {
       if (!actualHitTargets.some((target) => target.userData.controlId === id)) {
         throw new Error(`No hit target for ${id}`);
       }
@@ -548,7 +598,9 @@ export class RoomEngine {
 
   private applyCamera(definition: RoomManifestV1['camera']) {
     this.camera.position.set(...definition.position);
-    this.camera.fov = definition.fovDegrees ?? 40;
+    this.overviewFov = definition.fovDegrees ?? 40;
+    this.framingKey = '';
+    this.camera.fov = overviewFraming(this.overviewFov, this.container.clientWidth, this.container.clientHeight).fov;
     this.camera.near = definition.near ?? .05;
     this.camera.far = definition.far ?? 80;
     this.camera.updateProjectionMatrix();
@@ -639,17 +691,7 @@ export class RoomEngine {
     this.scene.updateMatrixWorld();
     this.camera.updateMatrixWorld();
     this.raycaster.setFromCamera(this.pointer, this.camera);
-    const hit = this.raycaster.intersectObjects(this.hitTargets, true)[0];
-    const id = findControlId(hit?.object);
-    if (hit && isBookId(id) && this.manifestRoot) {
-      // Actual books must not be selected through a wall or another solid object.
-      this.raycaster.layers.set(0);
-      const visibleHit = this.raycaster.intersectObject(this.manifestRoot, true)
-        .find(candidate => candidate.object.visible && candidate.object instanceof THREE.Mesh);
-      this.raycaster.layers.set(HIT_LAYER);
-      if (visibleHit && visibleHit.distance < hit.distance - .001) return null;
-    }
-    return id;
+    return pickRoomControl(this.raycaster, this.manifestRoot ?? this.procedural!.root, this.hitTargets, this.visualTargets);
   }
 
   private onPointerMove = (event: PointerEvent) => {
@@ -706,7 +748,7 @@ export class RoomEngine {
     this.hoverOutline.visible = Boolean(controlId);
     if (!controlId) return;
     // Outline the artwork without tinting the print or its shared fallback materials.
-    if (controlId === ARTWORK_INTERACTION_ID || isBookId(controlId)) { this.updateHoverOutline(); return; }
+    if (controlId === ARTWORK_INTERACTION_ID || isBookId(controlId) || isExpansionControl(controlId)) { this.updateHoverOutline(); return; }
     for (const root of this.visualTargets.get(controlId) ?? []) {
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
@@ -745,6 +787,7 @@ export class RoomEngine {
       this.orbit.autoRotate = true;
     }
     if (!this.artworkCamera.tick(now)) this.orbit.update(delta);
+    this.updateResponsiveFraming();
     if (this.procedural) {
       const pulse = this.reduceMotion ? 1 : 1 + Math.sin(now * .0018) * .22;
       for (const material of this.procedural.rgbMaterials) {
@@ -775,7 +818,23 @@ export class RoomEngine {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height, false);
+    this.framingKey = '';
+    this.updateResponsiveFraming();
   };
+
+  private updateResponsiveFraming() {
+    const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight);
+    const inspecting = this.artworkCamera.active || this.artworkCamera.returning;
+    const key = `${width}/${height}/${inspecting}/${this.overviewFov}`;
+    if (key === this.framingKey) return;
+    this.framingKey = key;
+    if (inspecting) { this.camera.clearViewOffset(); return; }
+    const framing = overviewFraming(this.overviewFov, width, height);
+    this.camera.fov = framing.fov;
+    if (framing.offsetY) this.camera.setViewOffset(width, height, 0, framing.offsetY, width, height);
+    else this.camera.clearViewOffset();
+    this.camera.updateProjectionMatrix();
+  }
 
   private chooseVariant(): 'desktop' | 'low' {
     if (process.env.NODE_ENV === 'development') {
@@ -863,15 +922,6 @@ function surroundingSamples(samples: TrackSample[], t: number): [TrackSample, Tr
   }
   const last = samples.at(-1)!;
   return [last, last, 0];
-}
-
-function findControlId(object?: THREE.Object3D | null): string | null {
-  let current = object ?? null;
-  while (current) {
-    if (typeof current.userData.controlId === 'string') return current.userData.controlId;
-    current = current.parent;
-  }
-  return null;
 }
 
 function disposeObject(root: THREE.Object3D) {

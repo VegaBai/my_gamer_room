@@ -1,4 +1,4 @@
-import { PRIMARY_CONTROL_IDS } from './default-controls';
+import { BASE_PRIMARY_CONTROL_IDS } from './default-controls';
 import type { RoomManifestV1 } from './types';
 
 export function validateManifest(manifest: RoomManifestV1) {
@@ -59,7 +59,7 @@ export function validateManifest(manifest: RoomManifestV1) {
     hitControlIds.add(target.controlId);
   }
   const visualControlIds = new Set(manifest.visualTargets?.map((target) => target.controlId) ?? []);
-  for (const id of PRIMARY_CONTROL_IDS) {
+  for (const id of BASE_PRIMARY_CONTROL_IDS) {
     const control = controls.get(id);
     if (!control?.tracks?.length) throw new Error(`Primary control has no tracks: ${id}`);
     if (!hitControlIds.has(id)) throw new Error(`Primary control has no hit target: ${id}`);

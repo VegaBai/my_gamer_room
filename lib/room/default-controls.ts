@@ -1,4 +1,5 @@
 import type { ControlDefinition, RoomCameraDefinition } from './types';
+import { EXPANSION_CONTROLS } from './expansion-controls';
 
 export const DEFAULT_CAMERA: RoomCameraDefinition = {
   position: [4.9, 3.05, 6.6],
@@ -11,7 +12,7 @@ export const DEFAULT_CAMERA: RoomCameraDefinition = {
   maxAzimuth: 0.94,
 };
 
-export const DEFAULT_CONTROLS: ControlDefinition[] = [
+export const BASE_ROOM_CONTROLS: ControlDefinition[] = [
   ...[1, 2, 3, 4].map((index) => ({
     id: `cabinet.drawer.${index}`,
     label: `抽屉 ${index}`,
@@ -81,6 +82,13 @@ export const DEFAULT_CONTROLS: ControlDefinition[] = [
     min: -5, max: 5, default: 0, clickValue: 5, durationMs: 550, unit: '°',
   },
 ];
+
+// The existing room GLB is unchanged; its validation must not require addon nodes.
+export const BASE_PRIMARY_CONTROL_IDS = BASE_ROOM_CONTROLS
+  .filter((control) => control.primary)
+  .map((control) => control.id);
+
+export const DEFAULT_CONTROLS: ControlDefinition[] = [...BASE_ROOM_CONTROLS, ...EXPANSION_CONTROLS];
 
 export const PRIMARY_CONTROL_IDS = DEFAULT_CONTROLS
   .filter((control) => control.primary)

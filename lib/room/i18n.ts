@@ -1,4 +1,5 @@
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from './types';
+import { isPowerControl } from './expansion-controls';
 
 export type RoomLanguage = 'en' | 'zh';
 export const DEFAULT_LANGUAGE: RoomLanguage = 'en';
@@ -17,6 +18,9 @@ const english = {
   selectedDevice: 'SELECTED DEVICE', closePanel: 'Close controls', panel: 'controls',
   monitorHint: 'The arms fold in when side by side. Turning inward unfolds the arms; outward trim turns only the screen. Left + and right − turn inward. Negative tilt looks down; positive looks up.',
   panelHint: 'Drag a slider to fine-tune, or click the device again to reverse.',
+  blindsHint: 'The slats level out as you raise them, then stack beneath the headrail. Your selected angle returns when lowered.',
+  expansionUnavailable: 'The new blinds, floor lamp and bookshelf could not load. The original room still works. Reload to retry.',
+  powerOn: 'On', powerOff: 'Off',
   resetDevice: 'Reset to defaults', resetDeviceHint: 'Reset only this device; keep the other devices and camera unchanged.',
   interactivePart: 'Interactive part', sceneActions: 'Scene actions', orbitHint: 'Drag to orbit · Scroll to zoom',
   demo: 'Demo', resetRoom: 'Reset room', fullscreen: 'Fullscreen', deviceDock: 'Interactive devices',
@@ -31,7 +35,7 @@ const english = {
       decode: 'This image could not be read. Try another file.', dimensions: 'Use an image up to 8,192 px per side and 32 megapixels.',
       unavailable: 'The replaceable wall art is not available in this scene.' },
   },
-  groups: { cabinet: 'Storage cabinet', desk: 'Sit-stand desk', chair: 'Gaming chair', microphone: 'Microphone arm', monitors: 'Dual monitors' },
+  groups: { cabinet: 'Storage cabinet', desk: 'Sit-stand desk', chair: 'Gaming chair', microphone: 'Microphone arm', monitors: 'Dual monitors', blinds: 'Window blinds', floorLamp: 'Floor lamp', bookshelf: 'Bookshelf' },
   controls: {
     'cabinet.drawer.1': 'Drawer 1', 'cabinet.drawer.2': 'Drawer 2', 'cabinet.drawer.3': 'Drawer 3', 'cabinet.drawer.4': 'Drawer 4',
     'cabinet.door': 'Cabinet door', 'desk.lift': 'Desk height', 'chair.swivel': 'Chair swivel',
@@ -40,6 +44,8 @@ const english = {
     'microphone.fold': 'Arm folding', 'microphone.yaw': 'Base rotation',
     'monitors.face': 'Inward rotation', 'monitors.leftTrim': 'Left swivel trim', 'monitors.rightTrim': 'Right swivel trim',
     'monitors.leftTilt': 'Left tilt', 'monitors.rightTilt': 'Right tilt',
+    'blinds.tilt': 'Slat angle', 'blinds.raise': 'Raise blinds', 'floorLamp.power': 'Floor lamp',
+    'bookshelf.leftDoor': 'Left bookcase door', 'bookshelf.rightDoor': 'Right bookcase door', 'bookshelf.lights': 'Shelf lighting',
   },
   loading: {
     waking: 'Waking up the room', manifest: 'Reading the scene manifest', desktop: 'Loading the high-quality model',
@@ -60,6 +66,9 @@ export const ROOM_COPY = {
     selectedDevice: '当前设备', closePanel: '关闭控制面板', panel: '控制面板',
     monitorHint: '并列时支架收拢；向内转动先展开机械臂，向外微调只转屏幕。左屏正值、右屏负值为向内。俯仰负值向下，正值向上。',
     panelHint: '拖动滑杆精调，或再次点击设备反向播放。',
+    blindsHint: '上收时叶片会逐渐放平，叠在顶盒下方；放下后恢复你选择的角度。',
+    expansionUnavailable: '百叶窗、落地灯和书架暂未加载成功。原房间仍可使用，请刷新重试。',
+    powerOn: '开', powerOff: '关',
     resetDevice: '恢复默认', resetDeviceHint: '仅恢复当前设备，不影响其他设备和视角。',
     interactivePart: '可互动部件', sceneActions: '场景操作', orbitHint: '拖动环绕 · 滚轮缩放',
     demo: '演示', resetRoom: '全部复位', fullscreen: '全屏', deviceDock: '互动设备快捷入口',
@@ -74,13 +83,15 @@ export const ROOM_COPY = {
         decode: '无法读取这张图片，请换一个文件。', dimensions: '图片单边不能超过 8192 像素，总像素不能超过 3200 万。',
         unavailable: '当前场景暂不支持替换挂画。' },
     },
-    groups: { cabinet: '收纳柜', desk: '升降桌', chair: '电竞椅', microphone: '话筒臂', monitors: '双屏' },
+    groups: { cabinet: '收纳柜', desk: '升降桌', chair: '电竞椅', microphone: '话筒臂', monitors: '双屏', blinds: '百叶窗', floorLamp: '落地灯', bookshelf: '书架' },
     controls: {
       'cabinet.drawer.1': '抽屉 1', 'cabinet.drawer.2': '抽屉 2', 'cabinet.drawer.3': '抽屉 3', 'cabinet.drawer.4': '抽屉 4',
       'cabinet.door': '柜门', 'desk.lift': '桌面高度', 'chair.swivel': '椅身旋转', 'chair.headrest': '头枕拆装', 'chair.lumbar': '腰枕拆装',
       'chair.moveX': '左右移动', 'chair.moveY': '前后移动',
       'microphone.fold': '折叠程度', 'microphone.yaw': '底座转向', 'monitors.face': '双屏夹角',
       'monitors.leftTrim': '左屏微调', 'monitors.rightTrim': '右屏微调', 'monitors.leftTilt': '左屏俯仰', 'monitors.rightTilt': '右屏俯仰',
+      'blinds.tilt': '叶片角度', 'blinds.raise': '百叶升降', 'floorLamp.power': '落地灯',
+      'bookshelf.leftDoor': '书架左柜门', 'bookshelf.rightDoor': '书架右柜门', 'bookshelf.lights': '书架氛围灯',
     },
     loading: { waking: '正在唤醒房间', manifest: '读取 Blender 场景清单', desktop: '加载桌面高质量模型', low: '加载轻量模型',
       assets: '载入房间模型与压缩纹理', ready: 'Blender 场景已就绪', fallbackReady: '互动预览已就绪',
@@ -105,6 +116,7 @@ export function statusLabel(status: EngineStatus | null, language: RoomLanguage)
 }
 
 export function formatControlValue(control: ControlDefinition, value: number, language: RoomLanguage) {
+  if (isPowerControl(control.id)) return value >= .5 ? ROOM_COPY[language].powerOn : ROOM_COPY[language].powerOff;
   if (control.id === 'chair.moveX' || control.id === 'chair.moveY') return `${Math.round(value * 100)} cm`;
   if (control.id === 'desk.lift') return `${Math.round(78 + value * 40)} cm`;
   if (control.id === 'monitors.face') return `${Math.round(value * 90)}°`;

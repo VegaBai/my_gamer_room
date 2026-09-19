@@ -90,4 +90,6 @@ export interface EngineStatus {
   usingBlenderAsset: boolean;
   variant: 'desktop' | 'low';
   bookError?: boolean;
+  expansionReady?: boolean;
+  expansionError?: boolean;
 }

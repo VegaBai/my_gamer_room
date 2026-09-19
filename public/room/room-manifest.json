@@ -8630,11 +8630,12 @@
     "ktx2Available": false
   },
   "poster": {
-    "url": "/room/poster-aa3cfe095f2cc1e613ca094aae8f59b1adbf1c5de0c76c3791327aff620cfef6.png",
-    "sha256": "aa3cfe095f2cc1e613ca094aae8f59b1adbf1c5de0c76c3791327aff620cfef6",
+    "url": "/room/expansion/poster-ea0161023be2e45453f3108084e5a5c5cecae8ec7be8e1174bdd179aa5a17210.png",
+    "sha256": "ea0161023be2e45453f3108084e5a5c5cecae8ec7be8e1174bdd179aa5a17210",
     "width": 1600,
     "height": 900,
-    "bytes": 1654681,
-    "rawDesktopSha256": "79bcbf69af9467cae1a908b8cb7274416415b52b4c826f3e45175a21b97e5f16"
+    "bytes": 1634654,
+    "source": "workstation-room-expansion-v5.blend",
+    "expansionAssetSha256": "aa70421701995561a010171e25458870c2d01fbada0b125032767e4baaf92680"
   }
 }

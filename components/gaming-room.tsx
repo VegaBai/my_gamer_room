@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DEFAULT_CONTROLS } from '../lib/room/default-controls';
+import { isExpansionControl, isPowerControl } from '../lib/room/expansion-controls';
 import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY, ROOM_COPY, controlLabel, formatControlValue, groupLabel, resolveLanguage, statusLabel, type RoomLanguage } from '../lib/room/i18n';
 import type { RoomEngine } from '../lib/room/room-engine';
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/room/types';
@@ -239,7 +240,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
       {!entered && (
         <aside className="parts-card" aria-label={copy.summary}>
-          <span className="parts-count">{DEFAULT_CONTROLS.filter(control => control.primary).length}</span>
+          <span className="parts-count">{DEFAULT_CONTROLS.filter(control => control.primary && (!isExpansionControl(control.id) || status?.expansionReady)).length}</span>
           <div><strong>{copy.interactionCount}</strong><small>{copy.interactionHint}</small></div>
         </aside>
       )}
@@ -261,8 +262,16 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
             {selected.group === '双屏' && (
               <p className="monitor-motion-hint">{copy.monitorHint}</p>
             )}
+            {selected.group === '百叶窗' && <p className="monitor-motion-hint">{copy.blindsHint}</p>}
             {groupControls.map((control) => (
-              <label key={control.id} className="range-control">
+              isPowerControl(control.id) ? <div key={control.id} className="range-control power-control">
+                <span><b>{controlLabel(control.id, language)}</b><output>{formatControlValue(control, values[control.id] ?? control.default, language)}</output></span>
+                <button type="button" role="switch" aria-label={controlLabel(control.id, language)}
+                  aria-checked={(values[control.id] ?? control.default) >= .5}
+                  onClick={() => engineRef.current?.selectAndToggle(control.id)}>
+                  <i aria-hidden="true" />{formatControlValue(control, values[control.id] ?? control.default, language)}
+                </button>
+              </div> : <label key={control.id} className="range-control">
                 <span><b>{controlLabel(control.id, language)}</b><output>{formatControlValue(control, values[control.id] ?? control.default, language)}</output></span>
                 <input
                   type="range"
@@ -356,6 +365,13 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
         </aside>
       )}
 
+      {entered && status?.expansionError && (
+        <aside className={`expansion-load-error ${status.bookError ? 'with-book-error' : ''}`} role="alert">
+          <p>{copy.expansionUnavailable}</p>
+          <button type="button" onClick={() => window.location.reload()}>{copy.retry}</button>
+        </aside>
+      )}
+
       {entered && hover && (
         <div className="cursor-tooltip" style={{ left: hover.x + 16, top: hover.y + 14 }}>
           {isBookId(hover.id) ? BOOKS[hover.id].title[language] : hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
@@ -384,8 +400,10 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
       {entered && !selected && !artworkOpen && !selectedBookId && (
         <section className="device-dock" aria-label={copy.deviceDock}>
-          {DEFAULT_CONTROLS.filter((control) => control.primary).map((control) => (
-            <button key={control.id} type="button" onClick={() => selectFromList(control)}>
+          {DEFAULT_CONTROLS.filter((control) => control.primary)
+            .sort((a, b) => Number(isExpansionControl(b.id)) - Number(isExpansionControl(a.id))).map((control) => (
+            <button key={control.id} type="button" disabled={isExpansionControl(control.id) && !status?.expansionReady}
+              onClick={() => selectFromList(control)}>
               <i />{controlLabel(control.id, language)}
             </button>
           ))}

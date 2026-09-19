@@ -1,0 +1,255 @@
+{
+  "schema": "room-expansion-runtime/1",
+  "status": "assembled-and-verified",
+  "asset": {
+    "url": "/room/expansion/aa70421701995561a010171e25458870c2d01fbada0b125032767e4baaf92680.glb",
+    "sha256": "aa70421701995561a010171e25458870c2d01fbada0b125032767e4baaf92680",
+    "bytes": 8029484
+  },
+  "rootNodeId": "expansion.root",
+  "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
+  "defaults": {
+    "blinds.tilt": 30,
+    "blinds.raise": 0,
+    "floorLamp.power": 1,
+    "bookshelf.leftDoor": 0,
+    "bookshelf.rightDoor": 0,
+    "bookshelf.lights": 1
+  },
+  "blinds": {
+    "slatIds": [
+      "window.slat.00",
+      "window.slat.01",
+      "window.slat.02",
+      "window.slat.03",
+      "window.slat.04",
+      "window.slat.05",
+      "window.slat.06",
+      "window.slat.07",
+      "window.slat.08",
+      "window.slat.09",
+      "window.slat.10",
+      "window.slat.11",
+      "window.slat.12",
+      "window.slat.13",
+      "window.slat.14",
+      "window.slat.15",
+      "window.slat.16",
+      "window.slat.17",
+      "window.slat.18",
+      "window.slat.19",
+      "window.slat.20",
+      "window.slat.21",
+      "window.slat.22",
+      "window.slat.23",
+      "window.slat.24"
+    ],
+    "topHeight": 0.57,
+    "loweredPitch": 0.047,
+    "raisedPitch": 0.006,
+    "tiltFadeExponent": 3,
+    "tiltAxis": "x",
+    "translationAxis": "y",
+    "bottomRailId": "window.bottomRail",
+    "bottomOffset": 0.035,
+    "slatThickness": 0.003,
+    "slatChordWidth": 0.045,
+    "pitchFormula": "loweredPitch*(1-raise)+raisedPitch*raise",
+    "slatHeightFormula": "topHeight-index*pitch",
+    "tiltRadiansFormula": "tilt*pi/180*(1-raise)^tiltFadeExponent",
+    "bottomHeightFormula": "topHeight-24*pitch-bottomOffset",
+    "cords": [
+      {
+        "nodeId": "window.cord.0.0",
+        "topHeight": 0.606
+      },
+      {
+        "nodeId": "window.cord.0.1",
+        "topHeight": 0.606
+      },
+      {
+        "nodeId": "window.cord.1.0",
+        "topHeight": 0.606
+      },
+      {
+        "nodeId": "window.cord.1.1",
+        "topHeight": 0.606
+      },
+      {
+        "nodeId": "window.cord.2.0",
+        "topHeight": 0.606
+      },
+      {
+        "nodeId": "window.cord.2.1",
+        "topHeight": 0.606
+      }
+    ],
+    "cordStretchAxis": "y",
+    "cordScaleFormula": "topHeight-bottomRailLocalY",
+    "cordModelLength": 1
+  },
+  "doors": [
+    {
+      "nodeId": "bookshelf.door.left.pivot",
+      "controlId": "bookshelf.leftDoor",
+      "axis": "y",
+      "angleDegrees": -95
+    },
+    {
+      "nodeId": "bookshelf.door.right.pivot",
+      "controlId": "bookshelf.rightDoor",
+      "axis": "y",
+      "angleDegrees": 95
+    }
+  ],
+  "emission": [
+    {
+      "controlId": "floorLamp.power",
+      "meshIds": [
+        "lamp.diffuser"
+      ],
+      "strength": 3,
+      "color": [
+        0.98,
+        0.79,
+        0.66
+      ],
+      "lightPosition_glTF": [
+        2.22,
+        0.926,
+        -0.4
+      ],
+      "lightIntensity": 0.6,
+      "distance": 2.2
+    },
+    {
+      "controlId": "bookshelf.lights",
+      "meshIds": [
+        "bookshelf.light.0.0",
+        "bookshelf.light.0.1",
+        "bookshelf.light.1.0",
+        "bookshelf.light.1.1",
+        "bookshelf.light.2.0",
+        "bookshelf.light.2.1",
+        "bookshelf.light.3.0",
+        "bookshelf.light.3.1"
+      ],
+      "strength": 2.5,
+      "preserveMaterialColor": true
+    }
+  ],
+  "selectable": [
+    {
+      "controlId": "blinds.tilt",
+      "nodeIds": [
+        "window.slat.00",
+        "window.slat.01",
+        "window.slat.02",
+        "window.slat.03",
+        "window.slat.04",
+        "window.slat.05",
+        "window.slat.06",
+        "window.slat.07",
+        "window.slat.08",
+        "window.slat.09",
+        "window.slat.10",
+        "window.slat.11",
+        "window.slat.12",
+        "window.slat.13",
+        "window.slat.14",
+        "window.slat.15",
+        "window.slat.16",
+        "window.slat.17",
+        "window.slat.18",
+        "window.slat.19",
+        "window.slat.20",
+        "window.slat.21",
+        "window.slat.22",
+        "window.slat.23",
+        "window.slat.24",
+        "window.wand"
+      ]
+    },
+    {
+      "controlId": "blinds.raise",
+      "nodeIds": [
+        "window.bottomRail",
+        "window.headrail",
+        "window.frame"
+      ]
+    },
+    {
+      "controlId": "floorLamp.power",
+      "nodeIds": [
+        "lamp.body",
+        "lamp.diffuser",
+        "lamp.base",
+        "lamp.footSwitch",
+        "lamp.cable"
+      ]
+    },
+    {
+      "controlId": "bookshelf.leftDoor",
+      "nodeIds": [
+        "bookshelf.door.left.mesh",
+        "bookshelf.door.left.handle"
+      ]
+    },
+    {
+      "controlId": "bookshelf.rightDoor",
+      "nodeIds": [
+        "bookshelf.door.right.mesh",
+        "bookshelf.door.right.handle"
+      ]
+    },
+    {
+      "controlId": "bookshelf.lights",
+      "nodeIds": [
+        "bookshelf.carcass",
+        "bookshelf.light.0.0",
+        "bookshelf.light.0.1",
+        "bookshelf.light.1.0",
+        "bookshelf.light.1.1",
+        "bookshelf.light.2.0",
+        "bookshelf.light.2.1",
+        "bookshelf.light.3.0",
+        "bookshelf.light.3.1"
+      ]
+    }
+  ],
+  "hideBaseNodeIds": [
+    "scene.window.frame.h.05eb03b5",
+    "scene.window.frame.h.001.a7d014a8",
+    "scene.window.frame.v.5dd312da",
+    "scene.window.frame.v.001.e91cd35d",
+    "scene.window.glass.051c2bae",
+    "scene.window.mullion.b2ddce94",
+    "scene.architecture.back.wall.160e154d"
+  ],
+  "camera": {
+    "position": [
+      -1.7,
+      2.6,
+      6.3
+    ],
+    "target": [
+      0,
+      1.1,
+      0.2
+    ],
+    "fov": 39,
+    "near": 0.05,
+    "far": 100,
+    "minDistance": 2,
+    "maxDistance": 10,
+    "minAzimuthAngle": -0.3,
+    "maxAzimuthAngle": 0.08,
+    "minPolarAngle": 0.7,
+    "maxPolarAngle": 1.52
+  },
+  "notes": [
+    "Each glTF mesh has extras.web_id; all actions replace local channel only.",
+    "Use loaded GLB default transforms as fallback; pose-fixtures.json has Blender-derived local TRS for exact equality tests.",
+    "Two glass panes remain non-pickable to permit selecting slats behind and avoid unsupported glass control."
+  ]
+}

@@ -491,6 +491,26 @@ button { -webkit-tap-highlight-color: transparent; }
 
 .device-dock button:hover,
 .device-dock button:focus-visible { background: rgba(255,255,255,.14); color: #fff; }
+.device-dock button { font-size: 14px; min-height: 36px; }
+.device-dock button:disabled { opacity: .4; cursor: not-allowed; }
+.power-control button {
+  display: flex; align-items: center; gap: 10px; min-height: 42px;
+  width: 100%; padding: 9px 12px; border: 1px solid #d9bfce;
+  border-radius: 12px; background: #f3e7ee; color: #654055;
+  font: inherit; cursor: pointer;
+}
+.power-control button i { width: 13px; height: 13px; border-radius: 50%; background: #a79ba2; }
+.power-control button[aria-checked="true"] { background: #eed2e2; border-color: #c78fab; }
+.power-control button[aria-checked="true"] i { background: #bd4e85; }
+.expansion-load-error {
+  position: absolute; z-index: 20; top: 94px; left: 50%; transform: translateX(-50%);
+  width: min(420px, calc(100% - 32px)); padding: 12px 16px;
+  border: 1px solid #d6b4c6; border-radius: 12px; background: #fff4f9;
+  color: #713951; font-size: 14px;
+}
+.expansion-load-error.with-book-error { top: 184px; }
+.expansion-load-error p { margin: 0 0 8px; }
+.expansion-load-error button { border: 0; background: none; color: #92285b; font: inherit; text-decoration: underline; cursor: pointer; }
 .device-dock button i {
   width: 5px;
   height: 5px;
