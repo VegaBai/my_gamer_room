@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { EXPANSION_CONTROL_IDS } from './expansion-controls';
 import type { RoomCameraDefinition, Vec3 } from './types';
 import type { ArchitectureContract } from './wallpaper';
+import { RoomPlacement, type RoomPlacementSpec } from './room-placement';
 
 export interface ExpansionContract {
   schema: 'room-expansion-runtime/1';
@@ -10,6 +11,8 @@ export interface ExpansionContract {
   defaults: Record<string, number>;
   hideBaseNodeIds: string[];
   architecture?: ArchitectureContract;
+  placements?: RoomPlacementSpec[];
+  controlLimits?: Record<string, { min: number; max: number; clickValue: number }>;
   blinds: {
     slatIds: string[]; topHeight: number; loweredPitch: number; raisedPitch: number;
     tiltFadeExponent: number; bottomRailId: string; bottomOffset: number;
@@ -72,6 +75,7 @@ export class RoomExpansion {
   private readonly lights: { controlId: string; light: THREE.PointLight; intensity: number }[] = [];
   private readonly emitters: { controlId: string; materials: THREE.MeshStandardMaterial[]; strength: number }[] = [];
   private readonly hidden: { object: THREE.Object3D; wasVisible: boolean }[] = [];
+  private readonly placement: RoomPlacement;
 
   constructor(readonly root: THREE.Object3D, readonly contract: ExpansionContract, baseRoot: THREE.Object3D) {
     validateExpansionContract(contract);
@@ -114,6 +118,7 @@ export class RoomExpansion {
       if (!object) throw new Error(`Base room cannot install expansion; missing ${id}`);
       this.hidden.push({ object, wasVisible: object.visible });
     }
+    this.placement = new RoomPlacement(baseRoot, contract.placements ?? []);
     // Only mutate the live scene after every required identity has been checked.
     root.traverse(object => {
       if (object instanceof THREE.Light || object instanceof THREE.Camera) object.visible = false;
@@ -156,6 +161,7 @@ export class RoomExpansion {
     this.hidden.forEach(({ object }) => { object.visible = false; });
     baseRoot.add(root);
     this.apply(contract.defaults);
+    this.placement.apply();
   }
 
   apply(values: Readonly<Record<string, number>>) {
@@ -177,6 +183,7 @@ export class RoomExpansion {
   }
 
   detach() {
+    this.placement.dispose();
     this.hidden.forEach(({ object, wasVisible }) => { object.visible = wasVisible; });
     this.root.removeFromParent();
   }

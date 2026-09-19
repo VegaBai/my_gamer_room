@@ -17,6 +17,7 @@ export const easeInOutCubic = (t: number) =>
 
 export class RoomStateMachine {
   private readonly definitions = new Map<string, ControlDefinition>();
+  private readonly authoredDefinitions = new Map<string, ControlDefinition>();
   private readonly values: Record<string, number> = {};
   private readonly tweens = new Map<string, ActiveTween>();
   private readonly listeners = new Set<Listener>();
@@ -27,8 +28,29 @@ export class RoomStateMachine {
         throw new Error(`Duplicate room control: ${definition.id}`);
       }
       this.definitions.set(definition.id, definition);
+      this.authoredDefinitions.set(definition.id, definition);
       this.values[definition.id] = definition.default;
     }
+  }
+
+  /** A room layout may narrow an authored mechanism's physical travel. */
+  setLimits(limits: Record<string, { min: number; max: number; clickValue: number }>) {
+    const next = new Map(this.authoredDefinitions);
+    for (const [id, limit] of Object.entries(limits)) {
+      const authored = this.authoredDefinitions.get(id);
+      if (!authored || ![limit.min, limit.max, limit.clickValue].every(Number.isFinite)
+        || limit.min < authored.min || limit.max > authored.max || limit.min > authored.default
+        || limit.max < authored.default || limit.clickValue < limit.min || limit.clickValue > limit.max) {
+        throw new Error(`Invalid physical limit for ${id}`);
+      }
+      next.set(id, { ...authored, ...limit });
+    }
+    this.tweens.clear();
+    for (const [id, definition] of next) {
+      this.definitions.set(id, definition);
+      this.values[id] = clamp(this.values[id], definition.min, definition.max);
+    }
+    this.emit();
   }
 
   subscribe(listener: Listener) {

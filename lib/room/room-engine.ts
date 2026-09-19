@@ -181,6 +181,7 @@ export class RoomEngine {
       bookError: this.bookAssetFailed || this.bookTargets.size !== BOOK_IDS.length,
       expansionReady: Boolean(this.expansion),
       expansionError: !this.expansion,
+      controlLimits: this.expansion?.contract.controlLimits,
     });
   }
 
@@ -503,10 +504,12 @@ export class RoomEngine {
         try { this.wallpaperId = resolveWallpaper(window.localStorage.getItem(WALLPAPER_STORAGE_KEY)); } catch { /* Keep linen. */ }
         this.architecture.setWallpaper(this.wallpaperId);
       }
+      this.expansion.apply(this.state.snapshot());
+      this.state.setLimits(contract.controlLimits ?? {});
+      this.applyCamera(this.expansion.camera);
+      // Publish pick targets only after physical limits and the rest of the addon validate.
       this.hitTargets.push(...this.expansion.hitTargets);
       for (const [id, targets] of this.expansion.visualTargets) this.visualTargets.set(id, targets);
-      this.expansion.apply(this.state.snapshot());
-      this.applyCamera(this.expansion.camera);
     } catch (error) {
       this.architecture?.dispose();
       this.architecture = null;

@@ -275,7 +275,11 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           </button>
           <div className="panel-controls">
             {selected.group === '双屏' && (
-              <p className="monitor-motion-hint">{copy.monitorHint}</p>
+              <p className="monitor-motion-hint">{status?.controlLimits?.['monitors.face']
+                ? language === 'zh'
+                  ? '近墙布局已启用防碰墙限位：同步内转最多 30°，左右微调与俯仰仍可使用。'
+                  : 'Near-wall safety stop: shared inward rotation is limited to 30°. Individual swivel trim and tilt remain available.'
+                : copy.monitorHint}</p>
             )}
             {selected.group === '百叶窗' && <p className="monitor-motion-hint">{copy.blindsHint}</p>}
             {selected.group === '书架' && <button className="panel-reset" type="button"
@@ -295,11 +299,12 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
                 <input
                   type="range"
                   aria-label={controlLabel(control.id, language)}
-                  min={control.min}
-                  max={control.max}
-                  step={control.id === 'monitors.face' ? 1 / 90 : control.unit === '°' ? .5 : .01}
-                  value={values[control.id] ?? control.default}
-                  onInput={(event) => engineRef.current?.setControl(control.id, Number(event.currentTarget.value))}
+                  min={(status?.controlLimits?.[control.id]?.min ?? control.min) * (control.id === 'monitors.face' ? 90 : 1)}
+                  max={(status?.controlLimits?.[control.id]?.max ?? control.max) * (control.id === 'monitors.face' ? 90 : 1)}
+                  step={control.id === 'monitors.face' ? 1 : control.unit === '°' ? .5 : .01}
+                  value={(values[control.id] ?? control.default) * (control.id === 'monitors.face' ? 90 : 1)}
+                  onInput={(event) => engineRef.current?.setControl(control.id,
+                    Number(event.currentTarget.value) / (control.id === 'monitors.face' ? 90 : 1))}
                 />
               </label>
             ))}

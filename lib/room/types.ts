@@ -86,6 +86,7 @@ export interface RoomManifestV1 {
 export type RoomLoadingStage = 'waking' | 'manifest' | 'desktop' | 'low' | 'assets' | 'ready' | 'fallbackReady' | 'webglError' | 'moduleError';
 
 export interface EngineStatus {
+  controlLimits?: Record<string, { min: number; max: number; clickValue: number }>;
   ready: boolean;
   usingBlenderAsset: boolean;
   variant: 'desktop' | 'low';

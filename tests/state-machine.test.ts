@@ -24,6 +24,26 @@ describe('room controls contract', () => {
 });
 
 describe('RoomStateMachine', () => {
+  it('enforces a layout safety stop for sliders, click reversal, demo and reset', () => {
+    const machine = new RoomStateMachine(DEFAULT_CONTROLS);
+    machine.setLimits({ 'monitors.face': { min: 0, max: 1 / 3, clickValue: 1 / 3 } });
+    machine.setDirect('monitors.face', 1);
+    expect(machine.getValue('monitors.face')).toBe(1 / 3);
+    machine.toggle('monitors.face', 0); machine.tick(2000);
+    expect(machine.getValue('monitors.face')).toBe(0);
+    machine.animateTo('monitors.face', 1, 2000);
+    for (let time = 2000; time <= 4000; time += 20) {
+      machine.tick(time); expect(machine.getValue('monitors.face')).toBeLessThanOrEqual(1 / 3);
+    }
+    machine.setDirect('monitors.leftTrim', 15); machine.setDirect('monitors.rightTilt', 5);
+    expect(machine.getValue('monitors.leftTrim')).toBe(15);
+    expect(machine.getValue('monitors.rightTilt')).toBe(5);
+    machine.reset(4000); machine.tick(6000);
+    expect(machine.getValue('monitors.face')).toBe(0);
+    expect(DEFAULT_CONTROLS.find(c => c.id === 'monitors.face')!.max).toBe(1);
+    expect(() => machine.setLimits({ 'monitors.face': { min: 0, max: 2, clickValue: 2 } })).toThrow();
+    expect(machine.getDefinition('monitors.face').max).toBe(1 / 3);
+  });
   it('plays a click action to its authored end state', () => {
     const machine = new RoomStateMachine(DEFAULT_CONTROLS);
     machine.toggle('cabinet.drawer.1', 0);

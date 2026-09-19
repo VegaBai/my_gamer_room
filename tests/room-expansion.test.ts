@@ -25,7 +25,9 @@ function rig() {
     }
     root.add(mesh);
   }
-  for (const id of contract.hideBaseNodeIds) { const node = new THREE.Group(); node.userData.web_id = id; base.add(node); }
+  for (const id of [...contract.hideBaseNodeIds, ...(contract.placements ?? []).flatMap(p => p.nodeIds)]) {
+    const node = new THREE.Group(); node.userData.web_id = id; base.add(node);
+  }
   return { root, base, expansion: new RoomExpansion(root, structuredClone(contract), base) };
 }
 
