@@ -340,6 +340,14 @@ button { -webkit-tap-highlight-color: transparent; }
   cursor: pointer;
 }
 .panel-reset:hover { background: rgba(255,206,229,.68); }
+.wallpaper-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+.wallpaper-grid button { padding: 8px; border: 1px solid rgba(103,76,91,.2); border-radius: 12px; background: rgba(255,255,255,.5); color: inherit; font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+.wallpaper-grid button[aria-pressed="true"] { border-color: #a9507b; box-shadow: 0 0 0 1px #a9507b; background: #fff7fb; }
+.wallpaper-grid button:focus-visible { outline: 2px solid #96345f; outline-offset: 3px; }
+.wallpaper-swatch { display: block; height: 64px; border-radius: 6px; margin-bottom: 8px; }
+.wallpaper-linen { background-image: repeating-linear-gradient(0deg, transparent 0 3px, #ffffff40 3px 4px), repeating-linear-gradient(90deg, transparent 0 3px, #75665210 3px 4px); }
+.wallpaper-pinstripe { background-image: repeating-linear-gradient(90deg, transparent 0 15px, #80616c30 15px 16px); }
+.wallpaper-diamond { background-image: repeating-linear-gradient(45deg, transparent 0 22px, #72868230 22px 23px), repeating-linear-gradient(-45deg, transparent 0 22px, #72868230 22px 23px); }
 
 .artwork-file-label, .artwork-fit-label { display: grid; gap: 10px; font-size: 14px; }
 .artwork-file-label input { width: 100%; min-width: 0; font-size: 14px; }
@@ -556,9 +564,9 @@ button { -webkit-tap-highlight-color: transparent; }
   .control-panel { top: 86px; max-height: calc(100vh - 160px); overflow-y: auto; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .room-toolbar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .room-toolbar button { min-width: 0; white-space: normal; }
+  .room-toolbar button { min-width: 0; min-height: 44px; white-space: normal; }
   .device-dock, .control-panel { bottom: 112px; }
 }
 

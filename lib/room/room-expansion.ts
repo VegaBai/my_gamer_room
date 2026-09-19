@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { EXPANSION_CONTROL_IDS } from './expansion-controls';
 import type { RoomCameraDefinition, Vec3 } from './types';
+import type { ArchitectureContract } from './wallpaper';
 
 export interface ExpansionContract {
   schema: 'room-expansion-runtime/1';
@@ -8,6 +9,7 @@ export interface ExpansionContract {
   rootNodeId: string;
   defaults: Record<string, number>;
   hideBaseNodeIds: string[];
+  architecture?: ArchitectureContract;
   blinds: {
     slatIds: string[]; topHeight: number; loweredPitch: number; raisedPitch: number;
     tiltFadeExponent: number; bottomRailId: string; bottomOffset: number;

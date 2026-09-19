@@ -18,8 +18,9 @@ import { installBookProp } from './book-prop';
 import bookPropAsset from './book-prop-asset.json';
 import { RoomExpansion, validateExpansionContract, type ExpansionContract } from './room-expansion';
 import { isExpansionControl } from './expansion-controls';
-import { pickRoomControl } from './room-picking';
+import { isVisibleInScene, pickRoomControl } from './room-picking';
 import { overviewFraming } from './overview-framing';
+import { RoomArchitecture, resolveWallpaper, WALLPAPER_STORAGE_KEY, type WallpaperId } from './wallpaper';
 import type {
   ControlDefinition,
   EngineStatus,
@@ -99,6 +100,8 @@ export class RoomEngine {
   private expansion: RoomExpansion | null = null;
   private overviewFov = 40;
   private framingKey = '';
+  private architecture: RoomArchitecture | null = null;
+  private wallpaperId: WallpaperId = 'linen';
 
   constructor(container: HTMLElement, callbacks: RoomEngineCallbacks) {
     this.container = container;
@@ -212,6 +215,24 @@ export class RoomEngine {
   }
 
   get artworkAvailable() { return this.wallArtwork?.available ?? false; }
+  get wallpaperAvailable() { return this.architecture?.available ?? false; }
+  get wallpaper() { return this.wallpaperId; }
+
+  setWallpaper(id: WallpaperId) {
+    if (!this.architecture?.available) return;
+    this.userInput();
+    this.wallpaperId = resolveWallpaper(id);
+    this.architecture.setWallpaper(this.wallpaperId);
+    try { window.localStorage.setItem(WALLPAPER_STORAGE_KEY, this.wallpaperId); } catch { /* Optional local preference. */ }
+  }
+
+  viewBookshelf() {
+    if (!this.expansion) return;
+    this.userInput(); this.closeBook(); this.closeArtwork();
+    this.artworkCamera.clear();
+    // Stand inside the room on the open side of the right-wall bookcase.
+    this.applyCamera({ ...this.expansion.camera, position: [-1.4, 2.05, 2.0], target: [2.05, 1.05, .45], fovDegrees: 43 });
+  }
 
   openArtwork() {
     if (!this.artworkAvailable) return;
@@ -391,6 +412,7 @@ export class RoomEngine {
     this.orbit.dispose();
     this.disposeSurfaceQA?.();
     this.wallArtwork?.dispose();
+    this.architecture?.dispose();
     this.procedural?.dispose();
     this.procedural = null;
     if (this.manifestRoot) disposeObject(this.manifestRoot);
@@ -476,11 +498,18 @@ export class RoomEngine {
       root = (await loader.loadAsync(contract.asset.url)).scene;
       if (this.disposed) { disposeObject(root); return; }
       this.expansion = new RoomExpansion(root, contract, this.manifestRoot!);
+      if (contract.architecture) {
+        this.architecture = new RoomArchitecture(this.manifestRoot!, contract.architecture);
+        try { this.wallpaperId = resolveWallpaper(window.localStorage.getItem(WALLPAPER_STORAGE_KEY)); } catch { /* Keep linen. */ }
+        this.architecture.setWallpaper(this.wallpaperId);
+      }
       this.hitTargets.push(...this.expansion.hitTargets);
       for (const [id, targets] of this.expansion.visualTargets) this.visualTargets.set(id, targets);
       this.expansion.apply(this.state.snapshot());
       this.applyCamera(this.expansion.camera);
     } catch (error) {
+      this.architecture?.dispose();
+      this.architecture = null;
       this.expansion?.detach();
       this.expansion = null;
       if (root) disposeObject(root);
@@ -610,8 +639,8 @@ export class RoomEngine {
       this.orbit.maxDistance = Math.min(8.5, definition.maxDistance);
       this.orbit.minPolarAngle = Math.max(.65, definition.minPolar);
       this.orbit.maxPolarAngle = Math.min(1.48, definition.maxPolar);
-      this.orbit.minAzimuthAngle = Math.max(-1.05, definition.minAzimuth);
-      this.orbit.maxAzimuthAngle = Math.min(1.05, definition.maxAzimuth);
+      this.orbit.minAzimuthAngle = this.architecture ? -Infinity : Math.max(-1.05, definition.minAzimuth);
+      this.orbit.maxAzimuthAngle = this.architecture ? Infinity : Math.min(1.05, definition.maxAzimuth);
       this.orbit.update();
     } else {
       this.camera.lookAt(...definition.target);
@@ -770,7 +799,8 @@ export class RoomEngine {
   private updateHoverOutline() {
     if (!this.hoveredControl) return;
     const box = new THREE.Box3();
-    for (const root of this.visualTargets.get(this.hoveredControl) ?? []) box.expandByObject(root);
+    for (const root of this.visualTargets.get(this.hoveredControl) ?? []) if (isVisibleInScene(root)) box.expandByObject(root);
+    this.hoverOutline.visible = !box.isEmpty();
     if (!box.isEmpty()) this.hoverOutline.box.copy(box).expandByScalar(isBookId(this.hoveredControl) ? .003 : .012);
   }
 
@@ -781,13 +811,14 @@ export class RoomEngine {
     const delta = Math.min(.05, Math.max(0, (now - this.lastFrameAt) / 1000));
     this.lastFrameAt = now;
     this.state.tick(now);
-    if (this.hoveredControl) this.updateHoverOutline();
     if (!this.disposeSurfaceQA && !this.reduceMotion && !this.artworkCamera.active && !this.artworkCamera.returning
         && now - this.lastInputAt > 8000 && !this.state.isAnimating()) {
       this.orbit.autoRotate = true;
     }
     if (!this.artworkCamera.tick(now)) this.orbit.update(delta);
     this.updateResponsiveFraming();
+    this.architecture?.update(this.camera.position);
+    if (this.hoveredControl) this.updateHoverOutline();
     if (this.procedural) {
       const pulse = this.reduceMotion ? 1 : 1 + Math.sin(now * .0018) * .22;
       for (const material of this.procedural.rgbMaterials) {

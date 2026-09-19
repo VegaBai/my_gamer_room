@@ -1,10 +1,10 @@
 {
   "schema": "room-expansion-runtime/1",
-  "status": "assembled-and-verified",
+  "status": "final-geometry-and-export-QA-passed",
   "asset": {
-    "url": "/room/expansion/aa70421701995561a010171e25458870c2d01fbada0b125032767e4baaf92680.glb",
-    "sha256": "aa70421701995561a010171e25458870c2d01fbada0b125032767e4baaf92680",
-    "bytes": 8029484
+    "url": "/room/expansion/a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6.glb",
+    "sha256": "a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6",
+    "bytes": 8056296
   },
   "rootNodeId": "expansion.root",
   "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
@@ -218,38 +218,181 @@
     }
   ],
   "hideBaseNodeIds": [
+    "scene.architecture.back.wall.160e154d",
+    "scene.architecture.left.wall.00feb0f3",
     "scene.window.frame.h.05eb03b5",
     "scene.window.frame.h.001.a7d014a8",
     "scene.window.frame.v.5dd312da",
     "scene.window.frame.v.001.e91cd35d",
     "scene.window.glass.051c2bae",
-    "scene.window.mullion.b2ddce94",
-    "scene.architecture.back.wall.160e154d"
+    "scene.window.mullion.b2ddce94"
   ],
   "camera": {
     "position": [
-      -1.7,
+      1.55,
       2.6,
       6.3
     ],
     "target": [
       0,
-      1.1,
+      1.15,
       0.2
     ],
     "fov": 39,
     "near": 0.05,
     "far": 100,
     "minDistance": 2,
-    "maxDistance": 10,
-    "minAzimuthAngle": -0.3,
-    "maxAzimuthAngle": 0.08,
-    "minPolarAngle": 0.7,
-    "maxPolarAngle": 1.52
+    "maxDistance": 12,
+    "minAzimuthAngle": -3.141592653589793,
+    "maxAzimuthAngle": 3.141592653589793,
+    "minPolarAngle": 0.45,
+    "maxPolarAngle": 1.55
   },
   "notes": [
     "Each glTF mesh has extras.web_id; all actions replace local channel only.",
     "Use loaded GLB default transforms as fallback; pose-fixtures.json has Blender-derived local TRS for exact equality tests.",
-    "Two glass panes remain non-pickable to permit selecting slats behind and avoid unsupported glass control."
-  ]
+    "Two glass panes remain non-pickable to permit selecting slats behind and avoid unsupported glass control.",
+    "v6 moves window.root only: rotation +90 degrees around glTF Y, panes/slats/wand/cord local motion unchanged.",
+    "Three replacement wall groups include upper wallpaper, low wainscot and slim cream trim; left cutaway also hides window.root.",
+    "Wallpaper UV distance of 1 equals 1 metre. Browser textures may use repeat (1, 0.5)."
+  ],
+  "version": "6.0.0",
+  "architecture": {
+    "wallpaperNodeIds": [
+      "architecture.backWall.v6.upper",
+      "architecture.leftWall.v6.upper",
+      "architecture.rightWall.v6.upper"
+    ],
+    "walls": [
+      {
+        "id": "back",
+        "rootNodeId": "architecture.backWall.v6",
+        "nodeIds": [
+          "architecture.backWall.v6"
+        ],
+        "point": [
+          0,
+          1.5,
+          -0.78
+        ],
+        "inward": [
+          0,
+          0,
+          1
+        ],
+        "upperMeshId": "architecture.backWall.v6.upper",
+        "members": [
+          "architecture.backWall.v6.baseboard",
+          "architecture.backWall.v6.chairRail",
+          "architecture.backWall.v6.lower",
+          "architecture.backWall.v6.railBead",
+          "architecture.backWall.v6.topTrim",
+          "architecture.backWall.v6.upper"
+        ]
+      },
+      {
+        "id": "left",
+        "rootNodeId": "architecture.leftWall.v6",
+        "nodeIds": [
+          "architecture.leftWall.v6",
+          "window.root"
+        ],
+        "point": [
+          -2.52,
+          1.5,
+          0.55
+        ],
+        "inward": [
+          1,
+          0,
+          0
+        ],
+        "upperMeshId": "architecture.leftWall.v6.upper",
+        "members": [
+          "architecture.leftWall.v6.baseboard",
+          "architecture.leftWall.v6.chairRail",
+          "architecture.leftWall.v6.lower",
+          "architecture.leftWall.v6.railBead",
+          "architecture.leftWall.v6.topTrim",
+          "architecture.leftWall.v6.upper"
+        ]
+      },
+      {
+        "id": "right",
+        "rootNodeId": "architecture.rightWall.v6",
+        "nodeIds": [
+          "architecture.rightWall.v6"
+        ],
+        "point": [
+          2.57,
+          1.5,
+          0.55
+        ],
+        "inward": [
+          -1,
+          0,
+          0
+        ],
+        "upperMeshId": "architecture.rightWall.v6.upper",
+        "members": [
+          "architecture.rightWall.v6.baseboard",
+          "architecture.rightWall.v6.chairRail",
+          "architecture.rightWall.v6.lower",
+          "architecture.rightWall.v6.railBead",
+          "architecture.rightWall.v6.topTrim",
+          "architecture.rightWall.v6.upper"
+        ]
+      }
+    ],
+    "wallpaperUvMetresPerUnit": 1,
+    "wallpaperDefault": "warm ivory subtle weave",
+    "wainscotHeight": 0.66,
+    "windowApertures": [
+      {
+        "centerBlender": [
+          -2.52,
+          -0.8170000000000001,
+          1.74
+        ],
+        "sizeBlender": [
+          0.1,
+          0.45,
+          1.24
+        ],
+        "centerGltf": [
+          -2.52,
+          1.74,
+          0.8170000000000001
+        ],
+        "sizeGltf": [
+          0.1,
+          1.24,
+          0.45
+        ]
+      },
+      {
+        "centerBlender": [
+          -2.52,
+          -0.28300000000000003,
+          1.74
+        ],
+        "sizeBlender": [
+          0.1,
+          0.45,
+          1.24
+        ],
+        "centerGltf": [
+          -2.52,
+          1.74,
+          0.28300000000000003
+        ],
+        "sizeGltf": [
+          0.1,
+          1.24,
+          0.45
+        ]
+      }
+    ],
+    "cutawayRule": "Hide wall nodeIds when dot(cameraWorld-point,inward)<0; expand group roots recursively."
+  }
 }

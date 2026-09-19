@@ -8,6 +8,7 @@ import type { RoomEngine } from '../lib/room/room-engine';
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/room/types';
 import { ARTWORK_INTERACTION_ID, ArtworkError, type ArtworkErrorCode, type ArtworkFit } from '../lib/room/artwork-input';
 import { BOOKS, BOOK_COPY, isBookId, type BookId } from '../lib/room/books';
+import { WALLPAPERS, type WallpaperId } from '../lib/room/wallpaper-options';
 
 interface HoverState {
   id: string;
@@ -47,6 +48,10 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const [artworkBusy, setArtworkBusy] = useState(false);
   const [artworkError, setArtworkError] = useState<ArtworkErrorCode | null>(null);
   const artworkRequestRef = useRef(0);
+  const [wallpaperAvailable, setWallpaperAvailable] = useState(false);
+  const [wallpaperOpen, setWallpaperOpen] = useState(false);
+  const [wallpaperId, setWallpaperId] = useState<WallpaperId>('linen');
+  const wallpaperButtonRef = useRef<HTMLButtonElement>(null);
 
   const selected = selectedId ? CONTROL_BY_ID.get(selectedId) ?? null : null;
   const groupControls = useMemo(
@@ -90,14 +95,17 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
             setArtworkOpen(false);
             setArtworkAvailable(engine?.artworkAvailable ?? false);
             setAvailableBooks(engine?.bookIds ?? []);
+            setWallpaperAvailable(engine?.wallpaperAvailable ?? false);
+            setWallpaperId(engine?.wallpaper ?? 'linen');
+            setWallpaperOpen(false);
           },
-          onSelect: (id) => { setSelectedId(id); if (id) setArtworkOpen(false); },
-          onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); },
+          onSelect: (id) => { setSelectedId(id); if (id) { setArtworkOpen(false); setWallpaperOpen(false); } },
+          onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); setWallpaperOpen(false); },
           onArtworkClose: () => { setArtworkOpen(false); setHover(null); },
           onBookSelect: (id) => {
             setSelectedBookId(id);
             setHover(null);
-            if (id) { setSelectedId(null); setArtworkOpen(false); }
+            if (id) { setSelectedId(null); setArtworkOpen(false); setWallpaperOpen(false); }
           },
           onHover: (id, x, y) => setHover(id ? { id, x, y } : null),
           onValues: (next) => setValues({ ...next }),
@@ -127,7 +135,9 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         if (bookPanelRef.current) booksButtonRef.current?.focus();
+        if (document.activeElement?.closest('.wallpaper-panel')) wallpaperButtonRef.current?.focus();
         setSelectedId(null);
+        setWallpaperOpen(false);
         engineRef.current?.closeArtwork();
         engineRef.current?.closeBook();
       }
@@ -187,6 +197,11 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
     setArtworkName('');
     setArtworkBusy(false);
     setArtworkError(null);
+  };
+
+  const chooseWallpaper = (id: WallpaperId) => {
+    engineRef.current?.setWallpaper(id);
+    setWallpaperId(id);
   };
 
   return (
@@ -263,6 +278,10 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
               <p className="monitor-motion-hint">{copy.monitorHint}</p>
             )}
             {selected.group === '百叶窗' && <p className="monitor-motion-hint">{copy.blindsHint}</p>}
+            {selected.group === '书架' && <button className="panel-reset" type="button"
+              onClick={() => engineRef.current?.viewBookshelf()}>
+              {language === 'zh' ? '查看书架正面' : 'View bookshelf'}
+            </button>}
             {groupControls.map((control) => (
               isPowerControl(control.id) ? <div key={control.id} className="range-control power-control">
                 <span><b>{controlLabel(control.id, language)}</b><output>{formatControlValue(control, values[control.id] ?? control.default, language)}</output></span>
@@ -286,6 +305,34 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
             ))}
           </div>
           <p className="panel-hint">{copy.panelHint}</p>
+        </aside>
+      )}
+
+      {entered && wallpaperOpen && (
+        <aside className="control-panel wallpaper-panel" aria-label={language === 'zh' ? '墙面装饰' : 'Wall finishes'}>
+          <div className="panel-heading">
+            <div><p>{language === 'zh' ? '细腻纹理 · 柔和配色' : 'Quiet textures · Soft tones'}</p>
+              <h2>{language === 'zh' ? '墙面装饰' : 'Wall finishes'}</h2></div>
+            <button type="button" aria-label={copy.closePanel} onClick={() => {
+              setWallpaperOpen(false); wallpaperButtonRef.current?.focus();
+            }}>×</button>
+          </div>
+          <div className="wallpaper-grid" role="group" aria-label={language === 'zh' ? '选择墙纸' : 'Choose wallpaper'}>
+            {WALLPAPERS.map(style => <button key={style.id} type="button" aria-pressed={wallpaperId === style.id}
+              onClick={() => chooseWallpaper(style.id)}>
+              <span className={`wallpaper-swatch wallpaper-${style.id}`} style={{ backgroundColor: style.color }} aria-hidden="true" />
+              <span>{style[language]}</span>
+            </button>)}
+          </div>
+          <p className="panel-hint">{language === 'zh'
+            ? '墙纸搭配固定的浅色墙裙与细收边。选择会保存在此浏览器。'
+            : 'Paired with pale wainscoting and fine trim. Your choice stays in this browser.'}</p>
+          <button className="panel-reset" type="button" onClick={() => engineRef.current?.viewBookshelf()}>
+            {language === 'zh' ? '查看书架正面' : 'View bookshelf'}
+          </button>
+          <p className="panel-hint">{language === 'zh'
+            ? '可整圈旋转镜头；外侧墙面会自动隐藏，让室内保持可见。'
+            : 'Orbit all the way around. Near-side walls automatically hide to reveal the room.'}</p>
         </aside>
       )}
 
@@ -394,11 +441,18 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
               if (selectedBookId) closeBook();
               else if (availableBooks[0]) engineRef.current?.openBook(availableBooks[0]);
             }}>{bookCopy.open}</button>
+          <button ref={wallpaperButtonRef} type="button" disabled={!wallpaperAvailable} aria-expanded={wallpaperOpen}
+            onClick={() => {
+              if (wallpaperOpen) { setWallpaperOpen(false); return; }
+              setSelectedId(null); setHover(null);
+              engineRef.current?.closeBook(); engineRef.current?.closeArtwork();
+              setWallpaperOpen(true);
+            }}>{language === 'zh' ? '墙纸' : 'Wallpapers'}</button>
           <button type="button" onClick={() => void engineRef.current?.enterFullscreen()}><span aria-hidden="true">⛶</span> {copy.fullscreen}</button>
         </nav>
       )}
 
-      {entered && !selected && !artworkOpen && !selectedBookId && (
+      {entered && !selected && !artworkOpen && !selectedBookId && !wallpaperOpen && (
         <section className="device-dock" aria-label={copy.deviceDock}>
           {DEFAULT_CONTROLS.filter((control) => control.primary)
             .sort((a, b) => Number(isExpansionControl(b.id)) - Number(isExpansionControl(a.id))).map((control) => (
