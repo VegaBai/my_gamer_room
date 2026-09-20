@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { Box3, BoxGeometry, Group, Mesh, Vector3 } from 'three';
 import { BOOK_IDS } from '../lib/room/books';
 import { installBookProp } from '../lib/room/book-prop';
+import { RoomPlacement } from '../lib/room/room-placement';
 
 function setup() {
   const room = new Group();
   const cabinet = new Group();
+  cabinet.userData.web_id = 'cabinet.root';
   cabinet.position.set(1, .2, .1);
   room.add(cabinet);
   const old = new Mesh(new BoxGeometry(.32, .23, .205));
@@ -28,6 +30,21 @@ function setup() {
 }
 
 describe('single-book template composition', () => {
+  it('carries all four replacement books exactly once with the near-wall cabinet placement', () => {
+    const { room, prop } = setup();
+    const installed = installBookProp(room, prop);
+    room.updateMatrixWorld(true);
+    const before = [...installed.books.values()].map(book => book.getWorldPosition(new Vector3()));
+    const offset = new Vector3(0, 0, -.4699999623000617);
+    const placement = new RoomPlacement(room, [{ id: 'cabinet-near-wall-v8', nodeIds: ['cabinet.root'], translation: offset.toArray() }]);
+    placement.apply(); placement.apply(); room.updateMatrixWorld(true);
+    [...installed.books.values()].forEach((book, i) => {
+      expect(book.getWorldPosition(new Vector3()).sub(before[i]).distanceTo(offset)).toBeLessThan(1e-8);
+    });
+    placement.dispose(); room.updateMatrixWorld(true);
+    [...installed.books.values()].forEach((book, i) => expect(book.getWorldPosition(new Vector3()).distanceTo(before[i])).toBeLessThan(1e-8));
+  });
+
   it('replaces the fused anchor with four real selectable books, grounded on the same surface', () => {
     const { room, cabinet, old, prop, furniture } = setup();
     const before = new Box3().setFromObject(old);

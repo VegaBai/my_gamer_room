@@ -1,6 +1,6 @@
 {
   "schema": "room-expansion-runtime/1",
-  "status": "near-wall-desk-with-physical-monitor-stop",
+  "status": "near-wall-desk-and-cabinet-with-physical-monitor-stop",
   "asset": {
     "url": "/room/expansion/a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6.glb",
     "sha256": "a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6",
@@ -255,9 +255,10 @@
     "v6 moves window.root only: rotation +90 degrees around glTF Y, panes/slats/wand/cord local motion unchanged.",
     "Three replacement wall groups include upper wallpaper, low wainscot and slim cream trim; left cutaway also hides window.root.",
     "Wallpaper UV distance of 1 equals 1 metre. Browser textures may use repeat (1, 0.5).",
-    "v7: desk and PC translate toward the rear wall, 5cm tabletop gap; shared monitor inward rotation limited to 30 degrees, full swivel trim/tilt retained."
+    "v7: desk and PC translate toward the rear wall, 5cm tabletop gap; shared monitor inward rotation limited to 30 degrees, full swivel trim/tilt retained.",
+    "v8: the cabinet, its four independent books, tabletop loop lamp and cabinet RGB lighting move together toward the rear wall, leaving a 5cm rear-body gap; drawer/door travel is unchanged."
   ],
-  "version": "7.0.0",
+  "version": "8.0.0",
   "architecture": {
     "wallpaperNodeIds": [
       "architecture.backWall.v6.upper",
@@ -409,6 +410,20 @@
         0,
         0,
         -0.339999907463789
+      ]
+    },
+    {
+      "id": "cabinet-near-wall-v8",
+      "nodeIds": [
+        "cabinet.root",
+        "scene.root.13.ambient.loop.lamp.89e8666e",
+        "scene.rgb.cabinet.underglow.0412b7e4",
+        "scene.cabinet.pink.bounce.bf95412c"
+      ],
+      "translation": [
+        0,
+        0,
+        -0.46999996230006214
       ]
     }
   ],

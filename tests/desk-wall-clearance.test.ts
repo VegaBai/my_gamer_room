@@ -28,6 +28,9 @@ function load(variant: 'desktop' | 'low') {
   const root = new THREE.Group(); data.scenes[data.scene ?? 0].nodes.forEach((i: number) => root.add(nodes[i]));
   const ids = new Map(nodes.map(n => [n.userData.web_id, n]));
   const bases = new Map(nodes.map(n => [n, { position: n.position.clone(), quaternion: n.quaternion.clone(), scale: n.scale.clone() }]));
+  const initialWorld = new Map(nodes.map(n => [n.userData.web_id, new THREE.Vector3()]));
+  root.updateMatrixWorld(true);
+  for (const n of nodes) n.getWorldPosition(initialWorld.get(n.userData.web_id)!);
   const placement = new RoomPlacement(root, expansion.placements!); placement.apply();
   const state = new RoomStateMachine(DEFAULT_CONTROLS); state.setLimits(expansion.controlLimits!);
   function apply(values: Record<string, number>) {
@@ -43,10 +46,35 @@ function load(variant: 'desktop' | 'low') {
   function bounds(id: string) {
     const box = new THREE.Box3(); ids.get(id)!.traverse(n => { if (n.userData.box) box.union(n.userData.box.clone().applyMatrix4(n.matrixWorld)); }); return box;
   }
-  return { apply, bounds };
+  function displacement(id: string) {
+    return ids.get(id)!.getWorldPosition(new THREE.Vector3()).sub(initialWorld.get(id)!);
+  }
+  return { apply, bounds, displacement };
 }
 
 describe('near-wall placement on actual desktop and low assets', () => {
+  it.each(['desktop', 'low'] as const)('%s: cabinet props travel together and drawers/door stay clear', variant => {
+    const rig = load(variant), wallZ = -.73;
+    const placement = expansion.placements!.find(p => p.id === 'cabinet-near-wall-v8')!;
+    expect(placement.nodeIds).not.toContain('decor.scifi.books');
+    rig.apply({});
+    expect(rig.bounds('scene.geo.cabinet.body.d90def4f').min.z - wallZ).toBeCloseTo(.05, 3);
+    for (const id of [...placement.nodeIds, 'decor.scifi.books']) {
+      expect(rig.displacement(id).distanceTo(new THREE.Vector3(...placement.translation)), id).toBeLessThan(1e-6);
+    }
+    const bookBounds = rig.bounds('decor.scifi.books'), lampBounds = rig.bounds('scene.root.13.ambient.loop.lamp.89e8666e');
+    for (let step = 0; step <= 10; step++) {
+      rig.apply({ 'cabinet.door': step / 10, ...Object.fromEntries([1, 2, 3, 4].map(i => [`cabinet.drawer.${i}`, step / 10])) });
+      const cabinet = rig.bounds('cabinet.root');
+      expect(cabinet.min.z - wallZ).toBeGreaterThan(.045);
+      expect(cabinet.min.x - rig.bounds('scene.root.04.pc.tower.075d2d73').max.x).toBeGreaterThan(.01);
+      expect(rig.bounds('decor.scifi.books').equals(bookBounds)).toBe(true);
+      expect(rig.bounds('scene.root.13.ambient.loop.lamp.89e8666e').equals(lampBounds)).toBe(true);
+    }
+    rig.apply({ 'cabinet.door': 0, ...Object.fromEntries([1, 2, 3, 4].map(i => [`cabinet.drawer.${i}`, 0])) });
+    expect(rig.bounds('scene.geo.cabinet.body.d90def4f').min.z - wallZ).toBeCloseTo(.05, 3);
+  });
+
   it.each(['desktop', 'low'] as const)('%s: keeps 5cm tabletop gap and safe monitor travel at both desk heights', variant => {
     expect(expansion.controlLimits?.['monitors.face'].max).toBe(1 / 3);
     const rig = load(variant), wallZ = -.73;
