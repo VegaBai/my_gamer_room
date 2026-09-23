@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
+    "build": "vinext build && node scripts/room-model-retention.mjs --prune-build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern public",
     "typecheck": "tsc --noEmit",
@@ -16,7 +16,9 @@
     "room:update:force": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -Force",
     "room:update:ktx2": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -RequireKtx2",
     "room:update:reuse": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -ReuseVariants",
-    "room:validate": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -ValidateOnly"
+    "room:validate": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ../tools/web-export/run_web_export.ps1 -ValidateOnly",
+    "room:models:report": "node scripts/room-model-retention.mjs",
+    "room:models:cleanup": "node scripts/room-model-retention.mjs --apply-public"
   },
   "dependencies": {
     "meshoptimizer": "^1.2.0",
