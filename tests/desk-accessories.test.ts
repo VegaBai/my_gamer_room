@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
 import { DeskMotionGuard, installDeskAccessories, type DeskAccessoryContract } from '../lib/room/desk-accessories';
+import { installPersonalCorner } from '../lib/room/personal-corner';
 import { composeTrackDelta, controlInputRange } from '../lib/room/room-engine';
 import { RoomPlacement } from '../lib/room/room-placement';
 import { RoomStateMachine } from '../lib/room/state-machine';
@@ -11,6 +12,7 @@ import type { RoomManifestV1 } from '../lib/room/types';
 const manifest: RoomManifestV1 = JSON.parse(readFileSync('public/room/room-manifest.json','utf8'));
 const expansion = JSON.parse(readFileSync('public/room/expansion/manifest.json','utf8'));
 const accessories: DeskAccessoryContract = JSON.parse(readFileSync('public/room/desk-accessories/manifest.json','utf8'));
+const personal = JSON.parse(readFileSync('public/room/personal-corner/manifest.json','utf8'));
 function glb(url: string) {
   const b=readFileSync('public'+url), g=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)).toString());
   const nodes: THREE.Object3D[] = g.nodes.map((n: { name?: string; extras?: object; matrix?: number[]; translation?: number[]; rotation?: number[]; scale?: number[]; mesh?: number }) => {
@@ -28,6 +30,8 @@ function setup(variant:'desktop'|'low') {
   const ids=new Map<string,THREE.Object3D>();root.traverse(o=>{if(o.userData.web_id)ids.set(o.userData.web_id,o);});
   const bases=new Map([...ids].map(([id,o])=>[id,{position:o.position.clone(),quaternion:o.quaternion.clone(),scale:o.scale.clone()}]));
   new RoomPlacement(root,expansion.placements).apply();installDeskAccessories(root,prop,accessories);
+  const wall=new THREE.Group();root.add(wall);
+  const [mug,board]=installPersonalCorner(root,wall,glb(personal.asset.url),personal);
   const state=new RoomStateMachine(DEFAULT_CONTROLS);state.setLimits(expansion.controlLimits);
   const pose=(values:Readonly<Record<string,number>>)=>{
     const targets=new Map([...bases].map(([id,p])=>[id,{position:p.position.clone(),quaternion:p.quaternion.clone(),scale:p.scale.clone()}]));
@@ -36,16 +40,21 @@ function setup(variant:'desktop'|'low') {
     root.updateMatrixWorld(true);
   };
   const guard=new DeskMotionGuard(root,state.snapshot(),pose);state.setConstraint(v=>guard.resolve(v));
-  return {root,prop,guard,state,pose,ids};
+  return {root,prop,guard,state,pose,ids,mug,board,wall};
 }
 
 describe('desk accessories on actual exported assets',()=>{
   it.each(['desktop','low'] as const)('%s: mounts all props on moving desktop, clear at home and raised',variant=>{
     const r=setup(variant);expect(r.prop.parent).toBe(r.ids.get('desk.top'));
     const start=r.prop.getWorldPosition(new THREE.Vector3());
+    const mugStart=r.mug.getWorldPosition(new THREE.Vector3());
+    const boardStart=r.board.getWorldPosition(new THREE.Vector3());
     r.state.setDirect('desk.lift',1);
     const end=r.prop.getWorldPosition(new THREE.Vector3());
     expect(end.y-start.y).toBeCloseTo(.4,5);expect(r.guard.contact()).toBe(false);
+    expect(r.mug.getWorldPosition(new THREE.Vector3()).y-mugStart.y).toBeCloseTo(.4,5);
+    expect(r.board.getWorldPosition(new THREE.Vector3()).distanceTo(boardStart)).toBeLessThan(1e-7);
+    expect(r.board.parent).toBe(r.wall);
     expect(Object.keys(accessories.groups)).toHaveLength(9);
   });
   it.each(['desktop','low'] as const)('%s: guards combined screen/arm motion, direct jumps and reversal',variant=>{

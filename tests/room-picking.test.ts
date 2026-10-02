@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
 import { pickRoomControl } from '../lib/room/room-picking';
+import { PHOTO_WALL_INTERACTION_ID, registerPhotoWallInteraction } from '../lib/room/photo-wall';
 
 function setup() {
   const root = new THREE.Group();
@@ -21,6 +22,19 @@ function setup() {
 }
 
 describe('room picking with additive furniture', () => {
+  it('clicks the wall-mounted photo board outside the base root, respecting wall cutaway and occlusion', () => {
+    const s = setup(); const base = new THREE.Group(); s.root.add(base);
+    const wall = new THREE.Group(); s.root.add(wall);
+    const board = new THREE.Group(); wall.add(board);
+    const print = s.mesh(1); board.add(print);
+    const originalMaterial = print.material;
+    registerPhotoWallInteraction(board, s.hits, s.visuals);
+    expect(s.pick()).toBe(PHOTO_WALL_INTERACTION_ID);
+    expect(print.layers.isEnabled(0)).toBe(true);
+    expect(print.material).toBe(originalMaterial);
+    wall.visible = false; expect(s.pick()).toBeNull();
+    wall.visible = true; base.add(s.mesh(2)); expect(s.pick()).toBeNull();
+  });
   it('picks a real door instead of an overlapping legacy cabinet box', () => {
     const s = setup(); s.mesh(2, 'cabinet.door', true); s.mesh(1, 'bookshelf.leftDoor');
     expect(s.pick()).toBe('bookshelf.leftDoor'); expect(s.ray.layers.mask).toBe(4);

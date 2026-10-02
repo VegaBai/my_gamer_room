@@ -578,3 +578,8 @@ button { -webkit-tap-highlight-color: transparent; }
     transition-duration: .001ms !important;
   }
 }
+.photo-wall-panel { max-height: calc(100dvh - 175px); overflow-y: auto; }
+.photo-wall-panel h2:focus { outline: none; }
+.photo-slot { border: 1px solid rgba(117, 78, 99, .18); border-radius: 12px; margin: 14px 0; padding: 12px; min-width: 0; }
+.photo-slot legend { padding: 0 5px; font-size: 12px; font-weight: 650; }
+.photo-slot .artwork-current { overflow-wrap: anywhere; }

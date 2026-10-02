@@ -9,6 +9,7 @@ import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/r
 import { ARTWORK_INTERACTION_ID, ArtworkError, type ArtworkErrorCode, type ArtworkFit } from '../lib/room/artwork-input';
 import { BOOKS, BOOK_COPY, isBookId, type BookId } from '../lib/room/books';
 import { WALLPAPERS, type WallpaperId } from '../lib/room/wallpaper-options';
+import { PHOTO_WALL_INTERACTION_ID, type PhotoSlot, type PhotoStatus } from '../lib/room/photo-wall';
 
 interface HoverState {
   id: string;
@@ -52,6 +53,13 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const [wallpaperOpen, setWallpaperOpen] = useState(false);
   const [wallpaperId, setWallpaperId] = useState<WallpaperId>('linen');
   const wallpaperButtonRef = useRef<HTMLButtonElement>(null);
+  const [photosOpen, setPhotosOpen] = useState(false);
+  const [photosAvailable, setPhotosAvailable] = useState(false);
+  const [photos, setPhotos] = useState<PhotoStatus[]>([]);
+  const [photoBusy, setPhotoBusy] = useState<PhotoSlot | null>(null);
+  const [photoError, setPhotoError] = useState<ArtworkErrorCode | null>(null);
+  const photoButtonRef = useRef<HTMLButtonElement>(null);
+  const photoPanelRef = useRef<HTMLElement>(null);
 
   const selected = selectedId ? CONTROL_BY_ID.get(selectedId) ?? null : null;
   const groupControls = useMemo(
@@ -98,14 +106,20 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
             setWallpaperAvailable(engine?.wallpaperAvailable ?? false);
             setWallpaperId(engine?.wallpaper ?? 'linen');
             setWallpaperOpen(false);
+            setPhotosAvailable(engine?.photoWallAvailable ?? false);
+            setPhotos(engine?.photos ?? []);
           },
-          onSelect: (id) => { setSelectedId(id); if (id) { setArtworkOpen(false); setWallpaperOpen(false); } },
-          onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); setWallpaperOpen(false); },
-          onArtworkClose: () => { setArtworkOpen(false); setHover(null); },
+          onSelect: (id) => { setSelectedId(id); if (id) { setArtworkOpen(false); setWallpaperOpen(false); setPhotosOpen(false); } },
+          onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); setWallpaperOpen(false); setPhotosOpen(false); },
+          onArtworkClose: () => { setArtworkOpen(false); setPhotosOpen(false); setHover(null); },
+          onPhotoWallSelect: () => {
+            setSelectedId(null); setSelectedBookId(null); setArtworkOpen(false); setWallpaperOpen(false); setHover(null);
+            setPhotos(engine?.photos ?? []); setPhotosOpen(true);
+          },
           onBookSelect: (id) => {
             setSelectedBookId(id);
             setHover(null);
-            if (id) { setSelectedId(null); setArtworkOpen(false); setWallpaperOpen(false); }
+            if (id) { setSelectedId(null); setArtworkOpen(false); setWallpaperOpen(false); setPhotosOpen(false); }
           },
           onHover: (id, x, y) => setHover(id ? { id, x, y } : null),
           onValues: (next) => setValues({ ...next }),
@@ -134,6 +148,8 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        if (document.activeElement?.closest('.photo-wall-panel')) photoButtonRef.current?.focus();
+        setPhotosOpen(false);
         if (bookPanelRef.current) booksButtonRef.current?.focus();
         if (document.activeElement?.closest('.wallpaper-panel')) wallpaperButtonRef.current?.focus();
         setSelectedId(null);
@@ -202,6 +218,20 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const chooseWallpaper = (id: WallpaperId) => {
     engineRef.current?.setWallpaper(id);
     setWallpaperId(id);
+  };
+
+  useEffect(() => {
+    if (photosOpen) photoPanelRef.current?.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+  }, [photosOpen]);
+
+  const changePhoto = async (id: PhotoSlot, operation: () => Promise<unknown>) => {
+    setPhotoBusy(id); setPhotoError(null);
+    try { await operation(); setPhotos(engineRef.current?.photos ?? []); }
+    catch (error) { setPhotoError(error instanceof ArtworkError ? error.code : 'decode'); }
+    finally { setPhotoBusy(null); }
+  };
+  const closePhotos = () => {
+    setPhotosOpen(false); engineRef.current?.closeArtwork(); photoButtonRef.current?.focus();
   };
 
   return (
@@ -341,6 +371,40 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
         </aside>
       )}
 
+      {entered && photosOpen && (
+        <aside ref={photoPanelRef} className="control-panel photo-wall-panel" aria-label={language === 'zh' ? '照片墙' : 'Photo wall'}>
+          <div className="panel-heading">
+            <h2 tabIndex={-1}>{language === 'zh' ? '照片墙' : 'Photo wall'}</h2>
+            <button type="button" aria-label={language === 'zh' ? '关闭照片墙' : 'Close photo wall'} onClick={closePhotos}>×</button>
+          </div>
+          <p className="artwork-privacy">{language === 'zh' ? '分别替换三张拍立得。照片只保存在当前浏览器，不会上传。' : 'Replace each Polaroid. Photos stay in this browser and are never uploaded.'}</p>
+          {photos.map((photo, index) => (
+            <fieldset key={photo.id} className="photo-slot" disabled={photoBusy !== null}>
+              <legend>{language === 'zh' ? `拍立得 ${index + 1}` : `Polaroid ${index + 1}`}</legend>
+              <p className="artwork-current" role="status">{photoBusy === photo.id ? copy.artwork.loading : photo.name || (language === 'zh' ? '默认风景' : 'Default scenery')}</p>
+              <label className="artwork-file-label">
+                <span>{language === 'zh' ? '选择照片' : 'Choose photo'}</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" aria-label={language === 'zh' ? `替换拍立得 ${index + 1}` : `Replace Polaroid ${index + 1}`}
+                  onChange={event => {
+                    const file = event.currentTarget.files?.[0]; event.currentTarget.value = '';
+                    if (file) void changePhoto(photo.id, () => engineRef.current?.replacePhoto(photo.id, file) ?? Promise.resolve());
+                  }} />
+              </label>
+              <label className="artwork-fit-label">
+                <span>{copy.artwork.fit}</span>
+                <select aria-label={language === 'zh' ? `拍立得 ${index + 1} 显示方式` : `Polaroid ${index + 1} fit`} value={photo.fit} disabled={!photo.name || photoBusy !== null}
+                  onChange={event => { const fit = event.currentTarget.value as ArtworkFit; void changePhoto(photo.id, () => engineRef.current?.setPhotoFit(photo.id, fit) ?? Promise.resolve()); }}>
+                  <option value="cover">{copy.artwork.cover}</option><option value="contain">{copy.artwork.contain}</option>
+                </select>
+              </label>
+              <button type="button" className="panel-reset" onClick={() => void changePhoto(photo.id, () => engineRef.current?.resetPhoto(photo.id) ?? Promise.resolve())}>{copy.artwork.reset}</button>
+              {!photo.saved && <p className="artwork-error" role="status">{language === 'zh' ? '当前已显示，但浏览器无法保存这次修改。' : 'Shown now, but this browser could not save the change.'}</p>}
+            </fieldset>
+          ))}
+          {photoError && <p className="artwork-error" role="alert">{copy.artwork.errors[photoError]}</p>}
+        </aside>
+      )}
+
       {entered && artworkOpen && (
         <aside className="control-panel artwork-panel" aria-label={copy.artwork.title}>
           <div className="panel-heading">
@@ -426,7 +490,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
       {entered && hover && (
         <div className="cursor-tooltip" style={{ left: hover.x + 16, top: hover.y + 14 }}>
-          {isBookId(hover.id) ? BOOKS[hover.id].title[language] : hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
+          {isBookId(hover.id) ? BOOKS[hover.id].title[language] : hover.id === PHOTO_WALL_INTERACTION_ID ? (language === 'zh' ? '凑近查看照片墙' : 'Inspect photo wall') : hover.id === ARTWORK_INTERACTION_ID ? copy.artwork.open : controlLabel(hover.id, language)}
         </div>
       )}
 
@@ -438,11 +502,13 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           <button type="button" onClick={() => engineRef.current?.reset()}><span aria-hidden="true">↺</span> {copy.resetRoom}</button>
           <button type="button" disabled={!artworkAvailable} aria-expanded={artworkOpen}
             onClick={() => {
+              setPhotosOpen(false);
               if (artworkOpen) engineRef.current?.closeArtwork();
               else engineRef.current?.openArtwork();
             }}>{copy.artwork.open}</button>
           <button ref={booksButtonRef} className="book-entry" type="button" disabled={!availableBooks.length} aria-expanded={!!selectedBookId}
             onClick={() => {
+              setPhotosOpen(false);
               if (selectedBookId) closeBook();
               else if (availableBooks[0]) engineRef.current?.openBook(availableBooks[0]);
             }}>{bookCopy.open}</button>
@@ -450,14 +516,19 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
             onClick={() => {
               if (wallpaperOpen) { setWallpaperOpen(false); return; }
               setSelectedId(null); setHover(null);
+              setPhotosOpen(false);
               engineRef.current?.closeBook(); engineRef.current?.closeArtwork();
               setWallpaperOpen(true);
             }}>{language === 'zh' ? '墙纸' : 'Wallpapers'}</button>
+          <button ref={photoButtonRef} type="button" disabled={!photosAvailable} aria-expanded={photosOpen} onClick={() => {
+            if (photosOpen) { closePhotos(); return; }
+            engineRef.current?.openPhotoWall();
+          }}>{language === 'zh' ? '照片墙' : 'Photo wall'}</button>
           <button type="button" onClick={() => void engineRef.current?.enterFullscreen()}><span aria-hidden="true">⛶</span> {copy.fullscreen}</button>
         </nav>
       )}
 
-      {entered && !selected && !artworkOpen && !selectedBookId && !wallpaperOpen && (
+      {entered && !selected && !artworkOpen && !selectedBookId && !wallpaperOpen && !photosOpen && (
         <section className="device-dock" aria-label={copy.deviceDock}>
           {DEFAULT_CONTROLS.filter((control) => control.primary)
             .sort((a, b) => Number(isExpansionControl(b.id)) - Number(isExpansionControl(a.id))).map((control) => (
@@ -468,6 +539,9 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           ))}
           {artworkAvailable && <button type="button" onClick={() => engineRef.current?.openArtwork()}>
             <i />{copy.artwork.open}
+          </button>}
+          {photosAvailable && <button type="button" onClick={() => engineRef.current?.openPhotoWall()}>
+            <i />{language === 'zh' ? '凑近查看照片墙' : 'Inspect photo wall'}
           </button>}
         </section>
       )}

@@ -1,0 +1,48 @@
+{
+  "schema": "personal-corner/1",
+  "asset": {
+    "url": "/room/personal-corner/6c46fcafa9323473a674e60d5a38b3f19327c2295ec770d4e729bf16048942ca.glb",
+    "sha256": "6c46fcafa9323473a674e60d5a38b3f19327c2295ec770d4e729bf16048942ca",
+    "bytes": 10983660
+  },
+  "groups": {
+    "P01_Mug": {
+      "min": [
+        0.5785000324249268,
+        -0.05949999764561653,
+        0.781000018119812
+      ],
+      "max": [
+        0.6970000267028809,
+        0.023499999195337296,
+        0.8821499943733215
+      ],
+      "placement": [
+        0.62,
+        -0.018,
+        0.781
+      ]
+    },
+    "P02_Photo_Wall": {
+      "min": [
+        -1.0149999856948853,
+        0.6904500126838684,
+        1.7200000286102295
+      ],
+      "max": [
+        -0.26499998569488525,
+        0.7230000495910645,
+        2.240000009536743
+      ],
+      "placement": [
+        -0.64,
+        0.711,
+        1.98
+      ]
+    }
+  },
+  "artworkStatus": {
+    "photoWall": "complete",
+    "mug": "Mario illustration pending; image service blocked concept"
+  }
+}

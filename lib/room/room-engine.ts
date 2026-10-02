@@ -8,6 +8,7 @@ import { validateManifest } from './manifest';
 import { buildProceduralRoom, type ProceduralRoom } from './procedural-room';
 import { RoomStateMachine } from './state-machine';
 import { WallArtwork } from './wall-artwork';
+import { PhotoWall, PHOTO_WALL_INTERACTION_ID, registerPhotoWallInteraction, type PhotoSlot } from './photo-wall';
 import { ARTWORK_INTERACTION_ID, type ArtworkFit } from './artwork-input';
 import { PointerTap } from './pointer-tap';
 import { artworkViewport } from './artwork-focus';
@@ -17,6 +18,7 @@ import { collectBookTargets } from './book-targets';
 import { installBookProp } from './book-prop';
 import bookPropAsset from './book-prop-asset.json';
 import { DeskMotionGuard, installDeskAccessories, type DeskAccessoryContract } from './desk-accessories';
+import { installPersonalCorner, type PersonalCornerContract } from './personal-corner';
 import { RoomExpansion, validateExpansionContract, type ExpansionContract } from './room-expansion';
 import { isExpansionControl } from './expansion-controls';
 import { isVisibleInScene, pickRoomControl } from './room-picking';
@@ -37,6 +39,7 @@ interface RoomEngineCallbacks {
   onSelect: (controlId: string | null) => void;
   onArtworkSelect: () => void;
   onArtworkClose: () => void;
+  onPhotoWallSelect: () => void;
   onBookSelect: (bookId: BookId | null) => void;
   onHover: (controlId: string | null, x: number, y: number) => void;
   onValues: (values: Readonly<Record<string, number>>) => void;
@@ -94,6 +97,7 @@ export class RoomEngine {
   private lastFrameAt = performance.now();
   private disposeSurfaceQA: (() => void) | null = null;
   private wallArtwork: WallArtwork | null = null;
+  private photoWall: PhotoWall | null = null;
   private bookTargets = new Map<BookId, THREE.Object3D>();
   private selectedBookId: BookId | null = null;
   private bookAssetFailed = false;
@@ -174,6 +178,7 @@ export class RoomEngine {
     const variant = this.chooseVariant();
     this.wallArtwork = new WallArtwork(this.manifestRoot ?? this.procedural!.root);
     this.registerArtworkInteraction();
+    if (this.photoWall) registerPhotoWallInteraction(this.photoWall.root, this.hitTargets, this.visualTargets);
     this.registerBookInteractions();
     this.callbacks.onProgress(100, usingBlenderAsset ? 'ready' : 'fallbackReady');
     this.callbacks.onReady({
@@ -190,6 +195,7 @@ export class RoomEngine {
   selectAndToggle(controlId: string) {
     if (isExpansionControl(controlId) && !this.expansion) return;
     if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
+    if (controlId === PHOTO_WALL_INTERACTION_ID) { this.openPhotoWall(); return; }
     if (isBookId(controlId)) { this.openBook(controlId); return; }
     this.userInput();
     this.select(controlId);
@@ -218,6 +224,23 @@ export class RoomEngine {
   }
 
   get artworkAvailable() { return this.wallArtwork?.available ?? false; }
+  get photoWallAvailable() { return this.photoWall?.available ?? false; }
+  get photos() { return this.photoWall?.status ?? []; }
+  replacePhoto(id: PhotoSlot, file: File) { return this.photoWall?.replace(id, file) ?? Promise.resolve(false); }
+  resetPhoto(id: PhotoSlot) { return this.photoWall?.reset(id) ?? Promise.resolve(); }
+  setPhotoFit(id: PhotoSlot, fit: ArtworkFit) { return this.photoWall?.setFit(id, fit) ?? Promise.resolve(); }
+  openPhotoWall() {
+    if (!this.photoWall?.available) return;
+    this.userInput();
+    this.clearBookSelection();
+    this.onPointerLeave();
+    this.select(null);
+    this.callbacks.onArtworkClose();
+    // Share the original return point when switching or repeatedly clicking the wall.
+    this.artworkCamera.enter();
+    this.focusBounds(new THREE.Box3().setFromObject(this.photoWall.root), .85, new THREE.Vector3(0,0,1));
+    this.callbacks.onPhotoWallSelect();
+  }
   get wallpaperAvailable() { return this.architecture?.available ?? false; }
   get wallpaper() { return this.wallpaperId; }
 
@@ -415,6 +438,7 @@ export class RoomEngine {
     this.orbit.dispose();
     this.disposeSurfaceQA?.();
     this.wallArtwork?.dispose();
+    this.photoWall?.dispose();
     this.architecture?.dispose();
     this.procedural?.dispose();
     this.procedural = null;
@@ -490,6 +514,8 @@ export class RoomEngine {
 
   private async tryLoadDeskAccessories() {
     let root: THREE.Object3D | null = null;
+    let personalRoot: THREE.Object3D | null = null;
+    let personalParts: THREE.Object3D[] = [];
     try {
       const response = await fetch('/room/desk-accessories/manifest.json', { cache: 'no-store' });
       if (!response.ok) throw Error(`Desk accessories HTTP ${response.status}`);
@@ -497,9 +523,21 @@ export class RoomEngine {
       root = (await new GLTFLoader().loadAsync(spec.asset.url)).scene;
       if (this.disposed) { disposeObject(root); return; }
       installDeskAccessories(this.manifestRoot!, root, spec);
+      const personalResponse = await fetch('/room/personal-corner/manifest.json', { cache: 'no-store' });
+      if (!personalResponse.ok) throw Error(`Personal corner HTTP ${personalResponse.status}`);
+      const personalSpec = await personalResponse.json() as PersonalCornerContract;
+      personalRoot = (await new GLTFLoader().loadAsync(personalSpec.asset.url)).scene;
+      if (this.disposed) { root.removeFromParent(); disposeObject(root); disposeObject(personalRoot); return; }
+      const wall = this.expansion?.nodes.get('architecture.backWall.v6');
+      if (!wall) throw Error('Photo wall attachment missing');
+      personalParts = installPersonalCorner(this.manifestRoot!, wall, personalRoot, personalSpec);
       const guard = new DeskMotionGuard(this.manifestRoot!, this.state.snapshot(), values => this.applyManifestTracks(values));
       this.state.setConstraint(values => guard.resolve(values));
+      this.photoWall = new PhotoWall(personalParts[1]);
+      await this.photoWall.restore();
     } catch (error) {
+      for (const part of personalParts) { part.removeFromParent(); disposeObject(part); }
+      if (personalRoot) disposeObject(personalRoot);
       if (root) { root.removeFromParent(); disposeObject(root); }
       console.error('[room] Desk accessories could not be installed safely.', error);
     }
@@ -742,7 +780,8 @@ export class RoomEngine {
     this.scene.updateMatrixWorld();
     this.camera.updateMatrixWorld();
     this.raycaster.setFromCamera(this.pointer, this.camera);
-    return pickRoomControl(this.raycaster, this.manifestRoot ?? this.procedural!.root, this.hitTargets, this.visualTargets);
+    // Wall-mounted additions live in the expansion, alongside the base room root.
+    return pickRoomControl(this.raycaster, this.scene, this.hitTargets, this.visualTargets);
   }
 
   private onPointerMove = (event: PointerEvent) => {
@@ -799,7 +838,7 @@ export class RoomEngine {
     this.hoverOutline.visible = Boolean(controlId);
     if (!controlId) return;
     // Outline the artwork without tinting the print or its shared fallback materials.
-    if (controlId === ARTWORK_INTERACTION_ID || isBookId(controlId) || isExpansionControl(controlId)) { this.updateHoverOutline(); return; }
+    if (controlId === ARTWORK_INTERACTION_ID || controlId === PHOTO_WALL_INTERACTION_ID || isBookId(controlId) || isExpansionControl(controlId)) { this.updateHoverOutline(); return; }
     for (const root of this.visualTargets.get(controlId) ?? []) {
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
