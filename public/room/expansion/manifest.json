@@ -1,10 +1,10 @@
 {
   "schema": "room-expansion-runtime/1",
-  "status": "near-wall-desk-and-cabinet-with-physical-monitor-stop",
+  "status": "starlight-bookshelf-v9",
   "asset": {
-    "url": "/room/expansion/a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6.glb",
-    "sha256": "a6d578915d04d8152ac3e4ec3a0b6d9b0d1d36b83644e96b7bcd0a15009635e6",
-    "bytes": 8056296
+    "url": "/room/expansion/16804d3f41c3a4aa62447d5fd9e946b07202d928df01a3bcc1b38a2e63fd3663.glb",
+    "sha256": "16804d3f41c3a4aa62447d5fd9e946b07202d928df01a3bcc1b38a2e63fd3663",
+    "bytes": 24652724
   },
   "rootNodeId": "expansion.root",
   "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
@@ -433,5 +433,11 @@
       "max": 0.3333333333333333,
       "clickValue": 0.3333333333333333
     }
+  },
+  "bookshelfStyling": {
+    "version": "9.0.0",
+    "books": 11,
+    "props": 5,
+    "source": "room-layout-v9/workstation-room-layout-v9.blend"
   }
 }

@@ -11,6 +11,7 @@ const roomRoot = fs.realpathSync(path.join(publicRoot, 'room'));
 const declarations = [
   'public/room/room-manifest.json',
   'public/room/expansion/manifest.json',
+  'public/room/desk-accessories/manifest.json',
   'lib/room/book-prop-asset.json',
 ];
 const models = new Map();
@@ -38,7 +39,7 @@ for (const asset of models.values()) {
 const root = mode === '--prune-build' ? fs.realpathSync(path.join(project, 'dist/client/room')) : roomRoot;
 const expected = new Set([...models.keys()].map(url => path.resolve(root, url.slice('/room/'.length))));
 if (mode === '--prune-build') {
-  for (const relative of ['room-manifest.json', 'expansion/manifest.json']) {
+  for (const relative of ['room-manifest.json', 'expansion/manifest.json', 'desk-accessories/manifest.json']) {
     if (!fs.readFileSync(path.join(root, relative)).equals(fs.readFileSync(path.join(roomRoot, relative)))) throw Error('Stale build; refusing cleanup');
   }
   for (const asset of models.values()) {

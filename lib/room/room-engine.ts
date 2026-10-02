@@ -16,6 +16,7 @@ import { BOOK_IDS, isBookId, type BookId } from './books';
 import { collectBookTargets } from './book-targets';
 import { installBookProp } from './book-prop';
 import bookPropAsset from './book-prop-asset.json';
+import { DeskMotionGuard, installDeskAccessories, type DeskAccessoryContract } from './desk-accessories';
 import { RoomExpansion, validateExpansionContract, type ExpansionContract } from './room-expansion';
 import { isExpansionControl } from './expansion-controls';
 import { isVisibleInScene, pickRoomControl } from './room-picking';
@@ -168,6 +169,7 @@ export class RoomEngine {
     const usingBlenderAsset = await this.tryLoadBlenderAsset();
     if (this.disposed) return;
     if (usingBlenderAsset) await this.tryLoadExpansion();
+    if (usingBlenderAsset && !this.disposed) await this.tryLoadDeskAccessories();
     if (this.disposed) return;
     const variant = this.chooseVariant();
     this.wallArtwork = new WallArtwork(this.manifestRoot ?? this.procedural!.root);
@@ -483,6 +485,23 @@ export class RoomEngine {
       // The procedural scene is intentionally a complete, interactive fallback.
       console.info('[room] Blender web asset unavailable; using interactive fallback.', error);
       return false;
+    }
+  }
+
+  private async tryLoadDeskAccessories() {
+    let root: THREE.Object3D | null = null;
+    try {
+      const response = await fetch('/room/desk-accessories/manifest.json', { cache: 'no-store' });
+      if (!response.ok) throw Error(`Desk accessories HTTP ${response.status}`);
+      const spec = await response.json() as DeskAccessoryContract;
+      root = (await new GLTFLoader().loadAsync(spec.asset.url)).scene;
+      if (this.disposed) { disposeObject(root); return; }
+      installDeskAccessories(this.manifestRoot!, root, spec);
+      const guard = new DeskMotionGuard(this.manifestRoot!, this.state.snapshot(), values => this.applyManifestTracks(values));
+      this.state.setConstraint(values => guard.resolve(values));
+    } catch (error) {
+      if (root) { root.removeFromParent(); disposeObject(root); }
+      console.error('[room] Desk accessories could not be installed safely.', error);
     }
   }
 

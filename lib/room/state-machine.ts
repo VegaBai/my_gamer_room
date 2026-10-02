@@ -21,6 +21,12 @@ export class RoomStateMachine {
   private readonly values: Record<string, number> = {};
   private readonly tweens = new Map<string, ActiveTween>();
   private readonly listeners = new Set<Listener>();
+  private constraint?: (values: Readonly<Record<string, number>>) => Record<string, number>;
+
+  setConstraint(constraint: (values: Readonly<Record<string, number>>) => Record<string, number>) {
+    this.constraint = constraint;
+    this.emit();
+  }
 
   constructor(definitions: ControlDefinition[]) {
     for (const definition of definitions) {
@@ -146,6 +152,13 @@ export class RoomStateMachine {
   }
 
   private emit() {
+    if (this.constraint) {
+      const safe = this.constraint(this.snapshot());
+      for (const id of this.definitions.keys()) if (Number.isFinite(safe[id])) {
+        if (Math.abs(safe[id] - this.values[id]) > 1e-8) this.tweens.delete(id);
+        this.values[id] = safe[id];
+      }
+    }
     const snapshot = this.snapshot();
     for (const listener of this.listeners) listener(snapshot);
   }
