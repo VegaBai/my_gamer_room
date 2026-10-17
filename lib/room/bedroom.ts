@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { BEDROOM_CONTROLS } from './bedroom-controls';
+import { FURNITURE_INSPECTIONS } from './furniture-inspection';
 import type { Vec3 } from './types';
 
 export interface BedroomContract {
@@ -22,6 +23,7 @@ export function validateBedroom(spec: BedroomContract) {
 export class BedroomAssembly {
   readonly hitTargets: THREE.Mesh[] = [];
   readonly visualTargets = new Map<string, THREE.Object3D[]>();
+  private readonly inspections = new Map<string, { key: string; bounds: THREE.Box3; backward: THREE.Vector3 }>();
   private readonly transforms: { node: THREE.Object3D; position: THREE.Vector3; quaternion: THREE.Quaternion; motion: BedroomContract['motions'][number] }[] = [];
   private readonly bulbs: THREE.MeshStandardMaterial[] = [];
   private readonly light = new THREE.PointLight('#ffd9ad', .8, 2.3, 2);
@@ -46,6 +48,10 @@ export class BedroomAssembly {
     this.visualTargets.get('trash.open')!.push(requireNode('t01-bin-body'));
     this.visualTargets.get('nightstand.drawer')!.push(requireNode('n01-carcass'));
     this.visualTargets.set('bedsideLamp.power', ['l01-lamp-base', 'l02-lampshade', 'l03-bulb'].map(requireNode));
+    // Static furniture surfaces are also selectable, not only tiny moving parts.
+    for (const [id, spec] of Object.entries(FURNITURE_INSPECTIONS)) {
+      if (id !== 'trash.liner') this.visualTargets.set(id, spec.parts.map(requireNode));
+    }
     for (const [id, targets] of this.visualTargets) for (const target of targets) target.traverse(o => {
       if (o instanceof THREE.Mesh) { o.userData.controlId = id; o.layers.enable(2); this.hitTargets.push(o); }
     });
@@ -59,7 +65,24 @@ export class BedroomAssembly {
       o.material = Array.isArray(o.material) ? materials : materials[0];
     });
     this.light.position.copy(gltfVector(contract.lamp.position));root.add(this.light);base.add(root);
+    // Frame the complete mechanism throughout its travel, keeping the camera still while operating it.
+    for (const [id, spec] of Object.entries(FURNITURE_INSPECTIONS)) {
+      const bounds = new THREE.Box3();
+      for (let step = 0; step <= 24; step++) {
+        const values = Object.fromEntries(contract.motions.filter(m => m.parts.some(p => spec.parts.includes(p)))
+          .map(m => [m.controlId, step / 24]));
+        this.apply(values); root.updateWorldMatrix(true, true);
+        spec.parts.forEach(p => bounds.expandByObject(requireNode(p)));
+      }
+      this.apply({}); root.updateWorldMatrix(true, true);
+      this.inspections.set(id, { key: spec.key, bounds, backward: new THREE.Vector3(...spec.backward) });
+    }
+    this.apply({ [contract.lamp.controlId]: 1 });
   }
+
+  inspection(id: string) { const view = this.inspections.get(id); return view && {
+    key: view.key, bounds: view.bounds.clone(), backward: view.backward.clone(),
+  }; }
 
   constrain(values: Readonly<Record<string, number>>) {
     const next = { ...values };

@@ -42,6 +42,7 @@ interface RoomEngineCallbacks {
   onArtworkSelect: () => void;
   onArtworkClose: () => void;
   onPhotoWallSelect: () => void;
+  onFurnitureInspection?: (key: string | null) => void;
   onBookSelect: (bookId: BookId | null) => void;
   onHover: (controlId: string | null, x: number, y: number) => void;
   onValues: (values: Readonly<Record<string, number>>) => void;
@@ -106,6 +107,7 @@ export class RoomEngine {
   private retiredBookRoot: THREE.Object3D | null = null;
   private expansion: RoomExpansion | null = null;
   private bedroom: BedroomAssembly | null = null;
+  private furnitureInspection: string | null = null;
   private overviewFov = 40;
   private framingKey = '';
   private architecture: RoomArchitecture | null = null;
@@ -201,6 +203,8 @@ export class RoomEngine {
     if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
     if (controlId === PHOTO_WALL_INTERACTION_ID) { this.openPhotoWall(); return; }
     if (isBookId(controlId)) { this.openBook(controlId); return; }
+    const inspection = this.bedroom?.inspection(controlId);
+    if (inspection && this.furnitureInspection !== inspection.key) { this.inspectFurniture(controlId); return; }
     this.userInput();
     this.select(controlId);
     this.state.toggle(controlId, performance.now());
@@ -215,6 +219,7 @@ export class RoomEngine {
 
   reset() {
     this.userInput();
+    this.clearFurnitureInspection();
     this.artworkCamera.clear();
     this.callbacks.onArtworkClose();
     this.clearBookSelection();
@@ -234,6 +239,7 @@ export class RoomEngine {
   resetPhoto(id: PhotoSlot) { return this.photoWall?.reset(id) ?? Promise.resolve(); }
   setPhotoFit(id: PhotoSlot, fit: ArtworkFit) { return this.photoWall?.setFit(id, fit) ?? Promise.resolve(); }
   openPhotoWall() {
+    this.clearFurnitureInspection();
     if (!this.photoWall?.available) return;
     this.userInput();
     this.clearBookSelection();
@@ -265,6 +271,7 @@ export class RoomEngine {
   }
 
   openArtwork() {
+    this.clearFurnitureInspection();
     if (!this.artworkAvailable) return;
     // Share the original return point while switching between inspection panels.
     this.clearBookSelection();
@@ -278,6 +285,7 @@ export class RoomEngine {
   closeArtwork() {
     if (!this.artworkCamera.active || this.selectedBookId) return;
     this.userInput();
+    this.clearFurnitureInspection();
     this.onPointerLeave();
     this.artworkCamera.close(performance.now(), this.reduceMotion ? 0 : 600);
     this.callbacks.onArtworkClose();
@@ -302,6 +310,7 @@ export class RoomEngine {
   openBook(id: BookId) {
     const book = this.bookTargets.get(id);
     if (!book) return;
+    this.clearFurnitureInspection();
     this.userInput();
     this.onPointerLeave();
     this.select(null);
@@ -353,6 +362,27 @@ export class RoomEngine {
   setArtworkFit(fit: ArtworkFit) { this.wallArtwork?.setFit(fit); }
   resetArtwork() { this.wallArtwork?.reset(); }
 
+  inspectFurniture(id: string) {
+    const view = this.bedroom?.inspection(id);
+    if (!view || view.bounds.isEmpty()) return;
+    this.userInput(); this.clearBookSelection(); this.onPointerLeave();
+    this.callbacks.onArtworkClose();
+    this.furnitureInspection = view.key;
+    this.callbacks.onFurnitureInspection?.(view.key);
+    this.callbacks.onSelect(id);
+    this.artworkCamera.enter();
+    this.focusBounds(view.bounds, .7, view.backward);
+  }
+
+  closeFurnitureInspection() {
+    if (this.furnitureInspection) this.closeArtwork();
+  }
+
+  private clearFurnitureInspection() {
+    this.furnitureInspection = null;
+    this.callbacks.onFurnitureInspection?.(null);
+  }
+
   focusArtwork() {
     const target = this.manifestNodes.get('decor.wall-art.root')
       ?? this.procedural?.root.getObjectByName('art-image-surface');
@@ -369,16 +399,17 @@ export class RoomEngine {
     const width = this.container.clientWidth;
     const height = this.container.clientHeight;
     const viewport = artworkViewport(width, height);
-    // Fit inside the unobscured area, alongside desktop controls or above mobile controls.
-    const visibleHeight = Math.max(size.y * height / (viewport.height * .82), size.x * height / (viewport.width * .82));
-    const distance = Math.max(minimumDistance, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))));
-    const actualHeight = 2 * distance * Math.tan(THREE.MathUtils.degToRad(43 / 2));
     const direction = new THREE.Spherical().setFromVector3(backward);
     direction.theta = THREE.MathUtils.clamp(direction.theta, this.orbit.minAzimuthAngle, this.orbit.maxAzimuthAngle);
     direction.phi = THREE.MathUtils.clamp(direction.phi, this.orbit.minPolarAngle, this.orbit.maxPolarAngle);
     backward.setFromSpherical(direction).normalize();
     const right = new THREE.Vector3().crossVectors(this.camera.up, backward).normalize();
     const up = new THREE.Vector3().crossVectors(backward, right).normalize();
+    // Project all three dimensions: a side-facing cabinet cannot use its world-X width alone.
+    const projected = (axis: THREE.Vector3) => size.x * Math.abs(axis.x) + size.y * Math.abs(axis.y) + size.z * Math.abs(axis.z);
+    const visibleHeight = Math.max(projected(up) * height / (viewport.height * .82), projected(right) * height / (viewport.width * .82));
+    const distance = Math.max(minimumDistance, visibleHeight / (2 * Math.tan(THREE.MathUtils.degToRad(43 / 2))) + projected(backward) / 2);
+    const actualHeight = 2 * distance * Math.tan(THREE.MathUtils.degToRad(43 / 2));
     const focus = center.clone()
       .addScaledVector(right, (.5 - viewport.centerX / width) * actualHeight * this.camera.aspect)
       .addScaledVector(up, (viewport.centerY / height - .5) * actualHeight);
@@ -838,7 +869,7 @@ export class RoomEngine {
 
   private select(controlId: string | null) {
     if (controlId) this.closeBook();
-    if (controlId && this.artworkCamera.active) this.closeArtwork();
+    if (controlId && this.artworkCamera.active && (!this.furnitureInspection || this.bedroom?.inspection(controlId)?.key !== this.furnitureInspection)) this.closeArtwork();
     this.callbacks.onSelect(controlId);
   }
 

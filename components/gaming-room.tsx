@@ -38,6 +38,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
   const [loadingStage, setLoadingStage] = useState<RoomLoadingStage>('waking');
   const [status, setStatus] = useState<EngineStatus | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [furnitureInspection, setFurnitureInspection] = useState<string | null>(null);
   const [hover, setHover] = useState<HoverState | null>(null);
   const [values, setValues] = useState<Record<string, number>>(
     Object.fromEntries(DEFAULT_CONTROLS.map((control) => [control.id, control.default])),
@@ -113,6 +114,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
           onSelect: (id) => { setSelectedId(id); if (id) { setArtworkOpen(false); setWallpaperOpen(false); setPhotosOpen(false); } },
           onArtworkSelect: () => { setSelectedId(null); setHover(null); setArtworkOpen(true); setWallpaperOpen(false); setPhotosOpen(false); },
           onArtworkClose: () => { setArtworkOpen(false); setPhotosOpen(false); setHover(null); },
+          onFurnitureInspection: setFurnitureInspection,
           onPhotoWallSelect: () => {
             setSelectedId(null); setSelectedBookId(null); setArtworkOpen(false); setWallpaperOpen(false); setHover(null);
             setPhotos(engine?.photos ?? []); setPhotosOpen(true);
@@ -298,13 +300,22 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
               <p>{copy.selectedDevice}</p>
               <h2>{groupLabel(selected.id, language)}</h2>
             </div>
-            <button type="button" aria-label={copy.closePanel} onClick={() => setSelectedId(null)}>×</button>
+            <button type="button" aria-label={copy.closePanel} onClick={() => { engineRef.current?.closeFurnitureInspection(); setSelectedId(null); }}>×</button>
           </div>
           <button className="panel-reset" type="button" title={copy.resetDeviceHint}
             onClick={() => engineRef.current?.resetGroup(selected.id)}>
             <span aria-hidden="true">↺</span> {copy.resetDevice}
           </button>
           <div className="panel-controls">
+            {isBedroomControl(selected.id) && <>
+              <button className="panel-reset" type="button" onClick={() => engineRef.current?.inspectFurniture(selected.id)}>
+                {language === 'zh' ? '凑近查看' : 'Inspect closely'}
+              </button>
+              {furnitureInspection && <button className="panel-reset" type="button" onClick={() => engineRef.current?.closeFurnitureInspection()}>
+                {language === 'zh' ? '返回原视角' : 'Return to previous view'}
+              </button>}
+              <p className="monitor-motion-hint">{language === 'zh' ? '拖动旋转查看细节；下方滑杆可操作部件。按 Esc 返回原视角。' : 'Drag to orbit the details. Use the controls below to operate parts. Esc returns to your previous view.'}</p>
+            </>}
             {selected.group === '双屏' && (
               <p className="monitor-motion-hint">{status?.controlLimits?.['monitors.face']
                 ? language === 'zh'

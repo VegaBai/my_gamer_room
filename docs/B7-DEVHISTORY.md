@@ -1,5 +1,15 @@
 # Dev history
 
+## 2026-10-17 — 新家具近看、衣服挂放修正
+
+- 新增 8 组家具近看：垃圾桶、吉他与支架、床头柜、台灯、单人床与抱枕、衣帽架、房门、衣帽间推拉门。首次点击模型或快捷入口先取景，不立即触发取下/开门；近看中使用原滑杆或再次点击操作。
+- 共用照片墙的相机保存/返回机制；可拖动环绕、滚轮缩放，按「返回原视角」、关闭面板或 Esc 返回。切换近看对象保留最初返回点；操作抽屉或门不会退出近看。取景包含完整部件组及运动范围，并按视线投影三维包围盒避开控制面板。
+- 衣服此前为避开衣帽架而向西让位，却缺少可见支撑。本次加入连接真实立柱位置的上挂杆、黄铜挂钩和木衣架；衣架隐藏在肩部内，随衣服沿原取放路径离开挂杆。原 23 个单品根节点和控制 ID 保持稳定。
+- 更新 `bedroom-assembled.glb/.blend`、完整 `workstation-bedroom-B7.blend`、网页哈希 GLB、MuJoCo 的 OBJ/材质及生成场景，并重出封面和衣架近景。
+- 验证：TypeScript 通过；22 文件 / 141 项网页测试通过，新增首次点击不操作、操作时镜头不退回、切换对象后精确返回、全部家具全行程仍在取景包围盒内。两层 GLB 校验均 0 错误 / 0 警告。
+- 模型 BVH 1,042 个运动采样无穿插；MuJoCo 1,010 个关节采样无超阈值穿透，2 秒模拟状态有限且无警告，4 项 B7 物理交互测试通过，4 房间配置与机器人 XML 编译通过。保留既有简化碰撞代理及内部配对排除；这不是布料软体模拟。
+- 浏览器实测床头抽屉全开、衣服取下/放回、衣帽间门收进墙内、床整体近景和返回原视角。验收文件位于 `bedroom-assembly-b7-v1/renders/`，本次通过现有 Sites 官方工作流发布，访问范围保持公开。
+
 ## 2026-10-17 — B7 卧室装配、网页与 MuJoCo 同步
 
 按已确认的 `bedroom-furniture-concepts-v1/final/01-approved-floor-plan-B7.png`，装配此前验收的 23 个 Seed3D → Blender 单品/部件。没有重新生成付费高模。原始交付资产保留；本次调整写在 `bedroom-assembly-b7-v1/`，所有尺寸均为场景估计值，单位米。
@@ -42,4 +52,10 @@
 
 复现顺序：`build_assembly.py` → `configure_physics.py` → `finish_scene.py` → `export_physics.py` → `install-web.mjs` → `generate_mjcf.py --compile` → `verify_sweeps.py` / `verify_physics.py`。Blender 脚本使用项目中的固定绝对路径，原高模/低模交付目录只读复用。
 
-公开站点发布结果在完成发布后补记。
+### 公开站点发布
+
+- 已发布 v13：https://vega-gamer-room-3d.vegabeyond.chatgpt.site
+- 源码提交：`351614c244614182793f37af10eb9d30cda2ecee`，官方 Sites 构建、推送、归档、保存版本与部署均完成，公开受众保持不变。
+- 部署：`appgdep_6ad33e21a25c8191aee7b0b523c94932`，状态 `succeeded`。最新封面为 B7 全景，1600 × 900。
+- 发布环境修复：当前运行时 pnpm 包装器引用了不存在的 pnpm.mjs，改用项目内忽略目录中的包装器指向已安装的 pnpm.cjs；发布进程补入 Git Bash，并使用 `TAR_OPTIONS=--force-local` 解决 GNU tar 把 Windows 的 C: 盘符误认成远程主机的问题。没有修改用户全局环境或泄露凭据。
+- 官方构建输出归档：`bedroom-assembly-b7-v1/sites-B7-deploy.tar.gz`。网页源码内的 `docs/B7-DEVHISTORY.md` 是发布前装配/验收快照，本文件保留最终发布结果。
