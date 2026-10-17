@@ -1,10 +1,10 @@
 {
   "schema": "room-expansion-runtime/1",
-  "status": "starlight-bookshelf-v9",
+  "status": "B7-bedroom-assembly",
   "asset": {
-    "url": "/room/expansion/16804d3f41c3a4aa62447d5fd9e946b07202d928df01a3bcc1b38a2e63fd3663.glb",
-    "sha256": "16804d3f41c3a4aa62447d5fd9e946b07202d928df01a3bcc1b38a2e63fd3663",
-    "bytes": 24652724
+    "url": "/room/expansion/2940316693c67e026d49db0463bcf19c302f9958581565f64c4d08981272e50b.glb",
+    "sha256": "2940316693c67e026d49db0463bcf19c302f9958581565f64c4d08981272e50b",
+    "bytes": 3353852
   },
   "rootNodeId": "expansion.root",
   "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
@@ -225,24 +225,25 @@
     "scene.window.frame.v.5dd312da",
     "scene.window.frame.v.001.e91cd35d",
     "scene.window.glass.051c2bae",
-    "scene.window.mullion.b2ddce94"
+    "scene.window.mullion.b2ddce94",
+    "scene.architecture.floor.56fe22c7"
   ],
   "camera": {
     "position": [
-      1.55,
-      2.6,
-      6.3
+      3.9,
+      4.7,
+      7.2
     ],
     "target": [
-      0,
-      1.15,
-      0.2
+      0.05,
+      0.95,
+      1.4
     ],
-    "fov": 39,
+    "fov": 43,
     "near": 0.05,
     "far": 100,
     "minDistance": 2,
-    "maxDistance": 12,
+    "maxDistance": 13,
     "minAzimuthAngle": -3.141592653589793,
     "maxAzimuthAngle": 3.141592653589793,
     "minPolarAngle": 0.45,
@@ -258,12 +259,19 @@
     "v7: desk and PC translate toward the rear wall, 5cm tabletop gap; shared monitor inward rotation limited to 30 degrees, full swivel trim/tilt retained.",
     "v8: the cabinet, its four independent books, tabletop loop lamp and cabinet RGB lighting move together toward the rear wall, leaving a 5cm rear-body gap; drawer/door travel is unchanged."
   ],
-  "version": "8.0.0",
+  "version": "10.0.0",
   "architecture": {
     "wallpaperNodeIds": [
       "architecture.backWall.v6.upper",
       "architecture.leftWall.v6.upper",
-      "architecture.rightWall.v6.upper"
+      "architecture.rightWall.v6.upper",
+      "architecture.leftWall.extension.upper",
+      "architecture.rightWall.extension.upper",
+      "architecture.rightWall.southPost.upper",
+      "architecture.rightWall.doorLintel",
+      "architecture.southWall.west.upper",
+      "architecture.southWall.east.upper",
+      "architecture.southWall.lintel"
     ],
     "walls": [
       {
@@ -300,7 +308,7 @@
           "window.root"
         ],
         "point": [
-          -2.52,
+          -2.17,
           1.5,
           0.55
         ],
@@ -323,7 +331,9 @@
         "id": "right",
         "rootNodeId": "architecture.rightWall.v6",
         "nodeIds": [
-          "architecture.rightWall.v6"
+          "architecture.rightWall.v6",
+          "d03-entry-frame",
+          "bedroom.entry.leaf"
         ],
         "point": [
           2.57,
@@ -344,6 +354,24 @@
           "architecture.rightWall.v6.topTrim",
           "architecture.rightWall.v6.upper"
         ]
+      },
+      {
+        "id": "south",
+        "nodeIds": [
+          "architecture.southWall.b7",
+          "d01-closet-frame",
+          "bedroom.closet.leaf"
+        ],
+        "point": [
+          0,
+          1.5,
+          3.61
+        ],
+        "inward": [
+          0,
+          0,
+          -1
+        ]
       }
     ],
     "wallpaperUvMetresPerUnit": 1,
@@ -352,7 +380,7 @@
     "windowApertures": [
       {
         "centerBlender": [
-          -2.52,
+          -2.17,
           -0.8170000000000001,
           1.74
         ],
@@ -362,7 +390,7 @@
           1.24
         ],
         "centerGltf": [
-          -2.52,
+          -2.17,
           1.74,
           0.8170000000000001
         ],
@@ -374,7 +402,7 @@
       },
       {
         "centerBlender": [
-          -2.52,
+          -2.17,
           -0.28300000000000003,
           1.74
         ],
@@ -384,7 +412,7 @@
           1.24
         ],
         "centerGltf": [
-          -2.52,
+          -2.17,
           1.74,
           0.28300000000000003
         ],
@@ -401,10 +429,7 @@
     {
       "id": "desk-near-wall-v7",
       "nodeIds": [
-        "desk.root",
-        "scene.root.04.pc.tower.075d2d73",
-        "scene.rgb.pc.cyan.6c910325",
-        "scene.pc.internal.glow.f1a092a2"
+        "desk.root"
       ],
       "translation": [
         0,
@@ -424,6 +449,19 @@
         0,
         0,
         -0.46999996230006214
+      ]
+    },
+    {
+      "id": "pc-clear-desk-foot-b7",
+      "nodeIds": [
+        "scene.root.04.pc.tower.075d2d73",
+        "scene.rgb.pc.cyan.6c910325",
+        "scene.pc.internal.glow.f1a092a2"
+      ],
+      "translation": [
+        0,
+        0,
+        0.11
       ]
     }
   ],

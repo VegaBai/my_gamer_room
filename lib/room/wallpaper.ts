@@ -61,7 +61,7 @@ export class RoomArchitecture {
     const requireNode = (id: string) => {
       const object = nodes.get(id); if (!object) throw new Error(`Missing architecture node ${id}`); return object;
     };
-    if (contract.walls.length !== 3 || contract.wallpaperNodeIds.length !== 3) throw new Error('Incomplete room architecture');
+    if (contract.walls.length < 3 || contract.wallpaperNodeIds.length < 3) throw new Error('Incomplete room architecture');
     for (const spec of contract.walls) {
       if (![...spec.point, ...spec.inward].every(Number.isFinite) || Math.abs(new THREE.Vector3(...spec.inward).length() - 1) > .001) throw new Error('Invalid wall plane');
       const objects = spec.nodeIds.map(requireNode);

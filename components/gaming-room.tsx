@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DEFAULT_CONTROLS } from '../lib/room/default-controls';
 import { isExpansionControl, isPowerControl } from '../lib/room/expansion-controls';
+import { isBedroomControl } from '../lib/room/bedroom-controls';
 import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY, ROOM_COPY, controlLabel, formatControlValue, groupLabel, resolveLanguage, statusLabel, type RoomLanguage } from '../lib/room/i18n';
 import type { RoomEngine } from '../lib/room/room-engine';
 import type { ControlDefinition, EngineStatus, RoomLoadingStage } from '../lib/room/types';
@@ -285,7 +286,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
 
       {!entered && (
         <aside className="parts-card" aria-label={copy.summary}>
-          <span className="parts-count">{DEFAULT_CONTROLS.filter(control => control.primary && (!isExpansionControl(control.id) || status?.expansionReady)).length}</span>
+          <span className="parts-count">{DEFAULT_CONTROLS.filter(control => control.primary && (!(isExpansionControl(control.id) || isBedroomControl(control.id)) || status?.expansionReady)).length}</span>
           <div><strong>{copy.interactionCount}</strong><small>{copy.interactionHint}</small></div>
         </aside>
       )}
@@ -312,6 +313,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
                 : copy.monitorHint}</p>
             )}
             {selected.group === '百叶窗' && <p className="monitor-motion-hint">{copy.blindsHint}</p>}
+            {selected.group === '垃圾桶' && <p className="monitor-motion-hint">{copy.binHint}</p>}
             {selected.group === '书架' && <button className="panel-reset" type="button"
               onClick={() => engineRef.current?.viewBookshelf()}>
               {language === 'zh' ? '查看书架正面' : 'View bookshelf'}
@@ -532,7 +534,7 @@ export default function GamingRoom({ posterUrl }: { posterUrl: string }) {
         <section className="device-dock" aria-label={copy.deviceDock}>
           {DEFAULT_CONTROLS.filter((control) => control.primary)
             .sort((a, b) => Number(isExpansionControl(b.id)) - Number(isExpansionControl(a.id))).map((control) => (
-            <button key={control.id} type="button" disabled={isExpansionControl(control.id) && !status?.expansionReady}
+            <button key={control.id} type="button" disabled={(isExpansionControl(control.id) || isBedroomControl(control.id)) && !status?.expansionReady}
               onClick={() => selectFromList(control)}>
               <i />{controlLabel(control.id, language)}
             </button>

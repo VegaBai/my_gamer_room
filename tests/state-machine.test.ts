@@ -10,9 +10,9 @@ afterEach(() => {
 });
 
 describe('room controls contract', () => {
-  it('preserves thirteen base interactions and adds six independent expansion controls', () => {
+  it('preserves thirteen base interactions and adds six expansion and nine bedroom controls', () => {
     expect(BASE_PRIMARY_CONTROL_IDS).toHaveLength(13);
-    expect(PRIMARY_CONTROL_IDS).toHaveLength(19);
+    expect(PRIMARY_CONTROL_IDS).toHaveLength(28);
     expect(new Set(DEFAULT_CONTROLS.map((control) => control.id)).size).toBe(DEFAULT_CONTROLS.length);
     for (const control of DEFAULT_CONTROLS) {
       expect(control.default).toBeGreaterThanOrEqual(control.min);

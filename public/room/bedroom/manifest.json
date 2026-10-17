@@ -1,0 +1,1084 @@
+{
+  "schema": "bedroom-b7/1",
+  "units": "meters",
+  "coordinates": "Blender Z up; east +X; north +Y",
+  "parts": [
+    {
+      "id": "t01-bin-body",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\t01-bin-body\\t01-bin-body.glb",
+      "sourceSha256": "067f4337d48e414e86b4fd1ef6fac8730c166a74432d6af6bd6decd1809ea510",
+      "normalizationScale": [
+        0.19497549533843994,
+        0.19497549533843994,
+        0.19497549533843994
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.4967702627182007,
+          -0.11731789261102676,
+          0
+        ],
+        "max": [
+          -1.1832298040390015,
+          0.19731789827346802,
+          0.38999998569488525
+        ],
+        "dimensions": [
+          0.3135404586791992,
+          0.3146357834339142,
+          0.38999998569488525
+        ]
+      },
+      "rootPosition": [
+        -1.340000033378601,
+        0.03999999910593033,
+        0
+      ]
+    },
+    {
+      "id": "t04-bin-liner",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\t04-bin-liner\\t04-bin-liner.glb",
+      "sourceSha256": "edf4bcdde7835032eb6109a49cdf3d1c47c31482d6afcaeb6f93f38954f34075",
+      "normalizationScale": [
+        0.15250879526138306,
+        0.15250879526138306,
+        0.15250879526138306
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.4610838890075684,
+          -0.07929238677024841,
+          0.03500000014901161
+        ],
+        "max": [
+          -1.2189161777496338,
+          0.15929238498210907,
+          0.3399999737739563
+        ],
+        "dimensions": [
+          0.24216771125793457,
+          0.23858477175235748,
+          0.304999977350235
+        ]
+      },
+      "rootPosition": [
+        -1.340000033378601,
+        0.03999999910593033,
+        0.03500000014901161
+      ]
+    },
+    {
+      "id": "t02-bin-lid",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\t02-bin-lid\\t02-bin-lid.glb",
+      "sourceSha256": "164591496e69eff4680daf3f08adf5463421eed423e5070ee14ef39404a4666f",
+      "normalizationScale": [
+        0.16297711431980133,
+        0.16456761956214905,
+        0.16377568244934082
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.503000020980835,
+          -0.11400002241134644,
+          0.39399999380111694
+        ],
+        "max": [
+          -1.1770000457763672,
+          0.1939999908208847,
+          0.4259999990463257
+        ],
+        "dimensions": [
+          0.3259999752044678,
+          0.30800002813339233,
+          0.03200000524520874
+        ]
+      },
+      "rootPosition": [
+        -1.340000033378601,
+        0.03999999165534973,
+        0.39399999380111694
+      ]
+    },
+    {
+      "id": "t03-bin-pedal",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\t03-bin-pedal\\t03-bin-pedal.glb",
+      "sourceSha256": "a5ff551bc1e08d05b993d5295a2c5e7a7289f2bd5a7d79f9430b9ce197573a77",
+      "normalizationScale": [
+        0.05470395088195801,
+        0.038029201328754425,
+        0.012501939199864864
+      ],
+      "sourceRotationDegrees": [
+        90,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.3825000524520874,
+          -0.16449999809265137,
+          0.02199999988079071
+        ],
+        "max": [
+          -1.2975000143051147,
+          -0.11950000375509262,
+          0.04700000211596489
+        ],
+        "dimensions": [
+          0.08500003814697266,
+          0.044999994337558746,
+          0.02500000223517418
+        ]
+      },
+      "rootPosition": [
+        -1.340000033378601,
+        -0.1420000046491623,
+        0.02199999988079071
+      ]
+    },
+    {
+      "id": "g02-guitar-stand",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\g02-guitar-stand\\g02-guitar-stand.glb",
+      "sourceSha256": "a9152e446600cc62a27ac86eee7250e41bb48fbcaf92416ccd47ca95a6d89c35",
+      "normalizationScale": [
+        0.2850324809551239,
+        0.2850324809551239,
+        0.2850324809551239
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.9909006357192993,
+          -0.227188840508461,
+          0
+        ],
+        "max": [
+          -1.5890992879867554,
+          0.2671888470649719,
+          0.5700000524520874
+        ],
+        "dimensions": [
+          0.40180134773254395,
+          0.49437767267227173,
+          0.5700000524520874
+        ]
+      },
+      "rootPosition": [
+        -1.7899999618530273,
+        0.019999999552965164,
+        0
+      ]
+    },
+    {
+      "id": "g01-guitar",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\g01-guitar\\g01-guitar.glb",
+      "sourceSha256": "1d70fef213fc381f0f0b1f2b983dff1d0eb0ed617a1808db760e47c56a85c28c",
+      "normalizationScale": [
+        0.5099849700927734,
+        0.5099849700927734,
+        0.5099849700927734
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.9957301616668701,
+          -0.28122323751449585,
+          0.14000000059604645
+        ],
+        "max": [
+          -1.5842697620391846,
+          0.041223250329494476,
+          1.159999966621399
+        ],
+        "dimensions": [
+          0.41146039962768555,
+          0.3224464952945709,
+          1.0199999809265137
+        ]
+      },
+      "rootPosition": [
+        -1.7899999618530273,
+        -0.11999999731779099,
+        0.14000000059604645
+      ]
+    },
+    {
+      "id": "n01-carcass",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\n01-carcass\\n01-carcass.glb",
+      "sourceSha256": "09d2da0ba7aa850e9db800b22cef7dd7582deaa7dbaf5b3b654e34523d143e88",
+      "normalizationScale": [
+        0.2952897548675537,
+        0.29529011249542236,
+        0.29501625895500183
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          -2.0899999141693115,
+          -2.195000171661377,
+          0
+        ],
+        "max": [
+          -1.6899999380111694,
+          -1.6850000619888306,
+          0.5899999737739563
+        ],
+        "dimensions": [
+          0.3999999761581421,
+          0.5100001096725464,
+          0.5899999737739563
+        ]
+      },
+      "rootPosition": [
+        -1.8899999856948853,
+        -1.940000057220459,
+        0
+      ]
+    },
+    {
+      "id": "n02-drawer",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\n02-drawer\\n02-drawer.glb",
+      "sourceSha256": "75338fa0e8e49bab1f678e25921830935eb3d8531d3f1645f10cbfeb4c39ba8c",
+      "normalizationScale": [
+        0.20838484168052673,
+        0.19000616669654846,
+        0.12722249329090118
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        180
+      ],
+      "bounds": {
+        "min": [
+          -2.005000114440918,
+          -2.130000114440918,
+          0.4230000078678131
+        ],
+        "max": [
+          -1.7050000429153442,
+          -1.75,
+          0.5080000162124634
+        ],
+        "dimensions": [
+          0.30000007152557373,
+          0.38000011444091797,
+          0.08500000834465027
+        ]
+      },
+      "rootPosition": [
+        -1.8550000190734863,
+        -1.940000057220459,
+        0.4230000078678131
+      ]
+    },
+    {
+      "id": "n03-handle",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\n03-handle\\n03-handle.glb",
+      "sourceSha256": "0849017ab44fe048f5f7cb79ef4b5696ee8268fe48f6ccc9c6cd0492978d47e3",
+      "normalizationScale": [
+        0.014359469525516033,
+        0.014979491010308266,
+        0.01500353030860424
+      ],
+      "sourceRotationDegrees": [
+        0,
+        90,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.7049999237060547,
+          -1.9550000429153442,
+          0.43700000643730164
+        ],
+        "max": [
+          -1.680999994277954,
+          -1.9250000715255737,
+          0.46700000762939453
+        ],
+        "dimensions": [
+          0.023999929428100586,
+          0.029999971389770508,
+          0.030000001192092896
+        ]
+      },
+      "rootPosition": [
+        -1.6929999589920044,
+        -1.940000057220459,
+        0.43700000643730164
+      ]
+    },
+    {
+      "id": "l01-lamp-base",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\l01-lamp-base\\l01-lamp-base.glb",
+      "sourceSha256": "27b8d5df49ff15bf341109e94ba819927a9167c9aacf85a3c6e1b72508efd38f",
+      "normalizationScale": [
+        0.10251875221729279,
+        0.10251875221729279,
+        0.10251875221729279
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.9641917943954468,
+          -2.015068531036377,
+          0.5929999947547913
+        ],
+        "max": [
+          -1.8158081769943237,
+          -1.8649317026138306,
+          0.7979999780654907
+        ],
+        "dimensions": [
+          0.14838361740112305,
+          0.1501368284225464,
+          0.20499998331069946
+        ]
+      },
+      "rootPosition": [
+        -1.8899999856948853,
+        -1.940000057220459,
+        0.5929999947547913
+      ]
+    },
+    {
+      "id": "l02-lampshade",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\l02-lampshade\\l02-lampshade.glb",
+      "sourceSha256": "693ff778db940b27c404e6a0a277570a807f67932e19de76a8e65b2c40295416",
+      "normalizationScale": [
+        0.1274806559085846,
+        0.12754839658737183,
+        0.12733076512813568
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -2.0174999237060547,
+          -2.067500114440918,
+          0.753000020980835
+        ],
+        "max": [
+          -1.7624999284744263,
+          -1.8125,
+          0.9120000004768372
+        ],
+        "dimensions": [
+          0.2549999952316284,
+          0.25500011444091797,
+          0.1589999794960022
+        ]
+      },
+      "rootPosition": [
+        -1.8899999856948853,
+        -1.940000057220459,
+        0.753000020980835
+      ]
+    },
+    {
+      "id": "l03-bulb",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\l03-bulb\\l03-bulb.glb",
+      "sourceSha256": "843c8b9acaef30941be5f4db8d550c01fa318dd6abc12364e295b0b3a5e74f6c",
+      "normalizationScale": [
+        0.04000326991081238,
+        0.04000326991081238,
+        0.04000326991081238
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.9189586639404297,
+          -1.96925687789917,
+          0.8009999990463257
+        ],
+        "max": [
+          -1.8610413074493408,
+          -1.910743236541748,
+          0.8809999823570251
+        ],
+        "dimensions": [
+          0.05791735649108887,
+          0.058513641357421875,
+          0.07999998331069946
+        ]
+      },
+      "rootPosition": [
+        -1.8899999856948853,
+        -1.940000057220459,
+        0.8009999990463257
+      ]
+    },
+    {
+      "id": "b01-bed-frame",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\b01-bed-frame\\b01-bed-frame.glb",
+      "sourceSha256": "11baead1ea6df7bfe776da8692365961b594f366d93590466b18fee414574817",
+      "normalizationScale": [
+        1.0699809789657593,
+        0.8894436359405518,
+        0.9495676755905151
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -2.0399999618530273,
+          -3.5299999713897705,
+          0
+        ],
+        "max": [
+          0.10000002384185791,
+          -2.3999998569488525,
+          0.8200000524520874
+        ],
+        "dimensions": [
+          2.1399998664855957,
+          1.130000114440918,
+          0.8200000524520874
+        ]
+      },
+      "rootPosition": [
+        -0.9700000286102295,
+        -2.9649999141693115,
+        0
+      ]
+    },
+    {
+      "id": "b02-mattress",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\b02-mattress\\b02-mattress.glb",
+      "sourceSha256": "9165c00e7c524df157789b9428c0f97bec2a94694503f9b243128106ff485a03",
+      "normalizationScale": [
+        0.9547257423400879,
+        0.9613266587257385,
+        0.5299400687217712
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          -1.8949999809265137,
+          -3.447499990463257,
+          0.32100000977516174
+        ],
+        "max": [
+          0.01500004529953003,
+          -2.482499837875366,
+          0.5260000228881836
+        ],
+        "dimensions": [
+          1.9100000858306885,
+          0.9650001525878906,
+          0.20500001311302185
+        ]
+      },
+      "rootPosition": [
+        -0.9399999976158142,
+        -2.9649999141693115,
+        0.32100000977516174
+      ]
+    },
+    {
+      "id": "b03-duvet",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\b03-duvet\\b03-duvet.glb",
+      "sourceSha256": "96cfa03675ac606c3ce6f4b97d0ab6e1aceca518a6e921cba8b4065429a32be7",
+      "normalizationScale": [
+        0.8749372363090515,
+        0.6926307678222656,
+        0.18905940651893616
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          -1.684999942779541,
+          -3.484999895095825,
+          0.531000018119812
+        ],
+        "max": [
+          0.06500005722045898,
+          -2.444999933242798,
+          0.656000018119812
+        ],
+        "dimensions": [
+          1.75,
+          1.0399999618530273,
+          0.125
+        ]
+      },
+      "rootPosition": [
+        -0.8100000023841858,
+        -2.9649999141693115,
+        0.531000018119812
+      ]
+    },
+    {
+      "id": "b04-pillow",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\b04-pillow\\b04-pillow.glb",
+      "sourceSha256": "64bc015edf307ce4430153d187ff7fe2619204d3a886a077a02917c75eb50a72",
+      "normalizationScale": [
+        0.28636977076530457,
+        0.3350529968738556,
+        0.2211557924747467
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          -1.850000023841858,
+          -3.299999952316284,
+          0.6600000262260437
+        ],
+        "max": [
+          -1.4499999284744263,
+          -2.629999876022339,
+          0.8050000071525574
+        ],
+        "dimensions": [
+          0.40000009536743164,
+          0.6700000762939453,
+          0.14499998092651367
+        ]
+      },
+      "rootPosition": [
+        -1.649999976158142,
+        -2.9649999141693115,
+        0.6600000262260437
+      ]
+    },
+    {
+      "id": "b05-peach-cat",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\b05-peach-cat\\b05-peach-cat.glb",
+      "sourceSha256": "b0820fb7784052f13fb08c1f6af5ad4665084ef8b374e4b7295e955353d41419",
+      "normalizationScale": [
+        0.21631090342998505,
+        0.24998921155929565,
+        0.25243109464645386
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          -1.4500000476837158,
+          -3.2149999141693115,
+          0.6600000262260437
+        ],
+        "max": [
+          -1.0499999523162842,
+          -2.7149999141693115,
+          1.0199999809265137
+        ],
+        "dimensions": [
+          0.40000009536743164,
+          0.5,
+          0.35999995470046997
+        ]
+      },
+      "rootPosition": [
+        -1.25,
+        -2.9649999141693115,
+        0.6600000262260437
+      ]
+    },
+    {
+      "id": "c01-coat-rack",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\c01-coat-rack\\c01-coat-rack.glb",
+      "sourceSha256": "8d686f707578d217737ff351edc8741462a6b2b3e7b6b60c32a868159ec15e88",
+      "normalizationScale": [
+        0.8250100612640381,
+        0.8250100612640381,
+        0.8250100612640381
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          1.7949963808059692,
+          -2.358410120010376,
+          0
+        ],
+        "max": [
+          2.4650039672851562,
+          -1.8015897274017334,
+          1.6500000953674316
+        ],
+        "dimensions": [
+          0.670007586479187,
+          0.5568203926086426,
+          1.6500000953674316
+        ]
+      },
+      "rootPosition": [
+        2.130000114440918,
+        -2.0799999237060547,
+        0
+      ]
+    },
+    {
+      "id": "c02-pink-coat",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\c02-pink-coat\\c02-pink-coat.glb",
+      "sourceSha256": "a2f4f001bbd34d8d359db45c9d02eb8336e42b8f00ccd126bf1e4f54f555f8af",
+      "normalizationScale": [
+        0.37097451090812683,
+        0.3704090118408203,
+        0.3849334120750427
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        -90
+      ],
+      "bounds": {
+        "min": [
+          1.5824999809265137,
+          -2.434999942779541,
+          0.7900000214576721
+        ],
+        "max": [
+          1.8575000762939453,
+          -1.7249999046325684,
+          1.559999942779541
+        ],
+        "dimensions": [
+          0.27500009536743164,
+          0.7100000381469727,
+          0.7699999213218689
+        ]
+      },
+      "rootPosition": [
+        1.7200000286102295,
+        -2.0799999237060547,
+        0.7900000214576721
+      ]
+    },
+    {
+      "id": "d01-closet-frame",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\d01-closet-frame\\d01-closet-frame.glb",
+      "sourceSha256": "13c959475448c50017ff0682498be1f66707519ccf5d85387386af6af95f563b",
+      "normalizationScale": [
+        0.9700437188148499,
+        0.5379678010940552,
+        1.261115550994873
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        -90
+      ],
+      "bounds": {
+        "min": [
+          0.2800000309944153,
+          -3.825000047683716,
+          0
+        ],
+        "max": [
+          2.2200000286102295,
+          -3.68500018119812,
+          2.179999828338623
+        ],
+        "dimensions": [
+          1.940000057220459,
+          0.1399998664855957,
+          2.179999828338623
+        ]
+      },
+      "rootPosition": [
+        1.25,
+        -3.755000114440918,
+        0
+      ]
+    },
+    {
+      "id": "d02-closet-leaf",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\d02-closet-leaf\\d02-closet-leaf.glb",
+      "sourceSha256": "33a8391bff86d806ae383559aa1be60035c9bb9a25ec30057cb391ae48227a11",
+      "normalizationScale": [
+        1.0020158290863037,
+        0.48700302839279175,
+        1.0324498414993286
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          0.3349999785423279,
+          -3.877500057220459,
+          0.014000000432133675
+        ],
+        "max": [
+          1.2049999237060547,
+          -3.8324999809265137,
+          2.0789999961853027
+        ],
+        "dimensions": [
+          0.8699999451637268,
+          0.04500007629394531,
+          2.065000057220459
+        ]
+      },
+      "rootPosition": [
+        0.7699999809265137,
+        -3.8550000190734863,
+        0.014000000432133675
+      ]
+    },
+    {
+      "id": "d03-entry-frame",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\d03-entry-frame\\d03-entry-frame.glb",
+      "sourceSha256": "8cf8f962705babdc42ee4d63581f0d8eca5adef8202489a8d2e1e3398c177338",
+      "normalizationScale": [
+        0.7168077826499939,
+        0.8628448247909546,
+        1.0850218534469604
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "bounds": {
+        "min": [
+          2.4800000190734863,
+          -3.4724998474121094,
+          0
+        ],
+        "max": [
+          2.6399998664855957,
+          -2.4375,
+          2.1700000762939453
+        ],
+        "dimensions": [
+          0.15999984741210938,
+          1.0349998474121094,
+          2.1700000762939453
+        ]
+      },
+      "rootPosition": [
+        2.559999942779541,
+        -2.9549999237060547,
+        0
+      ]
+    },
+    {
+      "id": "d04-entry-leaf",
+      "source": "bedroom-assets-pipeline-v1\\delivery\\d04-entry-leaf\\d04-entry-leaf.glb",
+      "sourceSha256": "00130d08ad6fcf0a84a1bfc1c279dd76667d579d052f5ef1dd46eb983c02fa10",
+      "normalizationScale": [
+        0.3841502070426941,
+        0.7621636986732483,
+        0.989993155002594
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          2.4049999713897705,
+          -3.3460001945495605,
+          0.04999999701976776
+        ],
+        "max": [
+          2.5350000858306885,
+          -2.565999984741211,
+          2.0299999713897705
+        ],
+        "dimensions": [
+          0.13000011444091797,
+          0.7800002098083496,
+          1.9800000190734863
+        ]
+      },
+      "rootPosition": [
+        2.4700000286102295,
+        -2.9560000896453857,
+        0.04999999701976776
+      ]
+    }
+  ],
+  "motions": [
+    {
+      "nodeId": "bedroom.bin.lid",
+      "parts": [
+        "t02-bin-lid"
+      ],
+      "pivot": [
+        -1.34,
+        0.192,
+        0.395
+      ],
+      "kind": "hinge",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "travel": -1.7453292519943295,
+      "controlId": "trash.open",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.bin.pedal",
+      "parts": [
+        "t03-bin-pedal"
+      ],
+      "pivot": [
+        -1.34,
+        -0.123,
+        0.035
+      ],
+      "kind": "hinge",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "travel": -0.20943951023931956,
+      "controlId": "trash.open",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.bin.liner",
+      "parts": [
+        "t04-bin-liner"
+      ],
+      "pivot": [
+        -1.34,
+        0.04,
+        0.027
+      ],
+      "kind": "slide",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 0.43,
+      "controlId": "trash.liner",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.guitar",
+      "parts": [
+        "g01-guitar"
+      ],
+      "pivot": [
+        -1.79,
+        -0.085,
+        0.105
+      ],
+      "kind": "slide",
+      "axis": [
+        0,
+        -0.5,
+        1
+      ],
+      "travel": 0.32,
+      "controlId": "guitar.take",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.nightstand.drawer",
+      "parts": [
+        "n02-drawer",
+        "n03-handle"
+      ],
+      "pivot": [
+        -1.875,
+        -1.94,
+        0.393
+      ],
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "travel": 0.26,
+      "controlId": "nightstand.drawer",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.plush",
+      "parts": [
+        "b05-peach-cat"
+      ],
+      "pivot": [
+        -1.25,
+        -2.985,
+        0.556
+      ],
+      "kind": "slide",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 0.3,
+      "controlId": "plush.lift",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.coat",
+      "parts": [
+        "c02-pink-coat"
+      ],
+      "pivot": [
+        1.84,
+        -2.08,
+        0.79
+      ],
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0.35
+      ],
+      "travel": 0.35,
+      "controlId": "coat.take",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.closet.leaf",
+      "parts": [
+        "d02-closet-leaf"
+      ],
+      "pivot": [
+        0.77,
+        -3.735,
+        0.014
+      ],
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "travel": 0.94,
+      "controlId": "closet.open",
+      "default": 0
+    },
+    {
+      "nodeId": "bedroom.entry.leaf",
+      "parts": [
+        "d04-entry-leaf"
+      ],
+      "pivot": [
+        2.515,
+        -3.398,
+        0.014
+      ],
+      "kind": "hinge",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 1.5707963267948966,
+      "controlId": "entry.open",
+      "default": 0
+    }
+  ],
+  "lamp": {
+    "controlId": "bedsideLamp.power",
+    "partId": "l03-bulb",
+    "position": [
+      -1.89,
+      -1.94,
+      0.81
+    ]
+  },
+  "room": {
+    "west": -2.17,
+    "east": 2.57,
+    "north": 0.78,
+    "south": -3.61,
+    "height": 3
+  },
+  "layout": {
+    "windowTranslation": [
+      0.35,
+      0,
+      0
+    ],
+    "bookshelfTranslation": [
+      0,
+      -0.6,
+      0
+    ],
+    "floorLampUnchanged": true,
+    "pcTranslationFromPrevious": [
+      0,
+      -0.45,
+      0
+    ]
+  },
+  "motionDependencies": {
+    "trash.liner": "trash.open"
+  },
+  "sourceFloorPlan": "bedroom-furniture-concepts-v1/final/01-approved-floor-plan-B7.png",
+  "asset": {
+    "url": "/room/bedroom/66bb4fbc396adc24d1b6be556a55f603941ff0554481c1fff4572c26c7ffe2db.glb",
+    "sha256": "66bb4fbc396adc24d1b6be556a55f603941ff0554481c1fff4572c26c7ffe2db",
+    "bytes": 9768096
+  }
+}

@@ -31,11 +31,11 @@ describe('wall finishes and full-orbit cutaway', () => {
     const bytes = readFileSync(new URL(`../public${manifest.asset.url}`, import.meta.url));
     const gltf = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString('utf8'));
     const nodes = new Map<string, { translation?: number[]; rotation?: number[] }>(gltf.nodes.map((n: { extras?: { web_id?: string } }) => [n.extras?.web_id, n]));
-    expect(manifest.architecture.walls.map((w: { id: string }) => w.id).sort()).toEqual(['back', 'left', 'right']);
+    expect(manifest.architecture.walls.map((w: { id: string }) => w.id).sort()).toEqual(['back', 'left', 'right', 'south']);
     expect(manifest.hideBaseNodeIds).toContain('scene.architecture.left.wall.00feb0f3');
     manifest.architecture.wallpaperNodeIds.forEach((id: string) => expect(nodes.has(id)).toBe(true));
     const windowRoot = nodes.get('window.root')!;
-    expect(new THREE.Vector3().fromArray(windowRoot.translation!).distanceTo(new THREE.Vector3(-2.4045, 1.73, .55))).toBeLessThan(.00001);
+    expect(new THREE.Vector3().fromArray(windowRoot.translation!).distanceTo(new THREE.Vector3(-2.0545, 1.73, .55))).toBeLessThan(.00001);
     expect(new THREE.Quaternion().fromArray(windowRoot.rotation!).normalize().angleTo(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2))).toBeLessThan(.00001);
   });
   it('validates stored choices without accepting arbitrary values', () => {

@@ -21,6 +21,8 @@ import { DeskMotionGuard, installDeskAccessories, type DeskAccessoryContract } f
 import { installPersonalCorner, type PersonalCornerContract } from './personal-corner';
 import { RoomExpansion, validateExpansionContract, type ExpansionContract } from './room-expansion';
 import { isExpansionControl } from './expansion-controls';
+import { BedroomAssembly, type BedroomContract } from './bedroom';
+import { isBedroomControl } from './bedroom-controls';
 import { isVisibleInScene, pickRoomControl } from './room-picking';
 import { overviewFraming } from './overview-framing';
 import { RoomArchitecture, resolveWallpaper, WALLPAPER_STORAGE_KEY, type WallpaperId } from './wallpaper';
@@ -103,6 +105,7 @@ export class RoomEngine {
   private bookAssetFailed = false;
   private retiredBookRoot: THREE.Object3D | null = null;
   private expansion: RoomExpansion | null = null;
+  private bedroom: BedroomAssembly | null = null;
   private overviewFov = 40;
   private framingKey = '';
   private architecture: RoomArchitecture | null = null;
@@ -160,6 +163,7 @@ export class RoomEngine {
       this.procedural?.apply(values);
       this.applyManifestTracks(values);
       this.expansion?.apply(values);
+      this.bedroom?.apply(values);
       this.callbacks.onValues(values);
     });
 
@@ -193,7 +197,7 @@ export class RoomEngine {
   }
 
   selectAndToggle(controlId: string) {
-    if (isExpansionControl(controlId) && !this.expansion) return;
+    if ((isExpansionControl(controlId) || isBedroomControl(controlId)) && !this.expansion) return;
     if (controlId === ARTWORK_INTERACTION_ID) { this.openArtwork(); return; }
     if (controlId === PHOTO_WALL_INTERACTION_ID) { this.openPhotoWall(); return; }
     if (isBookId(controlId)) { this.openBook(controlId); return; }
@@ -203,7 +207,7 @@ export class RoomEngine {
   }
 
   setControl(controlId: string, value: number) {
-    if (isExpansionControl(controlId) && !this.expansion) return;
+    if ((isExpansionControl(controlId) || isBedroomControl(controlId)) && !this.expansion) return;
     this.userInput();
     this.select(controlId);
     this.state.setDirect(controlId, value);
@@ -532,7 +536,7 @@ export class RoomEngine {
       if (!wall) throw Error('Photo wall attachment missing');
       personalParts = installPersonalCorner(this.manifestRoot!, wall, personalRoot, personalSpec);
       const guard = new DeskMotionGuard(this.manifestRoot!, this.state.snapshot(), values => this.applyManifestTracks(values));
-      this.state.setConstraint(values => guard.resolve(values));
+      this.state.setConstraint(values => guard.resolve(this.bedroom?.constrain(values) ?? values));
       this.photoWall = new PhotoWall(personalParts[1]);
       await this.photoWall.restore();
     } catch (error) {
@@ -556,6 +560,14 @@ export class RoomEngine {
       root = (await loader.loadAsync(contract.asset.url)).scene;
       if (this.disposed) { disposeObject(root); return; }
       this.expansion = new RoomExpansion(root, contract, this.manifestRoot!);
+      const bedroomResponse = await fetch('/room/bedroom/manifest.json', { cache: 'no-store' });
+      if (!bedroomResponse.ok) throw Error('B7 furniture unavailable');
+      const bedroomSpec = await bedroomResponse.json() as BedroomContract;
+      const bedroomRoot = (await loader.loadAsync(bedroomSpec.asset.url)).scene;
+      if (this.disposed) { disposeObject(bedroomRoot); return; }
+      this.bedroom = new BedroomAssembly(bedroomRoot, bedroomSpec, this.manifestRoot!);
+      this.bedroom.apply(this.state.snapshot());
+      this.state.setConstraint(values => this.bedroom?.constrain(values) ?? { ...values });
       if (contract.architecture) {
         this.architecture = new RoomArchitecture(this.manifestRoot!, contract.architecture);
         try { this.wallpaperId = resolveWallpaper(window.localStorage.getItem(WALLPAPER_STORAGE_KEY)); } catch { /* Keep linen. */ }
@@ -567,7 +579,10 @@ export class RoomEngine {
       // Publish pick targets only after physical limits and the rest of the addon validate.
       this.hitTargets.push(...this.expansion.hitTargets);
       for (const [id, targets] of this.expansion.visualTargets) this.visualTargets.set(id, targets);
+      this.hitTargets.push(...this.bedroom.hitTargets);
+      for (const [id, targets] of this.bedroom.visualTargets) this.visualTargets.set(id, targets);
     } catch (error) {
+      if (this.bedroom) { this.bedroom.detach(); disposeObject(this.bedroom.root); this.bedroom = null; }
       this.architecture?.dispose();
       this.architecture = null;
       this.expansion?.detach();
@@ -838,7 +853,7 @@ export class RoomEngine {
     this.hoverOutline.visible = Boolean(controlId);
     if (!controlId) return;
     // Outline the artwork without tinting the print or its shared fallback materials.
-    if (controlId === ARTWORK_INTERACTION_ID || controlId === PHOTO_WALL_INTERACTION_ID || isBookId(controlId) || isExpansionControl(controlId)) { this.updateHoverOutline(); return; }
+    if (controlId === ARTWORK_INTERACTION_ID || controlId === PHOTO_WALL_INTERACTION_ID || isBookId(controlId) || isExpansionControl(controlId) || isBedroomControl(controlId)) { this.updateHoverOutline(); return; }
     for (const root of this.visualTargets.get(controlId) ?? []) {
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;

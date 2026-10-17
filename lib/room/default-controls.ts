@@ -1,5 +1,6 @@
 import type { ControlDefinition, RoomCameraDefinition } from './types';
 import { EXPANSION_CONTROLS } from './expansion-controls';
+import { BEDROOM_CONTROLS } from './bedroom-controls';
 
 export const DEFAULT_CAMERA: RoomCameraDefinition = {
   position: [4.9, 3.05, 6.6],
@@ -88,7 +89,7 @@ export const BASE_PRIMARY_CONTROL_IDS = BASE_ROOM_CONTROLS
   .filter((control) => control.primary)
   .map((control) => control.id);
 
-export const DEFAULT_CONTROLS: ControlDefinition[] = [...BASE_ROOM_CONTROLS, ...EXPANSION_CONTROLS];
+export const DEFAULT_CONTROLS: ControlDefinition[] = [...BASE_ROOM_CONTROLS, ...EXPANSION_CONTROLS, ...BEDROOM_CONTROLS];
 
 export const PRIMARY_CONTROL_IDS = DEFAULT_CONTROLS
   .filter((control) => control.primary)

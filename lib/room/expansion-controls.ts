@@ -17,4 +17,4 @@ export const EXPANSION_CONTROLS: ControlDefinition[] = [
 
 export const EXPANSION_CONTROL_IDS = EXPANSION_CONTROLS.map(control => control.id);
 export const isExpansionControl = (id: string | null): boolean => id !== null && EXPANSION_CONTROL_IDS.includes(id);
-export const isPowerControl = (id: string): boolean => id === 'floorLamp.power' || id === 'bookshelf.lights';
+export const isPowerControl = (id: string): boolean => id === 'floorLamp.power' || id === 'bookshelf.lights' || id === 'bedsideLamp.power';
