@@ -36,7 +36,7 @@ const english = {
       decode: 'This image could not be read. Try another file.', dimensions: 'Use an image up to 8,192 px per side and 32 megapixels.',
       unavailable: 'The replaceable wall art is not available in this scene.' },
   },
-  groups: { cabinet: 'Storage cabinet', desk: 'Sit-stand desk', chair: 'Gaming chair', microphone: 'Microphone arm', monitors: 'Dual monitors', blinds: 'Window blinds', floorLamp: 'Floor lamp', bookshelf: 'Bookshelf', trash: 'Waste bin', nightstand: 'Nightstand', bedsideLamp: 'Bedside lamp', closet: 'Walk-in closet', entry: 'Room door', guitar: 'Guitar', coat: 'Coat rack', plush: 'Twin bed' },
+  groups: { cabinet: 'Storage cabinet', desk: 'Sit-stand desk', chair: 'Gaming chair', microphone: 'Microphone arm', monitors: 'Dual monitors', blinds: 'Window blinds', floorLamp: 'Floor lamp', bookshelf: 'Bookshelf', trash: 'Waste bin', nightstand: 'Nightstand', bedsideLamp: 'Bedside lamp', closet: 'Bathroom', entry: 'Room door', guitar: 'Guitar', coat: 'Coat rack', plush: 'Twin bed' },
   controls: {
     'trash.open': 'Pedal lid', 'trash.liner': 'Remove inner bin', 'nightstand.drawer': 'Nightstand drawer', 'bedsideLamp.power': 'Bedside lamp', 'closet.open': 'Pocket door', 'entry.open': 'Room door', 'guitar.take': 'Lift guitar off stand', 'coat.take': 'Remove coat', 'plush.lift': 'Lift peach-cat cushion',
     'cabinet.drawer.1': 'Drawer 1', 'cabinet.drawer.2': 'Drawer 2', 'cabinet.drawer.3': 'Drawer 3', 'cabinet.drawer.4': 'Drawer 4',
@@ -86,9 +86,9 @@ export const ROOM_COPY = {
         decode: '无法读取这张图片，请换一个文件。', dimensions: '图片单边不能超过 8192 像素，总像素不能超过 3200 万。',
         unavailable: '当前场景暂不支持替换挂画。' },
     },
-    groups: { cabinet: '收纳柜', desk: '升降桌', chair: '电竞椅', microphone: '话筒臂', monitors: '双屏', blinds: '百叶窗', floorLamp: '落地灯', bookshelf: '书架', trash: '垃圾桶', nightstand: '床头柜', bedsideLamp: '床头灯', closet: '衣帽间', entry: '房门', guitar: '吉他', coat: '衣帽架', plush: '单人床' },
+    groups: { cabinet: '收纳柜', desk: '升降桌', chair: '电竞椅', microphone: '话筒臂', monitors: '双屏', blinds: '百叶窗', floorLamp: '落地灯', bookshelf: '书架', trash: '垃圾桶', nightstand: '床头柜', bedsideLamp: '床头灯', closet: '浴室', entry: '房门', guitar: '吉他', coat: '衣帽架', plush: '单人床' },
     controls: {
-      'trash.open': '脚踏桶盖', 'trash.liner': '取出内桶', 'nightstand.drawer': '床头柜抽屉', 'bedsideLamp.power': '床头灯', 'closet.open': '衣帽间推拉门', 'entry.open': '房门', 'guitar.take': '取下吉他', 'coat.take': '取下外套', 'plush.lift': '拿起蜜桃猫抱枕',
+      'trash.open': '脚踏桶盖', 'trash.liner': '取出内桶', 'nightstand.drawer': '床头柜抽屉', 'bedsideLamp.power': '床头灯', 'closet.open': '浴室推拉门', 'entry.open': '房门', 'guitar.take': '取下吉他', 'coat.take': '取下外套', 'plush.lift': '拿起蜜桃猫抱枕',
       'cabinet.drawer.1': '抽屉 1', 'cabinet.drawer.2': '抽屉 2', 'cabinet.drawer.3': '抽屉 3', 'cabinet.drawer.4': '抽屉 4',
       'cabinet.door': '柜门', 'desk.lift': '桌面高度', 'chair.swivel': '椅身旋转', 'chair.headrest': '头枕拆装', 'chair.lumbar': '腰枕拆装',
       'chair.moveX': '左右移动', 'chair.moveY': '前后移动',

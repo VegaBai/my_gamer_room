@@ -5,7 +5,7 @@ const items = [
   ['trash.liner', '取出内桶', '垃圾桶', 0, 1],
   ['nightstand.drawer', '床头柜抽屉', '床头柜', 0, 1],
   ['bedsideLamp.power', '床头灯', '床头灯', 1, 0],
-  ['closet.open', '衣帽间推拉门', '衣帽间', 0, 1],
+  ['closet.open', '浴室推拉门', '浴室', 0, 1],
   ['entry.open', '房门', '房门', 0, 1],
   ['guitar.take', '取下吉他', '吉他', 0, 1],
   ['coat.take', '取下外套', '衣帽架', 0, 1],

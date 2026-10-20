@@ -131,6 +131,24 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   }
   button('话筒正面', () => focusMicrophone(false));
   button('话筒背面', () => focusMicrophone(true));
+  function focusCoatCollar(back: boolean) {
+    let hanger: THREE.Object3D | undefined;
+    root.traverse(node => {
+      if (node.userData.web_id === 'coat.v9.hanger.wood') hanger = node;
+    });
+    if (!hanger) return;
+    unlockCamera();
+    const center = new THREE.Box3().setFromObject(hanger).getCenter(new THREE.Vector3());
+    center.y += .025;
+    // Stay inside the side-hung hat so it cannot occlude the collar inspection.
+    camera.position.copy(center).add(new THREE.Vector3(-.20, .09, back ? -.25 : .23));
+    orbit.target.copy(center);
+    camera.fov = 38;
+    camera.updateProjectionMatrix();
+    orbit.update();
+  }
+  button('衣领正面', () => focusCoatCollar(false));
+  button('衣领背面', () => focusCoatCollar(true));
   const normalButton = button('法线贴图：开', () => {
     normals = !normals;
     normalButton.textContent = `法线贴图：${normals ? '开' : '关'}`;

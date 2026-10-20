@@ -634,77 +634,332 @@
     },
     {
       "id": "c01-coat-rack",
-      "source": "bedroom-assets-pipeline-v1\\delivery\\c01-coat-rack\\c01-coat-rack.glb",
-      "sourceSha256": "8d686f707578d217737ff351edc8741462a6b2b3e7b6b60c32a868159ec15e88",
+      "source": "coat-rack-generated-v3\\delivery\\c01-coat-rack\\c01-coat-rack.glb",
+      "sourceSha256": "fce31204c9c97e98c02178465d841e7191bc6f9c9284be2c1845a45068b78181",
       "normalizationScale": [
-        0.8250100612640381,
-        0.8250100612640381,
-        0.8250100612640381
+        0.910027027130127,
+        0.910027027130127,
+        0.910027027130127
       ],
       "sourceRotationDegrees": [
         0,
         0,
-        0
+        180
       ],
+      "collisionProxies": [
+        {
+          "kind": "capsule",
+          "fromto": [
+            2.24,
+            -2.1976,
+            1.815,
+            2.24,
+            -2.249,
+            1.815
+          ],
+          "size": [
+            0.0048000000000000004
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2584447860717773,
+            -1.920058012008667,
+            0.03983317315578461
+          ],
+          "size": [
+            0.22803819179534912,
+            0.33524173498153687,
+            0.03983317315578461
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2401833534240723,
+            -1.9201070070266724,
+            0.18923044204711914
+          ],
+          "size": [
+            0.1948411464691162,
+            0.23145878314971924,
+            0.13919517397880554
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2403488159179688,
+            -2.1820473670959473,
+            0.9300000071525574
+          ],
+          "size": [
+            0.03797745704650879,
+            0.02051830291748047,
+            0.8900000266730785
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2403275966644287,
+            -1.658386468887329,
+            0.9299631714820862
+          ],
+          "size": [
+            0.037906646728515625,
+            0.02049654722213745,
+            0.8899631910026073
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.240384578704834,
+            -1.9200000762939453,
+            1.7187899351119995
+          ],
+          "size": [
+            0.01921236515045166,
+            0.2560000419616699,
+            0.019649982452392578
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2404050827026367,
+            -1.9200000762939453,
+            0.6243181228637695
+          ],
+          "size": [
+            0.019325852394104004,
+            0.2560000419616699,
+            0.020143449306488037
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2402305603027344,
+            -2.256270408630371,
+            0.931531548500061
+          ],
+          "size": [
+            0.02282118797302246,
+            0.04284703731536865,
+            0.022790104150772095
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.240173578262329,
+            -1.5832146406173706,
+            0.9315131902694702
+          ],
+          "size": [
+            0.022902965545654297,
+            0.04233241081237793,
+            0.022947996854782104
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            2.2401034832000732,
+            -1.5836101770401,
+            1.5742411613464355
+          ],
+          "size": [
+            0.02287745475769043,
+            0.04255366325378418,
+            0.022777318954467773
+          ]
+        }
+      ],
+      "assemblyFitting": "Warm-white satin painted wood. Frame/base width reduced 20%; post and crossbar thickness reduced 20%; pegs retain safe length for original-size accessories. Original linen-box UV and texture retained.",
       "bounds": {
         "min": [
-          1.7300000190734863,
-          -2.358410120010376,
+          2.0304067134857178,
+          -2.2991175651550293,
           0
         ],
         "max": [
-          2.4650039672851562,
-          -1.8015897274017334,
-          1.6718100309371948
+          2.486483097076416,
+          -1.5408822298049927,
+          1.8200000524520874
         ],
         "dimensions": [
-          0.7350039482116699,
-          0.5568203926086426,
-          1.6718100309371948
+          0.45607638359069824,
+          0.7582353353500366,
+          1.8200000524520874
         ]
       },
       "rootPosition": [
-        2.130000114440918,
-        -2.0799999237060547,
+        2.240000009536743,
+        -1.9199999570846558,
         0
       ]
     },
     {
       "id": "c02-pink-coat",
-      "source": "bedroom-assets-pipeline-v1\\delivery\\c02-pink-coat\\c02-pink-coat.glb",
-      "sourceSha256": "a2f4f001bbd34d8d359db45c9d02eb8336e42b8f00ccd126bf1e4f54f555f8af",
+      "source": "coat-rack-generated-v3\\delivery-v2\\c02-pink-coat\\c02-pink-coat.glb",
+      "sourceSha256": "a9dd7d9270a0a2fd54f4604c31a4e29af74ee4f6d7bd7098ecc146a81ad81c07",
       "normalizationScale": [
-        0.37097451090812683,
-        0.3704090118408203,
-        0.3849334120750427
+        0.3899043798446655,
+        0.3899043798446655,
+        0.3899043798446655
       ],
       "sourceRotationDegrees": [
         0,
         0,
-        -90
+        180
       ],
+      "assemblyFitting": "Side-hanging narrow coat with curved hollow neckline, folded rear collar and independent maple hanger; original lower cloth preserved.",
       "bounds": {
         "min": [
-          1.5824999809265137,
-          -2.434999942779541,
-          0.7900000214576721
+          2.0096566677093506,
+          -2.1071205139160156,
+          0.9029090404510498
         ],
         "max": [
-          1.8575000762939453,
-          -1.7249999046325684,
-          1.6778531074523926
+          2.4707343578338623,
+          -1.949769139289856,
+          1.7428975105285645
         ],
         "dimensions": [
-          0.27500009536743164,
-          0.7100000381469727,
-          0.8878530859947205
+          0.4610776901245117,
+          0.15735137462615967,
+          0.8399884700775146
         ]
       },
       "rootPosition": [
-        1.7200000286102295,
-        -2.0799999237060547,
-        0.7900000214576721
+        2.240168571472168,
+        -2.0300662517547607,
+        0.8999999761581421
+      ],
+      "surfaceRevision": 9,
+      "normalRepair": "Collapsed rear cloth sheets cleaned; original material baked to a fresh atlas; continuous cloth normals.",
+      "localRepair": "Separate maple hanger; hollow curved neckline with folded rear collar; smooth hook stem."
+    },
+    {
+      "id": "c03-hat",
+      "source": "coat-rack-generated-v3\\delivery\\c03-hat\\c03-hat.glb",
+      "sourceSha256": "9e7686fadddcb2d6e4ad6e6b424452c4a6e9eb4ad1e7ea2a12dbc19820f26d85",
+      "normalizationScale": [
+        0.1305491179227829,
+        0.1305491179227829,
+        0.1305491179227829
+      ],
+      "sourceRotationDegrees": [
+        0,
+        8,
+        0
+      ],
+      "assemblyFitting": "Crown faces outward along the rail direction; hat hangs near the right post top from a short concealed pin and compact cord loop.",
+      "bounds": {
+        "min": [
+          2.1085028648376465,
+          -2.337286949157715,
+          1.552973985671997
+        ],
+        "max": [
+          2.3414664268493652,
+          -2.228184461593628,
+          1.8243000507354736
+        ],
+        "dimensions": [
+          0.23296356201171875,
+          0.10910248756408691,
+          0.27132606506347656
+        ]
+      },
+      "rootPosition": [
+        2.224984645843506,
+        -2.2823328971862793,
+        1.552973985671997
       ]
+    },
+    {
+      "id": "c04-bag",
+      "source": "coat-rack-generated-v3\\delivery\\c04-bag\\c04-bag.glb",
+      "sourceSha256": "f27dfa5efca2429df2c2b6e56d1940c3fa7ce1ef189331b68beda6453154bffc",
+      "normalizationScale": [
+        0.3150143027305603,
+        0.3150143027305603,
+        0.3150143027305603
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        180
+      ],
+      "assemblyFitting": "Bag faces outward and hangs below its side peg. Both strap runs remain untwisted and coplanar with the original bag; only the small upper bend widens around the cap.",
+      "bounds": {
+        "min": [
+          2.1199753284454346,
+          -1.6179907321929932,
+          0.9738675355911255
+        ],
+        "max": [
+          2.3609063625335693,
+          -1.4770691394805908,
+          1.603867530822754
+        ],
+        "dimensions": [
+          0.24093103408813477,
+          0.14092159271240234,
+          0.6299999952316284
+        ]
+      },
+      "rootPosition": [
+        2.240440845489502,
+        -1.547529935836792,
+        0.9738675355911255
+      ],
+      "accessoryRevision": 8,
+      "localRepair": "Straight original leather strap runs; untouched body, buckles and top bearing arc."
+    },
+    {
+      "id": "c05-shoes",
+      "source": "coat-rack-generated-v3\\delivery\\c05-shoes\\c05-shoes.glb",
+      "sourceSha256": "17369f208a77a705befb3dcfb68dc34bee9cb7191a03c1afeadb9e6fa0fecb3c",
+      "normalizationScale": [
+        0.1635540872812271,
+        0.1635540872812271,
+        0.1635540872812271
+      ],
+      "sourceRotationDegrees": [
+        0,
+        0,
+        90
+      ],
+      "bounds": {
+        "min": [
+          2.0613796710968018,
+          -2.070869207382202,
+          0.32992562651634216
+        ],
+        "max": [
+          2.388620138168335,
+          -1.7691307067871094,
+          0.5099256038665771
+        ],
+        "dimensions": [
+          0.3272404670715332,
+          0.3017385005950928,
+          0.17999997735023499
+        ]
+      },
+      "rootPosition": [
+        2.2249999046325684,
+        -1.9199999570846558,
+        0.32992562651634216
+      ],
+      "accessoryRevision": 8,
+      "localRepair": "Plain warm-gray recessed insoles; interior floor text removed. Exterior and laces unchanged."
     },
     {
       "id": "d01-closet-frame",
@@ -720,6 +975,87 @@
         0,
         -90
       ],
+      "materialRevision": "V6 warm-white paint matching the accepted rack; satin nickel hardware.",
+      "collisionProxies": [
+        {
+          "kind": "box",
+          "pos": [
+            0.35,
+            -3.755,
+            1.06
+          ],
+          "size": [
+            0.025,
+            0.065,
+            1.06
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            1.2,
+            -3.755,
+            1.06
+          ],
+          "size": [
+            0.025,
+            0.065,
+            1.06
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            1.25,
+            -3.755,
+            2.155
+          ],
+          "size": [
+            0.97,
+            0.065,
+            0.025
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            0.315,
+            -3.62,
+            1.075
+          ],
+          "size": [
+            0.014,
+            0.09,
+            1.075
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            1.224,
+            -3.62,
+            1.075
+          ],
+          "size": [
+            0.014,
+            0.09,
+            1.075
+          ]
+        },
+        {
+          "kind": "box",
+          "pos": [
+            0.7695,
+            -3.617,
+            2.064
+          ],
+          "size": [
+            0.4685,
+            0.09,
+            0.104
+          ]
+        }
+      ],
       "bounds": {
         "min": [
           0.2800000309944153,
@@ -728,12 +1064,12 @@
         ],
         "max": [
           2.2200000286102295,
-          -3.68500018119812,
+          -3.527,
           2.179999828338623
         ],
         "dimensions": [
           1.940000057220459,
-          0.1399998664855957,
+          0.2980000476837157,
           2.179999828338623
         ]
       },
@@ -757,20 +1093,21 @@
         0,
         90
       ],
+      "materialRevision": "White perimeter frame with a separate 8 mm milk-white frosted-glass pane. Source pull and hanging tabs retained.",
       "bounds": {
         "min": [
           0.3349999785423279,
-          -3.877500057220459,
+          -3.879699945449829,
           0.014000000432133675
         ],
         "max": [
           1.2049999237060547,
-          -3.8324999809265137,
+          -3.8303000926971436,
           2.0789999961853027
         ],
         "dimensions": [
           0.8699999451637268,
-          0.04500007629394531,
+          0.04939985275268555,
           2.065000057220459
         ]
       },
@@ -794,6 +1131,7 @@
         0,
         0
       ],
+      "materialRevision": "V6 warm-white paint matching the accepted rack; satin nickel hardware.",
       "bounds": {
         "min": [
           2.4800000190734863,
@@ -831,21 +1169,29 @@
         0,
         90
       ],
+      "fitCorrection": {
+        "translationDepth": 0.06,
+        "slabWidthScale": 1.098,
+        "heightScale": 1.018,
+        "bottom": 0.012,
+        "replacedGeneratedHinges": true
+      },
+      "materialRevision": "V6 warm-white paint matching the accepted rack; satin nickel hardware.",
       "bounds": {
         "min": [
-          2.4049999713897705,
-          -3.3460001945495605,
-          0.04999999701976776
+          2.4649999141693115,
+          -3.371000051498413,
+          0.011999998241662979
         ],
         "max": [
-          2.5350000858306885,
-          -2.565999984741211,
-          2.0299999713897705
+          2.5950000286102295,
+          -2.5526928901672363,
+          2.027639865875244
         ],
         "dimensions": [
           0.13000011444091797,
-          0.7800002098083496,
-          1.9800000190734863
+          0.8183071613311768,
+          2.0156397819519043
         ]
       },
       "rootPosition": [
@@ -983,9 +1329,9 @@
         "c02-pink-coat"
       ],
       "pivot": [
-        1.84,
-        -2.08,
-        0.79
+        2.24,
+        -1.92,
+        0.9
       ],
       "kind": "slide",
       "axis": [
@@ -993,7 +1339,7 @@
         0,
         0.35
       ],
-      "travel": 0.35,
+      "travel": 0.45,
       "controlId": "coat.take",
       "default": 0
     },
@@ -1023,8 +1369,8 @@
         "d04-entry-leaf"
       ],
       "pivot": [
-        2.515,
-        -3.398,
+        2.497,
+        -3.365,
         0.014
       ],
       "kind": "hinge",
@@ -1062,23 +1408,126 @@
     ],
     "bookshelfTranslation": [
       0,
-      -0.6,
+      -0.4,
       0
     ],
     "floorLampUnchanged": true,
-    "pcTranslationFromPrevious": [
-      0,
-      -0.45,
-      0
-    ]
+    "rackRevisionNote": "Bookshelf moved 20 cm north to preserve the generated rack and coat proportions and keep accessory separation."
   },
   "motionDependencies": {
     "trash.liner": "trash.open"
   },
   "sourceFloorPlan": "bedroom-furniture-concepts-v1/final/01-approved-floor-plan-B7.png",
+  "entryDoorFit": {
+    "pivot": [
+      2.497,
+      -3.365,
+      0.014
+    ],
+    "wallOpening": {
+      "south": -3.435,
+      "north": -2.475,
+      "top": 2.14
+    },
+    "slabBounds": {
+      "min": [
+        2.5114,
+        -3.3594,
+        0.012
+      ],
+      "max": [
+        2.5535,
+        -2.5527,
+        2.0277
+      ]
+    },
+    "nominalSideGap": 0.006,
+    "nominalTopGap": 0.005,
+    "floorGap": 0.012,
+    "mountingContact": {
+      "part": "d03-entry-frame",
+      "wall": "architecture.rightWall.v6",
+      "reason": "Casing intentionally overlaps rough opening edges to seat the jamb in the wall."
+    }
+  },
+  "coatRackFit": {
+    "revision": 6,
+    "concept": "coat-rack-orientation-v4/reference.png",
+    "wallwardTranslationMetres": 0.115,
+    "frontLipReductionMetres": 0.03689,
+    "coatDrape": "Narrow gravity-led sleeves; V9 separate hanger and curved hollow collar.",
+    "finish": "warm white satin paint on wood only; original linen texture retained",
+    "frameWidthFactor": 0.8,
+    "woodSectionFactor": 0.8,
+    "method": "Five independent Seed3D high masters; UV-preserving reductions and documented local repairs.",
+    "rail": {
+      "center": [
+        2.2403846979141235,
+        -1.92,
+        1.718770980834961
+      ],
+      "radius": 0.019631028175354004
+    },
+    "pegs": {
+      "bag": {
+        "center": [
+          2.2400670051574707,
+          -1.5819999999999999,
+          1.5744251012802124
+        ],
+        "radius": 0.019588232040405273
+      },
+      "hat": {
+        "center": [
+          2.240000009536743,
+          -2.2363998889923096,
+          1.815000057220459
+        ],
+        "radius": 0.0048000000000000004
+      }
+    },
+    "shoeSupportZ": 0.3284256160259247,
+    "sourceClothUniformScale": true,
+    "partCount": 26,
+    "accessories": [
+      "c03-hat",
+      "c04-bag",
+      "c05-shoes"
+    ],
+    "coatSurfaceRevision": 9,
+    "accessorySurfaceRevision": 8
+  },
+  "doorFinish": {
+    "revision": 6,
+    "roomDoor": "warm white solid panel and casing",
+    "bathroomDoor": "south wall pocket door; stable legacy IDs d01/d02-closet and closet.open retained",
+    "paintLinearRgba": [
+      0.83,
+      0.815,
+      0.79,
+      1
+    ],
+    "glass": {
+      "nodeId": "bathroom.frostedGlass",
+      "thicknessMetres": 0.008,
+      "roughness": 0.48,
+      "transmission": 0.78,
+      "ior": 1.46,
+      "openingBounds": {
+        "x": [
+          0.43,
+          1.04
+        ],
+        "z": [
+          0.18,
+          1.89
+        ]
+      }
+    }
+  },
   "asset": {
-    "url": "/room/bedroom/9eb4e309e3431a857041f6d95d98e8115efe988b9b94b28022100f96ea78097f.glb",
-    "sha256": "9eb4e309e3431a857041f6d95d98e8115efe988b9b94b28022100f96ea78097f",
-    "bytes": 9781272
+    "url": "/room/bedroom/c6dedf3185ae00317091905c8eac66de41049ed75c7dfcc01125dfbf0782de87.glb",
+    "sha256": "c6dedf3185ae00317091905c8eac66de41049ed75c7dfcc01125dfbf0782de87",
+    "bytes": 13823452
   }
 }

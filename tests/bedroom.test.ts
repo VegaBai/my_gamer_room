@@ -62,9 +62,17 @@ describe('B7 assembled room',()=>{
    model.apply({});
   }
  });
- it('ships all 23 parts with an intact hashed GLB and no duplicate identifiers',()=>{
+ it('ships all 26 parts with an intact hashed GLB and no duplicate identifiers',()=>{
   const {nodes,bytes}=rig();expect(bytes.length).toBe(spec.asset.bytes);expect(createHash('sha256').update(bytes).digest('hex')).toBe(spec.asset.sha256);
   for(const p of spec.parts)expect(nodes.filter((n:THREE.Object3D)=>n.userData.web_id===p.id)).toHaveLength(1);
+ });
+ it('keeps the hat, bag and shoes on the rack when the coat is lifted off the rail',()=>{
+  const {model,nodes}=rig();model.root.updateWorldMatrix(true,true);
+  const props=['c03-hat','c04-bag','c05-shoes'].map(id=>nodes.find((n:THREE.Object3D)=>n.userData.web_id===id)!);
+  const positions=props.map(p=>p.getWorldPosition(new THREE.Vector3()));
+  model.apply({'coat.take':1});model.root.updateWorldMatrix(true,true);
+  props.forEach((p,i)=>expect(p.getWorldPosition(new THREE.Vector3()).distanceTo(positions[i])).toBeLessThan(1e-8));
+  expect(FURNITURE_INSPECTIONS['coat.take'].parts).toEqual(expect.arrayContaining(['c03-hat','c04-bag','c05-shoes']));
  });
  it('preserves the authored pivots and returns every mechanism exactly to its rest pose',()=>{
   const {model,nodes}=rig();const transforms=nodes.map((o:THREE.Object3D)=>({p:o.position.clone(),q:o.quaternion.clone()}));

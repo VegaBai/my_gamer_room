@@ -14,7 +14,8 @@ export const gltfVector = ([x, y, z]: Vec3) => new THREE.Vector3(x, z, -y);
 
 export function validateBedroom(spec: BedroomContract) {
   if (spec.schema !== 'bedroom-b7/1' || !/^\/room\/bedroom\/[a-f0-9]{64}\.glb$/.test(spec.asset?.url)
-    || spec.parts.length !== 23 || new Set(spec.parts.map(p => p.id)).size !== 23) throw Error('Invalid B7 asset contract');
+    || spec.parts.length !== 26 || new Set(spec.parts.map(p => p.id)).size !== 26
+    || !['c03-hat','c04-bag','c05-shoes'].every(id => spec.parts.some(p => p.id === id))) throw Error('Invalid B7 asset contract');
   for (const m of spec.motions) if (!m.nodeId || !m.parts.length || !['hinge', 'slide'].includes(m.kind)
     || m.axis.length !== 3 || !m.axis.every(Number.isFinite) || !Number.isFinite(m.travel)
     || gltfVector(m.axis).length() < .5 || !BEDROOM_CONTROLS.some(c => c.id === m.controlId)) throw Error('Invalid B7 motion');

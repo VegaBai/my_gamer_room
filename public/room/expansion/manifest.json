@@ -2,9 +2,9 @@
   "schema": "room-expansion-runtime/1",
   "status": "B7-bedroom-assembly",
   "asset": {
-    "url": "/room/expansion/2940316693c67e026d49db0463bcf19c302f9958581565f64c4d08981272e50b.glb",
-    "sha256": "2940316693c67e026d49db0463bcf19c302f9958581565f64c4d08981272e50b",
-    "bytes": 3353852
+    "url": "/room/expansion/f3f54d8b7cb568c12a35b6e143ff9700f1609b6fd62a6a6db2fc6a0982d7471a.glb",
+    "sha256": "f3f54d8b7cb568c12a35b6e143ff9700f1609b6fd62a6a6db2fc6a0982d7471a",
+    "bytes": 3353880
   },
   "rootNodeId": "expansion.root",
   "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
