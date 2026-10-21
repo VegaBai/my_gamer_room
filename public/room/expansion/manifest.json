@@ -2,9 +2,9 @@
   "schema": "room-expansion-runtime/1",
   "status": "B7-bedroom-assembly",
   "asset": {
-    "url": "/room/expansion/f3f54d8b7cb568c12a35b6e143ff9700f1609b6fd62a6a6db2fc6a0982d7471a.glb",
-    "sha256": "f3f54d8b7cb568c12a35b6e143ff9700f1609b6fd62a6a6db2fc6a0982d7471a",
-    "bytes": 3353880
+    "url": "/room/expansion/f738c1e3ec8389f5efa43bc60e98428f3c3cef00fd95d25083e10b804259d406.glb",
+    "sha256": "f738c1e3ec8389f5efa43bc60e98428f3c3cef00fd95d25083e10b804259d406",
+    "bytes": 3353912
   },
   "rootNodeId": "expansion.root",
   "coordinateSystem": "glTF local TRS, Y up; all motions below are LOCAL",
@@ -86,7 +86,13 @@
     ],
     "cordStretchAxis": "y",
     "cordScaleFormula": "topHeight-bottomRailLocalY",
-    "cordModelLength": 1
+    "cordModelLength": 1,
+    "mounting": {
+      "revision": 11,
+      "insetTowardsGlassMetres": 0.07,
+      "nominalGlassGapMetres": 0.048,
+      "note": "Headrail recessed against the upper window frame; blade travel remains clear of panes."
+    }
   },
   "doors": [
     {
