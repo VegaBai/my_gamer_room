@@ -695,7 +695,27 @@ export class RoomEngine {
     if (process.env.NODE_ENV === 'development' && new URLSearchParams(location.search).has('surfaceQA')) {
       void import('./surface-qa').then(({ mountSurfaceQA }) => {
         if (this.disposed) return;
-        this.disposeSurfaceQA = mountSurfaceQA(root, this.scene, this.camera, this.orbit);
+        this.disposeSurfaceQA = mountSurfaceQA(root, this.scene, this.camera, this.orbit, () => {
+          const size = this.renderer.getSize(new THREE.Vector2());
+          const ratio = this.renderer.getPixelRatio();
+          const coverCamera = new THREE.PerspectiveCamera(43, 16 / 9, .05, 80);
+          coverCamera.position.set(-4.48, 5.26, 8.07);
+          coverCamera.lookAt(.05, .95, 1.4);
+          coverCamera.layers.disable(HIT_LAYER);
+          this.hoverOutline.visible = false;
+          this.bookOutline.visible = false;
+          try {
+            this.renderer.setPixelRatio(1);
+            this.renderer.setSize(1600, 900, false);
+            this.architecture?.update(coverCamera.position);
+            this.renderer.render(this.scene, coverCamera);
+            return this.renderer.domElement.toDataURL('image/png');
+          } finally {
+            this.renderer.setPixelRatio(ratio);
+            this.renderer.setSize(size.x, size.y, false);
+            this.architecture?.update(this.camera.position);
+          }
+        });
         this.lastInputAt = Number.POSITIVE_INFINITY;
       });
     }

@@ -6669,7 +6669,7 @@
       "space": "node-local",
       "center": [
         -0.163677931,
-        -1.5e-08,
+        -1.5e-8,
         0.012049407
       ],
       "size": [
@@ -6679,7 +6679,7 @@
       ],
       "activeCenter": [
         -0.163677931,
-        -1.5e-08,
+        -1.5e-8,
         0.012049447
       ],
       "activeSize": [
@@ -6805,9 +6805,9 @@
       "nodeId": "chair.headrest.pivot",
       "space": "node-local",
       "center": [
-        -3e-08,
+        -3e-8,
         0,
-        -6e-08
+        -6e-8
       ],
       "size": [
         0.127596319,
@@ -6815,9 +6815,9 @@
         0.304025769
       ],
       "activeCenter": [
-        -3e-08,
+        -3e-8,
         0,
-        -6e-08
+        -6e-8
       ],
       "activeSize": [
         0.127596319,
@@ -6832,7 +6832,7 @@
       "center": [
         0,
         0,
-        -3e-08
+        -3e-8
       ],
       "size": [
         0.204671383,
@@ -6842,7 +6842,7 @@
       "activeCenter": [
         0,
         0,
-        -3e-08
+        -3e-8
       ],
       "activeSize": [
         0.204671383,
@@ -6884,7 +6884,7 @@
       "space": "node-local",
       "center": [
         0,
-        1.5e-08,
+        1.5e-8,
         0
       ],
       "size": [
@@ -6902,7 +6902,7 @@
       "space": "node-local",
       "center": [
         0,
-        1.5e-08,
+        1.5e-8,
         0
       ],
       "size": [
@@ -8158,7 +8158,7 @@
     "method": "centred suspended U-yoke with coaxial side trunnions",
     "capsuleOffsetMeters": [
       -0.02002739906311035,
-      -4.3720006942749023e-05,
+      -0.000043720006942749023,
       -0.04999995231628418
     ],
     "capsulePreserved": true,
@@ -8270,10 +8270,10 @@
           "minimumCornerFaceNormalDot": 0.9200667050060988,
           "flatTrianglesChecked": 168,
           "flatCornerNormalMismatches": 0,
-          "flatFaceMaximumNormalErrorDegrees": 2.822622675569471e-05,
+          "flatFaceMaximumNormalErrorDegrees": 0.00002822622675569471,
           "connectedComponents": 2,
           "nonPositiveVolumeComponents": 0,
-          "minimumComponentVolumeM3": 5.7231868489853054e-05,
+          "minimumComponentVolumeM3": 0.000057231868489853054,
           "passed": true,
           "physicalAssemblies": 1
         },
@@ -8293,7 +8293,7 @@
           "flatFaceMaximumNormalErrorDegrees": 0.024241874151547813,
           "connectedComponents": 8,
           "nonPositiveVolumeComponents": 0,
-          "minimumComponentVolumeM3": 7.092000043377285e-06,
+          "minimumComponentVolumeM3": 0.000007092000043377285,
           "passed": true,
           "physicalAssemblies": 1
         },
@@ -8313,7 +8313,7 @@
           "flatFaceMaximumNormalErrorDegrees": 0.019782341029446364,
           "connectedComponents": 4,
           "nonPositiveVolumeComponents": 0,
-          "minimumComponentVolumeM3": 4.63478628948368e-06,
+          "minimumComponentVolumeM3": 0.00000463478628948368,
           "passed": true,
           "physicalAssemblies": 2
         }
@@ -8335,8 +8335,8 @@
       "allDriversLiveAndValidated": true,
       "defaultsRestored": true,
       "capsuleCenterInHeadM": [
-        1.862645149230957e-09,
-        3.725290298461914e-09,
+        1.862645149230957e-9,
+        3.725290298461914e-9,
         -0.16117990016937256
       ],
       "yokeCapsuleIntersectionPairs": 0,
@@ -8476,13 +8476,13 @@
         }
       ],
       "maxima": {
-        "rigidUnitError": 1.7881393432617188e-07,
+        "rigidUnitError": 1.7881393432617188e-7,
         "axleCenterErrorM": 0,
         "axleAxisErrorRadians": 0.0003452669847162036,
         "bearingSurfaceGapM": 0.0005000624805688858,
-        "capsuleRelativeMatrixError": 1.1920928955078125e-07,
+        "capsuleRelativeMatrixError": 1.1920928955078125e-7,
         "capsuleVerticalErrorRadians": 0,
-        "driverAngleErrorRadians": 4.801540154364403e-08
+        "driverAngleErrorRadians": 4.801540154364403e-8
       },
       "obbSeparatedPairs": 2520,
       "fullTriangleBvhPairs": 0,
@@ -8630,10 +8630,10 @@
     "ktx2Available": false
   },
   "poster": {
-    "url": "/room/poster-481137dfb82db8afee94b4d835e893adad7077a1987e09ff45b7952e4659c46c.png",
-    "sha256": "481137dfb82db8afee94b4d835e893adad7077a1987e09ff45b7952e4659c46c",
-    "bytes": 1638438,
+    "url": "/room/poster-a6e8e0f9efed3dedd8baf14fabbeb93028368a353999ccb472b2202cd2494ee5.png",
+    "sha256": "a6e8e0f9efed3dedd8baf14fabbeb93028368a353999ccb472b2202cd2494ee5",
     "width": 1600,
-    "height": 900
+    "height": 900,
+    "bytes": 588373
   }
 }

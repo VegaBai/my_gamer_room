@@ -42,6 +42,8 @@ export class BedroomAssembly {
     contract.parts.forEach(p => requireNode(p.id));
     for (const motion of contract.motions) {
       const node = requireNode(motion.nodeId);
+      // Imported float32 rotations can be slightly non-unit after an authored yaw.
+      node.quaternion.normalize();
       this.transforms.push({ node, position: node.position.clone(), quaternion: node.quaternion.clone(), motion });
       const targets = this.visualTargets.get(motion.controlId) ?? [];
       targets.push(...motion.parts.map(requireNode)); this.visualTargets.set(motion.controlId, targets);

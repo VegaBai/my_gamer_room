@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import roomManifest from '../public/room/room-manifest.json';
 
 export const metadata: Metadata = {
   title: "Vega's Gaming Room | Interactive 3D Room",
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['zh_CN'],
-    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Pink-and-white gaming room in 3D' }],
+    images: [{ url: roomManifest.poster.url, width: 1600, height: 900, alt: 'Pink-and-white gaming room in 3D' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Vega's Gaming Room | Interactive 3D Room",
     description: 'Explore a pink-and-white gaming room. Click the devices to adjust them in 3D.',
-    images: ['/og.png'],
+    images: [roomManifest.poster.url],
   },
 };
 

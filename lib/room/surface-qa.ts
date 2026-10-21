@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera: THREE.PerspectiveCamera, orbit: OrbitControls) {
+export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera: THREE.PerspectiveCamera, orbit: OrbitControls, captureCover?: () => string) {
   const panel = document.createElement('section');
   panel.setAttribute('aria-label', '表面检查工具');
   Object.assign(panel.style, { position: 'fixed', top: '12px', right: '12px', zIndex: '100', background: '#fff', color: '#202020', padding: '10px', borderRadius: '10px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: '560px', fontSize: '14px' });
@@ -149,6 +149,14 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   }
   button('衣领正面', () => focusCoatCollar(false));
   button('衣领背面', () => focusCoatCollar(true));
+  if (captureCover) button('生成当前房间封面', () => {
+    const preview = document.createElement('img');
+    preview.alt = '当前房间封面预览';
+    preview.src = captureCover();
+    preview.style.cssText = 'position:fixed;inset:12% 5%;width:90%;height:76%;object-fit:contain;z-index:110;background:#eadde4;cursor:pointer';
+    preview.onclick = () => preview.remove();
+    document.body.appendChild(preview);
+  });
   const normalButton = button('法线贴图：开', () => {
     normals = !normals;
     normalButton.textContent = `法线贴图：${normals ? '开' : '关'}`;
