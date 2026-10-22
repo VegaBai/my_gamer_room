@@ -157,6 +157,7 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   button('百叶安装侧面', () => detailView([-.9, 2.8, 1.9], [-2.05, 1.76, .55]));
   button('吉他承托斜视', () => detailView([-1.08, .65, .35], [-1.72, .30, .03]));
   button('吉他承托侧面', () => detailView([-2.10, .55, .62], [-1.72, .35, .03]));
+  button('垃圾桶铰链与踏板', () => detailView([-1.03, 1.05, .08], [-1.34, .35, -.44]));
   if (captureCover) button('生成当前房间封面', () => {
     const preview = document.createElement('img');
     preview.alt = '当前房间封面预览';

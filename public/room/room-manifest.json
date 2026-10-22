@@ -8630,10 +8630,10 @@
     "ktx2Available": false
   },
   "poster": {
-    "url": "/room/poster-f94b47e4687a73c254b15b68436ed3fb7a17ea43c7ef49df37d17a98d0f05aa6.png",
-    "sha256": "f94b47e4687a73c254b15b68436ed3fb7a17ea43c7ef49df37d17a98d0f05aa6",
+    "url": "/room/poster-a720078c1f354067c71f491de2f3fd9852d9b6db9f86879382ba0817a61cb05d.png",
+    "sha256": "a720078c1f354067c71f491de2f3fd9852d9b6db9f86879382ba0817a61cb05d",
     "width": 1600,
     "height": 900,
-    "bytes": 592101
+    "bytes": 592044
   }
 }
