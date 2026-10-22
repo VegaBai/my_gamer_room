@@ -62,7 +62,7 @@ describe('B7 assembled room',()=>{
    model.apply({});
   }
  });
- it('ships all 26 parts with an intact hashed GLB and no duplicate identifiers',()=>{
+ it('ships all 27 parts with an intact hashed GLB and no duplicate identifiers',()=>{
   const {nodes,bytes}=rig();expect(bytes.length).toBe(spec.asset.bytes);expect(createHash('sha256').update(bytes).digest('hex')).toBe(spec.asset.sha256);
   for(const p of spec.parts)expect(nodes.filter((n:THREE.Object3D)=>n.userData.web_id===p.id)).toHaveLength(1);
  });
