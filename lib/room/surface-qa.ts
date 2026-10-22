@@ -150,10 +150,13 @@ export function mountSurfaceQA(root: THREE.Object3D, scene: THREE.Scene, camera:
   button('衣领正面', () => focusCoatCollar(false));
   button('衣领背面', () => focusCoatCollar(true));
   const detailView = (position: [number, number, number], target: [number, number, number]) => {
-    unlockCamera(); camera.position.fromArray(position); orbit.target.fromArray(target); orbit.update();
+    unlockCamera(); camera.position.fromArray(position); orbit.target.fromArray(target);
+    camera.fov = 43; camera.updateProjectionMatrix(); orbit.update();
   };
   button('床尾褶皱', () => detailView([1.05, 1.50, 1.75], [-.65, .5, 2.96]));
   button('百叶安装侧面', () => detailView([-.9, 2.8, 1.9], [-2.05, 1.76, .55]));
+  button('吉他承托斜视', () => detailView([-1.08, .65, .35], [-1.72, .30, .03]));
+  button('吉他承托侧面', () => detailView([-2.10, .55, .62], [-1.72, .35, .03]));
   if (captureCover) button('生成当前房间封面', () => {
     const preview = document.createElement('img');
     preview.alt = '当前房间封面预览';
