@@ -1,0 +1,31 @@
+Avatar V28 checkpoint — 2026-10-26
+
+Current stage approved for Git archival. Further texture optimization is deferred.
+Open avatar-body-surface-v28.blend in Blender 5.2. Textures are packed in the file.
+
+This checkpoint includes the V26 arm/hand repair, V27 leg repair and V28 full-body
+review with additional local smoothing on the face, neck, jaw and ears.
+The modifiers remain editable and reversible in the saved Blender project.
+
+Review: eight azimuths at head, torso and full-body scale, plus grazing/low views
+of the neck, underside of the jaw and ears. Review images are in renders/.
+The before/after head sheet compares V27 with V28.
+
+Validation: inspection/verification.json records the completed V27-to-V28 checks.
+Original mesh positions, topology, custom normals, UVs, material assignments,
+transforms, material nodes and packed texture bytes were retained. Geometry,
+normals, UVs, topology and materials outside the new head patch match V27.
+Maximum boundary roundoff is 1.195e-7 model units (float32 precision).
+The local V28 patch includes 1643 head/neck/ear faces and pins its boundary.
+
+This archive is a final editable model snapshot. Earlier local revisions,
+source backups and temporary diagnostic renders are retained in the original
+workspace and are not included in this checkpoint. The file manifest records
+content hashes and the V27 comparison baseline hash.
+
+Git LFS is required for the Blender file. After cloning this repository, run:
+  git lfs install
+  git lfs pull
+
+The model is stored as a source asset under art_src; this commit does not
+integrate it into the room runtime. Texture optimization remains future work.

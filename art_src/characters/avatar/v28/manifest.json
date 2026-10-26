@@ -1,0 +1,43 @@
+{
+  "version": "v28",
+  "date": "2026-10-26",
+  "blender_version": "5.2",
+  "status": "character checkpoint; texture optimization deferred",
+  "baseline": {
+    "version": "v27",
+    "sha256": "17db8096c238796dba32324c7624aa0c99b8cc2b71356e178a16d7c3e1d13599",
+    "included": false
+  },
+  "files": [
+    {
+      "path": "avatar-body-surface-v28.blend",
+      "bytes": 276147928,
+      "sha256": "7d367b71384f170433ca55550ba50b4f48af87bf8e01a1c4aaa0b37df227ac21"
+    },
+    {
+      "path": "NOTES.txt",
+      "bytes": 1652,
+      "sha256": "bc2e962294ab40e7327db05a3ec246cbfcd00374e47a17809656dfb550da087b"
+    },
+    {
+      "path": "inspection/verification.json",
+      "bytes": 716,
+      "sha256": "b660d3e800bc0aac79e87742ad7fec97957fc9a807e8abc33ae746e7909b6bab"
+    },
+    {
+      "path": "renders/after-full-contact.png",
+      "bytes": 574527,
+      "sha256": "c33d1a9082a978e8546b107ccf0c6b1c8e27303f6fe8ffec556ee5f366c3ea04"
+    },
+    {
+      "path": "renders/after-head-contact.png",
+      "bytes": 1283354,
+      "sha256": "4a2a57b97637b87894da4fc9eaa67c18d602ff6fa7ed6f7e7d0331b2a3311042"
+    },
+    {
+      "path": "renders/head-before-after.png",
+      "bytes": 843575,
+      "sha256": "b9238a8dd0378214f9062319e8ec30e7153df19cf2ef13c11975f7fda55f2c71"
+    }
+  ]
+}

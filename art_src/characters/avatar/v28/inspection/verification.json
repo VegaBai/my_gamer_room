@@ -1,0 +1,19 @@
+{
+  "base_vertices": 13255,
+  "base_faces": 13429,
+  "head_skin_faces_selected": 1643,
+  "evaluated_vertices_after": 72917,
+  "evaluated_faces_after": 72479,
+  "outside_head_patch_positions_equal": true,
+  "outside_head_patch_uvs_equal": true,
+  "outside_head_patch_topology_equal": true,
+  "outside_head_patch_materials_equal": true,
+  "all_source_meshes_normals_uvs_material_assignments_transforms_unchanged": true,
+  "all_packed_images_unchanged": true,
+  "all_material_nodes_unchanged": true,
+  "outside_head_patch_normal_max_error": 0.0,
+  "outside_head_patch_normals_preserved": true,
+  "original_patch_boundary_preserved": true,
+  "patch_boundary_position_max_error": 1.194999725839807e-07,
+  "passed": true
+}
