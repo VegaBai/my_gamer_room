@@ -18,10 +18,12 @@ normals, UVs, topology and materials outside the new head patch match V27.
 Maximum boundary roundoff is 1.195e-7 model units (float32 precision).
 The local V28 patch includes 1643 head/neck/ear faces and pins its boundary.
 
-This archive is a final editable model snapshot. Earlier local revisions,
-source backups and temporary diagnostic renders are retained in the original
-workspace and are not included in this checkpoint. The file manifest records
-content hashes and the V27 comparison baseline hash.
+This archive is a final editable model snapshot. On 2026-10-26, V01-V27 models,
+textures and working files were removed at the user's request after preserving
+their preview images in ../progress/. The V27 backup was also removed.
+The progress archive contains aligned eight-view previews and a 28-second
+iteration video through V28. The file manifest records this snapshot's content
+hashes and the V27 comparison baseline hash.
 
 Git LFS is required for the Blender file. After cloning this repository, run:
   git lfs install

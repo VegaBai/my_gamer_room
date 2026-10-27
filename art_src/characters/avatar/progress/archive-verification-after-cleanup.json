@@ -1,0 +1,2922 @@
+{
+  "passed": true,
+  "after_cleanup": true,
+  "original_previews_verified": 892,
+  "old_version_previews_verified": 817,
+  "standard_views_verified": 224,
+  "v28_model_unchanged": true,
+  "standard_views": [
+    {
+      "version": 1,
+      "view": "front",
+      "path": "v01/views/front.png",
+      "sha256": "0ee5a850a39c57adb0605ec8a757d5886ba311e8bdc1b465ee0d3d4d11d6a229",
+      "bytes": 554190,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 1,
+      "view": "front-left",
+      "path": "v01/views/front-left.png",
+      "sha256": "794fe7308018e12b95fe6cb4cf687c1c26db5ad0e4b63d55db0e9158ce6174ba",
+      "bytes": 558204,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 1,
+      "view": "left",
+      "path": "v01/views/left.png",
+      "sha256": "16ab6a8efc6668ff02a4407c84d051068f18065591ec00bb3134ec848c705efe",
+      "bytes": 506787,
+      "foreground_bbox": [
+        326,
+        37,
+        521,
+        961
+      ]
+    },
+    {
+      "version": 1,
+      "view": "back-left",
+      "path": "v01/views/back-left.png",
+      "sha256": "eee7235ec01072437148ad53cf329cc6ab33ff4ee795013752486d0c266fa1f2",
+      "bytes": 539134,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 1,
+      "view": "back",
+      "path": "v01/views/back.png",
+      "sha256": "06db1923e76e9f48b994e6a9552b588dba9af3e7fd2ddcbd61b8c20d0a9d98e2",
+      "bytes": 531914,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 1,
+      "view": "back-right",
+      "path": "v01/views/back-right.png",
+      "sha256": "339000035f30ce6b45250ec0538a7868dda4b8934adc6e2755a279fa9e9782a0",
+      "bytes": 534676,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 1,
+      "view": "right",
+      "path": "v01/views/right.png",
+      "sha256": "43fb7460f1ea8f09834c1086de3f4e4076c0923eff472656194da1288665e053",
+      "bytes": 503882,
+      "foreground_bbox": [
+        327,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 1,
+      "view": "front-right",
+      "path": "v01/views/front-right.png",
+      "sha256": "5e299b6231374474444c202dedcaabeca96dc15fb6fd20c2d939fcfa0095cc0e",
+      "bytes": 556425,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 2,
+      "view": "front",
+      "path": "v02/views/front.png",
+      "sha256": "36e3c75fa64e983166c23f765a572d92b6e53b7bade14bb0e313a28ddc1487a3",
+      "bytes": 552553,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 2,
+      "view": "front-left",
+      "path": "v02/views/front-left.png",
+      "sha256": "157b4e77ca8d6fc0ecf98e8afb3d5b1e529104ef7af4316ada0031eb1293b196",
+      "bytes": 559628,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 2,
+      "view": "left",
+      "path": "v02/views/left.png",
+      "sha256": "3533fa2a481af6194bd30eb35a207b0fcd04422ff5db3cb6a61056577232873e",
+      "bytes": 510092,
+      "foreground_bbox": [
+        322,
+        37,
+        520,
+        962
+      ]
+    },
+    {
+      "version": 2,
+      "view": "back-left",
+      "path": "v02/views/back-left.png",
+      "sha256": "21091e84bbe4291eafd5fc9a79c53bf07ab7425ae3b47e7455d6223739fe5cdf",
+      "bytes": 543568,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        961
+      ]
+    },
+    {
+      "version": 2,
+      "view": "back",
+      "path": "v02/views/back.png",
+      "sha256": "94f371fad68b86c80780879443558d34f57b9f88d21e52d9c914f1709ce06607",
+      "bytes": 536084,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 2,
+      "view": "back-right",
+      "path": "v02/views/back-right.png",
+      "sha256": "d931163859ade47101a48468bd03f8952e41ac8545e0986869341fe9ad1cfb70",
+      "bytes": 539575,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        961
+      ]
+    },
+    {
+      "version": 2,
+      "view": "right",
+      "path": "v02/views/right.png",
+      "sha256": "b41bc74c51f45d41c19a57ddaffdb17aa2aeaff03b25cb1e928b86a665f79171",
+      "bytes": 507230,
+      "foreground_bbox": [
+        328,
+        37,
+        528,
+        961
+      ]
+    },
+    {
+      "version": 2,
+      "view": "front-right",
+      "path": "v02/views/front-right.png",
+      "sha256": "19919803da0f6b5d9276cd17f4ec4d6d791c85ee77d4921b131924782e207638",
+      "bytes": 557228,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 3,
+      "view": "front",
+      "path": "v03/views/front.png",
+      "sha256": "04e833c7a1c8ddf3f84ced699713305f1dafccbc0f1c29a0f7e6125ba962d063",
+      "bytes": 552653,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 3,
+      "view": "front-left",
+      "path": "v03/views/front-left.png",
+      "sha256": "a64af3021c07c8c8cdf0619a392ea2b1385c656fd398aaacab54c134aa3ca047",
+      "bytes": 560089,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 3,
+      "view": "left",
+      "path": "v03/views/left.png",
+      "sha256": "6dc9a73d8cad33f1dc22d068b067d3cc9e027cfb6239f7bc663dc9af4f1acd68",
+      "bytes": 511363,
+      "foreground_bbox": [
+        322,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 3,
+      "view": "back-left",
+      "path": "v03/views/back-left.png",
+      "sha256": "2d263c24e65a581714b30138b759379965721cd5023e63c588e3d54c07d69a3c",
+      "bytes": 544521,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        961
+      ]
+    },
+    {
+      "version": 3,
+      "view": "back",
+      "path": "v03/views/back.png",
+      "sha256": "30965b9e3aa3a7ab1ccde0ce7e7dee71d4484e483b8e872fa854c991bbdeb840",
+      "bytes": 536949,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 3,
+      "view": "back-right",
+      "path": "v03/views/back-right.png",
+      "sha256": "a9ab01a2b8980b80d31cd694622e973504f8391a5632745ea1539948963a46bd",
+      "bytes": 540370,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        961
+      ]
+    },
+    {
+      "version": 3,
+      "view": "right",
+      "path": "v03/views/right.png",
+      "sha256": "cec351cb4ef8f4a1901bc74107f7a96d5068dd3904499b9b0e5389f5aa2fd03e",
+      "bytes": 508382,
+      "foreground_bbox": [
+        329,
+        37,
+        528,
+        961
+      ]
+    },
+    {
+      "version": 3,
+      "view": "front-right",
+      "path": "v03/views/front-right.png",
+      "sha256": "05f3ad2c62697900d0ed9796b07cbfc034e62891a1cfbd233caa961bb53e666e",
+      "bytes": 557381,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 4,
+      "view": "front",
+      "path": "v04/views/front.png",
+      "sha256": "8439c400ec13f5d85b90dde7bf1a3f1748e7133025d7b2e99d2a0802f2ecdde9",
+      "bytes": 552635,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 4,
+      "view": "front-left",
+      "path": "v04/views/front-left.png",
+      "sha256": "4489eb51348f7c7e9f0b52c8e919f8d19409c27d24377cd9f003e8fe7464a809",
+      "bytes": 559973,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 4,
+      "view": "left",
+      "path": "v04/views/left.png",
+      "sha256": "127fb530deb58306cbe582a2851333a76b8be9b0c2a600e5156f127e6cea6ad1",
+      "bytes": 511063,
+      "foreground_bbox": [
+        322,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 4,
+      "view": "back-left",
+      "path": "v04/views/back-left.png",
+      "sha256": "1586581bb397fc3a3f610ce47dbcad49e420a9525f540520ad74c79a12d48147",
+      "bytes": 543579,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        961
+      ]
+    },
+    {
+      "version": 4,
+      "view": "back",
+      "path": "v04/views/back.png",
+      "sha256": "1897490b66f157664f193a4c345b2d736fe97903c7dcbf9d5fe773a63c25eb01",
+      "bytes": 536336,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 4,
+      "view": "back-right",
+      "path": "v04/views/back-right.png",
+      "sha256": "e829647499da489167775987fdde220caae8fb40fe06df45a4152a501c881e7a",
+      "bytes": 539595,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        961
+      ]
+    },
+    {
+      "version": 4,
+      "view": "right",
+      "path": "v04/views/right.png",
+      "sha256": "568ec8f4f013150814521f31e11b4fe1e11c83bdd9143f2e09828a4db5c994c4",
+      "bytes": 507998,
+      "foreground_bbox": [
+        329,
+        37,
+        528,
+        961
+      ]
+    },
+    {
+      "version": 4,
+      "view": "front-right",
+      "path": "v04/views/front-right.png",
+      "sha256": "7d45002818cec8de78ce20a8135cd09971a5491bff661d26637e611e7e45a44a",
+      "bytes": 557376,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "front",
+      "path": "v05/views/front.png",
+      "sha256": "3e3f68ca3b1660ed9476a27eb6f4f2f1e3f716dab0cf398520c08b66dfa32907",
+      "bytes": 553416,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "front-left",
+      "path": "v05/views/front-left.png",
+      "sha256": "436712d1b41f6a6578a760706085778684fe78cf637d4785d0a13d54b39b757f",
+      "bytes": 561116,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "left",
+      "path": "v05/views/left.png",
+      "sha256": "eb21dcf4387104fd9a448b6e17e047e447a583d1e7e46faed1a0658c41071908",
+      "bytes": 511964,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "back-left",
+      "path": "v05/views/back-left.png",
+      "sha256": "4ef6ab88764d3dfd1d492b28f44f759f158c282294ad21720a1a8f69c959ea70",
+      "bytes": 544277,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "back",
+      "path": "v05/views/back.png",
+      "sha256": "27b85249b6f73b89477f12f14a9d9224260339bbec924efdb07fd641d5c1249c",
+      "bytes": 536371,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 5,
+      "view": "back-right",
+      "path": "v05/views/back-right.png",
+      "sha256": "b723d4add9fbf9e803563c97385cd441861d897959c3d9ca4a43bffd20e9fb95",
+      "bytes": 540292,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 5,
+      "view": "right",
+      "path": "v05/views/right.png",
+      "sha256": "cd09c201e0472c8dc1e86fd39ae8e4969095b6e37cd680e8b778bc7e0fdc0ef2",
+      "bytes": 508732,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 5,
+      "view": "front-right",
+      "path": "v05/views/front-right.png",
+      "sha256": "5c96637899690b2ac8e6e070bd0b11f1617ca33379886c816a94fb48d6962d84",
+      "bytes": 558258,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "front",
+      "path": "v06/views/front.png",
+      "sha256": "0c456430b741059f37c7b6be7b1db558bfac0740095c2fea238925861408ae22",
+      "bytes": 553408,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "front-left",
+      "path": "v06/views/front-left.png",
+      "sha256": "61da682f66fbc0f6907e97ed239882d3605c3a295c959696d186fa1a56070a2a",
+      "bytes": 561208,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "left",
+      "path": "v06/views/left.png",
+      "sha256": "8b97b81065db901be2df5c8d9fce0a30c0807d586fa797a141690c6f06540be8",
+      "bytes": 512029,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "back-left",
+      "path": "v06/views/back-left.png",
+      "sha256": "7cce209b57a3c656ccb6e66b81e4efa8565859313a2a167afa428f060dc0625b",
+      "bytes": 544267,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "back",
+      "path": "v06/views/back.png",
+      "sha256": "2ee317b8063dcf0d3daea1a95b1160b9bb6430b39c2fb85f93b6cfa422b3ad59",
+      "bytes": 536337,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 6,
+      "view": "back-right",
+      "path": "v06/views/back-right.png",
+      "sha256": "4d5a63fe128aeb2f122c8451082bf67434df438137a593d219855b3f06a46dde",
+      "bytes": 540284,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 6,
+      "view": "right",
+      "path": "v06/views/right.png",
+      "sha256": "d0e925952c58e3fa9e621dc05743014c4367e3a1059de7645cba806badf4238e",
+      "bytes": 508777,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 6,
+      "view": "front-right",
+      "path": "v06/views/front-right.png",
+      "sha256": "b953e29546387a50118eef4b4faab6b6153c275a09988bba572e07fb5ef54975",
+      "bytes": 558234,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "front",
+      "path": "v07/views/front.png",
+      "sha256": "874784a13a18df1a0811c6fc69a74065edf5f297ca8f0d99fa9662011d6aba5c",
+      "bytes": 553909,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "front-left",
+      "path": "v07/views/front-left.png",
+      "sha256": "c45e2a8c6905494d22e51013f373c119295ef87d9ef3fe0f92bd098b4da4fb42",
+      "bytes": 562253,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "left",
+      "path": "v07/views/left.png",
+      "sha256": "cec14a2c1c4e4eea412bc56be5617b24282a9c374d22afd76600e05206227f8d",
+      "bytes": 515142,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "back-left",
+      "path": "v07/views/back-left.png",
+      "sha256": "5fe4269865c2f7b794569e4b6d1371f11fa2fd4c2289e6a9f2a32b6e9c5a0206",
+      "bytes": 546550,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "back",
+      "path": "v07/views/back.png",
+      "sha256": "4f0f2deaa717819586988b25a54f1c1e50d446b400dd1107b67ff89eca98e9bc",
+      "bytes": 537350,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 7,
+      "view": "back-right",
+      "path": "v07/views/back-right.png",
+      "sha256": "0012e8af5a9101b96b0c12f384daf5af558b4118c2efa6b136f87a7642164caf",
+      "bytes": 541846,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 7,
+      "view": "right",
+      "path": "v07/views/right.png",
+      "sha256": "44410d87e08566d1458a4f3dad971575a646e7765480358fa9e9fe0bccc84a8f",
+      "bytes": 512283,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 7,
+      "view": "front-right",
+      "path": "v07/views/front-right.png",
+      "sha256": "224caa24d7f3549950623609c5457c3fc0633db6fa8ce7c8db124733641bea19",
+      "bytes": 559813,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "front",
+      "path": "v08/views/front.png",
+      "sha256": "48cec901620b8760af78a1658a7b349c3feee820795e781072cf5eb96b475074",
+      "bytes": 553898,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "front-left",
+      "path": "v08/views/front-left.png",
+      "sha256": "f65513a29f02bf011b1c66a62024793e92c655cea89f4620c83541274aa29fcf",
+      "bytes": 562309,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "left",
+      "path": "v08/views/left.png",
+      "sha256": "066dd72da688b3db15537fe322428e0a350c5206462139fabdf23b6a1a3d7c94",
+      "bytes": 515110,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "back-left",
+      "path": "v08/views/back-left.png",
+      "sha256": "e002f5cfc930bd384469613192b76a34fe2140787ef00d64ba4ddebbce607235",
+      "bytes": 546658,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "back",
+      "path": "v08/views/back.png",
+      "sha256": "9301d4ea645e616caedff429f8dc92482c00e213873c20b9b7bf4c5d561cb46c",
+      "bytes": 537315,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 8,
+      "view": "back-right",
+      "path": "v08/views/back-right.png",
+      "sha256": "6e06dc4a55e6db5b1d1556e80bd85f57a93d38d6b4c63694de3ab224c3c5259d",
+      "bytes": 541950,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 8,
+      "view": "right",
+      "path": "v08/views/right.png",
+      "sha256": "596555f57e2118e61254ba49282db03a8a7d0462a06c78c6852a55a9b9395c81",
+      "bytes": 512201,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 8,
+      "view": "front-right",
+      "path": "v08/views/front-right.png",
+      "sha256": "d0cc69d6a46354dfae4dab7e39a51609abb55f6b99badcd719bbc002f1efe437",
+      "bytes": 559859,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "front",
+      "path": "v09/views/front.png",
+      "sha256": "9da6a37b9a769e6471cd2445908a190552064cac52949c4e5cea8dad85336246",
+      "bytes": 555643,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "front-left",
+      "path": "v09/views/front-left.png",
+      "sha256": "a97d0303a467b8c2c1dfa8bd0162a1bd0943eb5dbb46f9dae13c620ecc96fbc8",
+      "bytes": 564043,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "left",
+      "path": "v09/views/left.png",
+      "sha256": "dd330dbbe24fd58239fe85629e4924269fc34a2170d3bf813677ff63d1bfe368",
+      "bytes": 515290,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "back-left",
+      "path": "v09/views/back-left.png",
+      "sha256": "b8d9d1eb8d60e90d12df88122bf04e41114a0b5900e70efb50c7261d0f0ebd50",
+      "bytes": 546781,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "back",
+      "path": "v09/views/back.png",
+      "sha256": "9e0abd50b54d918a55c0a360ba40963434e669d75d59902d9688c82b3323b4c7",
+      "bytes": 537103,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 9,
+      "view": "back-right",
+      "path": "v09/views/back-right.png",
+      "sha256": "f7e0660ea434c629d2e957f537361262dc5e6e2e80c0a3ab3c73cf2b97c04288",
+      "bytes": 542019,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 9,
+      "view": "right",
+      "path": "v09/views/right.png",
+      "sha256": "1ba94301818ff788a0604face8a6b7e1eb760f29e4846145df9d9002976f6d6e",
+      "bytes": 512124,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 9,
+      "view": "front-right",
+      "path": "v09/views/front-right.png",
+      "sha256": "14bf0e1f69cbc2740be3b9da52f29aac2a4bf079553845ccf6637aef6c1f49ec",
+      "bytes": 561417,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "front",
+      "path": "v10/views/front.png",
+      "sha256": "4a7d065ae7208dab16e9150b026671ebf8f2f4f86f1344346d494df48dfbbcb5",
+      "bytes": 555680,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "front-left",
+      "path": "v10/views/front-left.png",
+      "sha256": "c157b4f34256e5c333c78d8c8bc84a01415f5b94cec28ed669e8b7113c45038a",
+      "bytes": 564179,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "left",
+      "path": "v10/views/left.png",
+      "sha256": "9ec1e307b7685028225e4676f7f3ff9409fb94a1b092efed0bbd8139c2dcd27a",
+      "bytes": 515527,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "back-left",
+      "path": "v10/views/back-left.png",
+      "sha256": "bb44f8822bcd2d02b3b67132e49cac7f333a7d35ecb44a3c3529c22e24afc3cf",
+      "bytes": 546741,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "back",
+      "path": "v10/views/back.png",
+      "sha256": "c43e9d382b49df0c6761a6b94ca77c9ded9dcbf48b38368758b5102d69757e15",
+      "bytes": 537167,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 10,
+      "view": "back-right",
+      "path": "v10/views/back-right.png",
+      "sha256": "3871b5293d9563206d77fe47038653e60beaee7abc07222d13dc4d718fc71453",
+      "bytes": 542092,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 10,
+      "view": "right",
+      "path": "v10/views/right.png",
+      "sha256": "70ed5c7ae179e35ca479da7f9eaaca0ab3677b3330329118a25d454834e07121",
+      "bytes": 512459,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 10,
+      "view": "front-right",
+      "path": "v10/views/front-right.png",
+      "sha256": "9a8619a3e42d293127e536f07dbc832ca173e4d89e39b073cc34e48c367642d4",
+      "bytes": 561393,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "front",
+      "path": "v11/views/front.png",
+      "sha256": "0d0bfaba6f3b9a89bd3494be568250ea2f82eb0457cf92fca1a8b550dc7232a9",
+      "bytes": 555622,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "front-left",
+      "path": "v11/views/front-left.png",
+      "sha256": "e435cb297b8ef56819e75a04fe074af6c6ba69ef96a969a0273787098dca8ce9",
+      "bytes": 564179,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "left",
+      "path": "v11/views/left.png",
+      "sha256": "18d169c8cc2e997dbdd68d3c0c24848ca33255c2f8e50ed06c4438521ca2361c",
+      "bytes": 515458,
+      "foreground_bbox": [
+        324,
+        37,
+        519,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "back-left",
+      "path": "v11/views/back-left.png",
+      "sha256": "d49d31d4b5019c4b4690ff034f8d7a6181f7545d3764f1745833ac80a078e2ee",
+      "bytes": 546737,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "back",
+      "path": "v11/views/back.png",
+      "sha256": "f6b69878a1668045ea354632cd53a080c97eb0b3fb931a2911a55b31403b6187",
+      "bytes": 537163,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 11,
+      "view": "back-right",
+      "path": "v11/views/back-right.png",
+      "sha256": "f2652b26683a4d78258ce3ca7b7c943adfcd75989b3d174d6897de79fb399076",
+      "bytes": 542088,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 11,
+      "view": "right",
+      "path": "v11/views/right.png",
+      "sha256": "7b5da1b453cde42cef5b4c711136e6b75beadcf7a4802cc7f18485aacaced1a8",
+      "bytes": 512456,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 11,
+      "view": "front-right",
+      "path": "v11/views/front-right.png",
+      "sha256": "e8d19ab1a61ce99a9cc28cc8a4a2f763505838c575830ccecf4f6f65c07ca69d",
+      "bytes": 561397,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "front",
+      "path": "v12/views/front.png",
+      "sha256": "9519649503f8e1af61b78cdd821523a449d7e2b90013639d31afaf883a2d1021",
+      "bytes": 556096,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "front-left",
+      "path": "v12/views/front-left.png",
+      "sha256": "1f1bc1f047b487cfd447b275af5caf049737fd3d55323c2837e3800098847ea5",
+      "bytes": 564684,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "left",
+      "path": "v12/views/left.png",
+      "sha256": "d776b2a03a927e13e9cac62bbe17ddd87d3d12b695d86c66460f040c691c1cca",
+      "bytes": 517315,
+      "foreground_bbox": [
+        324,
+        37,
+        516,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "back-left",
+      "path": "v12/views/back-left.png",
+      "sha256": "ce1781121cdffa402671556aa7a1dbb5364578077ec7ea1445d897fcb1c12210",
+      "bytes": 548227,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "back",
+      "path": "v12/views/back.png",
+      "sha256": "61a2711a67d5d2b2dded50939ff62428b84c8c4a3e4e77c5f319218bbe71f533",
+      "bytes": 538186,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 12,
+      "view": "back-right",
+      "path": "v12/views/back-right.png",
+      "sha256": "d61daf0989741a8544307fbcaa2f522e15b31a5478d865517769d3ebaf18b7c7",
+      "bytes": 543948,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 12,
+      "view": "right",
+      "path": "v12/views/right.png",
+      "sha256": "2f7fe8bc38f7e7a0c74c065d01330bd8515110cfa504f4d6ba76fffa59bed6f7",
+      "bytes": 514643,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 12,
+      "view": "front-right",
+      "path": "v12/views/front-right.png",
+      "sha256": "fee8b2659384f22df3c6c6f9c4730010267df5e27c50b55510d7069faa308b9c",
+      "bytes": 562057,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "front",
+      "path": "v13/views/front.png",
+      "sha256": "6df7868da40b7c1e38425c7dc581cbd5605bf4b65642302b2bfc32cb9debfc2b",
+      "bytes": 556298,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "front-left",
+      "path": "v13/views/front-left.png",
+      "sha256": "3444b8e5449151fd9964fd8aa072d4f899de901b281a1ff6dae74a3751f98ec5",
+      "bytes": 564813,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "left",
+      "path": "v13/views/left.png",
+      "sha256": "2398a0b780f4424dc7f7b4176d6009c800825938e82f17c359535394fab186bc",
+      "bytes": 517266,
+      "foreground_bbox": [
+        324,
+        37,
+        517,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "back-left",
+      "path": "v13/views/back-left.png",
+      "sha256": "838f6775151a7906e76cd8de84ee3a35f4afb861f5a826805bad5f6c8f8d1e00",
+      "bytes": 547934,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "back",
+      "path": "v13/views/back.png",
+      "sha256": "0a6c83c32231ca627aa27a5ac9462b8b7b4c114d676ee7ff25a58374900db6d3",
+      "bytes": 538008,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 13,
+      "view": "back-right",
+      "path": "v13/views/back-right.png",
+      "sha256": "23505f8aa63ecd9da513c705a4beb4ee805c254858491a34bb0a610ada0cd547",
+      "bytes": 544020,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 13,
+      "view": "right",
+      "path": "v13/views/right.png",
+      "sha256": "e02558fe1ae56f678b65640a66444682d3f3d25b444360678346f63cd1e4ee01",
+      "bytes": 514456,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 13,
+      "view": "front-right",
+      "path": "v13/views/front-right.png",
+      "sha256": "24596a64c95b51f4dab6fe83e8667ea2cb79858e66b4cd9e3a9803c96691a1a2",
+      "bytes": 562400,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "front",
+      "path": "v14/views/front.png",
+      "sha256": "66667574c2471bafa6d59a5a0b8c8eecb5b3ad4cf9a3d6a5d495a710a8bb14d6",
+      "bytes": 556314,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "front-left",
+      "path": "v14/views/front-left.png",
+      "sha256": "46cc1427941f934f0509991357c2edbe613f09ad6c818d1533fde59e0ab80ee0",
+      "bytes": 564745,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "left",
+      "path": "v14/views/left.png",
+      "sha256": "e972d2e944990077f17f963b0f916ea8166c83733fccf219805b073d8a108e23",
+      "bytes": 516508,
+      "foreground_bbox": [
+        324,
+        37,
+        517,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "back-left",
+      "path": "v14/views/back-left.png",
+      "sha256": "f9d38a00859cb240c2a943a8031d902f656fa292d4fd2db71f4dbe249d8dc06a",
+      "bytes": 547522,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "back",
+      "path": "v14/views/back.png",
+      "sha256": "c52331d9b05e4edf5697147dffd0310e06a5208a201ad328ea3cb4bfdc66c66c",
+      "bytes": 538185,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 14,
+      "view": "back-right",
+      "path": "v14/views/back-right.png",
+      "sha256": "9a9d0517f996114e6cee709c39838045fb0a0e8a7474594f60da5e10cd5eacc3",
+      "bytes": 543228,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 14,
+      "view": "right",
+      "path": "v14/views/right.png",
+      "sha256": "7f2ee707da017336791d974a9f282ecbda34070f7fb5205d061a8842cbfcc895",
+      "bytes": 513603,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 14,
+      "view": "front-right",
+      "path": "v14/views/front-right.png",
+      "sha256": "a8671b786565cd21d7e71c38afff98e03575c40e4aa3070e3b2c49744b8d14b7",
+      "bytes": 562464,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "front",
+      "path": "v15/views/front.png",
+      "sha256": "2223dd064edf407ff35e3f6d951f3704e5931fad561b0a76f079cfefc84546ee",
+      "bytes": 556315,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "front-left",
+      "path": "v15/views/front-left.png",
+      "sha256": "61e76fe900067e7b265265e2e5b05e661f9771dfcec05188e000c76c5ecf5da5",
+      "bytes": 564709,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "left",
+      "path": "v15/views/left.png",
+      "sha256": "01db7784c8c8532054a5206ef7f0059dbd9a016cdcad3f3865b7511d8203b12e",
+      "bytes": 516199,
+      "foreground_bbox": [
+        324,
+        37,
+        518,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "back-left",
+      "path": "v15/views/back-left.png",
+      "sha256": "3b18cbb816a5ae74a0780119f0eb26b539c785a71c1fe1a1690d9c9bf00615a2",
+      "bytes": 547266,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "back",
+      "path": "v15/views/back.png",
+      "sha256": "4330e4377411524287c912f5e3c97c00e7f3f2efaf772488c12d3944fd795672",
+      "bytes": 537539,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 15,
+      "view": "back-right",
+      "path": "v15/views/back-right.png",
+      "sha256": "50997e62f8fa8a0578165072e062e1b5d0f6032a693312017c4ba6ae43883161",
+      "bytes": 542990,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 15,
+      "view": "right",
+      "path": "v15/views/right.png",
+      "sha256": "0352fef2e8f3d634f50d2d28129c28281b629bdeb4ce5e1c82ae1e96a3beb584",
+      "bytes": 513284,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 15,
+      "view": "front-right",
+      "path": "v15/views/front-right.png",
+      "sha256": "03774b1c8926f43c8fc92376471a98aab4c07ed6a7c8036dd02e39cbb8bc1242",
+      "bytes": 562400,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "front",
+      "path": "v16/views/front.png",
+      "sha256": "5419caec5a99ef03ff1dd5a1e7e44bba41b5cdb2b200258004450aa78f24de35",
+      "bytes": 556299,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "front-left",
+      "path": "v16/views/front-left.png",
+      "sha256": "45f92741da91caca0e1fecd9e29fef23b6090d85a2fe700b75a8efb776bb350c",
+      "bytes": 564528,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "left",
+      "path": "v16/views/left.png",
+      "sha256": "97cd98c6e7d7c5820659cddf5697f9ae2350f0d18691d173c96c43abad7dcf1b",
+      "bytes": 516070,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "back-left",
+      "path": "v16/views/back-left.png",
+      "sha256": "bc6bf253a9463f70d2214c9d369ce83d9e885b0bc8c083f55ff847e21233351a",
+      "bytes": 547550,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "back",
+      "path": "v16/views/back.png",
+      "sha256": "fa84e933be0da786d99584d8a1ade9ab2bb820e87d32fcb94aeba09928b73742",
+      "bytes": 537865,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 16,
+      "view": "back-right",
+      "path": "v16/views/back-right.png",
+      "sha256": "1f44cae2c45a948aaa45d77165092a6e358b721ebddb01b7ceaf001d34111df8",
+      "bytes": 543065,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 16,
+      "view": "right",
+      "path": "v16/views/right.png",
+      "sha256": "9676688da78aa54e6f1ef56ed1f7a690f16b4780b51b9b92c6f27251f72726b4",
+      "bytes": 513148,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 16,
+      "view": "front-right",
+      "path": "v16/views/front-right.png",
+      "sha256": "bc28db005428b03f3eb8ddc4cb00774d50777d6f89cc69dc5b2ed893c16219f0",
+      "bytes": 562043,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "front",
+      "path": "v17/views/front.png",
+      "sha256": "3d425ea21562ebb063d3fe5e4d15baec0d61dd97584a0d0bfc4a6237409f8fed",
+      "bytes": 556303,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "front-left",
+      "path": "v17/views/front-left.png",
+      "sha256": "36a17684bf3a0a3307ccd9b210b080e76c77d56c9def8584a7a760044e9a4eb5",
+      "bytes": 564531,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "left",
+      "path": "v17/views/left.png",
+      "sha256": "989bf4e7c95b4557f8eada851564c1f3515da9895ac5c0608ca0a79ea975f8dd",
+      "bytes": 516712,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "back-left",
+      "path": "v17/views/back-left.png",
+      "sha256": "8ea87b50dd54dfd5f09d2bf1ec66287e5bab301601b2a535397109dff42e7f16",
+      "bytes": 547651,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "back",
+      "path": "v17/views/back.png",
+      "sha256": "e2acead6475e0d2cd31f364101b387e24355b7ac11852951d0edebcc0502552f",
+      "bytes": 538153,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 17,
+      "view": "back-right",
+      "path": "v17/views/back-right.png",
+      "sha256": "0b15e38dee70267041dd96416f4a85b2f31d8c9801144a1d809b697a35d4e177",
+      "bytes": 543301,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 17,
+      "view": "right",
+      "path": "v17/views/right.png",
+      "sha256": "970164570cc4046e1d6dfdb66e178f8af71baa67fe4f2c20c278d5d669dbd0b4",
+      "bytes": 513493,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 17,
+      "view": "front-right",
+      "path": "v17/views/front-right.png",
+      "sha256": "2680ca2a6ff5a16dd0db777e4fe1de41b5e370890331103629336298303b754b",
+      "bytes": 562478,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "front",
+      "path": "v18/views/front.png",
+      "sha256": "9a9469f0157fe126b4b4b9bf2a04474bde3c4bf1653b7b81a3709d06a9daafcb",
+      "bytes": 556324,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "front-left",
+      "path": "v18/views/front-left.png",
+      "sha256": "aa704202265004d5ebf3266f5631a3bb92c65d014db787b04e48ef6f45e9fcab",
+      "bytes": 564504,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "left",
+      "path": "v18/views/left.png",
+      "sha256": "dbaf471e02dfb11d7e047eb0dcaa4b83b0783a7021ba0b7d8fe76f8c440f1eda",
+      "bytes": 516434,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "back-left",
+      "path": "v18/views/back-left.png",
+      "sha256": "e766bb85f98d0850ed2ba29e076fed5e9d79da2d983a0db0c4bb2ef5e231bf23",
+      "bytes": 547610,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "back",
+      "path": "v18/views/back.png",
+      "sha256": "4f308a190f3c3da1e912ac19e2d1051ffb031ce92c89368f9eca6afb65af6442",
+      "bytes": 538149,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 18,
+      "view": "back-right",
+      "path": "v18/views/back-right.png",
+      "sha256": "8f47ecfba82f64fefcd08081fec96290e10334b83aca48ef28cb110bcc9c2a59",
+      "bytes": 543297,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 18,
+      "view": "right",
+      "path": "v18/views/right.png",
+      "sha256": "de9ee5ecd4f76338519361ac855c04a0b1782ecee84b7350228a1a7ba8752fd9",
+      "bytes": 513297,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 18,
+      "view": "front-right",
+      "path": "v18/views/front-right.png",
+      "sha256": "fbda58ce7fadf0dbe040433990dfe249aed227d6bec1cd3a601356f6785346ed",
+      "bytes": 562425,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "front",
+      "path": "v19/views/front.png",
+      "sha256": "27b2186a1e3835dd51ee0de783f08c6a3922f7038f54ed4fbadf9b54b4255676",
+      "bytes": 556226,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "front-left",
+      "path": "v19/views/front-left.png",
+      "sha256": "7ac5cafbac39f4b3604d418ef656100421f180f64f699b4d13a1d08a990d551d",
+      "bytes": 564512,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "left",
+      "path": "v19/views/left.png",
+      "sha256": "645c733b93ef28ab76c47d9f84ee7a9b3934bc542c3163c56b5b4a8ca4f6e846",
+      "bytes": 516559,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "back-left",
+      "path": "v19/views/back-left.png",
+      "sha256": "feb8e0e1c53fd2487ae41b7788dafcd6d7b79fcc96f690d3b95786b234da2c04",
+      "bytes": 547608,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "back",
+      "path": "v19/views/back.png",
+      "sha256": "9f352ae7b098cffcd32828d648fd39b0c264a299cc0e51b276fd9dd43327cab1",
+      "bytes": 538147,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 19,
+      "view": "back-right",
+      "path": "v19/views/back-right.png",
+      "sha256": "4ea4348ededc3fdd6b4a3d8ab7bb1234ce6a55431d5157dc5bf240555e46400b",
+      "bytes": 543295,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 19,
+      "view": "right",
+      "path": "v19/views/right.png",
+      "sha256": "5f3c88c285fb70d4693de04997dd43864c62609dffba8cbe29e2fd018c7e19eb",
+      "bytes": 513259,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 19,
+      "view": "front-right",
+      "path": "v19/views/front-right.png",
+      "sha256": "aa8b071dd0d0ddd137ec746eed6676befa24e6a2ab67817e76e3ce421cdf5397",
+      "bytes": 562496,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "front",
+      "path": "v20/views/front.png",
+      "sha256": "0d8b15963266a16ce13797a09657fd2e3432ffe33d6508591578db69df5ad4ba",
+      "bytes": 556308,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "front-left",
+      "path": "v20/views/front-left.png",
+      "sha256": "1d45e024893b322e10e331addf519b71c23e0ac2cc6ffe75c642e5688a25457f",
+      "bytes": 564532,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "left",
+      "path": "v20/views/left.png",
+      "sha256": "ef356fdf21a3f04469019184815f31f0043b36bd29949caab8d607dd0d667053",
+      "bytes": 516566,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "back-left",
+      "path": "v20/views/back-left.png",
+      "sha256": "d403e7b819854be0ae58e43ca309d9337da12e1facbead0a58cc95147ce901b4",
+      "bytes": 547614,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "back",
+      "path": "v20/views/back.png",
+      "sha256": "c2f380d45805af89de510cb9895804c51c2c9199de5cbfd77fe3443ce3810a4d",
+      "bytes": 538153,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 20,
+      "view": "back-right",
+      "path": "v20/views/back-right.png",
+      "sha256": "13eeee9e762d11ee44838e7dac27d4987b6131611c1587948421f87889b0514b",
+      "bytes": 543301,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 20,
+      "view": "right",
+      "path": "v20/views/right.png",
+      "sha256": "4ab29e24e52cd1f0abffa79a21da51090cbbc723570cf05bc72fcc5f4520ead8",
+      "bytes": 513257,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 20,
+      "view": "front-right",
+      "path": "v20/views/front-right.png",
+      "sha256": "b5e3732642a353530137cf4241f9f2441d502734a93887a05237d35182d7de73",
+      "bytes": 562473,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "front",
+      "path": "v21/views/front.png",
+      "sha256": "9fe9ec478b6727a35329bc727b55cebdc6c6822256a0e6c8f85a8892cb6e1e9c",
+      "bytes": 556220,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "front-left",
+      "path": "v21/views/front-left.png",
+      "sha256": "dfde91223ebd6b67b240365b6d1e02225f685f95f36e787ace11f44742590711",
+      "bytes": 564565,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "left",
+      "path": "v21/views/left.png",
+      "sha256": "4ac3f39f8181a0709b52e143b9ab0b2973fa5e9f1715205f567964147ece5941",
+      "bytes": 516616,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "back-left",
+      "path": "v21/views/back-left.png",
+      "sha256": "9b4986e7a378d51f77653d49654d8b4ae6f88654bfeaffbc758e8f76d1cf9d38",
+      "bytes": 547618,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "back",
+      "path": "v21/views/back.png",
+      "sha256": "9f9674ec4de80f6e9edc2164b0900acf68c8030d53088b0f203ef62862d669f1",
+      "bytes": 538157,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 21,
+      "view": "back-right",
+      "path": "v21/views/back-right.png",
+      "sha256": "fb6404f1b9e72e9a0b2d6aabcc4ffc0bf4b4c55fb0b5460fb50307c8ed8a4c82",
+      "bytes": 543305,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 21,
+      "view": "right",
+      "path": "v21/views/right.png",
+      "sha256": "62c17526135be361af0ebf95157bca7b9a025888d1592857b37adccd1afcb449",
+      "bytes": 513271,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 21,
+      "view": "front-right",
+      "path": "v21/views/front-right.png",
+      "sha256": "443218d35806c1d2ff2c8fb815cc5464f9e9b5a8d988a5a337cc26f1c2069c0d",
+      "bytes": 562523,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "front",
+      "path": "v22/views/front.png",
+      "sha256": "8ec645a05ce177d4bd9b0ec22af2b43594492381a9d4b72656739de48618436f",
+      "bytes": 556252,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "front-left",
+      "path": "v22/views/front-left.png",
+      "sha256": "6bc8b872ee07571cf135222d3980b18a793396d5e1a9a7102416318d02a9873b",
+      "bytes": 564489,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "left",
+      "path": "v22/views/left.png",
+      "sha256": "3d28d3c436cd0a074ed4dd9626e6e49063b1b992e17f4e4298a619617565f435",
+      "bytes": 516524,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "back-left",
+      "path": "v22/views/back-left.png",
+      "sha256": "ffd6279b7b3b76ebd6a6faf7758e84d52272375fed639f0e283d7b39f7bcde86",
+      "bytes": 547610,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "back",
+      "path": "v22/views/back.png",
+      "sha256": "13c65f836ed2dc1a0a2cbd314db1d21eca39e72a3b0705464b716982d1f56331",
+      "bytes": 538149,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 22,
+      "view": "back-right",
+      "path": "v22/views/back-right.png",
+      "sha256": "036ad43b640a9d2c3861d5394a874b0c3515862897fd95f5ef13f8d43908e11c",
+      "bytes": 543297,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 22,
+      "view": "right",
+      "path": "v22/views/right.png",
+      "sha256": "a5cda1c5d7733ab35f8747abe1dec6a308aaf12a9d9948e94db81e8f89d100c9",
+      "bytes": 513311,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 22,
+      "view": "front-right",
+      "path": "v22/views/front-right.png",
+      "sha256": "327b46a204e79d75b00474d9c932f74a22d8c1728fd8a0ed6beaab125be01e09",
+      "bytes": 562467,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "front",
+      "path": "v23/views/front.png",
+      "sha256": "034391bbbe3979676dc196eb998b28036d90f81feb08ed04ca832d2c1c7b096d",
+      "bytes": 556285,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "front-left",
+      "path": "v23/views/front-left.png",
+      "sha256": "b5219cef0db1055bbfa986758a29b0a8794ee5fa29454389ec7382bc413d7c0a",
+      "bytes": 564510,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "left",
+      "path": "v23/views/left.png",
+      "sha256": "8c13110ee49ed922790269acf1f70b2000798643be186d977c26204bc3ec7e54",
+      "bytes": 516597,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "back-left",
+      "path": "v23/views/back-left.png",
+      "sha256": "9b90d01024bc5e698c7d980d0587dcfdb69df5e43b7c00ab17be4655da385e35",
+      "bytes": 547614,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "back",
+      "path": "v23/views/back.png",
+      "sha256": "415e69917c2ad91caa3731670a0ab338da4fb65e36ae026fed6160dc7e85693b",
+      "bytes": 538153,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 23,
+      "view": "back-right",
+      "path": "v23/views/back-right.png",
+      "sha256": "c52c2b5126a46e3f2c674b4209f84f0ea8569110ffa23bc27e7584bdc86a0fb1",
+      "bytes": 543301,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 23,
+      "view": "right",
+      "path": "v23/views/right.png",
+      "sha256": "d9561017930f5b0a059c758b9c78d67a3012120877626ddd7cddf2cdc5bffa85",
+      "bytes": 513314,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 23,
+      "view": "front-right",
+      "path": "v23/views/front-right.png",
+      "sha256": "998ccb28ad281e32b1a46c494c27c0d491a40b8a99cb66b399424b23f7a646d9",
+      "bytes": 562468,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "front",
+      "path": "v24/views/front.png",
+      "sha256": "cbabc190a7af3bd40457bbae9957a040a4249a27ffca2ffe67cdecbe786c5263",
+      "bytes": 556404,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "front-left",
+      "path": "v24/views/front-left.png",
+      "sha256": "ee95e13135789f4ea4c626c773c06a78005b7af34cd8e306db0ad6ec2107e5c9",
+      "bytes": 564842,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "left",
+      "path": "v24/views/left.png",
+      "sha256": "ad526ae008edaed7d1ef21dc6dfd0b3876bcceb810c6b9f0843b83a7c6186809",
+      "bytes": 516447,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "back-left",
+      "path": "v24/views/back-left.png",
+      "sha256": "d34b3bfc95c52ddb44e6e72298d5a52f5ae89ac5ecfde6ff608eb58e78276e3e",
+      "bytes": 547523,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "back",
+      "path": "v24/views/back.png",
+      "sha256": "24576f22985edea07c25bd208ea45a869a6ed12d0ff7b69cd1c61b1e4d4dd120",
+      "bytes": 538298,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 24,
+      "view": "back-right",
+      "path": "v24/views/back-right.png",
+      "sha256": "c5079b998faf503c89b0f8f8db6e061d56fb8012ed479f7e28c7a00c12f6a03b",
+      "bytes": 543458,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 24,
+      "view": "right",
+      "path": "v24/views/right.png",
+      "sha256": "dfd8b5150bb9a5aef243841661bdaa12bb44e2a3ca80d8bd91877e1c883d8d68",
+      "bytes": 513302,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 24,
+      "view": "front-right",
+      "path": "v24/views/front-right.png",
+      "sha256": "5737bfab67c52da53b5f9eb78c24107043b999a1759654afc32e9403b6441e1c",
+      "bytes": 562510,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "front",
+      "path": "v25/views/front.png",
+      "sha256": "6966b07702ee2adfe03760693302e878f099c7b664d87064800c444e4a10e1c2",
+      "bytes": 556345,
+      "foreground_bbox": [
+        225,
+        37,
+        625,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "front-left",
+      "path": "v25/views/front-left.png",
+      "sha256": "7c6a8efafc275d071514e77466768e1d5842238abdfaa240e374a6a2b7310dd3",
+      "bytes": 564958,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "left",
+      "path": "v25/views/left.png",
+      "sha256": "d3e25dfa3ab44b932819f0c42f6aee4a6e5bdf6d82377800f182a7ccec9c5058",
+      "bytes": 516423,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "back-left",
+      "path": "v25/views/back-left.png",
+      "sha256": "5b34d3f412b9e549cda8c79a1425b5e574fac0b99b05e64ec1bff450eab1646f",
+      "bytes": 547463,
+      "foreground_bbox": [
+        256,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "back",
+      "path": "v25/views/back.png",
+      "sha256": "2bf367bc6ea79519721964ea8d5e7ebb46221aceeb9929cc2771342b430db9d6",
+      "bytes": 538369,
+      "foreground_bbox": [
+        224,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 25,
+      "view": "back-right",
+      "path": "v25/views/back-right.png",
+      "sha256": "fbf57e23b6f6867bc247ea0d256079f2d67b37224284167e7a41eb63a8ffcd46",
+      "bytes": 543373,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 25,
+      "view": "right",
+      "path": "v25/views/right.png",
+      "sha256": "b81ae8fe36fc2cba357339ede57b51974a819169573c009d8dd7fb6701d6ed12",
+      "bytes": 513352,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 25,
+      "view": "front-right",
+      "path": "v25/views/front-right.png",
+      "sha256": "ce7eafbdc1b95cc1578e515dc5bbbe7449d3801dc5de60aa044eb6e1885b469c",
+      "bytes": 562768,
+      "foreground_bbox": [
+        251,
+        37,
+        593,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "front",
+      "path": "v26/views/front.png",
+      "sha256": "94e844f01d824e95bd4a7d69ffbd19b0e27ecdc01b622bdfd60bde0fa40bc9c6",
+      "bytes": 555976,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "front-left",
+      "path": "v26/views/front-left.png",
+      "sha256": "ce88ac4576b4c696f50fb51d623b8693594e8fe1b0468770f22546b48529c481",
+      "bytes": 564605,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "left",
+      "path": "v26/views/left.png",
+      "sha256": "b403b4d20749799959590ad79c06e4d0fb27547c6ba046e9e5ad0caefc2bc628",
+      "bytes": 516445,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "back-left",
+      "path": "v26/views/back-left.png",
+      "sha256": "6d5300eb97b14a8440ef9f1a15aa340ad5e753de09cef1cb3279923137b689be",
+      "bytes": 547111,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "back",
+      "path": "v26/views/back.png",
+      "sha256": "fce00d65c5d8bb6854ca1861c273c93a8e259ab730b483a7e627baa86865c73a",
+      "bytes": 537257,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 26,
+      "view": "back-right",
+      "path": "v26/views/back-right.png",
+      "sha256": "2b4da13af5beffd13b7a7d26dcf10ce8bdcb8db55bd3d96b1ec1dfd6030e6f9d",
+      "bytes": 542982,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    },
+    {
+      "version": 26,
+      "view": "right",
+      "path": "v26/views/right.png",
+      "sha256": "38be26eccb1d6202075aee5fcf001866792ead164c9fbf4b709b20a96e6d4935",
+      "bytes": 513271,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 26,
+      "view": "front-right",
+      "path": "v26/views/front-right.png",
+      "sha256": "a151ef1b373f8faaf2b8fb35ca49518e38fe0c860bae251d53916b78c37f0e56",
+      "bytes": 562710,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "front",
+      "path": "v27/views/front.png",
+      "sha256": "67cdd6a88937d6e321ab526a1e7ae8b91cde4b62159045df47a8e5984fc0ea6d",
+      "bytes": 555017,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "front-left",
+      "path": "v27/views/front-left.png",
+      "sha256": "f99a66efa2285265b3cb7c5e1daf7e808e3d753e2fbd58374c447be036c2961e",
+      "bytes": 563877,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "left",
+      "path": "v27/views/left.png",
+      "sha256": "af23c62d627355d34d21baa0557550dcf3b875934f3f62d775f925e613bb8b81",
+      "bytes": 515925,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "back-left",
+      "path": "v27/views/back-left.png",
+      "sha256": "6fb2e01a6394f2af5b4133bf03acd046dfae840ea14c95a3d6cbf5c7a729b710",
+      "bytes": 545988,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "back",
+      "path": "v27/views/back.png",
+      "sha256": "a36e942bc27081ce93f112b59b3885086836bacd0f7cef2e7cf68cfe466b9435",
+      "bytes": 536470,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 27,
+      "view": "back-right",
+      "path": "v27/views/back-right.png",
+      "sha256": "a66785bccd733d28017dacff7694a70365da29762795bf67b93e62b19414ec87",
+      "bytes": 541998,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    },
+    {
+      "version": 27,
+      "view": "right",
+      "path": "v27/views/right.png",
+      "sha256": "d1deb7c378e64276126eb2a543cf61805a9b6eb3f0224e416f646485ec33f483",
+      "bytes": 512749,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 27,
+      "view": "front-right",
+      "path": "v27/views/front-right.png",
+      "sha256": "170b857f634c0b8174f112fe69dcad04310fd8c274b3d488ec0744141f7d5ed3",
+      "bytes": 562109,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "front",
+      "path": "v28/views/front.png",
+      "sha256": "9c3e26093f1cc4787d892b017bb67b2427260d94e9712e5e65e453a61a5c96c2",
+      "bytes": 554850,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "front-left",
+      "path": "v28/views/front-left.png",
+      "sha256": "6e2aa4377c518f1af26a8e0982f3b84251b7f67723727653c6f806c0298b993f",
+      "bytes": 563955,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "left",
+      "path": "v28/views/left.png",
+      "sha256": "dbb6954340c331930f2b3d18c7ad4aac5eac0a337c96f2bf24177c670afc1e7a",
+      "bytes": 515729,
+      "foreground_bbox": [
+        324,
+        37,
+        521,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "back-left",
+      "path": "v28/views/back-left.png",
+      "sha256": "db29356f77e83849dbd2f6076fe1175ad1059122996ac42103fafb364b2306dc",
+      "bytes": 545957,
+      "foreground_bbox": [
+        257,
+        37,
+        598,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "back",
+      "path": "v28/views/back.png",
+      "sha256": "e3c8a17756e55f527ff41ae65e1dd5a10488daa419951643d47cd9747812f23b",
+      "bytes": 536314,
+      "foreground_bbox": [
+        225,
+        37,
+        624,
+        961
+      ]
+    },
+    {
+      "version": 28,
+      "view": "back-right",
+      "path": "v28/views/back-right.png",
+      "sha256": "22b10b1e050672ccc788711f0647fd7d724febf50e8d1d684c3e93a0916d1204",
+      "bytes": 542107,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    },
+    {
+      "version": 28,
+      "view": "right",
+      "path": "v28/views/right.png",
+      "sha256": "894f4de8f6ba99db49285a43a27f637955f0898989d3de16f1cd9f8abf025542",
+      "bytes": 512730,
+      "foreground_bbox": [
+        329,
+        37,
+        525,
+        961
+      ]
+    },
+    {
+      "version": 28,
+      "view": "front-right",
+      "path": "v28/views/front-right.png",
+      "sha256": "4b073346c480a81c79855e737a4a08f28db076abf9b118d2fd1eeefe32574c4d",
+      "bytes": 562017,
+      "foreground_bbox": [
+        251,
+        37,
+        592,
+        962
+      ]
+    }
+  ]
+}

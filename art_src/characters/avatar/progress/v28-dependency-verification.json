@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "images": [
+    {
+      "name": "avatar-basecolor.png",
+      "packed": true,
+      "references_old_version": true
+    },
+    {
+      "name": "avatar-metallic.png",
+      "packed": true,
+      "references_old_version": true
+    },
+    {
+      "name": "avatar-normal.png",
+      "packed": true,
+      "references_old_version": true
+    },
+    {
+      "name": "avatar-roughness.png",
+      "packed": true,
+      "references_old_version": true
+    },
+    {
+      "name": "tripo_image_875a1bed_0.001",
+      "packed": true,
+      "references_old_version": true
+    }
+  ],
+  "linked_libraries": 0
+}

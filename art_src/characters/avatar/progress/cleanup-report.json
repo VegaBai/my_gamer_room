@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-26",
+  "old_versions_removed": 27,
+  "files_removed": 2074,
+  "bytes_removed": 25264860260.0,
+  "v28_sha256": "7d367b71384f170433ca55550ba50b4f48af87bf8e01a1c4aaa0b37df227ac21",
+  "original_previews_retained": 892,
+  "old_version_previews_retained": 817,
+  "standard_views_retained": 224,
+  "directories": [
+    {
+      "name": "tripo-retexture-v1",
+      "files": 135,
+      "bytes": 176030060.0
+    },
+    {
+      "name": "tripo-retexture-v2",
+      "files": 172,
+      "bytes": 1516317795.0
+    },
+    {
+      "name": "tripo-retexture-v3-hair",
+      "files": 84,
+      "bytes": 1030190927.0
+    },
+    {
+      "name": "tripo-retexture-v4-collar",
+      "files": 122,
+      "bytes": 736536977.0
+    },
+    {
+      "name": "tripo-retexture-v5-platform-boots",
+      "files": 82,
+      "bytes": 1019533608.0
+    },
+    {
+      "name": "tripo-retexture-v6-tassel",
+      "files": 58,
+      "bytes": 678353437.0
+    },
+    {
+      "name": "tripo-retexture-v7-anime-hair",
+      "files": 91,
+      "bytes": 663280810.0
+    },
+    {
+      "name": "tripo-retexture-v8-collar-edges",
+      "files": 93,
+      "bytes": 663783151.0
+    },
+    {
+      "name": "tripo-retexture-v9-front-collar",
+      "files": 98,
+      "bytes": 684525856.0
+    },
+    {
+      "name": "tripo-retexture-v10-collar-thickness",
+      "files": 126,
+      "bytes": 992682764.0
+    },
+    {
+      "name": "tripo-retexture-v11-collar-corners",
+      "files": 121,
+      "bytes": 1002264327.0
+    },
+    {
+      "name": "tripo-retexture-v12-hair-flow",
+      "files": 71,
+      "bytes": 1472892231.0
+    },
+    {
+      "name": "tripo-retexture-v13-fitted-hair",
+      "files": 149,
+      "bytes": 1506326337.0
+    },
+    {
+      "name": "tripo-retexture-v14-poly-hair",
+      "files": 83,
+      "bytes": 1215045739.0
+    },
+    {
+      "name": "tripo-retexture-v15-soft-hair",
+      "files": 64,
+      "bytes": 1469594145.0
+    },
+    {
+      "name": "tripo-retexture-v16-brush-hair",
+      "files": 63,
+      "bytes": 1731852323.0
+    },
+    {
+      "name": "tripo-retexture-v17-balanced-hair",
+      "files": 62,
+      "bytes": 1150498483.0
+    },
+    {
+      "name": "tripo-retexture-v18-pouch-clasp",
+      "files": 43,
+      "bytes": 851259505.0
+    },
+    {
+      "name": "tripo-retexture-v19-clasp-cord",
+      "files": 36,
+      "bytes": 839166806.0
+    },
+    {
+      "name": "tripo-retexture-v20-clasp-lowpoly",
+      "files": 16,
+      "bytes": 556247418.0
+    },
+    {
+      "name": "tripo-retexture-v21-clasp-alignment",
+      "files": 23,
+      "bytes": 557059032.0
+    },
+    {
+      "name": "tripo-retexture-v22-clasp-angle",
+      "files": 75,
+      "bytes": 833730794.0
+    },
+    {
+      "name": "tripo-retexture-v23-clasp-contact",
+      "files": 20,
+      "bytes": 832306718.0
+    },
+    {
+      "name": "tripo-retexture-v24-skirt-clearance",
+      "files": 40,
+      "bytes": 559946902.0
+    },
+    {
+      "name": "tripo-retexture-v25-skirt-review",
+      "files": 63,
+      "bytes": 841519363.0
+    },
+    {
+      "name": "tripo-retexture-v26-arm-surface",
+      "files": 66,
+      "bytes": 574844840.0
+    },
+    {
+      "name": "tripo-retexture-v27-leg-surface",
+      "files": 17,
+      "bytes": 832926907.0
+    }
+  ],
+  "old_v27_backup_removed": true
+}

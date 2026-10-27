@@ -1,3 +1,6 @@
 art_src/characters/avatar/**/*.blend filter=lfs diff=lfs merge=lfs -text
 art_src/characters/avatar/**/*.json text eol=lf
 art_src/characters/avatar/**/*.txt text eol=lf
+art_src/characters/avatar/progress/**/*.png filter=lfs diff=lfs merge=lfs -text
+art_src/characters/avatar/progress/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+art_src/characters/avatar/progress/*.mp4 filter=lfs diff=lfs merge=lfs -text
